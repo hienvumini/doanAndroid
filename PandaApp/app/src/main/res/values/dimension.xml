@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="dimension_actionbar_height_56dp">56dp</dimen>
+    <dimen name="dimension_actionbar_height_48dp">48dp</dimen>
+    <dimen name="dimen_1dp">1dp</dimen>
+    <dimen name="dimen_2dp">1dp</dimen>
+    <dimen name="dimen_5dp">1dp</dimen>
+    <dimen name="dimen_10dp">1dp</dimen>
+    <dimen name="dimen_15p">1dp</dimen>
+    <dimen name="dimen_20p">1dp</dimen>
+    <dimen name="dimen_25dp">1dp</dimen>
+    <dimen name="dimen_30dp">1dp</dimen>
+    <dimen name="dimen_35dp">1dp</dimen>
+    <dimen name="dimen_40dp">1dp</dimen>
+    <dimen name="dimen_50dp">1dp</dimen>
+    <dimen name="dimen_100dp">1dp</dimen>
+    <dimen name="dimen_150dp">1dp</dimen>
+    <dimen name="dimen_200dp">1dp</dimen>
+    <dimen name="font_16sp">16sp</dimen>
+    <dimen name="font_18sp">18sp</dimen>
+    <dimen name="font_20sp">20sp</dimen>
+    <dimen name="font_22sp">22sp</dimen>
+    <dimen name="font_24sp">24sp</dimen>
+    <dimen name="font_26sp">26sp</dimen>
+    <dimen name="font_28sp">28sp</dimen>
+    <dimen name="font_30sp">30sp</dimen>
+    <dimen name="font_32sp">32sp</dimen>
+    <dimen name="font_34sp">34sp</dimen>
+
+
+</resources>
