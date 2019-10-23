@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:gravity="center"
+    android:layout_height="@dimen/dimen_200dp"
+    android:layout_marginBottom="@dimen/dimen_10dp">
+    <ImageView
+        android:id="@+id/item_cart_img"
+        android:layout_width="@dimen/dimen_0dp"
+        android:layout_height="@dimen/dimen_135dp"
+        android:layout_weight="3"
+        android:src="@drawable/img_cart"
+        android:layout_gravity="center"/>
+    <LinearLayout
+        android:layout_width="@dimen/dimen_0dp"
+        android:layout_height="@dimen/dimen_135dp"
+        android:layout_weight="7"
+        android:layout_gravity="center">
+
+        <LinearLayout
+            android:layout_width="@dimen/dimen_0dp"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_weight="9">
+            <TextView
+                android:id="@+id/item_cart_tenSP"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Áo sơ mi nữ cổ ren"
+                android:textSize="@dimen/font_24sp"
+                android:textColor="@color/color_black"/>
+            <TextView
+                android:id="@+id/item_cart_tenShop"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Cung cấp bởi Panda Shop"
+                android:textSize="@dimen/font_18sp"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+                    android:id="@+id/item_cart_gia_SP"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="120.000"
+                    android:textSize="@dimen/font_28sp"
+                    android:textColor="@color/color_black"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="vnđ"
+                    android:textSize="@dimen/font_28sp"
+                    android:textColor="@color/color_black"
+                    android:textStyle="italic"
+                    android:layout_marginLeft="@dimen/dimen_5dp"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+                    android:id="@+id/item_cart_tru"
+                    android:layout_width="@dimen/dimen_35dp"
+                    android:layout_height="@dimen/dimen_35dp"
+                    android:text="-"
+                    android:textSize="@dimen/font_26sp"
+
+                    android:gravity="center"/>
+                <TextView
+                    android:id="@+id/item_cart_soluong"
+                    android:layout_width="@dimen/dimen_35dp"
+                    android:layout_height="@dimen/dimen_35dp"
+                    android:text="1"
+                    android:textColor="@color/color_black"
+                    android:textSize="@dimen/font_26sp"
+                    android:gravity="center"/>
+                <TextView
+                    android:id="@+id/item_cart_cong"
+                    android:layout_width="@dimen/dimen_35dp"
+                    android:layout_height="@dimen/dimen_35dp"
+                    android:text="+"
+
+                    android:textSize="@dimen/font_26sp"
+                    android:gravity="center"/>
+            </LinearLayout>
+
+        </LinearLayout>
+        <ImageView
+            android:id="@+id/item_cart_xoa"
+            android:layout_width="@dimen/dimen_0dp"
+            android:layout_height="@dimen/dimen_35dp"
+            android:layout_weight="1"
+            android:src="@drawable/x"
+            android:padding="@dimen/dimen_5dp"/>
+    </LinearLayout>
+</LinearLayout>

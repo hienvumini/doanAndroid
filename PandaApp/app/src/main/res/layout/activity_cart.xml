@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".CartActivity">
+
+    <androidx.appcompat.widget.Toolbar
+
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        android:background="@color/color_pink2">
+        <ImageView
+            android:id="@+id/img_qrorrfid"
+            android:layout_gravity="start"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:scaleType="centerInside"
+            android:src="@android:drawable/ic_input_add"/>
+        <TextView
+
+            android:textColor="@color/color_white"
+            android:textStyle="bold"
+            android:textSize="@dimen/font_18sp"
+            android:text="Giỏ hàng của tôi"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+    </androidx.appcompat.widget.Toolbar>
+
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/toolbar"
+        android:layout_above="@+id/cart_relative"
+        android:layout_marginBottom="@dimen/dimen_10dp">
+
+    </ListView>
+    <RelativeLayout
+        android:id="@+id/cart_relative"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimen_85dp"
+        android:orientation="vertical"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="@dimen/dimen_10dp">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginLeft="@dimen/dimen_10dp"
+            android:layout_marginTop="@dimen/dimen_5dp">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                >
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Thành tiền"
+                    android:textColor="@color/color_black"
+                    android:textSize="@dimen/font_20sp"
+                    />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="end"
+                android:layout_marginRight="@dimen/dimen_15p"
+                android:layout_marginTop="@dimen/dimen_5dp">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="450.000"
+                    android:textColor="@color/color_pink2"
+                    android:textSize="@dimen/font_20sp"
+                    android:gravity="center"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="đ"
+                    android:textColor="@color/color_pink2"
+                    android:textSize="@dimen/font_20sp"
+                    android:layout_marginLeft="@dimen/dimen_5dp"/>
+            </LinearLayout>
+
+
+        </LinearLayout>
+        <Button
+            android:id="@+id/cart_button"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimen_40dp"
+            android:text="Tiến hành đặt hàng"
+            android:textColor="@color/color_white"
+            android:background="@drawable/botron_button_pink"
+            android:layout_alignParentBottom="true"
+            android:layout_marginLeft="@dimen/dimen_15p"
+            android:layout_marginRight="@dimen/dimen_15p"/>
+    </RelativeLayout>
+</RelativeLayout>
