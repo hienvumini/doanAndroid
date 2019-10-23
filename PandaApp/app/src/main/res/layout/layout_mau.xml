@@ -41,7 +41,7 @@
         android:background="@color/color_pink2"
         android:gravity="center"
         android:orientation="horizontal"
-        android:id="@+id/toolbar"
+        android:id="@+id/ctsearch"
         android:layout_width="match_parent"
         android:layout_height="@dimen/dimension_actionbar_height_56dp"
         android:weightSum="10"
