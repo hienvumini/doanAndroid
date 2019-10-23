@@ -30,7 +30,40 @@
     </androidx.appcompat.widget.Toolbar>
 
 
+<LinearLayout
+    android:layout_above="@id/ctNavigationbotton"
+    android:layout_below="@id/toolbar"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <LinearLayout
 
+        android:layout_centerHorizontal="true"
+        android:background="@color/color_pink2"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimension_actionbar_height_56dp"
+        android:weightSum="10"
+        >
+        <SearchView
+
+            android:layout_marginRight="@dimen/dimen_50dp"
+            android:layout_marginLeft="@dimen/dimen_10dp"
+            android:background="@drawable/shape_edittext"
+            android:id="@+id/simpleSearchView"
+            android:layout_width="0dp"
+            android:layout_weight="10"
+            android:layout_height="wrap_content"
+            android:iconifiedByDefault="false"
+            android:queryHint="Bạn tìm gì hôm nay..." />
+        <ImageView
+            android:layout_weight="1"
+            android:src="@drawable/catagory"
+            android:layout_width="@dimen/dimen_50dp"
+            android:layout_height="@dimen/dimen_50dp"/>
+    </LinearLayout>
+</LinearLayout>
 
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
