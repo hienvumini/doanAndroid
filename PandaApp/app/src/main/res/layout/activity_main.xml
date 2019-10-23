@@ -5,8 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
-    <LinearLayout
 
+    <LinearLayout
         android:layout_centerHorizontal="true"
         android:background="@color/color_pink2"
         android:gravity="center"
@@ -18,21 +18,49 @@
                 >
         <SearchView
 
-            android:layout_marginRight="@dimen/dimen_50dp"
+
             android:layout_marginLeft="@dimen/dimen_10dp"
             android:background="@drawable/shape_edittext"
-            android:id="@+id/simpleSearchView"
+            android:id="@+id/SearchView"
             android:layout_width="0dp"
             android:layout_weight="10"
             android:layout_height="wrap_content"
             android:iconifiedByDefault="false"
             android:queryHint="Bạn tìm gì hôm nay..." />
         <ImageView
+android:id="@+id/imgcartMain"
             android:layout_weight="1"
-            android:src="@drawable/catagory"
+            android:src="@drawable/cart"
             android:layout_width="@dimen/dimen_50dp"
             android:layout_height="@dimen/dimen_50dp"/>
     </LinearLayout>
+
+    <ScrollView
+android:layout_below="@id/toolbar"
+        android:layout_above="@id/ctNavigationbotton"
+        android:id="@+id/scollviewmain"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+<ViewFlipper
+android:id="@+id/viewflipperquangcao"
+    android:background="@color/color_blue_text"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/dimen_150dp"/>
+<androidx.recyclerview.widget.RecyclerView
+
+    android:layout_gravity="center"
+    android:id="@+id/recycleviewLastlate"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+</androidx.recyclerview.widget.RecyclerView>
+        </LinearLayout>
+    </ScrollView>
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:layout_alignParentBottom="true"
         android:id="@+id/ctNavigationbotton"

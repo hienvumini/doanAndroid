@@ -1,5 +1,7 @@
 package com.example.pandaapp.Models;
 
+import java.util.ArrayList;
+
 public class Product {
     private int productId;
     private String name;
@@ -8,6 +10,7 @@ public class Product {
     private String shopName;
     private int idShop;
 private int sub_category;
+private ArrayList<String> AnhSP;
 
     public Product(int productId, String name, double price, double discount, String shopName, int idShop, int sub_category) {
         this.productId = productId;
@@ -28,7 +31,36 @@ private int sub_category;
         this.idShop = idShop;
     }
 
+    public Product(int productId, String name, double price, double discount, String shopName, int idShop, ArrayList<String> anhSP) {
+        this.productId = productId;
+        this.name = name;
+        this.price = price;
+        this.discount = discount;
+        this.shopName = shopName;
+        this.idShop = idShop;
+        AnhSP = anhSP;
+    }
+
+    public Product(String name, double price, String shopName, ArrayList<String> anhSP) {
+        this.name = name;
+        this.price = price;
+        this.shopName = shopName;
+        AnhSP = anhSP;
+    }
+
     public Product() {
+    }
+
+    public void setDiscount(double discount) {
+        this.discount = discount;
+    }
+
+    public ArrayList<String> getAnhSP() {
+        return AnhSP;
+    }
+
+    public void setAnhSP(ArrayList<String> anhSP) {
+        AnhSP = anhSP;
     }
 
     public int getProductId() {

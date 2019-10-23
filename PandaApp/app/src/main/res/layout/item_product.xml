@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+
+    android:gravity="center"
+    android:layout_margin="@dimen/dimen_10dp"
+    >
+<androidx.cardview.widget.CardView
+    android:layout_margin="@dimen/dimen_10dp"
+    android:layout_gravity="center"
+app:cardCornerRadius="@dimen/dimen_5dp"
+    app:cardElevation="@dimen/dimen_20dp"
+    android:layout_width="@dimen/dimen_150dp"
+    android:layout_height="@dimen/dimen_200dp">
+    <LinearLayout
+        android:gravity="center"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <ImageView
+            android:id="@+id/ImageanhSP"
+            android:src="@color/color_blue_text"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimen_150dp"/>
+        <TextView
+            android:id="@+id/textviewTenSP"
+            android:textSize="@dimen/font_18sp"
+
+            android:text="Tên sản phẩm"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+       <TextView
+           android:id="@+id/textviewGiaSP"
+           android:textColor="@color/color_pink2"
+           android:text="120.000đ"
+           android:textSize="@dimen/font_18sp"
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"/>
+    </LinearLayout>
+
+
+</androidx.cardview.widget.CardView>
+
+
+</LinearLayout>
