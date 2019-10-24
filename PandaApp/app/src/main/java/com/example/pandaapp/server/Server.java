@@ -8,4 +8,5 @@ public class Server {
     public static String GetAllProduct="http://"+localHost+"/pandaapAPI/getallProductfollowsubCategory.php";
     public static String getOrderofCustomers="http://"+localHost+"/pandaapAPI/getOrderofCustomers.php";
 
+
 }

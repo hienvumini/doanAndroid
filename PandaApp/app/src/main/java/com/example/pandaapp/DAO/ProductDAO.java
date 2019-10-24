@@ -27,8 +27,7 @@ public class ProductDAO implements ProductDAOimple {
 
     Context mctx;
     String url;
-    StringBuilder result=new StringBuilder();
-
+    StringBuilder result = new StringBuilder();
 
 
     public StringBuilder getResult() {
@@ -45,39 +44,39 @@ public class ProductDAO implements ProductDAOimple {
 
     @Override
     public void getAll() {
-        final List<Product> ListProduct=new ArrayList<>();
-        String url= Server.GetAllProduct;
+        final List<Product> ListProduct = new ArrayList<>();
+        String url = Server.GetAllProduct;
 
-        RequestQueue requestQueue= Volley.newRequestQueue(mctx);
-        StringRequest stringRequest=new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
+        RequestQueue requestQueue = Volley.newRequestQueue(mctx);
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 result.append(response);
 
-               Toast.makeText(mctx, result, Toast.LENGTH_SHORT).show();
+                Toast.makeText(mctx, result, Toast.LENGTH_SHORT).show();
                 try {
-                    JSONArray jsonArray=new JSONArray(response);
-                    int productId=0;
-String name="";
-double price=0;
-double discount=0;
-    String shopName="";
-    int idShop=0;
+                    JSONArray jsonArray = new JSONArray(response);
+                    int productId = 0;
+                    String name = "";
+                    double price = 0;
+                    double discount = 0;
+                    String shopName = "";
+                    int idShop = 0;
 
 
-                    for (int i = 0; i <jsonArray.length() ; i++) {
-JSONObject jsonObject=jsonArray.getJSONObject(i);
-idShop=jsonObject.getInt("idShop");
-name=jsonObject.getString("name");
-price=jsonObject.getDouble("price");
-discount=jsonObject.getDouble("discount");
-shopName=jsonObject.getString("shopName");
-idShop=jsonObject.getInt("idShop");
-                        Product product=new Product(idShop,name,price,discount,shopName,idShop);
+                    for (int i = 0; i < jsonArray.length(); i++) {
+                        JSONObject jsonObject = jsonArray.getJSONObject(i);
+                        idShop = jsonObject.getInt("idShop");
+                        name = jsonObject.getString("name");
+                        price = jsonObject.getDouble("price");
+                        discount = jsonObject.getDouble("discount");
+                        shopName = jsonObject.getString("shopName");
+                        idShop = jsonObject.getInt("idShop");
+                        Product product = new Product(idShop, name, price, discount, shopName, idShop);
                         ListProduct.add(product);
 
                     }
-                   // Toast.makeText(mctx, jsonArray.length()+"", Toast.LENGTH_SHORT).show();
+                    // Toast.makeText(mctx, jsonArray.length()+"", Toast.LENGTH_SHORT).show();
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -89,17 +88,16 @@ idShop=jsonObject.getInt("idShop");
             public void onErrorResponse(VolleyError error) {
 
             }
-        }){
+        }) {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
-                HashMap<String,String> hashMap=new HashMap<String,String>();
-                hashMap.put("id_subcate","9");
+                HashMap<String, String> hashMap = new HashMap<String, String>();
+                hashMap.put("id_subcate", "9");
                 return hashMap;
             }
         };
 
         requestQueue.add(stringRequest);
-
 
 
     }

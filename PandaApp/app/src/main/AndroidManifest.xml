@@ -12,14 +12,17 @@
         <activity android:name=".ListProductCatagoryActivity"/>
         <activity android:name=".CartActivity" />
         <activity android:name=".LoginActivity" />
-        <activity android:name=".FlashScreen" />
-        <activity android:name=".view.MainActivity">
-
+        <activity android:name=".FlashScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
+        </activity>
+        <activity android:name=".view.MainActivity">
+
+
         </activity>
     </application>
 

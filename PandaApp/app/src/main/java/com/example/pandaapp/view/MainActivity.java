@@ -1,12 +1,15 @@
 package com.example.pandaapp.view;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -24,6 +27,7 @@ import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.pandaapp.CartActivity;
 import com.example.pandaapp.DAO.ProductDAO;
+import com.example.pandaapp.Models.Account;
 import com.example.pandaapp.Models.Product;
 import com.example.pandaapp.R;
 import com.example.pandaapp.adapter.MainAdapter;
@@ -48,22 +52,25 @@ public class MainActivity extends AppCompatActivity {
     RecyclerView recyclerView;
     ViewFlipper viewFlipper;
     ImageView imgmyCart;
+    Account account=new Account();
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        Intent intent=getIntent();
+        account= (Account) intent.getSerializableExtra("account");
+        Toast.makeText(this, "Chào mừng "+account.getName(), Toast.LENGTH_SHORT).show();
         fakedata();
         init();
         recyclerView.setAdapter(mainAdapter);
         imgmyCart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent(getApplicationContext(), CartActivity.class);
-                int idaccount=1;
-                intent.putExtra("idaccount",idaccount);
+                Intent intent = new Intent(getApplicationContext(), CartActivity.class);
+                int idaccount = 1;
+                intent.putExtra("idaccount", idaccount);
                 startActivity(intent);
             }
         });
@@ -82,33 +89,38 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
-    }
-    public void fakedata(){
-        listproduct=new ArrayList<>();
-        ArrayList<String> manganh=new ArrayList<>();
-        manganh.add("https://cf.shopee.vn/file/b094ce2dc84d13b302e147e1b3cfa6d8");
-        manganh.add("https://cf.shopee.vn/file/b094ce2dc84d13b302e147e1b3cfa6d8");
-        manganh.add("https://cf.shopee.vn/file/b094ce2dc84d13b302e147e1b3cfa6d8");
-        manganh.add("https://cf.shopee.vn/file/b094ce2dc84d13b302e147e1b3cfa6d8");
-listproduct.add(new Product("Ao 1",150000,"Tu",manganh));
-listproduct.add(new Product("Ao 1",150000,"Tu",manganh));
-listproduct.add(new Product("Ao 1",150000,"Tu",manganh));
-listproduct.add(new Product("Ao 1",150000,"Tu",manganh));
-listproduct.add(new Product("Ao 1",150000,"Tu",manganh));
+
 
     }
-    public void  init(){
 
-        mainAdapter=new MainAdapter(getApplicationContext(),R.id.recycleviewLastlate,listproduct);
-        recyclerView=(RecyclerView) findViewById(R.id.recycleviewLastlate);
-        RecyclerView.LayoutManager layoutManager= new GridLayoutManager(getApplicationContext(),2);
+    public void fakedata() {
+        listproduct = new ArrayList<>();
+        ArrayList<String> manganh = new ArrayList<>();
+        manganh.add("https://cf.shopee.vn/file/b094ce2dc84d13b302e147e1b3cfa6d8");
+        manganh.add("https://cf.shopee.vn/file/b094ce2dc84d13b302e147e1b3cfa6d8");
+        manganh.add("https://cf.shopee.vn/file/b094ce2dc84d13b302e147e1b3cfa6d8");
+        manganh.add("https://cf.shopee.vn/file/b094ce2dc84d13b302e147e1b3cfa6d8");
+        listproduct.add(new Product("Ao 1", 150000, "Tu", manganh));
+        listproduct.add(new Product("Ao 2", 150000, "Tu", manganh));
+        listproduct.add(new Product("Ao 3", 150000, "Tu", manganh));
+        listproduct.add(new Product("Ao 4", 150000, "Tu", manganh));
+        listproduct.add(new Product("Ao 5", 150000, "Tu", manganh));
+
+    }
+
+    public void init() {
+
+        mainAdapter = new MainAdapter(getApplicationContext(), R.id.recycleviewLastlate, listproduct);
+        recyclerView = (RecyclerView) findViewById(R.id.recycleviewLastlate);
+        RecyclerView.LayoutManager layoutManager = new GridLayoutManager(getApplicationContext(), 2);
+        LinearLayoutManager linnerlayout
+                = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setHasFixedSize(true);
-        viewFlipper=(ViewFlipper) findViewById(R.id.viewflipperquangcao);
+        viewFlipper = (ViewFlipper) findViewById(R.id.viewflipperquangcao);
         ActionViewflipper();
-        imgmyCart=(ImageView) findViewById(R.id.imgcartMain);
-        searchView=(SearchView) findViewById(R.id.SearchView);
-
+        imgmyCart = (ImageView) findViewById(R.id.imgcartMain);
+        searchView = (SearchView) findViewById(R.id.SearchView);
 
 
     }
@@ -145,8 +157,24 @@ listproduct.add(new Product("Ao 1",150000,"Tu",manganh));
     }
 
 
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()){
 
-
+            case R.id.menu_nav_home:
+                Intent intent=new Intent(this,MainActivity.class);
+                startActivity(intent);
+                finish();
+                break;
+            case R.id.menu_nav_cate:
+                break;
+            case R.id.menu_nav_seach:
+                break;
+            case R.id.menu_nav_profile:
+                break;
+        }
+        return super.onOptionsItemSelected(item);
     }
+}
 
 

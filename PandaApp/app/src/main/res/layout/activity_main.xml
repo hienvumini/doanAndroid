@@ -7,67 +7,73 @@
     android:orientation="vertical">
 
     <LinearLayout
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimension_actionbar_height_56dp"
         android:layout_centerHorizontal="true"
         android:background="@color/color_pink2"
         android:gravity="center"
         android:orientation="horizontal"
-        android:id="@+id/toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/dimension_actionbar_height_56dp"
-        android:weightSum="10"
-                >
+        android:weightSum="10">
+
         <SearchView
 
 
-            android:layout_marginLeft="@dimen/dimen_10dp"
-            android:background="@drawable/shape_edittext"
             android:id="@+id/SearchView"
             android:layout_width="0dp"
-            android:layout_weight="10"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dimen_10dp"
+            android:layout_weight="10"
+            android:background="@drawable/shape_edittext"
             android:iconifiedByDefault="false"
             android:queryHint="Bạn tìm gì hôm nay..." />
+
         <ImageView
-android:id="@+id/imgcartMain"
-            android:layout_weight="1"
-            android:src="@drawable/cart"
+            android:id="@+id/imgcartMain"
             android:layout_width="@dimen/dimen_50dp"
-            android:layout_height="@dimen/dimen_50dp"/>
+            android:layout_height="@dimen/dimen_50dp"
+            android:layout_weight="1"
+            android:src="@drawable/cart" />
     </LinearLayout>
 
     <ScrollView
-android:layout_below="@id/toolbar"
-        android:layout_above="@id/ctNavigationbotton"
         android:id="@+id/scollviewmain"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_above="@id/ctNavigationbotton"
+        android:layout_below="@id/toolbar">
+
         <LinearLayout
-            android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
-<ViewFlipper
-android:id="@+id/viewflipperquangcao"
-    android:background="@color/color_blue_text"
-    android:layout_width="match_parent"
-    android:layout_height="@dimen/dimen_150dp"/>
-<androidx.recyclerview.widget.RecyclerView
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
-    android:layout_gravity="center"
-    android:id="@+id/recycleviewLastlate"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+            <ViewFlipper
+                android:id="@+id/viewflipperquangcao"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dimen_150dp"
+                android:background="@color/color_blue_text" />
+
+            <androidx.recyclerview.widget.RecyclerView
+
+                android:id="@+id/recycleviewLastlate"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center">
 
 
-</androidx.recyclerview.widget.RecyclerView>
+            </androidx.recyclerview.widget.RecyclerView>
         </LinearLayout>
     </ScrollView>
-    <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:layout_alignParentBottom="true"
-        android:id="@+id/ctNavigationbotton"
-        app:menu="@menu/navigation_bottonmenu"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
 
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/ctNavigationbotton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        app:menu="@menu/navigation_bottonmenu">
+
+        
     </com.google.android.material.bottomnavigation.BottomNavigationView>
 
 </RelativeLayout>
