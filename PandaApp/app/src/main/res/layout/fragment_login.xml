@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/color_pink1"
+    android:orientation="vertical"
+    tools:context=".LoginActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <ImageView
+            android:id="@+id/imgV"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/dimen_135dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="@dimen/dimen_100dp"
+            android:src="@drawable/panda" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="Đăng nhập tài khoản"
+            android:textColor="@color/color_blue_text"
+            android:textSize="@dimen/dimen_35dp"
+            android:textStyle="bold" />
+
+        <TextView
+
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimen_20dp"
+            android:layout_marginLeft="@dimen/dimen_15dp"
+            android:layout_marginTop="@dimen/dimen_15dp"
+            android:text="Tên tài khoản"
+            android:textColor="@color/color_blue_text" />
+
+        <EditText
+            android:id="@+id/edittextusernameLogin"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimen_35dp"
+            android:layout_marginLeft="@dimen/dimen_20dp"
+            android:layout_marginTop="@dimen/dimen_10dp"
+            android:background="@color/color_white"
+            android:hint="example@gmail.com"
+            android:inputType="textEmailAddress"
+            android:paddingLeft="@dimen/dimen_5dp"
+            android:text="tunguyen"
+            android:textColor="@color/color_red_text" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dimen_15dp"
+            android:layout_marginTop="@dimen/dimen_15dp"
+            android:text="Mật khẩu"
+            android:textColor="@color/color_blue_text" />
+
+        <EditText
+            android:id="@+id/edittextpassLogin"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimen_35dp"
+            android:layout_marginLeft="@dimen/dimen_20dp"
+            android:layout_marginTop="@dimen/dimen_10dp"
+            android:background="@color/color_white"
+            android:hint="*********"
+            android:inputType="textPassword"
+            android:paddingLeft="@dimen/dimen_5dp"
+            android:text="12345678" />
+
+        <Button
+
+            android:id="@+id/login_buttonLogin"
+            android:layout_width="@dimen/dimen_100dp"
+            android:layout_height="@dimen/dimen_40dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="@dimen/dimen_25dp"
+            android:background="@drawable/botron_button"
+            android:text="Đăng nhập"
+            android:textColor="@color/color_white" />
+
+        <TextView
+            android:id="@+id/textview_sigupLogin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="@dimen/dimen_15dp"
+            android:gravity="center"
+            android:text="Chưa có tài khoản? Đăng kí ngay"
+            android:textColor="@color/color_blue_text"
+            android:textSize="@dimen/font_16sp"
+            android:textStyle="bold" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimen_25dp"
+            android:layout_marginLeft="@dimen/dimen_10dp"
+            android:layout_marginTop="@dimen/dimen_15dp"
+            android:layout_marginRight="@dimen/dimen_10dp"
+            android:orientation="horizontal">
+
+            <View
+                android:layout_width="@dimen/dimen_135dp"
+                android:layout_height="@dimen/dimen_2dp"
+                android:layout_gravity="center"
+                android:background="@color/color_blue_text" />
+
+            <TextView
+                android:layout_width="@dimen/dimen_100dp"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="@dimen/dimen_10dp"
+                android:text="Hoặc sử dụng"
+                android:textColor="@color/color_blue_text" />
+
+            <View
+                android:layout_width="@dimen/dimen_135dp"
+                android:layout_height="@dimen/dimen_2dp"
+                android:layout_gravity="center"
+                android:background="@color/color_blue_text" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimen_35dp"
+            android:layout_marginTop="@dimen/dimen_15dp"
+            android:orientation="horizontal">
+
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginRight="@dimen/dimen_10dp"
+                android:layout_weight="1">
+
+                <ImageView
+
+                    android:id="@+id/login_facebookLogin"
+                    android:layout_width="@dimen/dimen_35dp"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentEnd="true"
+                    android:src="@drawable/facebook" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+
+                <ImageView
+                    android:id="@+id/login_googleLogin"
+                    android:layout_width="@dimen/dimen_35dp"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/google" />
+            </RelativeLayout>
+
+
+        </LinearLayout>
+    </LinearLayout>
+
+    <FrameLayout
+        android:id="@+id/frameSignup"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/color_white"
+        android:visibility="invisible">
+
+        <TextView
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="Signup"
+            android:textSize="@dimen/font_30sp" />
+    </FrameLayout>
+</RelativeLayout>

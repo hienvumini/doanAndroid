@@ -7,6 +7,7 @@ public class Server {
     public static String getCheckAccount="http://"+localHost+"/pandaapAPI/checkAccount.php";
     public static String GetAllProduct="http://"+localHost+"/pandaapAPI/getallProductfollowsubCategory.php";
     public static String getOrderofCustomers="http://"+localHost+"/pandaapAPI/getOrderofCustomers.php";
+    public static String AddAccount="http://"+localHost+"/pandaapAPI/addAccount.php";
 
 
 }

@@ -1,134 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".LoginActivity"
     android:orientation="vertical"
-    android:background="@color/color_pink1">
-
-    <ImageView
-        android:id="@+id/imgV"
-        android:layout_width="wrap_content"
-        android:layout_height="@dimen/dimen_135dp"
-        android:src="@drawable/panda"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="@dimen/dimen_100dp"/>
-    <TextView
-
+    tools:context=".LoginActivity">
+    <FrameLayout
+        android:id="@+id/frameSignup"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/dimen_20dp"
-        android:text="Tên tài khoản"
-        android:layout_marginLeft="@dimen/dimen_15dp"
-        android:layout_marginTop="@dimen/dimen_15dp"
-        android:textColor="@color/color_blue_text"/>
-    <EditText
-        android:text="tunguyen"
-        android:id="@+id/edittextusernameLogin"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/dimen_35dp"
-        android:hint="example@gmail.com"
-        android:inputType="textEmailAddress"
-        android:layout_marginLeft="@dimen/dimen_20dp"
-        android:layout_marginTop="@dimen/dimen_10dp"
-        android:background="@color/color_white"
-        android:textColor="@color/color_red_text"
-        android:paddingLeft="@dimen/dimen_5dp"/>
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Mật khẩu"
-        android:layout_marginLeft="@dimen/dimen_15dp"
-        android:layout_marginTop="@dimen/dimen_15dp"
-        android:textColor="@color/color_blue_text"/>
-    <EditText
-        android:text="12345678"
-        android:id="@+id/edittextpassLogin"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/dimen_35dp"
-        android:hint="*********"
-        android:inputType="textPassword"
-        android:layout_marginLeft="@dimen/dimen_20dp"
-        android:layout_marginTop="@dimen/dimen_10dp"
-        android:background="@color/color_white"
-        android:paddingLeft="@dimen/dimen_5dp"/>
-    <Button
-
-        android:id="@+id/login_buttonLogin"
-        android:layout_width="@dimen/dimen_100dp"
-        android:layout_height="@dimen/dimen_40dp"
-        android:text="Đăng nhập"
-        android:textColor="@color/color_white"
-        android:background="@drawable/botron_button"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="@dimen/dimen_25dp"/>
-    <TextView
-        android:id="@+id/textview_dangkiLogin"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Chưa có tài khoản? Đăng kí ngay"
-        android:textStyle="bold"
-        android:textColor="@color/color_blue_text"
-        android:textSize="@dimen/font_16sp"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="@dimen/dimen_15dp"
-        android:gravity="center"/>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/dimen_25dp"
-        android:layout_marginLeft="@dimen/dimen_10dp"
-        android:layout_marginRight="@dimen/dimen_10dp"
-        android:layout_marginTop="@dimen/dimen_15dp"
-        android:orientation="horizontal">
-        <View
-            android:layout_width="@dimen/dimen_135dp"
-            android:layout_height="@dimen/dimen_2dp"
-            android:background="@color/color_blue_text"
-            android:layout_gravity="center"/>
-        <TextView
-            android:layout_width="@dimen/dimen_100dp"
-            android:layout_height="match_parent"
-            android:text="Hoặc sử dụng"
-            android:textColor="@color/color_blue_text"
-            android:layout_marginLeft="@dimen/dimen_10dp"/>
-        <View
-            android:layout_width="@dimen/dimen_135dp"
-            android:layout_height="@dimen/dimen_2dp"
-            android:background="@color/color_blue_text"
-            android:layout_gravity="center"/>
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/dimen_35dp"
-        android:orientation="horizontal"
-        android:layout_marginTop="@dimen/dimen_15dp">
-        <RelativeLayout
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="match_parent"
-            android:layout_marginRight="@dimen/dimen_10dp">
-            <ImageView
-
-                android:id="@+id/login_facebookLogin"
-                android:layout_width="@dimen/dimen_35dp"
-                android:layout_height="match_parent"
-                android:src="@drawable/facebook"
-                android:layout_alignParentEnd="true"/>
-
-        </RelativeLayout>
-        <RelativeLayout
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="match_parent">
-            <ImageView
-                android:id="@+id/login_googleLogin"
-                android:layout_width="@dimen/dimen_35dp"
-                android:layout_height="match_parent"
-                android:src="@drawable/google"
-                />
-        </RelativeLayout>
+        android:layout_height="match_parent">
 
 
-    </LinearLayout>
-</LinearLayout>
+    </FrameLayout>
+    <FrameLayout
+
+        android:id="@+id/frameSigin"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    </FrameLayout>
+
+
+
+</RelativeLayout>
