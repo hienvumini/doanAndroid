@@ -20,6 +20,7 @@ public class FlashScreen extends AppCompatActivity {
                     Thread.sleep(0000);
                     Intent intent=new Intent(getBaseContext(), LoginActivity.class);
                     startActivity(intent);
+                    finish();
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
