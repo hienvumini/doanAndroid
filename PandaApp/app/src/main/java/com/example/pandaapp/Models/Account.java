@@ -29,6 +29,7 @@ public class Account implements Serializable {
         this.accountStatus = accountStatus;
     }
 
+
     public Account() {
     }
 
@@ -118,6 +119,23 @@ public class Account implements Serializable {
 
     public void setAccountStatus(int accountStatus) {
         this.accountStatus = accountStatus;
+    }
+
+    @Override
+    public String toString() {
+        return "Account{" +
+                "roleId=" + roleId +
+                ", idShop=" + idShop +
+                ", usename='" + usename + '\'' +
+                ", password='" + password + '\'' +
+                ", name='" + name + '\'' +
+                ", phone_number='" + phone_number + '\'' +
+                ", address='" + address + '\'' +
+                ", gender=" + gender +
+                ", email='" + email + '\'' +
+                ", DateOfBirth='" + DateOfBirth + '\'' +
+                ", accountStatus=" + accountStatus +
+                '}';
     }
 }
 
