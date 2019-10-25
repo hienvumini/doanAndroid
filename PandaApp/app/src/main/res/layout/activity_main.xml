@@ -18,7 +18,6 @@
 
         <SearchView
 
-
             android:id="@+id/SearchView"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -26,6 +25,7 @@
             android:layout_weight="10"
             android:background="@drawable/shape_edittext"
             android:iconifiedByDefault="false"
+
             android:queryHint="Bạn tìm gì hôm nay..." />
 
         <ImageView
@@ -73,7 +73,11 @@
         android:layout_alignParentBottom="true"
         app:menu="@menu/navigation_bottonmenu">
 
-        
+
     </com.google.android.material.bottomnavigation.BottomNavigationView>
 
+    <FrameLayout
+        android:id="@+id/framMainActivity"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"></FrameLayout>
 </RelativeLayout>

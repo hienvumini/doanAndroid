@@ -2,13 +2,15 @@ package com.example.pandaapp.view;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.animation.Animation;
@@ -19,29 +21,20 @@ import android.widget.Toast;
 import android.widget.Toolbar;
 import android.widget.ViewFlipper;
 
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonArrayRequest;
-import com.android.volley.toolbox.Volley;
 import com.example.pandaapp.CartActivity;
-import com.example.pandaapp.DAO.ProductDAO;
+import com.example.pandaapp.FragmentCart;
+import com.example.pandaapp.FragmentCategory;
+import com.example.pandaapp.FragmentProfile;
+import com.example.pandaapp.FragmentSearch;
 import com.example.pandaapp.Models.Account;
 import com.example.pandaapp.Models.Product;
 import com.example.pandaapp.R;
 import com.example.pandaapp.adapter.MainAdapter;
-import com.example.pandaapp.server.Server;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.squareup.picasso.Picasso;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class MainActivity extends AppCompatActivity {
     Toolbar toolbar;
@@ -52,26 +45,29 @@ public class MainActivity extends AppCompatActivity {
     RecyclerView recyclerView;
     ViewFlipper viewFlipper;
     ImageView imgmyCart;
-    Account account=new Account();
+    Account account = new Account();
+    BottomNavigationView nav_bottom_MainActivity;
+    FragmentCategory fragmentCategory = new FragmentCategory();
+    FragmentSearch fragmentSearch = new FragmentSearch();
+    FragmentProfile fragmentProfile = new FragmentProfile();
+    FragmentCart fragmentCart = new FragmentCart();
+
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Intent intent=getIntent();
-        account= (Account) intent.getSerializableExtra("account");
-        Toast.makeText(this, "Chào mừng "+account.getName(), Toast.LENGTH_SHORT).show();
+        Intent intent = getIntent();
+        account = (Account) intent.getSerializableExtra("account");
+        Toast.makeText(this, "Chào mừng " + account.getName(), Toast.LENGTH_SHORT).show();
         fakedata();
         init();
         recyclerView.setAdapter(mainAdapter);
         imgmyCart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), CartActivity.class);
-                int idaccount = 1;
-                intent.putExtra("idaccount", idaccount);
-                startActivity(intent);
+                openFragment(fragmentCart);
             }
         });
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
@@ -83,12 +79,18 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public boolean onQueryTextChange(String newText) {
+
                 Toast.makeText(MainActivity.this, "Abc", Toast.LENGTH_SHORT).show();
                 return false;
             }
         });
-
-
+        searchView.setOnSearchClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openFragment(fragmentSearch);
+            }
+        });
+        
 
 
     }
@@ -109,7 +111,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void init() {
-
+        nav_bottom_MainActivity = (BottomNavigationView) findViewById(R.id.ctNavigationbotton);
+        nav_bottom_MainActivity.setOnNavigationItemSelectedListener(categoryFragmentListennerItem);
         mainAdapter = new MainAdapter(getApplicationContext(), R.id.recycleviewLastlate, listproduct);
         recyclerView = (RecyclerView) findViewById(R.id.recycleviewLastlate);
         RecyclerView.LayoutManager layoutManager = new GridLayoutManager(getApplicationContext(), 2);
@@ -121,8 +124,6 @@ public class MainActivity extends AppCompatActivity {
         ActionViewflipper();
         imgmyCart = (ImageView) findViewById(R.id.imgcartMain);
         searchView = (SearchView) findViewById(R.id.SearchView);
-
-
     }
 
     public void ActionViewflipper() {
@@ -157,24 +158,43 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        switch (item.getItemId()){
+    private void openFragment(final Fragment fragment) {
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction transaction = fragmentManager.beginTransaction();
+        transaction.replace(R.id.framMainActivity, fragment);
+        transaction.addToBackStack(null);
+        transaction.commit();
 
-            case R.id.menu_nav_home:
-                Intent intent=new Intent(this,MainActivity.class);
-                startActivity(intent);
-                finish();
-                break;
-            case R.id.menu_nav_cate:
-                break;
-            case R.id.menu_nav_seach:
-                break;
-            case R.id.menu_nav_profile:
-                break;
-        }
-        return super.onOptionsItemSelected(item);
     }
+
+    public BottomNavigationView.OnNavigationItemSelectedListener categoryFragmentListennerItem = new BottomNavigationView.OnNavigationItemSelectedListener() {
+        @Override
+        public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+            Fragment fragmentselect = null;
+            switch (menuItem.getItemId()) {
+                case R.id.menu_nav_home:
+                    getSupportFragmentManager().popBackStack();
+                    break;
+                case R.id.menu_nav_cate:
+                    fragmentselect = new FragmentCategory();
+                    openFragment(fragmentselect);
+                    break;
+                case R.id.menu_nav_seach:
+                    fragmentselect = new FragmentSearch();
+                    openFragment(fragmentselect);
+                    break;
+                case R.id.menu_nav_profile:
+                    fragmentselect = new FragmentProfile();
+                    openFragment(fragmentselect);
+
+                    break;
+
+
+            }
+
+            return false;
+        }
+    };
 }
 
 
