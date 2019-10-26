@@ -1,4 +1,4 @@
-package com.example.pandaapp;
+package com.example.pandaapp.fragment;
 
 import android.content.Context;
 import android.net.Uri;
@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.pandaapp.R;
 
 
 public class FragmentCategory extends Fragment {

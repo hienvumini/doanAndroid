@@ -1,4 +1,4 @@
-package com.example.pandaapp;
+package com.example.pandaapp.fragment;
 
 import android.os.Bundle;
 
@@ -16,12 +16,12 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.SearchView;
-import android.widget.Toast;
 import android.widget.Toolbar;
 import android.widget.ViewFlipper;
 
 import com.example.pandaapp.Models.Account;
 import com.example.pandaapp.Models.Product;
+import com.example.pandaapp.R;
 import com.example.pandaapp.adapter.MainAdapter;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.squareup.picasso.Picasso;

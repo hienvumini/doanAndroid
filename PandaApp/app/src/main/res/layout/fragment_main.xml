@@ -52,7 +52,7 @@
                 android:id="@+id/viewflipperquangcao"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/dimen_150dp"
-                android:background="@color/color_blue_text" />
+                android:background="@color/color_pink2" />
 
             <androidx.recyclerview.widget.RecyclerView
 
