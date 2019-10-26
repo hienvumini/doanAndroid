@@ -34,6 +34,7 @@
             android:layout_height="@dimen/dimen_50dp"
             android:layout_weight="1"
             android:src="@drawable/cart" />
+
     </LinearLayout>
 
     <ScrollView

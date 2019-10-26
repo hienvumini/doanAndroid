@@ -10,12 +10,14 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.SearchView;
 import android.widget.Toast;
 import android.widget.Toolbar;
 import android.widget.ViewFlipper;
 
+import com.example.pandaapp.Util.GlobalApplication;
 import com.example.pandaapp.fragment.FragmentCart;
 import com.example.pandaapp.fragment.FragmentCategory;
 import com.example.pandaapp.fragment.FragmentMain;
@@ -30,7 +32,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements MainAdapter.AdapterItemClickListener {
     Toolbar toolbar;
     List<Product> ListProduct;
     SearchView searchView;
@@ -39,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
     RecyclerView recyclerView;
     ViewFlipper viewFlipper;
     ImageView imgmyCart;
-    Account account = new Account();
+    Account account0 = new Account();
     BottomNavigationView nav_bottom_MainActivity;
     FragmentCategory fragmentCategory = new FragmentCategory();
     FragmentSearch fragmentSearch = new FragmentSearch();
@@ -54,10 +56,11 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         openFragment(fragmentMain);
         Intent intent = getIntent();
-        account = (Account) intent.getSerializableExtra("account");
-        Toast.makeText(this, "Chào mừng " + account.getName(), Toast.LENGTH_SHORT).show();
-       nav_bottom_MainActivity=findViewById(R.id.ctNavigationbotton);
-       nav_bottom_MainActivity.setOnNavigationItemSelectedListener(categoryFragmentListennerItem);
+        account0 = (Account) intent.getSerializableExtra("account");
+        Toast.makeText(this, "Chào mừng " + account0.getName(), Toast.LENGTH_SHORT).show();
+        nav_bottom_MainActivity = findViewById(R.id.ctNavigationbotton);
+        nav_bottom_MainActivity.setOnNavigationItemSelectedListener(categoryFragmentListennerItem);
+
     }
 
 
@@ -65,7 +68,6 @@ public class MainActivity extends AppCompatActivity {
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction transaction = fragmentManager.beginTransaction();
         transaction.replace(R.id.framMainActivity, fragment);
-        transaction.addToBackStack(null);
         transaction.commit();
 
     }
@@ -80,13 +82,14 @@ public class MainActivity extends AppCompatActivity {
                     break;
                 case R.id.menu_nav_cate:
                     fragmentselect = fragmentCategory;
-                    openFragment(fragmentselect);
+
                     break;
                 case R.id.menu_nav_seach:
                     fragmentselect = fragmentSearch;
-                    openFragment(fragmentselect);
+
                     break;
                 case R.id.menu_nav_profile:
+
                     fragmentselect = fragmentProfile;
                     break;
 
@@ -97,6 +100,16 @@ public class MainActivity extends AppCompatActivity {
             return true;
         }
     };
+
+    @Override
+    public void onClick(View view, int position, boolean isLongClick) {
+
+    }
+
+    public void setGlobal() {
+
+
+    }
 }
 
 

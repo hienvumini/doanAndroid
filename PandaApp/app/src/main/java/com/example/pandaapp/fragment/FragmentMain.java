@@ -19,9 +19,11 @@ import android.widget.SearchView;
 import android.widget.Toolbar;
 import android.widget.ViewFlipper;
 
+import com.example.pandaapp.CartActivity;
 import com.example.pandaapp.Models.Account;
 import com.example.pandaapp.Models.Product;
 import com.example.pandaapp.R;
+import com.example.pandaapp.Util.ChangeActivity;
 import com.example.pandaapp.adapter.MainAdapter;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.squareup.picasso.Picasso;
@@ -57,6 +59,7 @@ public class FragmentMain extends Fragment {
        imgmyCart.setOnClickListener(onClickListenerCartItem);
 
 
+
         return view;
     }
     public void fakedata() {
@@ -66,11 +69,11 @@ public class FragmentMain extends Fragment {
         manganh.add("https://cf.shopee.vn/file/b094ce2dc84d13b302e147e1b3cfa6d8");
         manganh.add("https://cf.shopee.vn/file/b094ce2dc84d13b302e147e1b3cfa6d8");
         manganh.add("https://cf.shopee.vn/file/b094ce2dc84d13b302e147e1b3cfa6d8");
-        listproduct.add(new Product("Ao 1", 150000, "Tu", manganh));
-        listproduct.add(new Product("Ao 2", 150000, "Tu", manganh));
-        listproduct.add(new Product("Ao 3", 150000, "Tu", manganh));
-        listproduct.add(new Product("Ao 4", 150000, "Tu", manganh));
-        listproduct.add(new Product("Ao 5", 150000, "Tu", manganh));
+        listproduct.add(new Product("Ao 1", 150000, "Tu", manganh,"Đây là áo 1"));
+        listproduct.add(new Product("Ao 2", 150000, "Tu", manganh,"Đây là áo 1"));
+        listproduct.add(new Product("Ao 3", 150000, "Tu", manganh,"Đây là áo 1"));
+        listproduct.add(new Product("Ao 4", 150000, "Tu", manganh,"Đây là áo 1"));
+        listproduct.add(new Product("Ao 5", 150000, "Tu", manganh,"Đây là áo 1"));
 
     }
 
@@ -117,11 +120,12 @@ public class FragmentMain extends Fragment {
         viewFlipper.setOutAnimation(animation_slide_out);
 
 
+
     }
     public ImageView.OnClickListener onClickListenerCartItem=new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-openFragment(new FragmentCart());
+            ChangeActivity.toActivity(getActivity(), CartActivity.class);
         }
     };
     private void openFragment(final Fragment fragment) {
