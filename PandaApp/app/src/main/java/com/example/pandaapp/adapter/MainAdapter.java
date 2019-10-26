@@ -53,11 +53,6 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.ViewHolder> im
                 //Intent intent=new Intent(mctx,)   chưa có DetailProductActivity
             }
         });
-
-
-
-
-
     }
 
     @Override

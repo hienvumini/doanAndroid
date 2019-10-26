@@ -13,5 +13,10 @@
         android:text="Search"
         android:textColor="@color/color_white"
         android:textSize="50sp" />
+    <ImageView
+        android:id="@+id/imagetest"
+        android:src="@color/color_white"
+        android:layout_width="@dimen/dimen_100dp"
+        android:layout_height="@dimen/dimen_100dp"/>
 
 </FrameLayout>
