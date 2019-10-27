@@ -17,6 +17,7 @@ import android.widget.Toast;
 import android.widget.Toolbar;
 import android.widget.ViewFlipper;
 
+import com.example.pandaapp.Util.GlobalApplication;
 import com.example.pandaapp.fragment.FragmentCart;
 import com.example.pandaapp.fragment.FragmentCategory;
 import com.example.pandaapp.fragment.FragmentMain;
@@ -26,6 +27,7 @@ import com.example.pandaapp.Models.Account;
 import com.example.pandaapp.Models.Product;
 import com.example.pandaapp.R;
 import com.example.pandaapp.adapter.AdapterProduct;
+import com.example.pandaapp.fragment.FragmentShopProfile;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.util.ArrayList;
@@ -47,18 +49,29 @@ public class MainActivity extends AppCompatActivity implements AdapterProduct.Ad
     FragmentProfile fragmentProfile = new FragmentProfile();
     FragmentCart fragmentCart = new FragmentCart();
     FragmentMain fragmentMain = new FragmentMain();
+    FragmentShopProfile fragmentShopProfile=new FragmentShopProfile();
+    GlobalApplication globalApplication;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        globalApplication=(GlobalApplication) getApplicationContext();
         openFragment(fragmentMain);
         Intent intent = getIntent();
-        account0 = (Account) intent.getSerializableExtra("account");
-        Toast.makeText(this, "Chào mừng " + account0.getName(), Toast.LENGTH_SHORT).show();
-        nav_bottom_MainActivity = findViewById(R.id.ctNavigationbotton);
-        nav_bottom_MainActivity.setOnNavigationItemSelectedListener(categoryFragmentListennerItem);
+        if (globalApplication.account != null) {
+            account0 =globalApplication.account;
+            Toast.makeText(this, "Chào mừng " + account0.getName(), Toast.LENGTH_SHORT).show();
+            nav_bottom_MainActivity = findViewById(R.id.ctNavigationbotton);
+            nav_bottom_MainActivity.setOnNavigationItemSelectedListener(categoryFragmentListennerItem);
+        }
+        else{
+            Toast.makeText(getApplicationContext(), "Đăng nhập thất bại", Toast.LENGTH_SHORT).show();
+
+        }
+
+
 
     }
 
@@ -88,8 +101,13 @@ public class MainActivity extends AppCompatActivity implements AdapterProduct.Ad
 
                     break;
                 case R.id.menu_nav_profile:
+                    if (account0.getRoleId() == 1) {
+                        fragmentselect = fragmentProfile;
+                    } else {
+                        fragmentselect=fragmentShopProfile;
 
-                    fragmentselect = fragmentProfile;
+                    }
+
                     break;
 
 

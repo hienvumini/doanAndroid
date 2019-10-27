@@ -9,6 +9,7 @@ import android.os.Bundle;
 import androidx.fragment.app.Fragment;
 
 import android.preference.PreferenceManager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,6 +27,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.pandaapp.Models.Account;
+import com.example.pandaapp.Util.GlobalApplication;
 import com.example.pandaapp.server.Server;
 import com.example.pandaapp.view.MainActivity;
 
@@ -46,10 +48,7 @@ public class LoginFragment extends Fragment {
     ImageView btnfacebookLogin, btnGoogleLogin;
     String txtusername, txtpassword;
     TextView textViewSignupLogin;
-
-
-
-
+    Account account = new Account();
 
 
     @Override
@@ -59,9 +58,9 @@ public class LoginFragment extends Fragment {
 
         View view = inflater.inflate(R.layout.fragment_login, container, false);
         SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(getActivity());
-                String username=pref.getString("username", null);
-               String password=pref.getString("password", null);
-        Toast.makeText(getActivity(), username+"   "+password, Toast.LENGTH_SHORT).show();
+        String username = pref.getString("username", null);
+        String password = pref.getString("password", null);
+        Toast.makeText(getActivity(), username + "   " + password, Toast.LENGTH_SHORT).show();
 
         edittextuser = (EditText) view.findViewById(R.id.edittextusernameLogin);
         edittextpass = (EditText) view.findViewById(R.id.edittextpassLogin);
@@ -100,6 +99,8 @@ public class LoginFragment extends Fragment {
 
             @Override
             public void onResponse(String response) {
+                Toast.makeText(getActivity(), response, Toast.LENGTH_SHORT).show();
+                Log.d("FFF", "onResponse: "+response);
                 try {
                     JSONArray jsonArray = new JSONArray(response);
                     if (jsonArray.length() == 0) {
@@ -129,15 +130,13 @@ public class LoginFragment extends Fragment {
                         email = jsonObject.getString("email");
                         DateOfBirth = jsonObject.getString("DateOfBirth");
                         accountStatus = jsonObject.getInt("accountStatus");
-                        Account account = new Account(roleId, idShop, usename, password, name, phone_number, address, gender, email, DateOfBirth, accountStatus);
+                        Account account1 = new Account(roleId, idShop, usename, password, name, phone_number, address, gender, email, DateOfBirth, accountStatus);
                         Intent intent = new Intent(getActivity(), MainActivity.class);
-                        intent.putExtra("account", account);
+                        GlobalApplication globalApplication = (GlobalApplication) getActivity().getApplicationContext();
+                        globalApplication.account = account1;
                         startActivity(intent);
                         getActivity().finish();
-                        SharedPreferences pref = getActivity().getSharedPreferences("account", MODE_PRIVATE);
-                        SharedPreferences.Editor editor = pref.edit();
-                        editor.putString("username","congpham");
-                        editor.putString("password","123456");
+
 
                     }
                 } catch (JSONException e) {
@@ -147,6 +146,7 @@ public class LoginFragment extends Fragment {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
+                Log.d("AAA", "onErrorResponse: "+error.toString());
 
             }
         }) {
