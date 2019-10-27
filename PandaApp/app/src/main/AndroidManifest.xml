@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.pandaapp">
-<uses-permission android:name="android.permission.INTERNET"/>
+
     <application
         android:name=".Util.GlobalApplication"
         android:allowBackup="true"
@@ -10,7 +10,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ListProductCatagoryActivity"/>
+        <activity android:name=".ShopProfileActivity"></activity>
+        <activity android:name=".ProfileActivity" />
+        <activity android:name=".OrderManagerActivity" />
+        <activity android:name=".ListProductCatagoryActivity" />
         <activity android:name=".CartActivity" />
         <activity android:name=".LoginActivity" />
         <activity android:name=".view.DetailActivity"/>
@@ -21,12 +24,10 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
         </activity>
-        <activity android:name=".view.MainActivity">
-
-
-        </activity>
+        <activity android:name=".view.MainActivity" />
     </application>
+
+    <uses-permission android:name="android.permission.INTERNET" />
 
 </manifest>
