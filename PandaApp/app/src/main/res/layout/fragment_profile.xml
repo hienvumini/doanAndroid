@@ -190,15 +190,17 @@
                 android:layout_weight="1"
                 android:orientation="vertical">
                 <TextView
+                    android:id="@+id/textviewUsernameFull_Profile"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/dimen_0dp"
                     android:layout_weight="1"
-                    android:text="HiếuStar"
+                    android:text=""
                     android:textSize="@dimen/font_18sp"
                     android:textColor="@color/color_black"
                     android:gravity="center|left"
                     android:layout_marginLeft="@dimen/dimen_15dp"/>
                 <TextView
+                    android:id="@+id/textviewNameFull_Profile"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/dimen_0dp"
                     android:layout_weight="1"
@@ -208,6 +210,7 @@
                     android:gravity="center|left"
                     android:layout_marginLeft="@dimen/dimen_15dp"/>
                 <TextView
+                    android:id="@+id/textviewPhone_Profile"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/dimen_0dp"
                     android:layout_weight="1"
@@ -233,7 +236,7 @@
                 android:textSize="@dimen/font_20sp"
                 android:gravity="center"/>
             <TextView
-                android:id="@+id/profile_diachi"
+                android:id="@+id/textviewAddress_Profile"
                 android:layout_width="@dimen/dimen_0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="8"
@@ -247,6 +250,8 @@
     </LinearLayout>
 
     <Button
+        android:layout_margin="@dimen/dimen_10dp"
+        android:id="@+id/btnLogOut_Profile"
         android:layout_width="match_parent"
         android:layout_height="@dimen/dimen_40dp"
         android:text="Đăng xuất"
@@ -254,5 +259,5 @@
         android:textSize="@dimen/font_18sp"
         android:layout_alignParentBottom="true"
         android:background="@drawable/botron_button_pink"
-        android:layout_margin="@dimen/dimen_10dp"/>
+        />
 </RelativeLayout>

@@ -62,7 +62,7 @@ public class MainActivity extends AppCompatActivity implements AdapterProduct.Ad
         Intent intent = getIntent();
         if (globalApplication.account != null) {
             account0 =globalApplication.account;
-            Toast.makeText(this, "Chào mừng " + account0.getName(), Toast.LENGTH_SHORT).show();
+            
             nav_bottom_MainActivity = findViewById(R.id.ctNavigationbotton);
             nav_bottom_MainActivity.setOnNavigationItemSelectedListener(categoryFragmentListennerItem);
         }

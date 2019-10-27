@@ -20,6 +20,7 @@
     </com.google.android.material.bottomnavigation.BottomNavigationView>
 
     <FrameLayout
+        android:layout_above="@id/ctNavigationbotton"
         android:id="@+id/framMainActivity"
         android:layout_width="match_parent"
         android:layout_height="match_parent"></FrameLayout>
