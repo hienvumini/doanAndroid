@@ -209,7 +209,7 @@
                android:background="@drawable/botron_button_pink"
                android:layout_marginLeft="@dimen/dimen_25dp"/>
         <Button
-            android:id="@+id/detail_product_btn_them"
+            android:id="@+id/btnAddCart_Detail"
             android:layout_width="@dimen/dimen_0dp"
             android:layout_height="match_parent"
             android:layout_weight="5"

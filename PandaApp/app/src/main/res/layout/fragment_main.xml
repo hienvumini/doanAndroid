@@ -25,7 +25,7 @@
             android:layout_weight="10"
             android:background="@drawable/shape_edittext"
             android:iconifiedByDefault="false"
-
+            android:inputType="none"
             android:queryHint="Bạn tìm gì hôm nay..." />
 
         <ImageView
@@ -67,4 +67,4 @@
         </LinearLayout>
     </ScrollView>
 
-  </RelativeLayout>
+</RelativeLayout>

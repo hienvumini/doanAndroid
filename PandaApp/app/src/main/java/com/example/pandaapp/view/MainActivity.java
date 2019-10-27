@@ -17,7 +17,6 @@ import android.widget.Toast;
 import android.widget.Toolbar;
 import android.widget.ViewFlipper;
 
-import com.example.pandaapp.Util.GlobalApplication;
 import com.example.pandaapp.fragment.FragmentCart;
 import com.example.pandaapp.fragment.FragmentCategory;
 import com.example.pandaapp.fragment.FragmentMain;
@@ -26,18 +25,18 @@ import com.example.pandaapp.fragment.FragmentSearch;
 import com.example.pandaapp.Models.Account;
 import com.example.pandaapp.Models.Product;
 import com.example.pandaapp.R;
-import com.example.pandaapp.adapter.MainAdapter;
+import com.example.pandaapp.adapter.AdapterProduct;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity implements MainAdapter.AdapterItemClickListener {
+public class MainActivity extends AppCompatActivity implements AdapterProduct.AdapterItemClickListener {
     Toolbar toolbar;
     List<Product> ListProduct;
     SearchView searchView;
     ArrayList<Product> listproduct;
-    MainAdapter mainAdapter;
+    AdapterProduct mainAdapter;
     RecyclerView recyclerView;
     ViewFlipper viewFlipper;
     ImageView imgmyCart;

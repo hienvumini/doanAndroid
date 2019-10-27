@@ -5,13 +5,13 @@ import java.util.ArrayList;
 public class Product {
     private int productId;
     private String name;
-    private  double price;
+    private double price;
     private double discount;
     private String shopName;
     private int idShop;
-private int sub_category;
-private ArrayList<String> AnhSP;
-private  String Dis;
+    private int sub_category;
+    private ArrayList<String> AnhSP;
+    private String Dis;
 
     public Product(int productId, String name, double price, double discount, String shopName, int idShop, int sub_category) {
         this.productId = productId;
@@ -32,7 +32,7 @@ private  String Dis;
         this.idShop = idShop;
     }
 
-    public Product(int productId, String name, double price, double discount, String shopName, int idShop, ArrayList<String> anhSP,String disc) {
+    public Product(int productId, String name, double price, double discount, String shopName, int idShop, ArrayList<String> anhSP, String disc) {
         this.productId = productId;
         this.name = name;
         this.price = price;
@@ -40,15 +40,15 @@ private  String Dis;
         this.shopName = shopName;
         this.idShop = idShop;
         AnhSP = anhSP;
-        this.Dis=disc;
+        this.Dis = disc;
     }
 
-    public Product(String name, double price, String shopName, ArrayList<String> anhSP,String disc) {
+    public Product(String name, double price, String shopName, ArrayList<String> anhSP, String disc) {
         this.name = name;
         this.price = price;
         this.shopName = shopName;
         AnhSP = anhSP;
-        this.Dis=disc;
+        this.Dis = disc;
     }
 
     public Product() {
