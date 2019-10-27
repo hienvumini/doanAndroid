@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".OrderManagerActivity">
+
+    <androidx.appcompat.widget.Toolbar
+
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        android:background="@color/color_pink2">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <ImageView
+                android:id="@+id/img_back_black"
+                android:layout_gravity="start"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:scaleType="centerInside"
+                android:src="@drawable/back_black"
+                android:layout_marginTop="@dimen/dimen_5dp"/>
+            <TextView
+                android:id="@+id/order_muahang"
+                android:textColor="@color/color_white"
+                android:textStyle="bold"
+                android:textSize="@dimen/font_20sp"
+                android:text="Mua hàng"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/dimen_40dp"
+                android:layout_toRightOf="@+id/img_back_black"
+                android:gravity="center"
+                android:layout_marginLeft="@dimen/dimen_10dp"
+                android:layout_marginTop="@dimen/dimen_5dp" />
+
+                <TextView
+                    android:id="@+id/order_myShop"
+                    android:layout_width="@dimen/dimen_120dp"
+                    android:layout_height="@dimen/dimen_40dp"
+                    android:text="Shop của tôi"
+                    android:textColor="@color/color_white"
+                    android:textSize="@dimen/font_20sp"
+                    android:layout_alignParentEnd="true"
+                    android:background="@drawable/custom_myshop"
+                    android:gravity="center"
+                    android:layout_marginTop="@dimen/dimen_5dp"
+                    android:layout_marginRight="@dimen/dimen_10dp"
+                    android:paddingLeft="@dimen/dimen_2dp"
+                    android:paddingRight="@dimen/dimen_2dp"/>
+
+        </RelativeLayout>
+
+    </androidx.appcompat.widget.Toolbar>
+    <LinearLayout
+        android:id="@+id/order_trinhtrang"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimen_30dp"
+        android:orientation="horizontal"
+        android:layout_below="@+id/toolbar"
+        android:background="@color/color_brown">
+        <TextView
+            android:layout_width="@dimen/dimen_0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="Đang giao"
+            android:textSize="@dimen/font_18sp"
+            android:gravity="center"
+            android:layout_gravity="center"/>
+        <TextView
+            android:layout_width="@dimen/dimen_0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="Đã giao"
+            android:textSize="@dimen/font_18sp"
+            android:gravity="center"
+            android:layout_gravity="center"/>
+        <TextView
+            android:layout_width="@dimen/dimen_0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="Đã hủy"
+            android:textSize="@dimen/font_18sp"
+            android:gravity="center"
+            android:layout_gravity="center"/>
+    </LinearLayout>
+    <ListView
+        android:id="@+id/order_listview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/order_trinhtrang"
+        android:background="@color/color_brown"></ListView>
+</RelativeLayout>
