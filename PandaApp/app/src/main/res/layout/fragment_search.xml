@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/color_pink2"
+    tools:context=".fragment.FragmentSearch">
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:text="Search"
+        android:textColor="@color/color_white"
+        android:textSize="50sp" />
+    <ImageView
+        android:id="@+id/imagetest"
+        android:src="@color/color_white"
+        android:layout_width="@dimen/dimen_100dp"
+        android:layout_height="@dimen/dimen_100dp"/>
+
+</FrameLayout>

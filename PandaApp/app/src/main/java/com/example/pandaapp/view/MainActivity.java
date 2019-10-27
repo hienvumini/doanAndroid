@@ -2,178 +2,112 @@ package com.example.pandaapp.view;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.SearchView;
 import android.widget.Toast;
 import android.widget.Toolbar;
 import android.widget.ViewFlipper;
 
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonArrayRequest;
-import com.android.volley.toolbox.Volley;
-import com.example.pandaapp.CartActivity;
-import com.example.pandaapp.DAO.ProductDAO;
+import com.example.pandaapp.fragment.FragmentCart;
+import com.example.pandaapp.fragment.FragmentCategory;
+import com.example.pandaapp.fragment.FragmentMain;
+import com.example.pandaapp.fragment.FragmentProfile;
+import com.example.pandaapp.fragment.FragmentSearch;
 import com.example.pandaapp.Models.Account;
 import com.example.pandaapp.Models.Product;
 import com.example.pandaapp.R;
-import com.example.pandaapp.adapter.MainAdapter;
-import com.example.pandaapp.server.Server;
-import com.squareup.picasso.Picasso;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
+import com.example.pandaapp.adapter.AdapterProduct;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements AdapterProduct.AdapterItemClickListener {
     Toolbar toolbar;
     List<Product> ListProduct;
     SearchView searchView;
     ArrayList<Product> listproduct;
-    MainAdapter mainAdapter;
+    AdapterProduct mainAdapter;
     RecyclerView recyclerView;
     ViewFlipper viewFlipper;
     ImageView imgmyCart;
-    Account account=new Account();
+    Account account0 = new Account();
+    BottomNavigationView nav_bottom_MainActivity;
+    FragmentCategory fragmentCategory = new FragmentCategory();
+    FragmentSearch fragmentSearch = new FragmentSearch();
+    FragmentProfile fragmentProfile = new FragmentProfile();
+    FragmentCart fragmentCart = new FragmentCart();
+    FragmentMain fragmentMain = new FragmentMain();
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Intent intent=getIntent();
-        account= (Account) intent.getSerializableExtra("account");
-        Toast.makeText(this, "Chào mừng "+account.getName(), Toast.LENGTH_SHORT).show();
-        fakedata();
-        init();
-        recyclerView.setAdapter(mainAdapter);
-        imgmyCart.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), CartActivity.class);
-                int idaccount = 1;
-                intent.putExtra("idaccount", idaccount);
-                startActivity(intent);
-            }
-        });
-        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-            @Override
-            public boolean onQueryTextSubmit(String query) {
-                Toast.makeText(MainActivity.this, "say hello", Toast.LENGTH_SHORT).show();
-                return false;
-            }
-
-            @Override
-            public boolean onQueryTextChange(String newText) {
-                Toast.makeText(MainActivity.this, "Abc", Toast.LENGTH_SHORT).show();
-                return false;
-            }
-        });
-
-
-
+        openFragment(fragmentMain);
+        Intent intent = getIntent();
+        account0 = (Account) intent.getSerializableExtra("account");
+        Toast.makeText(this, "Chào mừng " + account0.getName(), Toast.LENGTH_SHORT).show();
+        nav_bottom_MainActivity = findViewById(R.id.ctNavigationbotton);
+        nav_bottom_MainActivity.setOnNavigationItemSelectedListener(categoryFragmentListennerItem);
 
     }
 
-    public void fakedata() {
-        listproduct = new ArrayList<>();
-        ArrayList<String> manganh = new ArrayList<>();
-        manganh.add("https://cf.shopee.vn/file/b094ce2dc84d13b302e147e1b3cfa6d8");
-        manganh.add("https://cf.shopee.vn/file/b094ce2dc84d13b302e147e1b3cfa6d8");
-        manganh.add("https://cf.shopee.vn/file/b094ce2dc84d13b302e147e1b3cfa6d8");
-        manganh.add("https://cf.shopee.vn/file/b094ce2dc84d13b302e147e1b3cfa6d8");
-        listproduct.add(new Product("Ao 1", 150000, "Tu", manganh));
-        listproduct.add(new Product("Ao 2", 150000, "Tu", manganh));
-        listproduct.add(new Product("Ao 3", 150000, "Tu", manganh));
-        listproduct.add(new Product("Ao 4", 150000, "Tu", manganh));
-        listproduct.add(new Product("Ao 5", 150000, "Tu", manganh));
+
+    private void openFragment(final Fragment fragment) {
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction transaction = fragmentManager.beginTransaction();
+        transaction.replace(R.id.framMainActivity, fragment);
+        transaction.commit();
 
     }
 
-    public void init() {
+    public BottomNavigationView.OnNavigationItemSelectedListener categoryFragmentListennerItem = new BottomNavigationView.OnNavigationItemSelectedListener() {
+        @Override
+        public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+            Fragment fragmentselect = null;
+            switch (menuItem.getItemId()) {
+                case R.id.menu_nav_home:
+                    fragmentselect = fragmentMain;
+                    break;
+                case R.id.menu_nav_cate:
+                    fragmentselect = fragmentCategory;
 
-        mainAdapter = new MainAdapter(getApplicationContext(), R.id.recycleviewLastlate, listproduct);
-        recyclerView = (RecyclerView) findViewById(R.id.recycleviewLastlate);
-        RecyclerView.LayoutManager layoutManager = new GridLayoutManager(getApplicationContext(), 2);
-        LinearLayoutManager linnerlayout
-                = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
-        recyclerView.setLayoutManager(layoutManager);
-        recyclerView.setHasFixedSize(true);
-        viewFlipper = (ViewFlipper) findViewById(R.id.viewflipperquangcao);
-        ActionViewflipper();
-        imgmyCart = (ImageView) findViewById(R.id.imgcartMain);
-        searchView = (SearchView) findViewById(R.id.SearchView);
+                    break;
+                case R.id.menu_nav_seach:
+                    fragmentselect = fragmentSearch;
 
+                    break;
+                case R.id.menu_nav_profile:
 
-    }
-
-    public void ActionViewflipper() {
-
-        ArrayList<String> mangquangcao = new ArrayList<>();
-        mangquangcao.add("https://cdn.tgdd.vn/2019/10/banner/V17-800-300-800x300-(1).png");
-        mangquangcao.add("https://cdn.tgdd.vn/2019/10/banner/800-300-800x300-(2).png");
-        mangquangcao.add("https://cdn.tgdd.vn/2019/10/banner/800-300-800x300-(7).png");
-        mangquangcao.add("https://cdn.tgdd.vn/2019/10/banner/Realme-5-Teaser-800-300-800x300.png");
-        mangquangcao.add("https://cdn.tgdd.vn/2019/10/banner/800-300-800x300-(1).png");
-        mangquangcao.add("https://cdn.tgdd.vn/2019/10/banner/Phu-kien-online--800-300-800x300.png");
-
-        for (int i = 0; i < mangquangcao.size(); i++) {
-            ImageView imageView = new ImageView(getApplicationContext());
-            Picasso.with(getApplicationContext()).load(mangquangcao.get(i))
-                    .into(imageView);
-            imageView.setScaleType(ImageView.ScaleType.FIT_XY);
-            viewFlipper.addView(imageView);
+                    fragmentselect = fragmentProfile;
+                    break;
 
 
+            }
+            openFragment(fragmentselect);
+
+            return true;
         }
-        viewFlipper.setFlipInterval(3000);
-        viewFlipper.setAutoStart(true);
-        Animation animation_slide_in = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.slide_in_right);
-        Animation animation_slide_out = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.slide_out_right);
-
-
-        viewFlipper.setInAnimation(animation_slide_in);
-        viewFlipper.setOutAnimation(animation_slide_out);
-
-
-    }
-
+    };
 
     @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        switch (item.getItemId()){
+    public void onClick(View view, int position, boolean isLongClick) {
 
-            case R.id.menu_nav_home:
-                Intent intent=new Intent(this,MainActivity.class);
-                startActivity(intent);
-                finish();
-                break;
-            case R.id.menu_nav_cate:
-                break;
-            case R.id.menu_nav_seach:
-                break;
-            case R.id.menu_nav_profile:
-                break;
-        }
-        return super.onOptionsItemSelected(item);
+    }
+
+    public void setGlobal() {
+
+
     }
 }
 

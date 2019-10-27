@@ -18,6 +18,7 @@
             android:layout_height="@dimen/dimen_0dp"
             android:layout_weight="6">
             <ImageView
+                android:id="@+id/Image_Detail"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:src="@drawable/detail_img" />
@@ -43,12 +44,13 @@
                 android:id="@+id/detail_product_more"
                 android:layout_width="@dimen/dimen_35dp"
                 android:layout_height="@dimen/dimen_35dp"
-                android:background="@drawable/custom_circle"
-                android:src="@drawable/detail_more"
+
+                android:src="@drawable/favorite"
                 android:layout_alignParentEnd="true"
                 android:layout_marginRight="@dimen/dimen_15dp"
                 android:layout_marginTop="@dimen/dimen_15dp"
                 android:padding="@dimen/dimen_5dp"/>
+
             <LinearLayout
                 android:layout_width="@dimen/dimen_40dp"
                 android:layout_height="@dimen/dimen_25dp"
@@ -85,6 +87,7 @@
             android:background="@color/color_brown"
             android:orientation="vertical">
             <TextView
+                android:id="@+id/textviewTen_Detail"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/dimen_40dp"
                 android:text="Áo sơ mi nữ cổ đen"
@@ -102,6 +105,7 @@
                     android:layout_weight="1"
                     android:orientation="horizontal">
                     <TextView
+                        android:id="@+id/textviewGia_Deatail"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:text="120.000"
@@ -109,14 +113,7 @@
                         android:textColor="@color/color_pink2"
                         android:gravity="center|left"
                         android:paddingLeft="@dimen/dimen_10dp"/>
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:text="đ"
-                        android:textSize="@dimen/font_16sp"
-                        android:textColor="@color/color_pink2"
-                        android:gravity="center|left"
-                        android:paddingLeft="@dimen/dimen_10dp"/>
+
 
                 </LinearLayout>
                 <LinearLayout
@@ -125,6 +122,7 @@
                     android:layout_weight="1"
                     android:gravity="end">
                     <TextView
+                        android:id="@+id/textviewSold_Detail"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:text="Đã bán: "
@@ -161,40 +159,14 @@
                 android:textStyle="bold"
                 android:layout_marginLeft="@dimen/dimen_15dp"/>
             <TextView
+                android:id="@+id/textviewDis_Detail"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Thiết kế"
                 android:textColor="@color/color_black"
                 android:textSize="@dimen/font_16sp"
                 android:layout_marginLeft="@dimen/dimen_20dp"/>
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Chất liệu"
-                android:textColor="@color/color_black"
-                android:textSize="@dimen/font_16sp"
-                android:layout_marginLeft="@dimen/dimen_20dp"/>
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Kiểu dáng"
-                android:textColor="@color/color_black"
-                android:textSize="@dimen/font_16sp"
-                android:layout_marginLeft="@dimen/dimen_20dp"/>
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Phong cách"
-                android:textColor="@color/color_black"
-                android:textSize="@dimen/font_16sp"
-                android:layout_marginLeft="@dimen/dimen_20dp"/>
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Đi làm, ..."
-                android:textColor="@color/color_black"
-                android:textSize="@dimen/font_16sp"
-                android:layout_marginLeft="@dimen/dimen_20dp"/>
+
         </LinearLayout>
     </LinearLayout>
 
@@ -237,7 +209,7 @@
                android:background="@drawable/botron_button_pink"
                android:layout_marginLeft="@dimen/dimen_25dp"/>
         <Button
-            android:id="@+id/detail_product_btn_them"
+            android:id="@+id/btnAddCart_Detail"
             android:layout_width="@dimen/dimen_0dp"
             android:layout_height="match_parent"
             android:layout_weight="5"
@@ -247,5 +219,10 @@
             android:layout_marginRight="@dimen/dimen_5dp"
             android:layout_marginLeft="@dimen/dimen_5dp"/>
     </LinearLayout>
+    <FrameLayout
+
+        android:id="@+id/fram_Detail"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
 
 </RelativeLayout>
