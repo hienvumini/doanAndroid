@@ -47,7 +47,7 @@ public class ListProductCatagoryActivity extends AppCompatActivity {
             mcategory = globalApplication.category;
             idCate = globalApplication.category.getCateID();
             getlistProductCate();
-            Toast.makeText(getApplicationContext(), listProduct.size()+"SL", Toast.LENGTH_SHORT).show();
+
         } else {
             Toast.makeText(getApplicationContext(), "Danh mục lỗi", Toast.LENGTH_SHORT).show();
 

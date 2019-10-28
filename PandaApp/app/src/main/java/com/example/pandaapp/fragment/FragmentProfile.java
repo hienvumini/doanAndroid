@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.example.pandaapp.FavoriteActivity;
 import com.example.pandaapp.LoginActivity;
 import com.example.pandaapp.Models.Account;
 import com.example.pandaapp.R;
@@ -20,10 +21,11 @@ import com.example.pandaapp.Util.GlobalApplication;
 
 
 public class FragmentProfile extends Fragment {
-    TextView textViewName,textViewUsername,textViewPhone,textViewAddress;
+    TextView textViewName, textViewUsername, textViewPhone, textViewAddress;
     Button btnLogout;
     GlobalApplication globalApplication;
     Account account;
+    TextView textViewbtnFavorite;
 
 
     @Override
@@ -35,36 +37,46 @@ public class FragmentProfile extends Fragment {
             account = globalApplication.account;
             init(view);
             setProfileView(view);
-            Listener();
+            Listenner();
         }
         return view;
     }
-    public void init(View view){
-        textViewName=(TextView)view.findViewById(R.id.textviewNameFull_Profile);
-        textViewUsername=(TextView)view.findViewById(R.id.textviewUsernameFull_Profile);
-        textViewAddress=(TextView)view.findViewById(R.id.textviewAddress_Profile);
-        textViewPhone=(TextView)view.findViewById(R.id.textviewPhone_Profile);
-        btnLogout=(Button) view.findViewById(R.id.btnLogOut_Profile);
+
+    public void init(View view) {
+        textViewName = (TextView) view.findViewById(R.id.textviewName_Profile);
+        textViewUsername = (TextView) view.findViewById(R.id.textviewUsename_Profile);
+        textViewAddress = (TextView) view.findViewById(R.id.textviewAddress_Profile);
+        textViewPhone = (TextView) view.findViewById(R.id.textviewPhone_Profile);
+        btnLogout = (Button) view.findViewById(R.id.btnLogOut_Profile);
+        textViewbtnFavorite = (TextView) view.findViewById(R.id.textview_Favorite_Profile);
 
     }
-    public void setProfileView(View view){
+
+    public void setProfileView(View view) {
         textViewName.setText(account.getName());
         textViewUsername.setText(account.getUsename());
         textViewPhone.setText(account.getPhone_number());
         textViewAddress.setText(account.getAddress());
 
     }
-    public void Listener(){
-btnLogout.setOnClickListener(new View.OnClickListener() {
-    @Override
-    public void onClick(View v) {
-        Intent intent=new Intent(getContext(), LoginActivity.class);
-        startActivity(intent);
-        getActivity().finish();
-    }
-});
+
+    public void Listenner() {
+        btnLogout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getContext(), LoginActivity.class);
+                startActivity(intent);
+                getActivity().finish();
+            }
+        });
+        textViewbtnFavorite.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), FavoriteActivity.class);
+                startActivity(intent);
+            }
+        });
 
     }
-
 
 }

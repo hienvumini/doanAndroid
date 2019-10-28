@@ -13,7 +13,7 @@
         <LinearLayout
             android:id="@+id/linnerlayoutitemCategory"
             android:layout_gravity="center"
-            android:gravity="center"
+            android:gravity="center_horizontal"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
@@ -40,7 +40,7 @@
 
             <TextView
                 android:id="@+id/textviewCate_Item"
-                android:layout_width="80dp"
+                android:layout_width="110dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:gravity="center"

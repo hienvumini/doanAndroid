@@ -7,6 +7,11 @@
     android:layout_height="match_parent"
     android:background="@color/color_brown">
 
+<ScrollView
+    android:layout_above="@+id/detail_product_footer"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
     <LinearLayout
         android:id="@+id/detail_liner"
         android:layout_width="match_parent"
@@ -22,34 +27,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:src="@drawable/detail_img" />
-            <ImageView
-                android:id="@+id/detail_product_back"
-                android:layout_width="@dimen/dimen_35dp"
-                android:layout_height="@dimen/dimen_35dp"
-                android:background="@drawable/custom_circle"
-                android:src="@drawable/back_black"
-                android:layout_marginTop="@dimen/dimen_15dp"
-                android:layout_marginLeft="@dimen/dimen_15dp"/>
-            <ImageView
-                android:id="@+id/detail_product_cart"
-                android:layout_width="@dimen/dimen_35dp"
-                android:layout_height="@dimen/dimen_35dp"
-                android:background="@drawable/custom_circle"
-                android:src="@drawable/cart"
-                android:layout_toLeftOf="@+id/detail_product_more"
-                android:layout_marginRight="@dimen/dimen_10dp"
-                android:layout_marginTop="@dimen/dimen_15dp"
-                android:padding="@dimen/dimen_2dp" />
-            <ImageView
-                android:id="@+id/detail_product_more"
-                android:layout_width="@dimen/dimen_35dp"
-                android:layout_height="@dimen/dimen_35dp"
 
-                android:src="@drawable/favorite"
-                android:layout_alignParentEnd="true"
-                android:layout_marginRight="@dimen/dimen_15dp"
-                android:layout_marginTop="@dimen/dimen_15dp"
-                android:padding="@dimen/dimen_5dp"/>
+
 
             <LinearLayout
                 android:layout_width="@dimen/dimen_40dp"
@@ -170,6 +149,8 @@
         </LinearLayout>
     </LinearLayout>
 
+</ScrollView>
+
     <LinearLayout
         android:id="@+id/detail_product_footer"
         android:orientation="horizontal"
@@ -219,10 +200,37 @@
             android:layout_marginRight="@dimen/dimen_5dp"
             android:layout_marginLeft="@dimen/dimen_5dp"/>
     </LinearLayout>
-    <FrameLayout
-
-        android:id="@+id/fram_Detail"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent">
+        <ImageView
+            android:id="@+id/detail_product_back"
+            android:layout_width="@dimen/dimen_35dp"
+            android:layout_height="@dimen/dimen_35dp"
+            android:background="@drawable/custom_circle"
+            android:src="@drawable/back_black"
+            android:layout_marginTop="@dimen/dimen_15dp"
+            android:layout_marginLeft="@dimen/dimen_15dp"/>
+        <ImageView
+            android:id="@+id/detail_product_cart"
+            android:layout_width="@dimen/dimen_35dp"
+            android:layout_height="@dimen/dimen_35dp"
+            android:background="@drawable/custom_circle"
+            android:src="@drawable/cart"
+            android:layout_toLeftOf="@+id/detail_product_more"
+            android:layout_marginRight="@dimen/dimen_10dp"
+            android:layout_marginTop="@dimen/dimen_15dp"
+            android:padding="@dimen/dimen_2dp" />
+        <ImageView
+            android:id="@+id/detail_product_more"
+            android:layout_width="@dimen/dimen_35dp"
+            android:layout_height="@dimen/dimen_35dp"
+
+            android:src="@drawable/favorite"
+            android:layout_alignParentEnd="true"
+            android:layout_marginRight="@dimen/dimen_15dp"
+            android:layout_marginTop="@dimen/dimen_15dp"
+            android:padding="@dimen/dimen_5dp"/>
+    </RelativeLayout>
 
 </RelativeLayout>

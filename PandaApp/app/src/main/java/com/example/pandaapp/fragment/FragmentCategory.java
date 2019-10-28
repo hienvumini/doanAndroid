@@ -47,7 +47,7 @@ public class FragmentCategory extends Fragment {
         View view = inflater.inflate(R.layout.fragment_category, container, false);
         recyclerViewListCate = (RecyclerView) view.findViewById(R.id.recycleviewListCate);
         categoryList = new ArrayList<>();
-        //fakelistCate();
+
         getListCategory();
         adapterCategory = new AdapterCategory(getActivity(), R.id.recycleviewListCate, categoryList);
         RecyclerView.LayoutManager layoutManager = new GridLayoutManager(getActivity(), 3);
@@ -67,15 +67,6 @@ public class FragmentCategory extends Fragment {
 
     }
 
-    public void fakelistCate() {
-        categoryList.add(new Category(1,"Áo phông", "https://images.nike.com/is/image/DotCom/PDP_P/OS2711_657_A/icon-nba-rockets-older-basketball-t-shirt.png?fmt=png-alpha"));
-        categoryList.add(new Category(1,"Áo Sơ mi", "https://images.nike.com/is/image/DotCom/PDP_P/OS2711_657_A/icon-nba-rockets-older-basketball-t-shirt.png?fmt=png-alpha"));
-        categoryList.add(new Category(7,"Áo Lót", "https://images.nike.com/is/image/DotCom/PDP_P/OS2711_657_A/icon-nba-rockets-older-basketball-t-shirt.png?fmt=png-alpha"));
-        categoryList.add(new Category(9,"Áo Ngực", "https://images.nike.com/is/image/DotCom/PDP_P/OS2711_657_A/icon-nba-rockets-older-basketball-t-shirt.png?fmt=png-alpha"));
-        categoryList.add(new Category(9,"Quần đùi", "https://images.nike.com/is/image/DotCom/PDP_P/OS2711_657_A/icon-nba-rockets-older-basketball-t-shirt.png?fmt=png-alpha"));
-        categoryList.add(new Category(9,"Quần âu", "https://images.nike.com/is/image/DotCom/PDP_P/OS2711_657_A/icon-nba-rockets-older-basketball-t-shirt.png?fmt=png-alpha"));
-
-    }
 public void getListCategory(){
     RequestQueue requestQueue= Volley.newRequestQueue(getActivity());
     StringRequest stringRequest=new StringRequest(Request.Method.GET, Server.getCategory, new Response.Listener<String>() {
