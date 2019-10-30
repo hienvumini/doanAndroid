@@ -44,7 +44,7 @@
                 android:id="@+id/add_product_ok"
                 android:layout_width="@dimen/dimen_40dp"
                 android:layout_height="@dimen/dimen_40dp"
-                android:src="@drawable/dau_V"
+                android:src="@drawable/dau_v"
                 android:layout_alignParentEnd="true"
                 android:layout_marginTop="@dimen/dimen_10dp"
                 android:layout_marginRight="@dimen/dimen_15dp"/>
