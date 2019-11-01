@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".FlashScreen"
+    tools:context=".view.FlashScreen"
     android:background="@color/color_pink1">
     <ImageView
         android:id="@+id/screen_imgV"

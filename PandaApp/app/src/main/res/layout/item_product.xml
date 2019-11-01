@@ -18,6 +18,7 @@
         app:cardElevation="@dimen/dimen_20dp">
 
         <LinearLayout
+            android:padding="@dimen/dimen_10dp"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center"
@@ -31,14 +32,16 @@
                 android:src="@color/color_blue_text" />
 
             <TextView
+                android:maxLines="2"
                 android:id="@+id/textviewTenSP"
                 android:layout_width="match_parent"
 
                 android:layout_height="wrap_content"
                 android:text="Tên sản phẩm"
-                android:textSize="@dimen/font_18sp" />
+                android:textSize="@dimen/font_16sp" />
 
             <TextView
+
                 android:id="@+id/textviewGiaSP"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

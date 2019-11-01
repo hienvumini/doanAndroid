@@ -6,16 +6,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
-import androidx.viewpager.widget.ViewPager;
 
-import com.example.pandaapp.CartActivity;
-import com.example.pandaapp.FavoriteActivity;
 import com.example.pandaapp.Models.CartItem;
 import com.example.pandaapp.Models.Product;
 import com.example.pandaapp.R;
@@ -23,9 +16,7 @@ import com.example.pandaapp.Util.ChangeActivity;
 import com.example.pandaapp.Util.GlobalApplication;
 import com.example.pandaapp.Util.LoadImage;
 
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.Set;
 
 public class DetailActivity extends AppCompatActivity {
     ImageView imageViewSP, imageViewButtonBack, imageViewCart;

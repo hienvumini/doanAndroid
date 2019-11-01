@@ -1,9 +1,7 @@
-package com.example.pandaapp;
+package com.example.pandaapp.fragment;
 
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -26,7 +24,9 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.pandaapp.view.LoginActivity;
 import com.example.pandaapp.Models.Account;
+import com.example.pandaapp.R;
 import com.example.pandaapp.Util.GlobalApplication;
 import com.example.pandaapp.server.Server;
 import com.example.pandaapp.view.MainActivity;
@@ -38,10 +38,8 @@ import org.json.JSONObject;
 import java.util.HashMap;
 import java.util.Map;
 
-import static android.content.Context.MODE_PRIVATE;
 
-
-public class LoginFragment extends Fragment {
+public class FragmentLogin extends Fragment {
 
     EditText edittextuser, edittextpass;
     Button btnlogin;
@@ -118,7 +116,10 @@ public class LoginFragment extends Fragment {
                         String email = "";
                         String DateOfBirth = "";
                         int accountStatus = 0;
+                        int accountId=0;
                         JSONObject jsonObject = jsonArray.getJSONObject(0);
+
+                        accountId = jsonObject.getInt("AccountId");
                         roleId = jsonObject.getInt("roleId");
                         idShop = jsonObject.getInt("idShop");
                         usename = jsonObject.getString("usename");
@@ -130,7 +131,7 @@ public class LoginFragment extends Fragment {
                         email = jsonObject.getString("email");
                         DateOfBirth = jsonObject.getString("DateOfBirth");
                         accountStatus = jsonObject.getInt("accountStatus");
-                        Account account1 = new Account(roleId, idShop, usename, password, name, phone_number, address, gender, email, DateOfBirth, accountStatus);
+                        Account account1 = new Account(roleId, idShop,accountId, usename, password, name, phone_number, address, gender, email, DateOfBirth, accountStatus);
                         Intent intent = new Intent(getActivity(), MainActivity.class);
                         GlobalApplication globalApplication = (GlobalApplication) getActivity().getApplicationContext();
                         globalApplication.account = account1;

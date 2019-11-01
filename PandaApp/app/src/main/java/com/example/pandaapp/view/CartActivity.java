@@ -1,4 +1,4 @@
-package com.example.pandaapp;
+package com.example.pandaapp.view;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -7,6 +7,7 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import com.example.pandaapp.Models.CartItem;
+import com.example.pandaapp.R;
 import com.example.pandaapp.Util.GlobalApplication;
 import com.example.pandaapp.adapter.AdapterCartItem;
 

@@ -5,6 +5,7 @@ import java.io.Serializable;
 public class Account implements Serializable {
     private int roleId;
     private int idShop;
+    private int accountId;
     private String usename;
     private String password;
     private String name;
@@ -29,6 +30,28 @@ public class Account implements Serializable {
         this.accountStatus = accountStatus;
     }
 
+    public Account(int roleId, int idShop, int accountId, String usename, String password, String name, String phone_number, String address, int gender, String email, String dateOfBirth, int accountStatus) {
+        this.roleId = roleId;
+        this.idShop = idShop;
+        this.accountId = accountId;
+        this.usename = usename;
+        this.password = password;
+        this.name = name;
+        this.phone_number = phone_number;
+        this.address = address;
+        this.gender = gender;
+        this.email = email;
+        DateOfBirth = dateOfBirth;
+        this.accountStatus = accountStatus;
+    }
+
+    public int getAccountId() {
+        return accountId;
+    }
+
+    public void setAccountId(int accountId) {
+        this.accountId = accountId;
+    }
 
     public Account() {
     }

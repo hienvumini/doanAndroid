@@ -1,4 +1,4 @@
-package com.example.pandaapp;
+package com.example.pandaapp.view;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -16,6 +16,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.pandaapp.Models.Category;
 import com.example.pandaapp.Models.Product;
+import com.example.pandaapp.R;
 import com.example.pandaapp.Util.GlobalApplication;
 import com.example.pandaapp.adapter.AdapterProduct;
 import com.example.pandaapp.server.Server;

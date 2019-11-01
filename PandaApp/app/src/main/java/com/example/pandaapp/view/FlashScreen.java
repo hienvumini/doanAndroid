@@ -1,11 +1,11 @@
-package com.example.pandaapp;
+package com.example.pandaapp.view;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
 
-import com.example.pandaapp.view.MainActivity;
+import com.example.pandaapp.R;
 
 public class FlashScreen extends AppCompatActivity {
 

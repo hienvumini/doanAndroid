@@ -1,4 +1,4 @@
-package com.example.pandaapp;
+package com.example.pandaapp.view;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
+import com.example.pandaapp.R;
 import com.example.pandaapp.view.DetailActivity;
 
 public class ProfileActivity extends AppCompatActivity {

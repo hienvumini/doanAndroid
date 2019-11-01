@@ -10,17 +10,17 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".RevenueActivity"></activity>
-        <activity android:name=".AddProductActivity" />
-        <activity android:name=".FavoriteActivity" />
-        <activity android:name=".ShopProfileActivity" />
-        <activity android:name=".ProfileActivity" />
-        <activity android:name=".OrderManagerActivity" />
-        <activity android:name=".ListProductCatagoryActivity" />
-        <activity android:name=".CartActivity" />
-        <activity android:name=".LoginActivity" />
+        <activity android:name=".view.RevenueActivity"></activity>
+        <activity android:name=".view.AddProductActivity" />
+        <activity android:name=".view.FavoriteActivity" />
+        <activity android:name=".view.ShopProfileActivity" />
+        <activity android:name=".view.ProfileActivity" />
+        <activity android:name=".view.OrderManagerActivity" />
+        <activity android:name=".view.ListProductCatagoryActivity" />
+        <activity android:name=".view.CartActivity" />
+        <activity android:name=".view.LoginActivity" />
         <activity android:name=".view.DetailActivity" />
-        <activity android:name=".FlashScreen">
+        <activity android:name=".view.FlashScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

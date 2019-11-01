@@ -8,13 +8,10 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import androidx.annotation.NonNull;
-import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.pandaapp.ListProductCatagoryActivity;
+import com.example.pandaapp.view.ListProductCatagoryActivity;
 import com.example.pandaapp.Models.Category;
 import com.example.pandaapp.R;
 import com.example.pandaapp.Util.GlobalApplication;

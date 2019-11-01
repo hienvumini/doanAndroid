@@ -1,7 +1,5 @@
-package com.example.pandaapp;
+package com.example.pandaapp.fragment;
 
-import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -26,16 +24,15 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.pandaapp.view.LoginActivity;
 import com.example.pandaapp.Models.Account;
+import com.example.pandaapp.R;
 import com.example.pandaapp.server.Server;
-
-import org.json.JSONArray;
-import org.json.JSONException;
 
 import java.util.HashMap;
 import java.util.Map;
 
-public class SignupFragment extends Fragment {
+public class FragmentSignup extends Fragment {
     EditText edittextusernameSignup, edittextpassSignup, edittextNameSignup, edittextPhoneSignup, edittextAddressSignup, edittextEmailSignup, edittextDateOfBirthSignup, edittextNameShopSignup;
     RadioGroup radiogroupGioitinh;
     RadioButton checkNuSignup, checkNamSignup;

@@ -1,8 +1,10 @@
-package com.example.pandaapp;
+package com.example.pandaapp.view;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+
+import com.example.pandaapp.R;
 
 public class ShopProfileActivity extends AppCompatActivity {
 

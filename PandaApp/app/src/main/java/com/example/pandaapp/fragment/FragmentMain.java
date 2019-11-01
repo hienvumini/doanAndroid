@@ -9,7 +9,6 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,7 +16,6 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.SearchView;
-import android.widget.Toast;
 import android.widget.Toolbar;
 import android.widget.ViewFlipper;
 
@@ -28,7 +26,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.example.pandaapp.CartActivity;
+import com.example.pandaapp.view.CartActivity;
 import com.example.pandaapp.Models.Account;
 import com.example.pandaapp.Models.Product;
 import com.example.pandaapp.R;

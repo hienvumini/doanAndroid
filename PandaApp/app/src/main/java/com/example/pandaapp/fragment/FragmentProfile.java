@@ -1,8 +1,6 @@
 package com.example.pandaapp.fragment;
 
-import android.content.Context;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -13,8 +11,8 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.example.pandaapp.FavoriteActivity;
-import com.example.pandaapp.LoginActivity;
+import com.example.pandaapp.view.FavoriteActivity;
+import com.example.pandaapp.view.LoginActivity;
 import com.example.pandaapp.Models.Account;
 import com.example.pandaapp.R;
 import com.example.pandaapp.Util.GlobalApplication;

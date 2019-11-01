@@ -1,14 +1,16 @@
-package com.example.pandaapp;
+package com.example.pandaapp.view;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 
-public class RevenueActivity extends AppCompatActivity {
+import com.example.pandaapp.R;
+
+public class AddProductActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_revenue);
+        setContentView(R.layout.activity_add_product);
     }
 }
