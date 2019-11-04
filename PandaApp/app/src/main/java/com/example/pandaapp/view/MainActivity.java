@@ -8,6 +8,8 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
+import android.content.res.ColorStateList;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -80,6 +82,7 @@ public class MainActivity extends AppCompatActivity implements AdapterProduct.Ad
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction transaction = fragmentManager.beginTransaction();
         transaction.replace(R.id.framMainActivity, fragment);
+        transaction.addToBackStack(null);
         transaction.commit();
 
     }
@@ -122,11 +125,12 @@ public class MainActivity extends AppCompatActivity implements AdapterProduct.Ad
     public void onClick(View view, int position, boolean isLongClick) {
 
     }
-
-    public void setGlobal() {
-
+    public void changeNavigationBottomto(int sttFragment){
+        nav_bottom_MainActivity.setSelectedItemId(R.id.menu_nav_home);
 
     }
+
+
 }
 
 

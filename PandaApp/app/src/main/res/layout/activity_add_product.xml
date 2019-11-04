@@ -4,12 +4,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".view.AddProductActivity"
-    android:background="@color/color_brown">
+    android:background="@color/color_brown"
+    tools:context=".view.AddProductActivity">
 
     <androidx.appcompat.widget.Toolbar
-
-        android:id="@+id/toolbar"
+        android:id="@+id/toolbab_AddProduct"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:background="@color/color_brown"
@@ -40,126 +39,188 @@
                 android:textColor="@color/color_pink2"
                 android:textSize="@dimen/font_20sp"
                 android:textStyle="bold" />
+
             <ImageView
-                android:id="@+id/add_product_ok"
+                android:id="@+id/imageviewSubmit_AddProduct"
                 android:layout_width="@dimen/dimen_40dp"
                 android:layout_height="@dimen/dimen_40dp"
-                android:src="@drawable/dau_v"
                 android:layout_alignParentEnd="true"
                 android:layout_marginTop="@dimen/dimen_10dp"
-                android:layout_marginRight="@dimen/dimen_15dp"/>
+                android:layout_marginRight="@dimen/dimen_15dp"
+                android:src="@drawable/dau_v" />
 
         </RelativeLayout>
 
     </androidx.appcompat.widget.Toolbar>
-    <ListView
-        android:id="@+id/add_product_listview"
+
+    <ScrollView
+        android:id="@+id/scollviewmain_AddProduct"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/dimen_100dp"
-        android:layout_below="@+id/toolbar"
-        android:background="@color/color_brown"></ListView>
-    <LinearLayout
-        android:id="@+id/add_product_linerDetail"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/dimen_135dp"
-        android:layout_below="@+id/add_product_listview"
-        android:orientation="vertical"
-        android:background="@drawable/custom_rectangle">
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/dimen_35dp"
-            android:text="Tên sản phẩm"
-            android:textColor="@color/color_black"
-            android:textSize="@dimen/font_16sp"
-            android:gravity="center|left"
-            android:layout_marginLeft="@dimen/dimen_15dp"/>
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/dimen_2dp"
-            android:background="@color/color_brown"/>
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="Mô tả sản phẩm"
-            android:textColor="@color/color_black"
-            android:textSize="@dimen/font_16sp"
-            android:layout_marginLeft="@dimen/dimen_15dp"
-            android:layout_marginTop="@dimen/dimen_15dp"/>
-    </LinearLayout>
-    <LinearLayout
-        android:id="@+id/add_product_category"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/dimen_50dp"
-        android:layout_below="@id/add_product_linerDetail"
-        android:background="@drawable/custom_rectangle">
+        android:layout_height="match_parent"
+        android:layout_below="@id/toolbab_AddProduct">
+
         <LinearLayout
-            android:layout_width="@dimen/dimen_0dp"
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:orientation="horizontal">
-            <ImageView
-                android:layout_width="@dimen/dimen_35dp"
-                android:layout_height="@dimen/dimen_35dp"
-                android:src="@drawable/catagory"
-                android:layout_gravity="center"
-                android:layout_marginLeft="@dimen/dimen_15dp"/>
-            <TextView
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <GridView
+                    android:numColumns="3"
+                    android:id="@+id/gridview_Image_AddProduc"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/toolbab_AddProduct"
+                    android:layout_marginLeft="@dimen/dimen_20dp"
+                    android:layout_marginRight="@dimen/dimen_20dp"
+                    android:background="@color/color_brown">
+
+                </GridView>
+                <ImageView
+                    android:id="@+id/addmoreimage_AddProduct"
+                    android:layout_marginLeft="@dimen/dimen_20dp"
+                    android:layout_marginTop="@dimen/dimen_20dp"
+                    android:src="@drawable/addimage"
+                    android:layout_width="@dimen/dimen_100dp"
+                    android:layout_height="@dimen/dimen_100dp"/>
+
+            </LinearLayout>
+
+
+
+            <LinearLayout
+                android:id="@+id/add_product_linerDetail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:background="@drawable/custom_rectangle"
+                android:orientation="vertical">
+
+                <EditText
+                    android:id="@+id/edittextName_AddProduct"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dimen_35dp"
+                    android:layout_marginLeft="@dimen/dimen_15dp"
+                    android:gravity="center|left"
+                    android:hint="Tên sản phẩm"
+                    android:paddingTop="@dimen/dimen_10dp"
+                    android:paddingBottom="@dimen/dimen_10dp"
+                    android:text=""
+                    android:textColor="@color/color_black"
+                    android:textSize="@dimen/font_16sp" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dimen_2dp"
+                    android:background="@color/color_brown" />
+
+                <EditText
+                    android:id="@+id/edittextdisc_AddProduct"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/dimen_15dp"
+                    android:layout_marginTop="@dimen/dimen_15dp"
+                    android:hint="Mô tả sản phẩm"
+                    android:paddingTop="@dimen/dimen_20dp"
+                    android:paddingBottom="20dp"
+                    android:textColor="@color/color_black"
+                    android:textSize="@dimen/font_16sp" />
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dimen_50dp"
+                android:layout_below="@+id/add_product_category"
+
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="@dimen/dimen_35dp"
+                    android:layout_height="@dimen/dimen_35dp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/price" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:text="Giá"
+                    android:textColor="@color/color_black"
+                    android:textSize="@dimen/font_20sp" />
+
+                <EditText
+                    android:id="@+id/edittextPrice_AddProduct"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="@dimen/dimen_20dp"
+                    android:gravity="center"
+                    android:hint="Đặt giá"
+                    android:textColor="@color/color_black"
+                    android:textSize="@dimen/font_20sp" />
+            </LinearLayout>
+
+
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:text="Danh mục"
-                android:textColor="@color/color_black"
-                android:textSize="@dimen/font_16sp"
-                android:gravity="center|left"
-                android:layout_marginLeft="@dimen/dimen_15dp"/>
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="@dimen/dimen_0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1">
-            <TextView
-                android:layout_width="@dimen/dimen_0dp"
-                android:layout_weight="7"
-                android:layout_height="match_parent"
-                android:text="Chọn danh mục"
-                android:textColor="@color/color_black"
-                android:textSize="@dimen/font_16sp"
-                android:gravity="center|right"
-                android:layout_marginRight="@dimen/dimen_15dp"/>
-            <ImageView
-            android:layout_width="@dimen/dimen_35dp"
-            android:layout_height="@dimen/dimen_35dp"
-            android:src="@drawable/drop_black"
-            android:layout_gravity="center"
-            android:layout_marginRight="@dimen/dimen_15dp"/>
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="@dimen/dimen_35dp"
+                        android:layout_height="@dimen/dimen_35dp"
+                        android:layout_gravity="center"
+                        android:layout_marginLeft="@dimen/dimen_15dp"
+                        android:src="@drawable/catagory" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="@dimen/dimen_15dp"
+                        android:gravity="center|left"
+                        android:text="Danh mục"
+                        android:textColor="@color/color_black"
+                        android:textSize="@dimen/font_16sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/linerlayoutCate_AddProduct"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1">
+
+                    <TextView
+                        android:layout_width="@dimen/dimen_0dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginRight="@dimen/dimen_15dp"
+                        android:layout_weight="7"
+                        android:gravity="center|right"
+                        android:text="Chọn danh mục"
+                        android:textColor="@color/color_black"
+                        android:textSize="@dimen/font_16sp" />
+
+                    <ImageView
+                        android:layout_width="@dimen/dimen_35dp"
+                        android:layout_height="@dimen/dimen_35dp"
+                        android:layout_gravity="center"
+                        android:layout_marginRight="@dimen/dimen_15dp"
+                        android:src="@drawable/drop_black" />
+
+                </LinearLayout>
+            </LinearLayout>
 
         </LinearLayout>
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/dimen_50dp"
-        android:layout_below="@+id/add_product_category"
-        android:background="@drawable/custom_rectangle"
-        android:orientation="horizontal">
-        <ImageView
-            android:layout_width="@dimen/dimen_35dp"
-            android:layout_height="@dimen/dimen_35dp"
-            android:src="@drawable/price"
-            android:layout_gravity="center"/>
-        <TextView
-            android:layout_width="@dimen/dimen_70dp"
-            android:layout_height="match_parent"
-            android:text="Giá"
-            android:gravity="center"
-            android:textColor="@color/color_black"
-            android:textSize="@dimen/font_20sp"/>
-        <TextView
-            android:layout_width="@dimen/dimen_100dp"
-            android:layout_height="match_parent"
-            android:text="Đặt giá"
-            android:gravity="center"
-            android:textSize="@dimen/font_20sp"
-            android:textColor="@color/color_black"
-            android:layout_marginLeft="@dimen/dimen_200dp"/>
-    </LinearLayout>
+
+    </ScrollView>
+
 
 </RelativeLayout>

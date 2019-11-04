@@ -8,7 +8,7 @@
 
     <androidx.appcompat.widget.Toolbar
 
-        android:id="@+id/toolbar"
+        android:id="@+id/toolbab_AddProduct"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
@@ -52,7 +52,7 @@
         android:id="@+id/shop_liner_tinhtrang"
         android:layout_width="match_parent"
         android:layout_height="@dimen/dimen_135dp"
-        android:layout_below="@+id/toolbar"
+        android:layout_below="@+id/toolbab_AddProduct"
         android:orientation="vertical"
         android:background="@color/color_white">
         <TextView
@@ -70,6 +70,7 @@
             android:layout_height="@dimen/dimen_0dp"
             android:layout_weight="9">
             <LinearLayout
+                android:id="@+id/layoutOnWay_ProfileShop"
                 android:layout_width="@dimen/dimen_0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -90,6 +91,7 @@
                     android:layout_marginTop="@dimen/dimen_15dp"/>
             </LinearLayout>
             <LinearLayout
+                android:id="@+id/layoutReceived_ProfileShop"
                 android:layout_width="@dimen/dimen_0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -110,6 +112,7 @@
                     android:layout_marginTop="@dimen/dimen_15dp"/>
             </LinearLayout>
             <LinearLayout
+                android:id="@+id/layoutCancel_ProfileShop"
                 android:layout_width="@dimen/dimen_0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -134,12 +137,13 @@
     <LinearLayout
         android:id="@+id/shop_liner_manager"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/dimen_135dp"
+        android:layout_height="wrap_content"
         android:orientation="vertical"
         android:layout_below="@+id/shop_liner_tinhtrang"
         android:background="@color/color_white"
         android:layout_marginTop="@dimen/dimen_15dp">
         <LinearLayout
+            android:id="@+id/layoutAddProduct_ProfileShop"
             android:layout_width="match_parent"
             android:layout_height="@dimen/dimen_35dp"
             android:orientation="horizontal"
@@ -165,6 +169,31 @@
                 android:layout_marginLeft="@dimen/dimen_15dp"/>
         </LinearLayout>
         <LinearLayout
+            android:id="@+id/layoutListProduct_ProfileShop"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimen_35dp"
+            android:orientation="horizontal"
+            android:layout_marginTop="@dimen/dimen_35dp">
+            <ImageView
+
+                android:layout_width="@dimen/dimen_35dp"
+                android:layout_height="@dimen/dimen_35dp"
+                android:src="@drawable/listproducticon"
+                android:background="@drawable/custom_circle_pink"
+                android:layout_marginLeft="@dimen/dimen_15dp"/>
+            <TextView
+                android:id="@+id/shop_txt_revenue"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="Danh sách sản phẩm"
+                android:textSize="@dimen/font_18sp"
+                android:textColor="@color/color_black"
+                android:gravity="center|left"
+                android:layout_marginLeft="@dimen/dimen_15dp"
+                />
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/layoutRevenue_ProfileShop"
             android:layout_width="match_parent"
             android:layout_height="@dimen/dimen_35dp"
             android:orientation="horizontal"
@@ -187,28 +216,38 @@
                 android:layout_marginLeft="@dimen/dimen_15dp"
                 />
         </LinearLayout>
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:layout_below="@+id/shop_liner_manager"
-        android:background="@color/color_white"
-        android:layout_marginTop="@dimen/dimen_5dp">
-        <TextView
+        <LinearLayout
+            android:id="@+id/layoutProfileInfomation_ProfileShop"
             android:layout_width="match_parent"
             android:layout_height="@dimen/dimen_35dp"
-            android:text="Sản phẩm của tôi"
-            android:textColor="@color/color_black"
-            android:textStyle="bold"
-            android:textSize="@dimen/font_16sp"
-            android:gravity="left|center"
-            android:layout_marginLeft="@dimen/dimen_15dp"/>
-        <GridView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:numColumns="3"
-            android:padding="@dimen/dimen_10dp">
-        </GridView>
+            android:orientation="horizontal"
+            android:layout_marginTop="@dimen/dimen_35dp">
+            <ImageView
+
+                android:layout_width="@dimen/dimen_35dp"
+                android:layout_height="@dimen/dimen_35dp"
+                android:src="@drawable/profileicon"
+                android:background="@drawable/custom_circle_pink"
+                android:layout_marginLeft="@dimen/dimen_15dp"/>
+            <TextView
+
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="Thông tin tài khoản"
+                android:textSize="@dimen/font_18sp"
+                android:textColor="@color/color_black"
+                android:gravity="center|left"
+                android:layout_marginLeft="@dimen/dimen_15dp"
+                />
+        </LinearLayout>
     </LinearLayout>
+  <Button
+      android:id="@+id/btnLogOut_ProfileShop"
+      android:layout_margin="@dimen/dimen_10dp"
+      android:textColor="@color/color_white"
+      android:background="@drawable/botron_button_pink"
+      android:layout_alignParentBottom="true"
+      android:text="Đăng xuất"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"/>
 </RelativeLayout>

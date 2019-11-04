@@ -1,7 +1,7 @@
 package com.example.pandaapp.server;
 
 public class Server {
-    public static String localHost="192.168.43.153";
+    public static String localHost="192.168.200.37:88";
     public static String Link="http://"+localHost+"/pandaapAPI/";
     public static String getCategory="http://"+localHost+"/pandaapAPI/getCategory.php";
     public static String getSubCategory="http://"+localHost+"/pandaapAPI/getsubCategory.php";
