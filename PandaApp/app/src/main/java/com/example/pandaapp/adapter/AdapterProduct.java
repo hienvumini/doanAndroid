@@ -79,7 +79,7 @@ public class AdapterProduct extends RecyclerView.Adapter<AdapterProduct.ViewHold
                         builder.setPositiveButton("Có", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-
+                                Toast.makeText(mctx, "Tới trang sửa thông tin sản phẩm", Toast.LENGTH_SHORT).show();
                             }
                         });
                         builder.setNegativeButton("Không", new DialogInterface.OnClickListener() {
@@ -91,7 +91,7 @@ public class AdapterProduct extends RecyclerView.Adapter<AdapterProduct.ViewHold
                         try {
                             builder.show();
 
-                        }catch (IllegalStateException i)
+                        }catch (IllegalStateException i) // Đoạn này bị lỗi nếu kích vào sản phẩm từ trang danh sách sản phẩm của Shop nên nhét vào try catch. còn ở Main Activity thì không sao
                         {
                             Toast.makeText(mctx, "Tới trang sửa thông tin sản phẩm", Toast.LENGTH_SHORT).show();
                         }
