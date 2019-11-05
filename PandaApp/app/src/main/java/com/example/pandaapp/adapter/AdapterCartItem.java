@@ -46,7 +46,7 @@ public class AdapterCartItem extends ArrayAdapter {
         TextView textViewMinussoMount = (TextView) view.findViewById(R.id.textviewMinusProduct_Cart);
         TextView textViewAddsoMoutt = (TextView) view.findViewById(R.id.textviewAddProduct_Cart);
         TextView textViewDeleteProduct = (TextView) view.findViewById(R.id.textviewDelteProductCart);
-        LoadImage.getImageInServer(mctx,cartItemList.get(position).getProduct().getAnhSP().get(0),imageViewProduct);
+        LoadImage.getImageInServer(mctx,cartItemList.get(position).getProduct().getImages().get(0),imageViewProduct);
         textViewName.setText(cartItemList.get(position).getProduct().getName());
         DecimalFormat decimalFormat=new DecimalFormat("###,###.###");
         textViewPrice.setText((cartItemList.get(position).getProduct().getPrice()+"đ"));

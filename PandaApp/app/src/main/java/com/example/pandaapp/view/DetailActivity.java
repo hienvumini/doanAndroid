@@ -35,8 +35,7 @@ public class DetailActivity extends AppCompatActivity {
         }
         init();
         setDataSP(product);
-       // Listener();
-
+        // Listener();
 
 
     }
@@ -54,13 +53,20 @@ public class DetailActivity extends AppCompatActivity {
     }
 
     public void setDataSP(Product product) {
-        LoadImage.getImageInternet(this, product.getAnhSP().get(0), imageViewSP);
+        if (product.getImages().size() > 0) {
+            LoadImage.getImageInServer(this, product.getImages().get(0), imageViewSP);
+        } else {
+            LoadImage.getImageInServer(getApplicationContext(),"image/image/thumbnail.png",imageViewSP);
+
+        }
+
         textViewTen.setText(product.getName());
         textViewgia.setText(product.getPrice() + "đ");
         textViewmota.setText(product.getDis());
 
     }
-    public void Listener(){
+
+    public void Listener() {
         imageViewButtonBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

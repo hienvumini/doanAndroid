@@ -1,45 +1,54 @@
 package com.example.pandaapp.Models;
 
-public class Category {
-    private String NameCategory;
-    private int CateID;
-    private String ThumbnailCategory;
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
 
-    public Category( int cateID,String nameCategory, String thumbnailCategory) {
-        NameCategory = nameCategory;
-        CateID = cateID;
-        ThumbnailCategory = thumbnailCategory;
+public class Category {
+    @SerializedName("categoryName")
+    @Expose
+    private String categoryName;
+    @SerializedName("idcategory")
+    @Expose
+    private int idcategory;
+    @SerializedName("thumbnailCate")
+    @Expose
+    private String thumbnailCate;
+
+    public Category(int idcategory, String categoryName, String thumbnailCate) {
+        this.categoryName = categoryName;
+        this.idcategory = idcategory;
+        this.thumbnailCate = thumbnailCate;
     }
 
-    public Category(String nameCategory, String thumbnailCategory) {
-        NameCategory = nameCategory;
-        ThumbnailCategory = thumbnailCategory;
+    public Category(String categoryName, String thumbnailCate) {
+        this.categoryName = categoryName;
+        this.thumbnailCate = thumbnailCate;
     }
 
     public Category() {
     }
 
-    public String getNameCategory() {
-        return NameCategory;
+    public String getCategoryName() {
+        return categoryName;
     }
 
-    public void setNameCategory(String nameCategory) {
-        NameCategory = nameCategory;
+    public void setCategoryName(String categoryName) {
+        this.categoryName = categoryName;
     }
 
-    public int getCateID() {
-        return CateID;
+    public int getIdcategory() {
+        return idcategory;
     }
 
-    public void setCateID(int cateID) {
-        CateID = cateID;
+    public void setIdcategory(int idcategory) {
+        this.idcategory = idcategory;
     }
 
-    public String getThumbnailCategory() {
-        return ThumbnailCategory;
+    public String getThumbnailCate() {
+        return thumbnailCate;
     }
 
-    public void setThumbnailCategory(String thumbnailCategory) {
-        ThumbnailCategory = thumbnailCategory;
+    public void setThumbnailCate(String thumbnailCate) {
+        this.thumbnailCate = thumbnailCate;
     }
 }

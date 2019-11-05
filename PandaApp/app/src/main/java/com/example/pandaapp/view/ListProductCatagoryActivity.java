@@ -46,7 +46,7 @@ public class ListProductCatagoryActivity extends AppCompatActivity {
         init();
         if (globalApplication.category != null) {
             mcategory = globalApplication.category;
-            idCate = globalApplication.category.getCateID();
+            idCate = globalApplication.category.getIdcategory();
             getlistProductCate();
 
         } else {

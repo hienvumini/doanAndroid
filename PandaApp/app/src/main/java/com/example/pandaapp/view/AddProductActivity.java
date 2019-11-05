@@ -12,14 +12,23 @@ import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
+import android.widget.Adapter;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.ImageView;
+import android.widget.SimpleAdapter;
+import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.example.pandaapp.Models.Category;
+import com.example.pandaapp.Models.Product;
 import com.example.pandaapp.R;
 import com.example.pandaapp.Retrofit2.APIUltils;
 import com.example.pandaapp.Retrofit2.DataClient;
+import com.example.pandaapp.Retrofit2.RetrofitClient;
+import com.example.pandaapp.Util.GlobalApplication;
 import com.example.pandaapp.adapter.AdapterAddImage;
 
 import java.io.File;
@@ -45,6 +54,15 @@ public class AddProductActivity extends AppCompatActivity implements AdapterAddI
     GridView gridViewImage;
     ImageView btnsubmit;
     String realpath = "";
+    EditText txtNameProduct, txtDiscProduct, txtPrice, txtDiscount;
+    Spinner spinnerCategory;
+    String name, disc;
+    double price, discount;
+    int idCate, idshop;
+    Product product;
+    ArrayList<Category> categoryArrayList = new ArrayList<>();
+    ArrayAdapter adapterspinner;
+    int idproductadd;
 
 
     @Override
@@ -73,45 +91,99 @@ public class AddProductActivity extends AppCompatActivity implements AdapterAddI
         btnsubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                File file = null;
-                Toast.makeText(AddProductActivity.this, imagesEncodedList.size() + "", Toast.LENGTH_SHORT).show();
-                for (int i = 0; i < imagesEncodedList.size(); i++) {
-                    Uri uri = imagesEncodedList.get(i);
-                    realpath = getRealPathFromURI(uri);
-
-                    file = new File(realpath);
-                    String file_path = file.getAbsolutePath();
-                    String[] mangtenfile = file_path.split("\\.");
-                    file_path = mangtenfile[0] + System.currentTimeMillis() + "." + mangtenfile[1];
-
-                    RequestBody requestBody = RequestBody.create(MediaType.parse("multipart/from-data"), file); //  xác định loai file tải lên
-                    MultipartBody.Part part = MultipartBody.Part.createFormData("upload_file", file_path, requestBody);
-                    DataClient dataClient = APIUltils.getData();
-                    Call<String> callback = dataClient.UploadPhoto(part);
-                    callback.enqueue(new Callback<String>() {
-                        @Override
-                        public void onResponse(Call<String> call, Response<String> response) {
-                          if (response !=null){
-
-                              listLinkImage.add("\\image\\ImageProduct\\"+response.body());
-
-                          }
-                        }
-
-                        @Override
-                        public void onFailure(Call<String> call, Throwable t) {
-                            Log.d("AAA","Error"+t);
-                        }
-                    });
-                }
-                for (int i = 0; i <listLinkImage.size() ; i++) {
-                    Log.d("AAA", "onClick: "+listLinkImage.get(i));
-                }
+                insertProduct();
+                postFile();
+                Intent intent=new Intent(getApplicationContext(),ListProductShopActivity.class);
+                startActivity(intent);
+                finish();
 
 
             }
         });
 
+    }
+
+    private void insertProduct() {
+        getdataFromUser();
+        Log.d("AAA", "insertProduct: "+product.toString());
+        DataClient insertProduct = APIUltils.getData();
+        Call<String> stringCall = insertProduct.InsertProduct(product.getIdcategory(), product.getIdShop(), product.getName(), product.getPrice(), product.getDis(), product.getDiscount());
+        stringCall.enqueue(new Callback<String>() {
+            @Override
+            public void onResponse(Call<String> call, Response<String> response) {
+                idproductadd = Integer.parseInt(response.body());
+                Log.d("AAA", "onResponse: " + response.body());
+            }
+
+            @Override
+            public void onFailure(Call<String> call, Throwable t) {
+                Log.d("FFF", "onResponse: " + t.toString());
+
+            }
+        });
+
+
+    }
+
+    private void getdataFromUser() {
+        name = txtNameProduct.getText().toString().trim();
+        disc = txtDiscProduct.getText().toString().trim();
+        price = Double.parseDouble(txtPrice.getText().toString().trim());
+        discount = Double.parseDouble(txtDiscount.getText().toString().trim());
+        idCate = categoryArrayList.get(spinnerCategory.getSelectedItemPosition()).getIdcategory();
+        GlobalApplication globalApplication = (GlobalApplication) getApplicationContext();
+        idshop = globalApplication.account.getIdShop();
+        product = new Product(name, price, discount, idshop, idCate, disc);
+
+
+    }
+
+    private void postFile() {
+        File file = null;
+
+        for (int i = 0; i < imagesEncodedList.size(); i++) {
+            Uri uri = imagesEncodedList.get(i);
+            realpath = getRealPathFromURI(uri);
+
+            file = new File(realpath);
+            String file_path = file.getAbsolutePath();
+            String[] mangtenfile = file_path.split("\\.");
+            file_path = mangtenfile[0] + System.currentTimeMillis() + "." + mangtenfile[1];
+
+            RequestBody requestBody = RequestBody.create(MediaType.parse("multipart/from-data"), file); //  xác định loai file tải lên
+            MultipartBody.Part part = MultipartBody.Part.createFormData("upload_file", file_path, requestBody);
+            DataClient dataClient = APIUltils.getData();
+            Call<String> callback = dataClient.UploadPhoto(part);
+            callback.enqueue(new Callback<String>() {
+                @Override
+                public void onResponse(Call<String> call, Response<String> response) {
+                    DataClient insertImages = APIUltils.getData();
+                    Call<String> stringCall = insertImages.InsertImage("image/ImageProduct/"+response.body(),idproductadd);
+                    stringCall.enqueue(new Callback<String>() {
+                        @Override
+                        public void onResponse(Call<String> call, Response<String> response) {
+
+
+                        }
+
+                        @Override
+                        public void onFailure(Call<String> call, Throwable t) {
+
+
+                        }
+                    });
+
+                }
+
+                @Override
+                public void onFailure(Call<String> call, Throwable t) {
+                    Log.d("BBB", "Error" + t);
+                }
+            });
+        }
+        for (int i = 0; i < listLinkImage.size(); i++) {
+            Log.d("CCC", "onClick: " + listLinkImage.get(i));
+        }
     }
 
     @Override
@@ -142,12 +214,18 @@ public class AddProductActivity extends AppCompatActivity implements AdapterAddI
     }
 
     private void init() {
+        txtNameProduct = (EditText) findViewById(R.id.edittextName_AddProduct);
+        txtDiscProduct = (EditText) findViewById(R.id.edittextdisc_AddProduct);
+        txtPrice = (EditText) findViewById(R.id.edittextPrice_AddProduct);
+        txtDiscount = (EditText) findViewById(R.id.edittextPriceDiscount_AddProduct);
+        spinnerCategory = (Spinner) findViewById(R.id.spinnerCategory_AddProduct);
         requestPermision();
+        getCategory();
         btnsubmit = (ImageView) findViewById(R.id.imageviewSubmit_AddProduct);
         addmoreimage_AddProduct = (ImageView) findViewById(R.id.addmoreimage_AddProduct);
         gridViewImage = (GridView) findViewById(R.id.gridview_Image_AddProduc);
         imagesEncodedList = new ArrayList<>();
-        listLinkImage=new ArrayList<>();
+        listLinkImage = new ArrayList<>();
 
         adapterAddImage = new AdapterAddImage(getApplicationContext(), R.id.gridview_Image_AddProduc, imagesEncodedList);
         gridViewImage.setAdapter(adapterAddImage);
@@ -155,6 +233,35 @@ public class AddProductActivity extends AppCompatActivity implements AdapterAddI
             gridViewImage.setVisibility(View.GONE);
 
         }
+
+    }
+
+    private void getCategory() {
+
+        DataClient dataClientgetcate = APIUltils.getData();
+        dataClientgetcate.getCategory();
+        Call<ArrayList<Category>> arrayListCallCate = dataClientgetcate.getCategory();
+        arrayListCallCate.enqueue(new Callback<ArrayList<Category>>() {
+            @Override
+            public void onResponse(Call<ArrayList<Category>> call, Response<ArrayList<Category>> response) {
+                if (response.body().size() > 0) {
+                    categoryArrayList = response.body();
+                    ArrayList<String> listCate = new ArrayList<>();
+                    for (int i = 0; i < categoryArrayList.size(); i++) {
+                        listCate.add(categoryArrayList.get(i).getCategoryName());
+
+                    }
+                    adapterspinner = new ArrayAdapter(getApplicationContext(), android.R.layout.simple_list_item_1, listCate);
+                    spinnerCategory.setAdapter(adapterspinner);
+
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ArrayList<Category>> call, Throwable t) {
+                Log.d("GetCate", "onFailure: " + t.toString());
+            }
+        });
 
     }
 

@@ -160,6 +160,18 @@ public class Account implements Serializable {
                 ", accountStatus=" + accountStatus +
                 '}';
     }
+    public void destroyAccount(){
+        this.idShop=0;
+        this.accountId=0;
+        this.roleId=0;
+        this.name="";
+        this.address="";
+        this.DateOfBirth="";
+        this.email="";
+
+
+
+    }
 }
 
 

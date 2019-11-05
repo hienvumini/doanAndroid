@@ -162,6 +162,37 @@
                     android:textColor="@color/color_black"
                     android:textSize="@dimen/font_20sp" />
             </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dimen_50dp"
+                android:layout_below="@+id/add_product_category"
+
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="@dimen/dimen_35dp"
+                    android:layout_height="@dimen/dimen_35dp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/price" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:text="Giảm giá"
+                    android:textColor="@color/color_black"
+                    android:textSize="@dimen/font_20sp" />
+
+                <EditText
+                    android:id="@+id/edittextPriceDiscount_AddProduct"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="@dimen/dimen_20dp"
+                    android:gravity="center"
+                    android:hint="đ"
+                    android:textColor="@color/color_black"
+                    android:textSize="@dimen/font_20sp" />
+            </LinearLayout>
 
 
             <LinearLayout
@@ -198,22 +229,11 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1">
 
-                    <TextView
-                        android:layout_width="@dimen/dimen_0dp"
-                        android:layout_height="match_parent"
-                        android:layout_marginRight="@dimen/dimen_15dp"
-                        android:layout_weight="7"
-                        android:gravity="center|right"
-                        android:text="Chọn danh mục"
-                        android:textColor="@color/color_black"
-                        android:textSize="@dimen/font_16sp" />
+                    <Spinner
 
-                    <ImageView
-                        android:layout_width="@dimen/dimen_35dp"
-                        android:layout_height="@dimen/dimen_35dp"
-                        android:layout_gravity="center"
-                        android:layout_marginRight="@dimen/dimen_15dp"
-                        android:src="@drawable/drop_black" />
+                        android:id="@+id/spinnerCategory_AddProduct"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"/>
 
                 </LinearLayout>
             </LinearLayout>

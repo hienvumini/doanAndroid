@@ -41,8 +41,8 @@ public class AdapterCategory extends RecyclerView.Adapter<AdapterCategory.ViewHo
 
     @Override
     public void onBindViewHolder(ViewHolder holder, final int position) {
-        LoadImage.getImageInServer(mctx, categoryList.get(position).getThumbnailCategory(), holder.imageView);
-        holder.textView.setText(categoryList.get(position).getNameCategory());
+        LoadImage.getImageInServer(mctx, categoryList.get(position).getThumbnailCate(), holder.imageView);
+        holder.textView.setText(categoryList.get(position).getCategoryName());
         holder.linnerlayoutitemCategory.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

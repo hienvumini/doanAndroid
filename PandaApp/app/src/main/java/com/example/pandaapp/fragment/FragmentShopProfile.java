@@ -16,11 +16,16 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
+import com.example.pandaapp.Models.Account;
+import com.example.pandaapp.Util.CacheUltils;
 import com.example.pandaapp.view.AddProductActivity;
+import com.example.pandaapp.view.ListProductShopActivity;
 import com.example.pandaapp.view.LoginActivity;
 import com.example.pandaapp.R;
 import com.example.pandaapp.Util.GlobalApplication;
 import com.example.pandaapp.view.MainActivity;
+
+import java.io.File;
 
 
 public class FragmentShopProfile extends Fragment implements View.OnClickListener{
@@ -75,7 +80,9 @@ public class FragmentShopProfile extends Fragment implements View.OnClickListene
                 Toast.makeText(getActivity(), "Doanh thu", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.layoutListProduct_ProfileShop:
-                Toast.makeText(getActivity(), "Danh sách sản phẩm", Toast.LENGTH_SHORT).show();
+
+                intent=new Intent(getActivity(), ListProductShopActivity.class);
+                startActivity(intent);
                 break;
             case R.id.layoutProfileInfomation_ProfileShop:
                 Toast.makeText(getActivity(), "THông tin tài khoản", Toast.LENGTH_SHORT).show();
@@ -84,6 +91,12 @@ public class FragmentShopProfile extends Fragment implements View.OnClickListene
                 intent = new Intent(getActivity(), LoginActivity.class);
                 startActivity(intent);
                 getActivity().finish();
+                GlobalApplication globalApplication=(GlobalApplication) getActivity().getApplicationContext();
+                globalApplication.destroy(globalApplication.account);
+                globalApplication.destroy(globalApplication.listProduct);
+                globalApplication.destroy(globalApplication.product);
+
+
                 break;
             case R.id.img_back_black:
 //                intent=new Intent(getActivity(), MainActivity.class);
