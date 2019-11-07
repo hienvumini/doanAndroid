@@ -10,20 +10,23 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
-import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.pandaapp.Models.Category;
 import com.example.pandaapp.Models.Product;
 import com.example.pandaapp.R;
+import com.example.pandaapp.Retrofit2.APIUltils;
+import com.example.pandaapp.Retrofit2.DataClient;
 import com.example.pandaapp.Util.GlobalApplication;
 import com.example.pandaapp.adapter.AdapterCategory;
 import com.example.pandaapp.server.Server;
@@ -35,11 +38,17 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
 
 public class FragmentCategory extends Fragment {
     RecyclerView recyclerViewListCate;
     AdapterCategory adapterCategory;
     ArrayList<Category> categoryList;
+
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -67,39 +76,26 @@ public class FragmentCategory extends Fragment {
 
     }
 
-public void getListCategory(){
-    RequestQueue requestQueue= Volley.newRequestQueue(getActivity());
-    StringRequest stringRequest=new StringRequest(Request.Method.GET, Server.getCategory, new Response.Listener<String>() {
-        @Override
-        public void onResponse(String response) {
-            try {
-                JSONArray jsonArray=new JSONArray(response);
-                int cateId=0;
-                String categoryName="";
-                String thumbnailCate="";
-                for (int i = 0; i <jsonArray.length() ; i++) {
-                    JSONObject jsonObject=jsonArray.getJSONObject(i);
-                    cateId=jsonObject.getInt("idcategory");
-                    categoryName=jsonObject.getString("categoryName");
-                    thumbnailCate=jsonObject.getString("thumbnailCate");
-                    Category category=new Category(cateId,categoryName,thumbnailCate);
-                    categoryList.add(category);
-
-                    adapterCategory.notifyDataSetChanged();
+    public void getListCategory() {
+        DataClient dataClientgetcate = APIUltils.getData();
+        dataClientgetcate.getCategory();
+        Call<ArrayList<Category>> arrayListCallCate = dataClientgetcate.getCategory();
+        arrayListCallCate.enqueue(new Callback<ArrayList<Category>>() {
+            @Override
+            public void onResponse(Call<ArrayList<Category>> call, Response<ArrayList<Category>> response) {
+                if (response.body().size() > 0) {
+                    categoryList = response.body();
+                  adapterCategory=new AdapterCategory(getActivity(),R.id.recycleviewListCate,categoryList);
                     recyclerViewListCate.setAdapter(adapterCategory);
                 }
-            } catch (JSONException e) {
-                e.printStackTrace();
             }
-        }
-    }, new Response.ErrorListener() {
-        @Override
-        public void onErrorResponse(VolleyError error) {
 
-        }
-    });
-    requestQueue.add(stringRequest);
+            @Override
+            public void onFailure(Call<ArrayList<Category>> call, Throwable t) {
+                Log.d("GetCate", "onFailure: " + t.toString());
+            }
+        });
 
-}
+    }
 
 }

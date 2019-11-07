@@ -22,6 +22,13 @@ public class GlobalApplication extends Application {
 
 
 
+
+    public void destroy(Object o) {
+        destroy(o);
+
+
+
+
     public double updatetotal() {
         double total=0;
         for (int i =0 ;i<ListcartItems.size();i++)

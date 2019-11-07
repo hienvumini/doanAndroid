@@ -1,10 +1,11 @@
-package com.example.pandaapp.fragment;
+﻿package com.example.pandaapp.fragment;
 
 import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -87,13 +88,31 @@ public class FragmentShopProfile extends Fragment implements View.OnClickListene
                 break;
             case R.id.layoutProfileInfomation_ProfileShop:
                 Toast.makeText(getActivity(), "THông tin tài khoản", Toast.LENGTH_SHORT).show();
+
                 FragmentUtils.openFragment((new FragmentProfile()), getActivity().getSupportFragmentManager(), R.id.frameProfile_ProfileShop);
+
+
+                FragmentUtils.openFragment((new FragmentProfile()), getActivity().getSupportFragmentManager(), R.id.frameProfile_ProfileShop);
+
+                FragmentProfile fragmentProfile=new FragmentProfile();
+                openFragment(fragmentProfile);
+
+
                 break;
             case R.id.btnLogOut_ProfileShop:
                 intent = new Intent(getActivity(), LoginActivity.class);
                 startActivity(intent);
                 getActivity().finish();
+
                 GlobalApplication globalApplication = (GlobalApplication) getActivity().getApplicationContext();
+
+
+                GlobalApplication globalApplication = (GlobalApplication) getActivity().getApplicationContext();
+
+                GlobalApplication globalApplication=(GlobalApplication) getActivity().getApplicationContext();
+
+
+
 
 
                 break;
@@ -122,6 +141,16 @@ public class FragmentShopProfile extends Fragment implements View.OnClickListene
         btnLogoutShop = (Button) view.findViewById(R.id.btnLogOut_ProfileShop);
         img_back_black = (ImageView) view.findViewById(R.id.img_back_black);
     }
+    private void openFragment(final Fragment fragment) {
+        FragmentManager fragmentManager = getFragmentManager();
+        FragmentTransaction transaction = fragmentManager.beginTransaction();
+        transaction.replace(R.id.framMainActivity, fragment);
+        transaction.addToBackStack(null);
+        transaction.commit();
+
+
+    }
+
 
 
 }
