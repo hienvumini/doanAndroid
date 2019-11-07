@@ -19,6 +19,7 @@ import android.widget.Toast;
 import android.widget.Toolbar;
 import android.widget.ViewFlipper;
 
+import com.example.pandaapp.Util.FragmentUtils;
 import com.example.pandaapp.Util.GlobalApplication;
 import com.example.pandaapp.fragment.FragmentCart;
 import com.example.pandaapp.fragment.FragmentCategory;
@@ -36,22 +37,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements AdapterProduct.AdapterItemClickListener {
-    Toolbar toolbar;
-    List<Product> ListProduct;
-    SearchView searchView;
-    ArrayList<Product> listproduct;
-    AdapterProduct mainAdapter;
-    RecyclerView recyclerView;
-    ViewFlipper viewFlipper;
-    ImageView imgmyCart;
+
     Account account0 = new Account();
     BottomNavigationView nav_bottom_MainActivity;
     FragmentCategory fragmentCategory = new FragmentCategory();
     FragmentSearch fragmentSearch = new FragmentSearch();
     FragmentProfile fragmentProfile = new FragmentProfile();
-    FragmentCart fragmentCart = new FragmentCart();
     FragmentMain fragmentMain = new FragmentMain();
-    FragmentShopProfile fragmentShopProfile=new FragmentShopProfile();
+    FragmentShopProfile fragmentShopProfile = new FragmentShopProfile();
     GlobalApplication globalApplication;
 
 
@@ -59,31 +52,19 @@ public class MainActivity extends AppCompatActivity implements AdapterProduct.Ad
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        globalApplication=(GlobalApplication) getApplicationContext();
-        openFragment(fragmentMain);
-        Intent intent = getIntent();
+        globalApplication = (GlobalApplication) getApplicationContext();
+        FragmentUtils.openFragment(fragmentMain, getSupportFragmentManager(), R.id.framMainActivity);
         if (globalApplication.account != null) {
-            account0 =globalApplication.account;
-            
+            account0 = globalApplication.account;
+
+
             nav_bottom_MainActivity = findViewById(R.id.ctNavigationbotton);
             nav_bottom_MainActivity.setOnNavigationItemSelectedListener(categoryFragmentListennerItem);
-        }
-        else{
+        } else {
             Toast.makeText(getApplicationContext(), "Đăng nhập thất bại", Toast.LENGTH_SHORT).show();
 
         }
 
-
-
-    }
-
-
-    private void openFragment(final Fragment fragment) {
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        FragmentTransaction transaction = fragmentManager.beginTransaction();
-        transaction.replace(R.id.framMainActivity, fragment);
-        transaction.addToBackStack(null);
-        transaction.commit();
 
     }
 
@@ -104,18 +85,19 @@ public class MainActivity extends AppCompatActivity implements AdapterProduct.Ad
 
                     break;
                 case R.id.menu_nav_profile:
+                    Toast.makeText(getApplicationContext(), account0.getRoleId()+ "Loai", Toast.LENGTH_SHORT).show();
                     if (account0.getRoleId() == 1) {
                         fragmentselect = fragmentProfile;
-                    } else {
-                        fragmentselect=fragmentShopProfile;
-
+                    } else if (account0.getRoleId() == 2) {
+                        fragmentselect = fragmentShopProfile;
                     }
+
 
                     break;
 
 
             }
-            openFragment(fragmentselect);
+            FragmentUtils.openFragment(fragmentselect, getSupportFragmentManager(), R.id.framMainActivity);
 
             return true;
         }
@@ -125,7 +107,8 @@ public class MainActivity extends AppCompatActivity implements AdapterProduct.Ad
     public void onClick(View view, int position, boolean isLongClick) {
 
     }
-    public void changeNavigationBottomto(int sttFragment){
+
+    public void changeNavigationBottomto(int sttFragment) {
         nav_bottom_MainActivity.setSelectedItemId(R.id.menu_nav_home);
 
     }

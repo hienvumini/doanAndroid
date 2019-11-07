@@ -17,21 +17,11 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.android.volley.AuthFailureError;
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.StringRequest;
-import com.android.volley.toolbox.Volley;
 import com.example.pandaapp.Retrofit2.APIUltils;
 import com.example.pandaapp.Retrofit2.DataClient;
 import com.example.pandaapp.view.LoginActivity;
 import com.example.pandaapp.Models.Account;
 import com.example.pandaapp.R;
-import com.example.pandaapp.server.Server;
-
-import java.util.HashMap;
-import java.util.Map;
 
 import retrofit2.Call;
 import retrofit2.Callback;

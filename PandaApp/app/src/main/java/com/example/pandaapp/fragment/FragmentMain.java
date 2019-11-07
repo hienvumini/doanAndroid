@@ -3,8 +3,6 @@ package com.example.pandaapp.fragment;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -19,31 +17,24 @@ import android.widget.SearchView;
 import android.widget.Toolbar;
 import android.widget.ViewFlipper;
 
-import com.android.volley.AuthFailureError;
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.StringRequest;
-import com.android.volley.toolbox.Volley;
+import com.example.pandaapp.Retrofit2.APIUltils;
+import com.example.pandaapp.Retrofit2.DataClient;
+import com.example.pandaapp.Util.FragmentUtils;
 import com.example.pandaapp.view.CartActivity;
 import com.example.pandaapp.Models.Account;
 import com.example.pandaapp.Models.Product;
 import com.example.pandaapp.R;
 import com.example.pandaapp.Util.ChangeActivity;
 import com.example.pandaapp.adapter.AdapterProduct;
-import com.example.pandaapp.server.Server;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.squareup.picasso.Picasso;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 
 public class FragmentMain extends Fragment {
@@ -61,6 +52,7 @@ public class FragmentMain extends Fragment {
     FragmentSearch fragmentSearch = new FragmentSearch();
     FragmentProfile fragmentProfile = new FragmentProfile();
     FragmentCart fragmentCart = new FragmentCart();
+    int limitProductPerPull = 10;
 
 
     @Override
@@ -75,7 +67,7 @@ public class FragmentMain extends Fragment {
         searchView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                openFragment(fragmentSearch);
+                FragmentUtils.openFragment(fragmentSearch, getActivity().getSupportFragmentManager(), R.id.ctNavigationbotton);
             }
         });
 
@@ -84,58 +76,23 @@ public class FragmentMain extends Fragment {
     }
 
     private void getlistProduct() {
-        RequestQueue requestQueue = Volley.newRequestQueue(getActivity());
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, Server.getUpdateProduct, new Response.Listener<String>() {
+        DataClient dataClient = APIUltils.getData();
+        Call<ArrayList<Product>> listProductCall = dataClient.getUpdateProduct(limitProductPerPull);
+        listProductCall.enqueue(new Callback<ArrayList<Product>>() {
             @Override
-            public void onResponse(String response) {
-
-                try {
-                    JSONArray jsonArray = new JSONArray(response);
-                    int productId = 0;
-                    String name = "";
-                    double price = 0;
-                    double discount = 0;
-                    String shopName = "";
-                    int idShop = 0;
-                    String detail = "";
-                    for (int i = 0; i < jsonArray.length(); i++) {
-                        JSONObject jsonObject = jsonArray.getJSONObject(i);
-                        productId = jsonObject.getInt("productId");
-                        name = jsonObject.getString("name");
-                        price = jsonObject.getDouble("price");
-                        discount = jsonObject.getDouble("discount");
-                        shopName = jsonObject.getString("shopName");
-                        idShop = jsonObject.getInt("idShop");
-                        detail=jsonObject.getString("detail");
-                        JSONArray images = jsonObject.getJSONArray("images");
-                        ArrayList<String> strings = new ArrayList<>();
-                        for (int j = 0; j < images.length(); j++) {
-                            strings.add(images.get(j).toString());
-                        }
-                        Product product = new Product(productId, name, price, discount, shopName, idShop, strings,detail );
-                        listproduct.add(product);
-                        mainAdapter.notifyDataSetChanged();
-                        recyclerView.setAdapter(mainAdapter);
-                    }
-                } catch (JSONException e) {
-                    e.printStackTrace();
+            public void onResponse(Call<ArrayList<Product>> call, Response<ArrayList<Product>> response) {
+                if (response.body() != null) {
+                    listproduct = response.body();
+                    mainAdapter=new AdapterProduct(getActivity(),R.id.recycleviewLastlate_Main,listproduct);
+                    recyclerView.setAdapter(mainAdapter);
                 }
+            }
+
+            @Override
+            public void onFailure(Call<ArrayList<Product>> call, Throwable t) {
 
             }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-
-            }
-        }) {
-            @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
-                HashMap<String, String> hashMap = new HashMap<String, String>();
-                hashMap.put("limit", "10");
-                return hashMap;
-            }
-        };
-        requestQueue.add(stringRequest);
+        });
     }
 
     public void fakedata() {
@@ -204,15 +161,6 @@ public class FragmentMain extends Fragment {
             ChangeActivity.toActivity(getActivity(), CartActivity.class);
         }
     };
-
-    private void openFragment(final Fragment fragment) {
-        FragmentManager fragmentManager = getFragmentManager();
-        FragmentTransaction transaction = fragmentManager.beginTransaction();
-        transaction.replace(R.id.framMainActivity, fragment);
-        transaction.addToBackStack(null);
-        transaction.commit();
-
-    }
 
 
 }

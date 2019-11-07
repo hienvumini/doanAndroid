@@ -6,7 +6,6 @@ import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
-import android.os.StrictMode;
 import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -18,28 +17,15 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.android.volley.AuthFailureError;
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.StringRequest;
-import com.android.volley.toolbox.Volley;
 import com.example.pandaapp.Retrofit2.APIUltils;
 import com.example.pandaapp.Retrofit2.DataClient;
 import com.example.pandaapp.view.LoginActivity;
 import com.example.pandaapp.Models.Account;
 import com.example.pandaapp.R;
 import com.example.pandaapp.Util.GlobalApplication;
-import com.example.pandaapp.server.Server;
 import com.example.pandaapp.view.MainActivity;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
 
 import retrofit2.Call;
 import retrofit2.Callback;

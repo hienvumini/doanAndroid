@@ -1,13 +1,11 @@
 package com.example.pandaapp.Util;
 
 import android.content.Context;
-import android.graphics.drawable.Drawable;
-import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.example.pandaapp.R;
-import com.example.pandaapp.server.Server;
+import com.example.pandaapp.Retrofit2.APIUltils;
 import com.squareup.picasso.Picasso;
 
 public class LoadImage {
@@ -24,7 +22,7 @@ public class LoadImage {
             if (url ==null || url.equalsIgnoreCase("")) {
                 Toast.makeText(context, "Link ảnh trống", Toast.LENGTH_SHORT).show();
             }else {
-                Picasso.with(context).load(Server.Link+url).error(R.drawable.errror).into(imageview);
+                Picasso.with(context).load(APIUltils.BaseURL+url).error(R.drawable.errror).into(imageview);
             }
         }
 
