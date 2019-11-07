@@ -31,6 +31,7 @@ import com.example.pandaapp.R;
 import com.example.pandaapp.adapter.AdapterProduct;
 import com.example.pandaapp.fragment.FragmentShopProfile;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.bottomnavigation.LabelVisibilityMode;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -67,6 +68,8 @@ public class MainActivity extends AppCompatActivity implements AdapterProduct.Ad
             
             nav_bottom_MainActivity = findViewById(R.id.ctNavigationbotton);
             nav_bottom_MainActivity.setOnNavigationItemSelectedListener(categoryFragmentListennerItem);
+            nav_bottom_MainActivity.setLabelVisibilityMode(LabelVisibilityMode.LABEL_VISIBILITY_LABELED);
+
         }
         else{
             Toast.makeText(getApplicationContext(), "Đăng nhập thất bại", Toast.LENGTH_SHORT).show();

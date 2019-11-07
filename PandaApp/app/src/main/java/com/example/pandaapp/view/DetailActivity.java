@@ -6,6 +6,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -21,9 +22,10 @@ import java.util.HashSet;
 public class DetailActivity extends AppCompatActivity {
     ImageView imageViewSP, imageViewButtonBack, imageViewCart;
     TextView textViewTen, textViewgia, textViewmota, textViewdaBan, textViewDisc;
-    Button btnAddCart;
+    Button btnAddCart,btnBuyNow;
     GlobalApplication globalApplication;
     Product product = new Product();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,7 +36,10 @@ public class DetailActivity extends AppCompatActivity {
             product = globalApplication.product;
         }
         init();
+
+
         setDataSP(product);
+
         // Listener();
 
 
@@ -56,7 +61,7 @@ public class DetailActivity extends AppCompatActivity {
         if (product.getImages().size() > 0) {
             LoadImage.getImageInServer(this, product.getImages().get(0), imageViewSP);
         } else {
-            LoadImage.getImageInServer(getApplicationContext(),"image/image/thumbnail.png",imageViewSP);
+            LoadImage.getImageInServer(getApplicationContext(), "image/image/thumbnail.png", imageViewSP);
 
         }
 

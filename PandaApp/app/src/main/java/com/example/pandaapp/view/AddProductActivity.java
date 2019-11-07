@@ -1,6 +1,8 @@
 package com.example.pandaapp.view;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
 import android.Manifest;
 import android.content.Intent;
@@ -63,14 +65,15 @@ public class AddProductActivity extends AppCompatActivity implements AdapterAddI
     ArrayList<Category> categoryArrayList = new ArrayList<>();
     ArrayAdapter adapterspinner;
     int idproductadd;
+    int t = 0;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_product);
-
-        init();
+        checkPermistion();
+       init();
         setOnlisterner();
 
 
@@ -93,9 +96,6 @@ public class AddProductActivity extends AppCompatActivity implements AdapterAddI
             public void onClick(View v) {
                 insertProduct();
                 postFile();
-                Intent intent=new Intent(getApplicationContext(),ListProductShopActivity.class);
-                startActivity(intent);
-                finish();
 
 
             }
@@ -105,14 +105,16 @@ public class AddProductActivity extends AppCompatActivity implements AdapterAddI
 
     private void insertProduct() {
         getdataFromUser();
-        Log.d("AAA", "insertProduct: "+product.toString());
+        Log.d("AAA", "insertProduct: " + product.toString());
         DataClient insertProduct = APIUltils.getData();
         Call<String> stringCall = insertProduct.InsertProduct(product.getIdcategory(), product.getIdShop(), product.getName(), product.getPrice(), product.getDis(), product.getDiscount());
         stringCall.enqueue(new Callback<String>() {
             @Override
             public void onResponse(Call<String> call, Response<String> response) {
                 idproductadd = Integer.parseInt(response.body());
+
                 Log.d("AAA", "onResponse: " + response.body());
+                postFile();
             }
 
             @Override
@@ -146,6 +148,8 @@ public class AddProductActivity extends AppCompatActivity implements AdapterAddI
             realpath = getRealPathFromURI(uri);
 
             file = new File(realpath);
+
+
             String file_path = file.getAbsolutePath();
             String[] mangtenfile = file_path.split("\\.");
             file_path = mangtenfile[0] + System.currentTimeMillis() + "." + mangtenfile[1];
@@ -157,11 +161,15 @@ public class AddProductActivity extends AppCompatActivity implements AdapterAddI
             callback.enqueue(new Callback<String>() {
                 @Override
                 public void onResponse(Call<String> call, Response<String> response) {
+                    // Toast.makeText(AddProductActivity.this, response.body() + "  ---->    " + idproductadd, Toast.LENGTH_SHORT).show();
+                    // Toast.makeText(getApplicationContext(), "Thanh Cong " + response.body(), Toast.LENGTH_SHORT).show();
+
                     DataClient insertImages = APIUltils.getData();
-                    Call<String> stringCall = insertImages.InsertImage("image/ImageProduct/"+response.body(),idproductadd);
+                    Call<String> stringCall = insertImages.InsertImage("image/ImageProduct/" + response.body(), idproductadd);
                     stringCall.enqueue(new Callback<String>() {
                         @Override
                         public void onResponse(Call<String> call, Response<String> response) {
+                            Toast.makeText(AddProductActivity.this, response.body(), Toast.LENGTH_SHORT).show();
 
 
                         }
@@ -172,6 +180,7 @@ public class AddProductActivity extends AppCompatActivity implements AdapterAddI
 
                         }
                     });
+
 
                 }
 
@@ -294,6 +303,22 @@ public class AddProductActivity extends AppCompatActivity implements AdapterAddI
         }
         cursor.close();
         return path;
+    }
+
+    //Check permistion android 6.0
+    private void checkPermistion() {
+        if (ContextCompat.checkSelfPermission(AddProductActivity.this,
+                Manifest.permission.READ_EXTERNAL_STORAGE)
+                != PackageManager.PERMISSION_GRANTED) {
+            if (ActivityCompat.shouldShowRequestPermissionRationale(AddProductActivity.this,
+                    Manifest.permission.READ_EXTERNAL_STORAGE)) {
+
+            } else {
+                ActivityCompat.requestPermissions(AddProductActivity.this,
+                        new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},
+                        1);
+            }
+        }
     }
 }
 

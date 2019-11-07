@@ -1,19 +1,46 @@
 package com.example.pandaapp.Models;
 
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
+
 import java.io.Serializable;
 
 public class Account implements Serializable {
-    private int roleId;
-    private int idShop;
+    @SerializedName("AccountId")
+    @Expose
     private int accountId;
+    @SerializedName("roleId")
+    @Expose
+    private int roleId;
+    @SerializedName("idShop")
+    @Expose
+    private int idShop;
+    @SerializedName("usename")
+    @Expose
     private String usename;
+    @SerializedName("password")
+    @Expose
     private String password;
+    @SerializedName("name")
+    @Expose
     private String name;
+    @SerializedName("phone_number")
+    @Expose
     private String phone_number;
+    @SerializedName("address")
+    @Expose
     private String address;
+    @SerializedName("gender")
+    @Expose
     private int gender;
+    @SerializedName("email")
+    @Expose
     private  String email;
+    @SerializedName("DateOfBirth")
+    @Expose
     private String DateOfBirth;
+    @SerializedName("accountStatus")
+    @Expose
     private int accountStatus;
 
     public Account(int roleId, int idShop, String usename, String password, String name, String phone_number, String address, int gender, String email, String dateOfBirth, int accountStatus) {

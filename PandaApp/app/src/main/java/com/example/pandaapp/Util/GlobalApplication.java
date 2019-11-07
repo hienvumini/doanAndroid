@@ -19,12 +19,4 @@ public class GlobalApplication extends Application {
     public ArrayList<CartItem> listcartItems;
     public Set<CartItem> SetcartItems;
     public Category category;
-
-    public void destroy(Object o) {
-        destroy(o);
-
-    }
-
-
 }
-

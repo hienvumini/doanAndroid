@@ -24,7 +24,8 @@ public class Product {
     @SerializedName("idShop")
     @Expose
     private int idShop;
-
+    @SerializedName("idcategory")
+    @Expose
     private int idcategory;
     @SerializedName("images")
     @Expose
