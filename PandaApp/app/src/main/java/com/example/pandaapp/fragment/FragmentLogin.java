@@ -6,6 +6,7 @@ import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
+import android.os.StrictMode;
 import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -20,10 +21,11 @@ import android.widget.Toast;
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
-import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.pandaapp.Retrofit2.APIUltils;
+import com.example.pandaapp.Retrofit2.DataClient;
 import com.example.pandaapp.view.LoginActivity;
 import com.example.pandaapp.Models.Account;
 import com.example.pandaapp.R;
@@ -35,8 +37,13 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 
 public class FragmentLogin extends Fragment {
@@ -47,6 +54,7 @@ public class FragmentLogin extends Fragment {
     String txtusername, txtpassword;
     TextView textViewSignupLogin;
     Account account = new Account();
+    GlobalApplication globalApplication;
 
 
     @Override
@@ -55,6 +63,11 @@ public class FragmentLogin extends Fragment {
 
 
         View view = inflater.inflate(R.layout.fragment_login, container, false);
+        super.onCreate(savedInstanceState);
+
+
+
+
         SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(getActivity());
         String username = pref.getString("username", null);
         String password = pref.getString("password", null);
@@ -90,78 +103,35 @@ public class FragmentLogin extends Fragment {
     }
 
     public void checkaccount(final String ussername, final String password) {
-
-        RequestQueue requestQueue = Volley.newRequestQueue(getActivity());
-
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, Server.getCheckAccount, new Response.Listener<String>() {
-
+        DataClient processLogin = APIUltils.getData();
+        Call<ArrayList<Account>> accountCall = processLogin.CheckAccount(ussername, password);
+        accountCall.enqueue(new Callback<ArrayList<Account>>() {
             @Override
-            public void onResponse(String response) {
-                Toast.makeText(getActivity(), response, Toast.LENGTH_SHORT).show();
-                Log.d("FFF", "onResponse: "+response);
-                try {
-                    JSONArray jsonArray = new JSONArray(response);
-                    if (jsonArray.length() == 0) {
-                        Toast.makeText(getActivity(), "Tên đăng nhập hoặc mật khẩu sai!", Toast.LENGTH_SHORT).show();
-                    } else {
-                        Toast.makeText(getActivity(), "Đang đăng nhập...", Toast.LENGTH_SHORT).show();
-                        int roleId = 0;
-                        int idShop = 0;
-                        String usename = "";
-                        String password = "";
-                        String name = "";
-                        String phone_number = "";
-                        String address = "";
-                        int gender = 0;
-                        String email = "";
-                        String DateOfBirth = "";
-                        int accountStatus = 0;
-                        int accountId=0;
-                        JSONObject jsonObject = jsonArray.getJSONObject(0);
-
-                        accountId = jsonObject.getInt("AccountId");
-                        roleId = jsonObject.getInt("roleId");
-                        idShop = jsonObject.getInt("idShop");
-                        usename = jsonObject.getString("usename");
-                        password = jsonObject.getString("password");
-                        name = jsonObject.getString("name");
-                        phone_number = jsonObject.getString("phone_number");
-                        address = jsonObject.getString("address");
-                        gender = jsonObject.getInt("gender");
-                        email = jsonObject.getString("email");
-                        DateOfBirth = jsonObject.getString("DateOfBirth");
-                        accountStatus = jsonObject.getInt("accountStatus");
-                        Account account1 = new Account(roleId, idShop,accountId, usename, password, name, phone_number, address, gender, email, DateOfBirth, accountStatus);
-                        Intent intent = new Intent(getActivity(), MainActivity.class);
-                        GlobalApplication globalApplication = (GlobalApplication) getActivity().getApplicationContext();
-                        globalApplication.account = account1;
-                        startActivity(intent);
-                        getActivity().finish();
-
+            public void onResponse(Call<ArrayList<Account>> call, Response<ArrayList<Account>> response) {
+                if (response.body().size() > 0) {
+                    //Toast.makeText(getActivity(), "Đăng nhập thành công" , Toast.LENGTH_SHORT).show();
+                    Log.d("AZ", "Dăng nhập: "+response.body());
+                    ArrayList<Account> accountslist = response.body();
+                    Account account = accountslist.get(0);
+                    if (globalApplication == null) {
+                        globalApplication = (GlobalApplication) getActivity().getApplicationContext();
 
                     }
-                } catch (JSONException e) {
-                    e.printStackTrace();
+                    globalApplication.account = account;
+                    Intent intent = new Intent(getActivity(), MainActivity.class);
+                    startActivity(intent);
+                    getActivity().finish();
                 }
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                Log.d("AAA", "onErrorResponse: "+error.toString());
 
             }
-        }) {
 
             @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
-                HashMap<String, String> hashMap = new HashMap<String, String>();
-                hashMap.put("usernameaccount", ussername);
-                hashMap.put("passwordaccount", password);
-                return hashMap;
-            }
+            public void onFailure(Call<ArrayList<Account>> call, Throwable t) {
+                Log.d("BBBB", "That bai: " + t.toString());
 
-        };
-        requestQueue.add(stringRequest);
+            }
+        });
+
     }
 
 

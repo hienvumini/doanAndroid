@@ -20,10 +20,7 @@ public class GlobalApplication extends Application {
     public List<CartItem> ListcartItems;
     public Category category;
 
-    public void destroy(Object o) {
-        destroy(o);
 
-    }
 
     public double updatetotal() {
         double total=0;

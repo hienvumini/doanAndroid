@@ -30,7 +30,7 @@ public class PaymentActivity extends AppCompatActivity {
     GlobalApplication globalApplication;
     EditText txtuser, txtDiaChi, txtSDT;
     ListView lstPayMent;
-    Account account;
+    Account Myaccount;
     AdapterPayment adapterPayment;
     List<CartItem> listCartItem;
     Button payment_button;
@@ -42,7 +42,7 @@ public class PaymentActivity extends AppCompatActivity {
         setContentView(R.layout.activity_payment);
         init();
         setData();
-
+        Log.d("000", "Account: "+Myaccount.toString());
         adapterPayment = new AdapterPayment(getApplicationContext(), R.id.payment_listview, listCartItem);
         lstPayMent.setAdapter(adapterPayment);
         payment_button.setOnClickListener(new View.OnClickListener() {
@@ -59,28 +59,23 @@ public class PaymentActivity extends AppCompatActivity {
 
 
     private void addBill() {
-
-           APIUltils.getData().addOder(account.getAccountId(),total,txtuser.getText().toString(),txtDiaChi.getText().toString(),txtSDT.getText().toString()).enqueue(new Callback<String>() {
+        Log.d("11111", "AAA1: "+Myaccount.getAccountId()+"--"+total+txtuser.getText().toString()+"--"+txtDiaChi.getText().toString()+"--"+txtSDT.getText().toString());
+           APIUltils.getData().addOder(Myaccount.getAccountId(),globalApplication.updatetotal(),txtuser.getText().toString(),txtDiaChi.getText().toString(),txtSDT.getText().toString()).enqueue(new Callback<String>() {
                @Override
                public void onResponse(Call<String> call, Response<String> response) {
-
                    oderId= response.body();
-
-                    Log.d("aaaaa", "onResponse:"+response.body()+"i");
                    insertToOrderItem();
                }
 
                @Override
                public void onFailure(Call<String> call, Throwable t) {
-                   Log.e("payerror", "onFailure: "+t.toString() );
+                   Log.e("AAA3", "onFailure: "+t.toString() );
                }
            });
 
 
 
-        globalApplication.ListcartItems=null;
-        Intent intent = new Intent(this,MainActivity.class);
-        startActivity(intent);
+
 
        }
 
@@ -89,10 +84,10 @@ public class PaymentActivity extends AppCompatActivity {
 
     private void setData() {
         globalApplication = (GlobalApplication) getApplicationContext();
-        account = globalApplication.account;
-        txtuser.setText(account.getName().toString());
-        txtSDT.setText(account.getPhone_number());
-        txtDiaChi.setText(account.getAddress());
+        Myaccount = globalApplication.account;
+        txtuser.setText(Myaccount.getName().toString());
+        txtSDT.setText(Myaccount.getPhone_number());
+        txtDiaChi.setText(Myaccount.getAddress());
         listCartItem = new ArrayList<>();
         listCartItem = globalApplication.ListcartItems;
         payment_total.setText(String.valueOf(globalApplication.updatetotal()));
@@ -110,18 +105,27 @@ public class PaymentActivity extends AppCompatActivity {
     public void insertToOrderItem(){
         for (int i=0;i<listCartItem.size();i++)
         {
-            Log.d("abcde", "addBill: "+oderId+"-"+listCartItem.get(i).getProduct().getProductId()+"-"+
+            Log.d("AAA3", "addBill: "+oderId+"-"+listCartItem.get(i).getProduct().getProductId()+"-"+
                     listCartItem.get(i).getMount()+"-"+listCartItem.get(i).getTotal());
             APIUltils.getData().addOderItem(oderId,listCartItem.get(i).getProduct().getProductId(),listCartItem.get(i).getMount(),listCartItem.get(i).getTotal()).enqueue(new Callback<String>() {
                 @Override
                 public void onResponse(Call<String> call, Response<String> response) {
-                    String a =response.body();
-                    Log.d("payyy", "onResponse:"+oderId +" "+a);
+                    if (response.body().contains("Success")){
+                        Toast.makeText(getApplicationContext(), "Đặt hàng thành công", Toast.LENGTH_SHORT).show();
+                        globalApplication.ListcartItems=null;
+                        Intent intent = new Intent(getApplicationContext(),MainActivity.class);
+                        startActivity(intent);
+                        
+                    } else if (response.body().contains("Error")) {
+                        Toast.makeText(getApplicationContext(), "Đặt hàng thất bại", Toast.LENGTH_SHORT).show();
+
+                    }
+
                 }
 
                 @Override
                 public void onFailure(Call<String> call, Throwable t) {
-                    Log.e("ppp", "onFailure: "+t.toString() );
+                    Log.e("AAA5", "onFailure: "+t.toString() );
                 }
             });
         }

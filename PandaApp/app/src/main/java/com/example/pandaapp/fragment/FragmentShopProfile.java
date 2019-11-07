@@ -18,6 +18,7 @@ import android.widget.Toast;
 
 import com.example.pandaapp.Models.Account;
 import com.example.pandaapp.Util.CacheUltils;
+import com.example.pandaapp.Util.FragmentUtils;
 import com.example.pandaapp.view.AddProductActivity;
 import com.example.pandaapp.view.ListProductShopActivity;
 import com.example.pandaapp.view.LoginActivity;
@@ -28,11 +29,11 @@ import com.example.pandaapp.view.MainActivity;
 import java.io.File;
 
 
-public class FragmentShopProfile extends Fragment implements View.OnClickListener{
+public class FragmentShopProfile extends Fragment implements View.OnClickListener {
     LinearLayout linearAddProduct, linearRevenue, linearProductList, linearOnWay, linearReceived, linearCancel, linearProfile;
     Button btnLogoutShop;
     ImageView img_back_black;
-    int REQUEST_CODE_ADDPRODUCT=112;
+    int REQUEST_CODE_ADDPRODUCT = 112;
 
 
     @Override
@@ -72,8 +73,8 @@ public class FragmentShopProfile extends Fragment implements View.OnClickListene
                 break;
             case R.id.layoutAddProduct_ProfileShop:
                 Toast.makeText(getActivity(), "Add Product", Toast.LENGTH_SHORT).show();
-                Intent intent =new Intent(getActivity(), AddProductActivity.class);
-                startActivityForResult(intent,REQUEST_CODE_ADDPRODUCT);
+                Intent intent = new Intent(getActivity(), AddProductActivity.class);
+                startActivityForResult(intent, REQUEST_CODE_ADDPRODUCT);
 
                 break;
             case R.id.layoutRevenue_ProfileShop:
@@ -81,20 +82,18 @@ public class FragmentShopProfile extends Fragment implements View.OnClickListene
                 break;
             case R.id.layoutListProduct_ProfileShop:
 
-                intent=new Intent(getActivity(), ListProductShopActivity.class);
+                intent = new Intent(getActivity(), ListProductShopActivity.class);
                 startActivity(intent);
                 break;
             case R.id.layoutProfileInfomation_ProfileShop:
                 Toast.makeText(getActivity(), "THông tin tài khoản", Toast.LENGTH_SHORT).show();
+                FragmentUtils.openFragment((new FragmentProfile()), getActivity().getSupportFragmentManager(), R.id.frameProfile_ProfileShop);
                 break;
             case R.id.btnLogOut_ProfileShop:
                 intent = new Intent(getActivity(), LoginActivity.class);
                 startActivity(intent);
                 getActivity().finish();
-                GlobalApplication globalApplication=(GlobalApplication) getActivity().getApplicationContext();
-                globalApplication.destroy(globalApplication.account);
-                globalApplication.destroy(globalApplication.listProduct);
-                globalApplication.destroy(globalApplication.product);
+                GlobalApplication globalApplication = (GlobalApplication) getActivity().getApplicationContext();
 
 
                 break;
@@ -102,9 +101,8 @@ public class FragmentShopProfile extends Fragment implements View.OnClickListene
 //                intent=new Intent(getActivity(), MainActivity.class);
 //                startActivity(intent);
 //                getActivity().finish();
-              // getFragmentManager().popBackStack();
-                ((MainActivity)getActivity()).changeNavigationBottomto(1);
-
+                // getFragmentManager().popBackStack();
+                ((MainActivity) getActivity()).changeNavigationBottomto(1);
 
 
                 break;
@@ -124,8 +122,6 @@ public class FragmentShopProfile extends Fragment implements View.OnClickListene
         btnLogoutShop = (Button) view.findViewById(R.id.btnLogOut_ProfileShop);
         img_back_black = (ImageView) view.findViewById(R.id.img_back_black);
     }
-
-
 
 
 }
