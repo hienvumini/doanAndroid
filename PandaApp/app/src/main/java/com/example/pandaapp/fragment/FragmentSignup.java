@@ -20,10 +20,11 @@ import android.widget.Toast;
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
-import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.pandaapp.Retrofit2.APIUltils;
+import com.example.pandaapp.Retrofit2.DataClient;
 import com.example.pandaapp.view.LoginActivity;
 import com.example.pandaapp.Models.Account;
 import com.example.pandaapp.R;
@@ -32,6 +33,10 @@ import com.example.pandaapp.server.Server;
 import java.util.HashMap;
 import java.util.Map;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
 public class FragmentSignup extends Fragment {
     EditText edittextusernameSignup, edittextpassSignup, edittextNameSignup, edittextPhoneSignup, edittextAddressSignup, edittextEmailSignup, edittextDateOfBirthSignup, edittextNameShopSignup;
     RadioGroup radiogroupGioitinh;
@@ -39,9 +44,9 @@ public class FragmentSignup extends Fragment {
     Button signup_buttonSignup;
     String txtusername, txtpassword, txtnamefull, txtphone, txtaddress, txtemail, txtdateofbirth, txtNameShop;
     int gioitinh;
-    boolean enableShop=false;
-    int  idShop, AccountId;
-    int idrole=1;
+    boolean enableShop = false;
+    int idShop, AccountId;
+    int idrole = 1;
     Account account = new Account();
     CheckBox checkenableShop;
 
@@ -66,63 +71,40 @@ public class FragmentSignup extends Fragment {
                 } else {
 
                     getdataformSignup();
-                    Log.d("AAA", "Cong   "  +account.toString());
-                    //requestSignUp();
+                    Log.d("AAA", "Cong   " + account.toString());
+                    requestSignUp();
                 }
-//                if (edittextNameSignup.toString().equalsIgnoreCase("") ||
-//                        edittextusernameSignup.toString().equalsIgnoreCase("") ||
-//                        edittextpassSignup.toString().equalsIgnoreCase("") ||
-//                        edittextAddressSignup.toString().equalsIgnoreCase("") ||
-//                        edittextDateOfBirthSignup.toString().equalsIgnoreCase("") ||
-//                        edittextPhoneSignup.toString().equalsIgnoreCase("")
-//                ) {
-//                    Toast.makeText(getActivity(), "Vui lòng điền đầy đủ thông tin!", Toast.LENGTH_SHORT).show();
-//                } else {
-//                    Toast.makeText(getActivity(), "Đang đăng kí!", Toast.LENGTH_SHORT).show();
-//                    getdataformSignup();
-//                    requestSignUp();
-//                }
 
 
             }
 
             private void requestSignUp() {
-                RequestQueue requestQueue = Volley.newRequestQueue(getActivity());
-                StringRequest stringRequest = new StringRequest(Request.Method.POST, Server.AddAccount, new Response.Listener<String>() {
+
+                DataClient dataClientRegister = APIUltils.getData();
+                Call<String> stringCall = dataClientRegister.RegisterAccount(
+                        txtusername, txtpassword, idrole, txtnamefull, txtphone,
+                        txtaddress, gioitinh + "", txtemail, txtdateofbirth, txtNameShop);
+                stringCall.enqueue(new Callback<String>() {
                     @Override
-                    public void onResponse(String response) {
-                        Toast.makeText(getActivity(), response.toString(), Toast.LENGTH_SHORT).show();
-                        if (response.contains("xxx001")) {
-                            Toast.makeText(getActivity(), "Tài khoản đã tồn tại!", Toast.LENGTH_SHORT).show();
+                    public void onResponse(Call<String> call, Response<String> response) {
+                        if (response.body().equalsIgnoreCase("Exist")) {
+                            Toast.makeText(getActivity(), "Tài khoản đã tồn tại", Toast.LENGTH_SHORT).show();
+                        } else if (response.body() == "0") {
+                            Toast.makeText(getActivity(), "Đăng kí thất bại, Thử lại", Toast.LENGTH_SHORT).show();
+
                         } else {
                             Toast.makeText(getActivity(), "Đăng kí thành công", Toast.LENGTH_SHORT).show();
                             ((LoginActivity) getActivity()).toSigninFragment();
 
-
                         }
                     }
-                }, new Response.ErrorListener() {
+
                     @Override
-                    public void onErrorResponse(VolleyError error) {
+                    public void onFailure(Call<String> call, Throwable t) {
+                        Log.d("BBB", "That bại: " + t.toString());
 
                     }
-                }) {
-                    @Override
-                    protected Map<String, String> getParams() throws AuthFailureError {
-                        HashMap<String, String> hashMap = new HashMap<String, String>();
-                        hashMap.put("shopName", txtNameShop);
-                        hashMap.put("idrole", account.getRoleId() + "");
-                        hashMap.put("txtusername", account.getUsename());
-                        hashMap.put("txtpassword", account.getPassword());
-                        hashMap.put("txtnamefull", account.getName());
-                        hashMap.put("txtphone", account.getPhone_number());
-                        hashMap.put("txtaddress", account.getAddress());
-                        hashMap.put("gender", account.getGender() + "");
-                        hashMap.put("txtemail", account.getEmail());
-                        return hashMap;
-                    }
-                };
-                requestQueue.add(stringRequest);
+                });
             }
         });
         checkenableShop.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -133,14 +115,13 @@ public class FragmentSignup extends Fragment {
                     ((TextView) view.findViewById(R.id.texviewlableOpenShopSignUp)).setVisibility(View.VISIBLE);
                     edittextNameShopSignup.setVisibility(View.VISIBLE);
                     edittextNameShopSignup.setText(edittextNameSignup.getText().toString().trim());
-                    idrole=2;
-
+                    idrole = 2;
 
 
                 } else {
                     ((TextView) view.findViewById(R.id.texviewlableOpenShopSignUp)).setVisibility(View.INVISIBLE);
                     edittextNameShopSignup.setVisibility(View.INVISIBLE);
-                    idrole=1;
+                    idrole = 1;
 
 
                 }
@@ -197,9 +178,5 @@ public class FragmentSignup extends Fragment {
         if (txtNameShop == null || txtNameShop.equalsIgnoreCase("")) {
             txtNameShop = txtnamefull;
         }
-
-
     }
-
-
 }

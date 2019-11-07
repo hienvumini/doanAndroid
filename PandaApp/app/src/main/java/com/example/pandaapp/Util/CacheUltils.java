@@ -2,6 +2,12 @@ package com.example.pandaapp.Util;
 
 import android.content.Context;
 
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
+
+import com.example.pandaapp.R;
+
 import java.io.File;
 
 public class CacheUltils {
@@ -34,4 +40,5 @@ public class CacheUltils {
             return false;
         }
     }
+
 }

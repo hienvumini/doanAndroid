@@ -20,11 +20,14 @@ public class LoadImage {
 
     }
     public static void getImageInServer(Context context, String url, ImageView imageview){
-        if (url ==null || url.equalsIgnoreCase("")) {
-            Toast.makeText(context, "Link ảnh trống", Toast.LENGTH_SHORT).show();
-        }else {
-            Picasso.with(context).load(Server.Link+url).error(R.drawable.errror).into(imageview);
+        if (url != null) {
+            if (url ==null || url.equalsIgnoreCase("")) {
+                Toast.makeText(context, "Link ảnh trống", Toast.LENGTH_SHORT).show();
+            }else {
+                Picasso.with(context).load(Server.Link+url).error(R.drawable.errror).into(imageview);
+            }
         }
+
 
     }
 }
