@@ -46,4 +46,13 @@ public interface DataClient {
     @FormUrlEncoded
     @POST("getProductofShop.php")
     Call<ArrayList<Product>> getProductShop(@Field("idshop") int idShop);
+
+    @FormUrlEncoded
+    @POST("insertBill.php")
+    Call<String> addOder(@Field("AccountId") int AccountId,@Field("totalPrice") Double totalPrice
+    ,@Field("name") String name,@Field("address") String address,@Field("phone_number") String phone_number);
+
+    @FormUrlEncoded
+    @POST("insertOderItem.php")
+    Call<String> addOderItem(@Field("oderId") String oderId,@Field("productId") int productId,@Field("amount") int amount,@Field("total") double total);
 }
