@@ -1,4 +1,4 @@
-package com.example.pandaapp.view;
+﻿package com.example.pandaapp.view;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -17,6 +17,7 @@ import com.example.pandaapp.Util.ChangeActivity;
 import com.example.pandaapp.Util.GlobalApplication;
 import com.example.pandaapp.Util.LoadImage;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 
 public class DetailActivity extends AppCompatActivity {
@@ -40,7 +41,11 @@ public class DetailActivity extends AppCompatActivity {
 
         setDataSP(product);
 
+
         // Listener();
+
+        Listener();
+
 
 
     }
@@ -88,11 +93,25 @@ public class DetailActivity extends AppCompatActivity {
         btnAddCart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (globalApplication.SetcartItems == null) {
-                    globalApplication.SetcartItems = new HashSet<>();
+                if (globalApplication.ListcartItems == null) {
+                    globalApplication.ListcartItems = new ArrayList<>();
 
                 }
-                globalApplication.SetcartItems.add(new CartItem(product, 1));
+                boolean trung = false;
+                for(int i = 0 ;i<globalApplication.ListcartItems.size();i++)
+                {
+                    if(product.getProductId()==globalApplication.ListcartItems.get(i).getProduct().getProductId())
+                    {
+                        trung=true;
+                        globalApplication.ListcartItems.get(i).setMount( globalApplication.ListcartItems.get(i).getMount()+1);
+                    }
+
+                }
+                if(trung==false)
+                {
+                    globalApplication.ListcartItems.add(new CartItem(product,1));
+                }
+
             }
         });
 

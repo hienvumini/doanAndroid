@@ -1,4 +1,4 @@
-package com.example.pandaapp.Retrofit2;
+﻿package com.example.pandaapp.Retrofit2;
 
 import com.example.pandaapp.Models.Account;
 import com.example.pandaapp.Models.Category;
@@ -49,6 +49,7 @@ public interface DataClient {
     Call<ArrayList<Product>> getProductShop(@Field("idshop") int idShop);
 
     @FormUrlEncoded
+
     @POST("getallProductCategory.php")
     Call<ArrayList<Product>> getProductCategory(@Field("idcategory") int idcategory);
 
@@ -68,4 +69,13 @@ public interface DataClient {
                                  @Field("txtemail") String txtemail,
                                  @Field("DateOfBirth") String DateOfBirth,
                                  @Field("shopName") String shopName);
+
+    @POST("insertBill.php")
+    Call<String> addOder(@Field("AccountId") int AccountId,@Field("totalPrice") Double totalPrice
+    ,@Field("name") String name,@Field("address") String address,@Field("phone_number") String phone_number);
+
+    @FormUrlEncoded
+    @POST("insertOderItem.php")
+    Call<String> addOderItem(@Field("oderId") String oderId,@Field("productId") int productId,@Field("amount") int amount,@Field("total") double total);
+
 }

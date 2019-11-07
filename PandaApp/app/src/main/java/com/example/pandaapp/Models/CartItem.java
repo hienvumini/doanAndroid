@@ -8,6 +8,11 @@ public class CartItem {
         this.product = product;
         Mount = mount;
     }
+    public Double getTotal()
+    {
+        return (product.getPrice()*(double)Mount);
+    }
+
 
     public CartItem() {
     }

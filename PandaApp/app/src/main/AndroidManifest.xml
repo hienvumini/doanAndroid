@@ -8,7 +8,6 @@
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.INTERNET" />
 
-
     <application
         android:hardwareAccelerated="false"
         android:name=".Util.GlobalApplication"
@@ -19,7 +18,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".view.ListProductShopActivity"></activity>
+        <activity android:name=".view.PaymentActivity"></activity>
+        <activity android:name=".view.ListProductShopActivity" />
         <activity android:name=".view.RevenueActivity" />
         <activity android:name=".view.AddProductActivity" />
         <activity android:name=".view.FavoriteActivity" />

@@ -33,7 +33,7 @@ public class AdapterCartItem extends ArrayAdapter {
 
 
     @Override
-    public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
+    public View getView(final int position, @Nullable View convertView, @NonNull ViewGroup parent) {
         View view = convertView;
         if (view == null) {
             view = LayoutInflater.from(mctx).inflate(R.layout.item_product_listview, parent, false);
@@ -42,10 +42,28 @@ public class AdapterCartItem extends ArrayAdapter {
         ImageView imageViewProduct = (ImageView) view.findViewById(R.id.imageanhSP_Cart);
         TextView textViewName = (TextView) view.findViewById(R.id.textviewTenSP_Cart);
         TextView textViewPrice = (TextView) view.findViewById(R.id.textviewGiaSP_Cart);
-        TextView textViewsoMount = (TextView) view.findViewById(R.id.textviewMountProduct_Cart);
+         final TextView textViewsoMount = (TextView) view.findViewById(R.id.textviewMountProduct_Cart);
         TextView textViewMinussoMount = (TextView) view.findViewById(R.id.textviewMinusProduct_Cart);
         TextView textViewAddsoMoutt = (TextView) view.findViewById(R.id.textviewAddProduct_Cart);
         TextView textViewDeleteProduct = (TextView) view.findViewById(R.id.textviewDelteProductCart);
+
+        textViewAddsoMoutt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                cartItemList.get(position).setMount(cartItemList.get(position).getMount()+1);
+                textViewsoMount.setText(cartItemList.get(position).getMount()+"");
+            }
+        });
+        textViewMinussoMount.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(cartItemList.get(position).getMount()>1)
+                {
+                        cartItemList.get(position).setMount(cartItemList.get(position).getMount() - 1);
+                        textViewsoMount.setText(cartItemList.get(position).getMount() + "");
+                    }}
+        });
+
         LoadImage.getImageInServer(mctx,cartItemList.get(position).getProduct().getImages().get(0),imageViewProduct);
         textViewName.setText(cartItemList.get(position).getProduct().getName());
         DecimalFormat decimalFormat=new DecimalFormat("###,###.###");
