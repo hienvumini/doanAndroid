@@ -28,6 +28,7 @@ public class AdapterProduct extends RecyclerView.Adapter<AdapterProduct.ViewHold
     int layout;
     List<Product> listproduct;
     int stt;
+    GlobalApplication globalApplication;
 
 
     public AdapterProduct(Context context, int resource, List<Product> object) {
@@ -57,8 +58,8 @@ public class AdapterProduct extends RecyclerView.Adapter<AdapterProduct.ViewHold
         holder.linearLayoutItemProduct.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                GlobalApplication globalApplication = (GlobalApplication) mctx.getApplicationContext();
-                //globalApplication.product=listproduct.get(position);
+                globalApplication = (GlobalApplication) mctx.getApplicationContext();
+
                 if (globalApplication.product == null) {
                     globalApplication.product = new Product();
 
@@ -73,38 +74,14 @@ public class AdapterProduct extends RecyclerView.Adapter<AdapterProduct.ViewHold
 
                 } else {
                     if (listproduct.get(position).getIdShop() == account.getIdShop()) {
-                        AlertDialog.Builder builder = new AlertDialog.Builder(mctx);
-                        builder.setTitle("Chào "+account.getName());
-                        builder.setMessage("Sản phẩm này thuôc về shop của bạn \n Bạn có muốn sửa thôn tin sản phẩm này không?");
-                        builder.setPositiveButton("Có", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                Toast.makeText(mctx, "Tới trang sửa thông tin sản phẩm", Toast.LENGTH_SHORT).show();
-                            }
-                        });
-                        builder.setNegativeButton("Không", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-
-                            }
-                        });
-                        try {
-                            builder.show();
-
-                        }catch (IllegalStateException i) // Đoạn này bị lỗi nếu kích vào sản phẩm từ trang danh sách sản phẩm của Shop nên nhét vào try catch. còn ở Main Activity thì không sao
-                        {
-                            Toast.makeText(mctx, "Tới trang sửa thông tin sản phẩm", Toast.LENGTH_SHORT).show();
-                        }
-
-
-
 
                     } else {  // sản phẩm không thuộc về shop , dẫn tới trang thông tin sản phẩm
-                        Intent intent = new Intent(mctx, DetailActivity.class);
-                        globalApplication.product = listproduct.get(position);
-                        mctx.startActivity(intent);
+
 
                     }
+                    Intent intent = new Intent(mctx, DetailActivity.class);
+                    globalApplication.product = listproduct.get(position);
+                    mctx.startActivity(intent);
 
                 }
 

@@ -6,6 +6,10 @@ import com.google.gson.annotations.SerializedName;
 import java.io.Serializable;
 
 public class Account implements Serializable {
+
+    @SerializedName("AccountId")
+    @Expose
+    private int accountId;
     @SerializedName("roleId")
     @Expose
     private int roleId;
@@ -204,14 +208,4 @@ public class Account implements Serializable {
 
 
 
-//$row['roleId'],
-//        $row['idShop'],
-//        $row['usename'],
-//        $row['password'],
-//        $row['name'],
-//        $row['phone_number'],
-//        $row['address'],
-//        $row['gender'],
-//        $row['email'],
-//        $row['DateOfBirth'],
-//        $row['accountStatus']
+

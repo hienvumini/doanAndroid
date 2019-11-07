@@ -63,7 +63,6 @@ public class ListProductShopActivity extends AppCompatActivity {
                 public void onResponse(Call<ArrayList<Product>> call, Response<ArrayList<Product>> response) {
                     Log.d("AAA", "onResponse: " + response.body());
                     listProduct = response.body();
-                    Toast.makeText(ListProductShopActivity.this, "San pham: " + listProduct.size(), Toast.LENGTH_SHORT).show();
                     adapterProduct = new AdapterProduct(getApplicationContext(), R.id.recycleview_ShopProduct, listProduct);
                     adapterProduct.notifyDataSetChanged();
                     recyclerViewListProduct.setAdapter(adapterProduct);

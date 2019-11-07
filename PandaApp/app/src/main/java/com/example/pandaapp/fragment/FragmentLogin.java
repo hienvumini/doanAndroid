@@ -1,4 +1,4 @@
-package com.example.pandaapp.fragment;
+﻿package com.example.pandaapp.fragment;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -111,6 +111,7 @@ public class FragmentLogin extends Fragment {
                 if (response.body().size() > 0) {
                     //Toast.makeText(getActivity(), "Đăng nhập thành công" , Toast.LENGTH_SHORT).show();
                     Log.d("AZ", "Dăng nhập: "+response.body());
+                    Toast.makeText(getActivity(), "Đăng nhập thành công", Toast.LENGTH_SHORT).show();
                     ArrayList<Account> accountslist = response.body();
                     Account account = accountslist.get(0);
                     if (globalApplication == null) {
@@ -128,7 +129,7 @@ public class FragmentLogin extends Fragment {
             @Override
             public void onFailure(Call<ArrayList<Account>> call, Throwable t) {
                 Log.d("BBBB", "That bai: " + t.toString());
-
+                Log.d("BBBB", "THAnh Cong: " + t.toString());
             }
         });
 
