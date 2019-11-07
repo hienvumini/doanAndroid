@@ -92,10 +92,8 @@ public class AddProductActivity extends AppCompatActivity implements AdapterAddI
             @Override
             public void onClick(View v) {
                 insertProduct();
-                postFile();
-                Intent intent=new Intent(getApplicationContext(),ListProductShopActivity.class);
-                startActivity(intent);
-                finish();
+
+
 
 
             }
@@ -113,6 +111,7 @@ public class AddProductActivity extends AppCompatActivity implements AdapterAddI
             public void onResponse(Call<String> call, Response<String> response) {
                 idproductadd = Integer.parseInt(response.body());
                 Log.d("AAA", "onResponse: " + response.body());
+                postFile();
             }
 
             @Override
@@ -162,6 +161,12 @@ public class AddProductActivity extends AppCompatActivity implements AdapterAddI
                     stringCall.enqueue(new Callback<String>() {
                         @Override
                         public void onResponse(Call<String> call, Response<String> response) {
+                            Toast.makeText(AddProductActivity.this, response.body(), Toast.LENGTH_SHORT).show();
+                            if (response.body().contains("Success")){
+                                Intent intent=new Intent(getApplicationContext(),ListProductShopActivity.class);
+                                startActivity(intent);
+                                finish();
+                            }
 
 
                         }
