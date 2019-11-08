@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.pandaapp.view.FavoriteActivity;
@@ -24,6 +25,7 @@ public class FragmentProfile extends Fragment {
     GlobalApplication globalApplication;
     Account account;
     TextView textViewbtnFavorite;
+    ImageView imageViewi_black_Profile;
 
 
     @Override
@@ -41,6 +43,7 @@ public class FragmentProfile extends Fragment {
     }
 
     public void init(View view) {
+        imageViewi_black_Profile=(ImageView) view.findViewById(R.id.img_back_black_Profile);
         textViewName = (TextView) view.findViewById(R.id.textviewName_Profile);
         textViewUsername = (TextView) view.findViewById(R.id.textviewUsename_Profile);
         textViewAddress = (TextView) view.findViewById(R.id.textviewAddress_Profile);
@@ -74,7 +77,14 @@ public class FragmentProfile extends Fragment {
                 startActivity(intent);
             }
         });
+        imageViewi_black_Profile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                getFragmentManager().popBackStack();
+            }
+        });
 
     }
+
 
 }

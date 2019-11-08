@@ -5,21 +5,18 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.database.Cursor;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
-import android.widget.Adapter;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.ImageView;
-import android.widget.SimpleAdapter;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.pandaapp.Models.Category;
@@ -27,7 +24,7 @@ import com.example.pandaapp.Models.Product;
 import com.example.pandaapp.R;
 import com.example.pandaapp.Retrofit2.APIUltils;
 import com.example.pandaapp.Retrofit2.DataClient;
-import com.example.pandaapp.Retrofit2.RetrofitClient;
+import com.example.pandaapp.Util.FileUtils;
 import com.example.pandaapp.Util.GlobalApplication;
 import com.example.pandaapp.adapter.AdapterAddImage;
 
@@ -41,13 +38,13 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class AddProductActivity extends AppCompatActivity implements AdapterAddImage.IcallbackAddProductActivity {
+public class AddProductActivity extends AppCompatActivity{
 
-    ImageView addmoreimage_AddProduct;
+    ImageView addmoreimage_AddProduct, img_back_AddProduct;
     int REQUEST_CODE_ADDMOREIMAGES = 123;
     private static final int READ_EXTENAL_STORAGE_PERMISION = 0;
     private static final int CAMERA_PERMISION = 1;
-    ArrayList<Uri> imagesEncodedList;
+    ArrayList<Uri> listUriImage;
     ArrayList<String> listLinkImage;
 
     AdapterAddImage adapterAddImage;
@@ -63,17 +60,14 @@ public class AddProductActivity extends AppCompatActivity implements AdapterAddI
     ArrayList<Category> categoryArrayList = new ArrayList<>();
     ArrayAdapter adapterspinner;
     int idproductadd;
-
+    TextView textViewNotifi;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_product);
-
         init();
         setOnlisterner();
-
-
     }
 
     private void setOnlisterner() {
@@ -85,66 +79,94 @@ public class AddProductActivity extends AppCompatActivity implements AdapterAddI
                 intent.setAction(Intent.ACTION_PICK);
                 intent.setType("image/*");
                 startActivityForResult(Intent.createChooser(intent, "Select Picture"), REQUEST_CODE_ADDMOREIMAGES);
-
             }
         });
         btnsubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 insertProduct();
 
+            }
 
 
-
+            //  }
+        });
+        img_back_AddProduct.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
+        adapterAddImage.setListener(new AdapterAddImage.IcallbackAddProductActivity() {
+            @Override
+            public void removeImage(int position) {
+                Toast.makeText(getApplicationContext(), "Xoa anh thu "+position, Toast.LENGTH_SHORT).show();
+                listUriImage.remove(position);
+                adapterAddImage.notifyDataSetChanged();
             }
         });
 
     }
 
     private void insertProduct() {
-        getdataFromUser();
-        Log.d("AAA", "insertProduct: "+product.toString());
-        DataClient insertProduct = APIUltils.getData();
-        Call<String> stringCall = insertProduct.InsertProduct(product.getIdcategory(), product.getIdShop(), product.getName(), product.getPrice(), product.getDis(), product.getDiscount());
-        stringCall.enqueue(new Callback<String>() {
-            @Override
-            public void onResponse(Call<String> call, Response<String> response) {
-                idproductadd = Integer.parseInt(response.body());
-                Log.d("AAA", "onResponse: " + response.body());
-                postFile();
-            }
+        if (txtNameProduct.getText().toString().trim().equalsIgnoreCase("") || txtDiscProduct.getText().toString().trim().equalsIgnoreCase("")) {
+            Toast.makeText(this, "Vui lòng điền đầy đủ thông tin sản phẩm", Toast.LENGTH_SHORT).show();
+        } else {
+            getdataFromUser();
+            DataClient insertProduct = APIUltils.getData();
+            Call<String> stringCall = insertProduct.InsertProduct(product.getIdcategory(), product.getIdShop(), product.getName(), product.getPrice(), product.getDis(), product.getDiscount());
+            stringCall.enqueue(new Callback<String>() {
+                @Override
+                public void onResponse(Call<String> call, Response<String> response) {
+                    idproductadd = Integer.parseInt(response.body());
+                    Log.d("AAA", "onResponse: " + response.body());
+                    postFile();
+                }
 
-            @Override
-            public void onFailure(Call<String> call, Throwable t) {
-                Log.d("FFF", "onResponse: " + t.toString());
+                @Override
+                public void onFailure(Call<String> call, Throwable t) {
+                    Log.d("FFF", "onResponse: " + t.toString());
 
-            }
-        });
+                }
+            });
+        }
 
 
     }
 
     private void getdataFromUser() {
+
         name = txtNameProduct.getText().toString().trim();
         disc = txtDiscProduct.getText().toString().trim();
-        price = Double.parseDouble(txtPrice.getText().toString().trim());
-        discount = Double.parseDouble(txtDiscount.getText().toString().trim());
+        if (!(txtPrice.getText().toString().trim().equalsIgnoreCase(""))) {
+            price = Double.parseDouble(txtPrice.getText().toString().trim());
+        } else {
+            price = 0;
+        }
+        if (!(txtDiscount.getText().toString().trim().equalsIgnoreCase(""))) {
+            discount = Double.parseDouble(txtDiscount.getText().toString().trim());
+        } else {
+            discount = 0;
+        }
         idCate = categoryArrayList.get(spinnerCategory.getSelectedItemPosition()).getIdcategory();
         GlobalApplication globalApplication = (GlobalApplication) getApplicationContext();
         idshop = globalApplication.account.getIdShop();
         product = new Product(name, price, discount, idshop, idCate, disc);
+        Toast.makeText(getApplicationContext(), product.toString(), Toast.LENGTH_SHORT).show();
 
 
     }
 
+
     private void postFile() {
         File file = null;
 
-        for (int i = 0; i < imagesEncodedList.size(); i++) {
-            Uri uri = imagesEncodedList.get(i);
-            realpath = getRealPathFromURI(uri);
+        for (int i = 0; i < listUriImage.size(); i++) {
+            Uri uri = listUriImage.get(i);
+            realpath = FileUtils.getRealPathFromURI(uri,getApplicationContext());
 
-            file = new File(realpath);
+            file = new File(FileUtils.getRealPathFromURI(uri,getApplicationContext()));
             String file_path = file.getAbsolutePath();
             String[] mangtenfile = file_path.split("\\.");
             file_path = mangtenfile[0] + System.currentTimeMillis() + "." + mangtenfile[1];
@@ -157,13 +179,13 @@ public class AddProductActivity extends AppCompatActivity implements AdapterAddI
                 @Override
                 public void onResponse(Call<String> call, Response<String> response) {
                     DataClient insertImages = APIUltils.getData();
-                    Call<String> stringCall = insertImages.InsertImage("image/ImageProduct/"+response.body(),idproductadd);
+                    Call<String> stringCall = insertImages.InsertImage("image/ImageProduct/" + response.body(), idproductadd);
                     stringCall.enqueue(new Callback<String>() {
                         @Override
                         public void onResponse(Call<String> call, Response<String> response) {
                             Toast.makeText(AddProductActivity.this, response.body(), Toast.LENGTH_SHORT).show();
-                            if (response.body().contains("Success")){
-                                Intent intent=new Intent(getApplicationContext(),ListProductShopActivity.class);
+                            if (response.body().contains("Success")) {
+                                Intent intent = new Intent(getApplicationContext(), ListProductShopActivity.class);
                                 startActivity(intent);
                                 finish();
                             }
@@ -201,15 +223,15 @@ public class AddProductActivity extends AppCompatActivity implements AdapterAddI
                 int count = data.getClipData().getItemCount();
                 for (int i = 0; i < count; i++) {
                     Uri uri = data.getClipData().getItemAt(i).getUri();
-                    imagesEncodedList.add(uri);
-                    realpath = getRealPathFromURI(uri);
+                    listUriImage.add(uri);
+                    realpath = FileUtils.getRealPathFromURI(uri,getApplicationContext());
 
 
                 }
                 gridViewImage.setAdapter(adapterAddImage);
             } else {
                 Uri imgUri = data.getData();
-                imagesEncodedList.add(imgUri);
+                listUriImage.add(imgUri);
 
             }
 
@@ -219,6 +241,8 @@ public class AddProductActivity extends AppCompatActivity implements AdapterAddI
     }
 
     private void init() {
+        textViewNotifi = (TextView) findViewById(R.id.textviewNoti_setImageProduct);
+        img_back_AddProduct = (ImageView) findViewById(R.id.img_back_black_AddProduct);
         txtNameProduct = (EditText) findViewById(R.id.edittextName_AddProduct);
         txtDiscProduct = (EditText) findViewById(R.id.edittextdisc_AddProduct);
         txtPrice = (EditText) findViewById(R.id.edittextPrice_AddProduct);
@@ -229,12 +253,12 @@ public class AddProductActivity extends AppCompatActivity implements AdapterAddI
         btnsubmit = (ImageView) findViewById(R.id.imageviewSubmit_AddProduct);
         addmoreimage_AddProduct = (ImageView) findViewById(R.id.addmoreimage_AddProduct);
         gridViewImage = (GridView) findViewById(R.id.gridview_Image_AddProduc);
-        imagesEncodedList = new ArrayList<>();
+        listUriImage = new ArrayList<>();
         listLinkImage = new ArrayList<>();
 
-        adapterAddImage = new AdapterAddImage(getApplicationContext(), R.id.gridview_Image_AddProduc, imagesEncodedList);
+        adapterAddImage = new AdapterAddImage(getApplicationContext(), R.id.gridview_Image_AddProduc, listUriImage);
         gridViewImage.setAdapter(adapterAddImage);
-        if (imagesEncodedList.size() == 0) {
+        if (listUriImage.size() == 0) {
             gridViewImage.setVisibility(View.GONE);
 
         }
@@ -283,23 +307,8 @@ public class AddProductActivity extends AppCompatActivity implements AdapterAddI
         }
     }
 
-    @Override
-    public void removeImage(int position) {
-        imagesEncodedList.remove(imagesEncodedList.get(position));
-        adapterAddImage.notifyDataSetChanged();
-    }
 
-    public String getRealPathFromURI(Uri contentUri) {
-        String path = null;
-        String[] proj = {MediaStore.MediaColumns.DATA};
-        Cursor cursor = getContentResolver().query(contentUri, proj, null, null, null);
-        if (cursor.moveToFirst()) {
-            int column_index = cursor.getColumnIndexOrThrow(MediaStore.MediaColumns.DATA);
-            path = cursor.getString(column_index);
-        }
-        cursor.close();
-        return path;
-    }
+
 }
 
 

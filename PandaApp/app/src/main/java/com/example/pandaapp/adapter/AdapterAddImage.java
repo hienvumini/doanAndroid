@@ -16,7 +16,11 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.example.pandaapp.R;
+import com.example.pandaapp.Retrofit2.APIUltils;
 import com.example.pandaapp.view.AddProductActivity;
+import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
+import com.nostra13.universalimageloader.core.assist.ImageSize;
 
 import java.io.FileNotFoundException;
 import java.io.InputStream;
@@ -26,6 +30,11 @@ public class AdapterAddImage extends ArrayAdapter {
     Context mctx;
     int layout;
     List<Uri> uriListImage;
+    IcallbackAddProductActivity listener;
+
+    public void setListener(IcallbackAddProductActivity listener) {
+        this.listener = listener;
+    }
 
     public AdapterAddImage(Context context, int resource, List objects) {
 
@@ -33,6 +42,7 @@ public class AdapterAddImage extends ArrayAdapter {
         this.mctx = context;
         this.layout = resource;
         this.uriListImage = objects;
+
     }
 
     @NonNull
@@ -44,23 +54,23 @@ public class AdapterAddImage extends ArrayAdapter {
         }
         ImageView imageView = (ImageView) view.findViewById(R.id.imageImageProduct_ItemImage);
         TextView textView = (TextView) view.findViewById(R.id.textviewremoveImage_ItemImage);
-        try {
-            InputStream inputStream = getContext().getContentResolver().openInputStream(uriListImage.get(position));
-            Bitmap bitmap = BitmapFactory.decodeStream(inputStream);
-            imageView.setImageBitmap(bitmap);
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
+//        try {
+//            InputStream inputStream = getContext().getContentResolver().openInputStream(uriListImage.get(position));
+//            Bitmap bitmap = BitmapFactory.decodeStream(inputStream);
+//            imageView.setImageBitmap(bitmap);
+//        } catch (FileNotFoundException e) {
+//            e.printStackTrace();
+//        }
+        ImageLoader imageLoader = ImageLoader.getInstance();
+        imageLoader.init(ImageLoaderConfiguration.createDefault(mctx));
+        ImageSize targetSize = new ImageSize(80, 50);
+        imageLoader.displayImage(uriListImage.get(position)+"",imageView);
+
+
         textView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                uriListImage.remove(position);
-                AddProductActivity  addProductActivity=new AddProductActivity();
-                addProductActivity.removeImage(position);
-
-
-
-
+                listener.removeImage(position);
             }
         });
 

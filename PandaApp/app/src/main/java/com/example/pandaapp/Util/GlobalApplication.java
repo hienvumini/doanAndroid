@@ -21,16 +21,14 @@ public class GlobalApplication extends Application {
     public Category category;
 
 
-
     public double updatetotal() {
-        double total=0;
-        for (int i =0 ;i<ListcartItems.size();i++)
-        {
-            double price= ListcartItems.get(i).getProduct().getPrice();
-            double amount= (double) ListcartItems.get(i).getMount();
-            total += price*amount;
-        }
-
+        double total = 0;
+        if (ListcartItems!=null)
+            for (int i = 0; i < ListcartItems.size(); i++) {
+                double price = ListcartItems.get(i).getProduct().getPrice();
+                double amount = (double) ListcartItems.get(i).getMount();
+                total += price * amount;
+            }
         return total;
     }
 

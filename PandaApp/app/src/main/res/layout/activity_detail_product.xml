@@ -18,49 +18,35 @@
             android:layout_above="@+id/detail_product_footer"
             android:orientation="vertical">
 
-            <RelativeLayout
+            <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/dimen_0dp"
-                android:layout_weight="6">
+                android:layout_height="match_parent">
 
-                <ImageView
-                    android:id="@+id/Image_Detail"
+                <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:src="@drawable/detail_img" />
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dimen_20dp">
 
-                <LinearLayout
-                    android:layout_width="@dimen/dimen_40dp"
-                    android:layout_height="@dimen/dimen_25dp"
-                    android:layout_alignParentEnd="true"
-                    android:layout_alignParentBottom="true"
-                    android:layout_marginRight="@dimen/dimen_15dp"
-                    android:layout_marginBottom="@dimen/dimen_35dp"
-                    android:background="@drawable/botron_10dp">
+                    <ImageView
+
+                        android:id="@+id/Image_Detail"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:src="@drawable/detail_img" />
 
                     <TextView
+                        android:id="@+id/textviewSTT_DetailProduct"
+                        android:layout_marginBottom="@dimen/dimen_10dp"
+                        android:textSize="@dimen/font_20sp"
+                        android:textColor="@color/color_pink2"
+                        android:layout_centerHorizontal="true"
+                        android:layout_alignParentBottom="true"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:gravity="center|left"
-                        android:paddingLeft="@dimen/dimen_5dp"
-                        android:text="1"
-                        android:textSize="@dimen/font_16sp" />
+                        android:text="0/0" />
+                </RelativeLayout>
+            </androidx.cardview.widget.CardView>
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:gravity="center|left"
-                        android:text="/"
-                        android:textSize="@dimen/font_16sp" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:gravity="center|left"
-                        android:text="6"
-                        android:textSize="@dimen/font_16sp" />
-                </LinearLayout>
-            </RelativeLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -197,7 +183,7 @@
         </LinearLayout>
 
         <Button
-            android:id="@+id/detail_product_btn_mua"
+            android:id="@+id/btn_buy_ProductDetail"
             android:layout_width="@dimen/dimen_0dp"
             android:layout_height="match_parent"
             android:layout_marginLeft="@dimen/dimen_25dp"
@@ -205,6 +191,17 @@
             android:background="@drawable/botron_button_pink"
             android:text="Mua ngay"
             android:textColor="@color/color_white" />
+
+        <Button
+            android:id="@+id/btnEdit_ProductDetail"
+            android:layout_width="@dimen/dimen_0dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="@dimen/dimen_25dp"
+            android:layout_weight="3"
+            android:background="@drawable/botron_button_pink"
+            android:text="Sửa sản phẩm"
+            android:textColor="@color/color_white"
+            android:visibility="gone" />
 
         <Button
             android:id="@+id/btnAddCart_Detail"
@@ -253,5 +250,10 @@
             android:padding="@dimen/dimen_5dp"
             android:src="@drawable/favorite" />
     </RelativeLayout>
+
+    <FrameLayout
+        android:id="@+id/Frame_ShowImage"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"></FrameLayout>
 
 </RelativeLayout>

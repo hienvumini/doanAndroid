@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -30,6 +31,7 @@ public class CartActivity extends AppCompatActivity {
     TextView textViewMinussoMount ;
     TextView textViewAddsoMoutt ;
     TextView textViewDeleteProduct ;
+    ImageView imageView_back_Cart;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,27 +39,14 @@ public class CartActivity extends AppCompatActivity {
         setContentView(R.layout.activity_cart);
         init();
         cart_total.setText(String.valueOf(globalApplication.updatetotal()));
-        if (globalApplication.ListcartItems != null) {
-            cart_button.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Intent intent = new Intent(CartActivity.this, PaymentActivity.class);
-                    startActivity(intent);
-                }
-            });
-        }else {
-            Toast.makeText(globalApplication, "Giỏ hàng trống", Toast.LENGTH_SHORT).show();
-
-        }
-
+        onListener();
     }
 
 
 
 
-
-
     private void init() {
+        imageView_back_Cart=(ImageView) findViewById(R.id.img_back_Cart);
         textViewMinussoMount = (TextView)findViewById(R.id.textviewMinusProduct_Cart);
         textViewAddsoMoutt = (TextView) findViewById(R.id.textviewAddProduct_Cart);
         textViewDeleteProduct = (TextView) findViewById(R.id.textviewDelteProductCart);
@@ -75,6 +64,28 @@ public class CartActivity extends AppCompatActivity {
             Toast.makeText(globalApplication, "Giỏ hàng trống", Toast.LENGTH_SHORT).show();
 
         }
+
+    }
+    private void onListener() {
+        if (globalApplication.ListcartItems != null) {
+            cart_button.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(CartActivity.this, PaymentActivity.class);
+                    startActivity(intent);
+                }
+            });
+        }else {
+            Toast.makeText(globalApplication, "Giỏ hàng trống", Toast.LENGTH_SHORT).show();
+
+        }
+
+        imageView_back_Cart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
 
     }
 }

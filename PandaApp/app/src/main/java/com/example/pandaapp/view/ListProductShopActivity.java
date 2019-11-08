@@ -6,6 +6,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.example.pandaapp.Models.Product;
@@ -29,6 +31,7 @@ public class ListProductShopActivity extends AppCompatActivity {
     AdapterProduct adapterProduct;
     int idshop;
     GlobalApplication globalApplication;
+    ImageView imageViewcatagory_back;
 
 
     @Override
@@ -37,10 +40,12 @@ public class ListProductShopActivity extends AppCompatActivity {
         setContentView(R.layout.activity_list_product_shop);
         init();
         getProductShop();
+        onClickListener();
     }
 
 
     private void init() {
+        imageViewcatagory_back=(ImageView) findViewById(R.id.catagory_back_ProductShop);
         recyclerViewListProduct = (RecyclerView) findViewById(R.id.recycleview_ShopProduct);
         listProduct = new ArrayList<>();
         adapterProduct = new AdapterProduct(this, R.id.recycleview_ShopProduct, listProduct);
@@ -77,6 +82,15 @@ public class ListProductShopActivity extends AppCompatActivity {
                 }
             });
 
+
+    }
+    public void onClickListener(){
+        imageViewcatagory_back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
 
     }
 }

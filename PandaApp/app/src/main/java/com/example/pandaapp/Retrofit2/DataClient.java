@@ -31,6 +31,18 @@ public interface DataClient {
                                @Field("discount") double giamgia
     );
 
+
+    @FormUrlEncoded
+    @POST("UpdateProduct.php")
+    Call<String> UpdateProduct (@Field("idcategory") int category,
+                               @Field("productId") int productId,
+                               @Field("name") String tensanpham,
+                               @Field("price") double gia,
+                               @Field("detail") String mota,
+                               @Field("discount") double giamgia
+    );
+
+
     @FormUrlEncoded
     @POST("getallProductCategory.php")
     Call<ArrayList<Product>> getProductCategory(@Field("idcategory") int idcategory);
@@ -81,4 +93,12 @@ public interface DataClient {
                                  @Field("txtemail") String txtemail,
                                  @Field("DateOfBirth") String DateOfBirth,
                                  @Field("shopName") String shopName);
+
+    @FormUrlEncoded
+    @POST("DeleteFileOnServer.php")
+    Call<String> DeleteFileonServer(@Field("pathFile") String LinkFile);
+
+    @FormUrlEncoded
+    @POST("getProduct.php")
+    Call<Product> getProduct(@Field("productId") int productId);
 }
