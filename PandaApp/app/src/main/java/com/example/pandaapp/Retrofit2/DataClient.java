@@ -100,5 +100,5 @@ public interface DataClient {
 
     @FormUrlEncoded
     @POST("getProduct.php")
-    Call<Product> getProduct(@Field("productId") int productId);
+    Call<ArrayList<Product>> getProduct(@Field("productId") int productId);
 }

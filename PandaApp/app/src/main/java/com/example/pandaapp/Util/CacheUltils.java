@@ -55,26 +55,27 @@ public class CacheUltils {
         }
     }
 
-    public int RefreshProduct(int idproduct) {
-        DataClient getProductCategory = APIUltils.getData();
-        Call<Product> productCall = getProductCategory.getProduct(idproduct);
-        productCall.enqueue(new Callback<Product>() {
+    public void RefreshProduct(int idproduct) {
+        DataClient getProduct = APIUltils.getData();
+        Call<ArrayList<Product>> productCall = getProduct.getProduct(idproduct);
+        productCall.enqueue(new Callback<ArrayList<Product>>() {
             @Override
-            public void onResponse(Call<Product> call, Response<Product> response) {
+            public void onResponse(Call<ArrayList<Product>> call, Response<ArrayList<Product>> response) {
+
                 if (globalApplication == null) {
                     globalApplication = (GlobalApplication) mctx.getApplicationContext();
                 }
-                globalApplication.product = response.body();
-                System.out.println("000"+response.body().toString());
+                globalApplication.product = response.body().get(0);
+                Log.d("AAAA1", "onResponse: " + response.body());
+
             }
 
             @Override
-            public void onFailure(Call<Product> call, Throwable t) {
+            public void onFailure(Call<ArrayList<Product>> call, Throwable t) {
+                System.out.println("Loi " + t.toString());
 
             }
         });
-
-        return 1;
     }
 
 }

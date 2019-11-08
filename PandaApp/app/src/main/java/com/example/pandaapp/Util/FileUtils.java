@@ -1,5 +1,6 @@
 package com.example.pandaapp.Util;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
@@ -10,6 +11,7 @@ import android.widget.Toast;
 
 import com.example.pandaapp.Retrofit2.APIUltils;
 import com.example.pandaapp.Retrofit2.DataClient;
+import com.example.pandaapp.view.DetailActivity;
 import com.example.pandaapp.view.ListProductShopActivity;
 
 import java.io.File;
@@ -84,9 +86,12 @@ public class FileUtils {
                             Toast.makeText(context, response.body(), Toast.LENGTH_SHORT).show();
                             if (response.body().contains("Success")) {
                                 Toast.makeText(context, "Chỉnh sửa sản phẩm thành công", Toast.LENGTH_SHORT).show();
-                                Intent intent = new Intent(context, ListProductShopActivity.class);
+                                CacheUltils cacheUltils=new CacheUltils(context);
+                                cacheUltils.RefreshProduct(idProduct);
+                                Intent intent = new Intent(context, DetailActivity.class);
                                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                                 context.startActivity(intent);
+                                (new Activity()).finish();
 
                             }
 

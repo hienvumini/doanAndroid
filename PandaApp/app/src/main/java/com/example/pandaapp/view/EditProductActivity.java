@@ -72,8 +72,6 @@ public class EditProductActivity extends AppCompatActivity {
     }
 
 
-
-
     private void init() {
 
         globalApplication = (GlobalApplication) getApplicationContext();
@@ -199,17 +197,10 @@ public class EditProductActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 UpdateProduct();
-                CacheUltils cacheUltils=new CacheUltils(getApplicationContext());
-                if (cacheUltils.RefreshProduct(product.getProductId()) == 1) {
-                    Intent intent=new Intent(getApplicationContext(),DetailActivity.class);
-                    startActivity(intent);
-                }
-
-
-
-
-
-
+                CacheUltils cacheUltils = new CacheUltils(getApplicationContext());
+                cacheUltils.RefreshProduct(product.getProductId());
+                Intent intent = new Intent(getApplicationContext(), DetailActivity.class);
+                startActivity(intent);
 
 
             }
