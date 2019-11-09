@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -23,7 +24,7 @@ public class AdapterCartItem extends ArrayAdapter {
     Context mctx;
     int layout;
     List<CartItem> cartItemList;
-
+    CartItemListerner listener;
     public AdapterCartItem( Context context, int resource,  List<CartItem> object) {
         super(context, resource, object);
         this.mctx = context;
@@ -31,6 +32,10 @@ public class AdapterCartItem extends ArrayAdapter {
         this.cartItemList = object;
     }
 
+    public void setListener(CartItemListerner listener)
+    {
+        this.listener = listener;
+    }
 
     @Override
     public View getView(final int position, @Nullable View convertView, @NonNull ViewGroup parent) {
@@ -46,23 +51,27 @@ public class AdapterCartItem extends ArrayAdapter {
         TextView textViewMinussoMount = (TextView) view.findViewById(R.id.textviewMinusProduct_Cart);
         TextView textViewAddsoMoutt = (TextView) view.findViewById(R.id.textviewAddProduct_Cart);
         TextView textViewDeleteProduct = (TextView) view.findViewById(R.id.textviewDelteProductCart);
+        ImageView imgDeleteItem = (ImageView) view.findViewById(R.id.item_cart_delete);
 
         textViewAddsoMoutt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                cartItemList.get(position).setMount(cartItemList.get(position).getMount()+1);
-                textViewsoMount.setText(cartItemList.get(position).getMount()+"");
+                listener.OnClickAddAmount(position);
             }
         });
-        textViewMinussoMount.setOnClickListener(new View.OnClickListener() {
+       textViewMinussoMount.setOnClickListener(new View.OnClickListener() {
+           @Override
+           public void onClick(View v) {
+               listener.OnClickMinusAmount(position);
+           }
+       });
+        imgDeleteItem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(cartItemList.get(position).getMount()>1)
-                {
-                        cartItemList.get(position).setMount(cartItemList.get(position).getMount() - 1);
-                        textViewsoMount.setText(cartItemList.get(position).getMount() + "");
-                    }}
+                listener.OnClickRemoveAmount(position);
+            }
         });
+
 
         LoadImage.getImageInServer(mctx,cartItemList.get(position).getProduct().getImages().get(0),imageViewProduct);
         textViewName.setText(cartItemList.get(position).getProduct().getName());
@@ -70,5 +79,12 @@ public class AdapterCartItem extends ArrayAdapter {
         textViewPrice.setText((cartItemList.get(position).getProduct().getPrice()+"đ"));
         textViewsoMount.setText(cartItemList.get(position).getMount()+"");
         return view;
+    }
+
+    public  interface  CartItemListerner
+    {
+        public void OnClickAddAmount(int position);
+        public void OnClickMinusAmount(int position);
+        public void OnClickRemoveAmount(int position);
     }
 }

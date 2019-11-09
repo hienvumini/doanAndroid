@@ -20,7 +20,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class CartActivity extends AppCompatActivity {
+public class CartActivity extends AppCompatActivity  {
     ListView listViewCart;
 
     AdapterCartItem adapterCartItem;
@@ -38,8 +38,8 @@ public class CartActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cart);
         init();
-        cart_total.setText(String.valueOf(globalApplication.updatetotal()));
         onListener();
+        cart_total.setText(String.valueOf(globalApplication.updatetotal()));;
     }
 
 
@@ -67,6 +67,7 @@ public class CartActivity extends AppCompatActivity {
 
     }
     private void onListener() {
+
         if (globalApplication.ListcartItems != null) {
             cart_button.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -75,10 +76,39 @@ public class CartActivity extends AppCompatActivity {
                     startActivity(intent);
                 }
             });
+
+            adapterCartItem.setListener(new AdapterCartItem.CartItemListerner() {
+                @Override
+                public void OnClickAddAmount(int position) {
+                    LiCartItemList.get(position).setMount(LiCartItemList.get(position).getMount() + 1);
+                    adapterCartItem.notifyDataSetChanged();
+                    listViewCart.setAdapter(adapterCartItem);
+                }
+
+                @Override
+                public void OnClickMinusAmount(int position) {
+                    if( LiCartItemList.get(position).getMount()>1)
+                    {
+                        LiCartItemList.get(position).setMount(LiCartItemList.get(position).getMount() - 1);
+                        adapterCartItem.notifyDataSetChanged();
+                        listViewCart.setAdapter(adapterCartItem);
+                    }
+
+                }
+
+                @Override
+                public void OnClickRemoveAmount(int position) {
+                    LiCartItemList.remove(position);
+                    adapterCartItem.notifyDataSetChanged();
+                    listViewCart.setAdapter(adapterCartItem);
+                }
+            });
+
         }else {
             Toast.makeText(globalApplication, "Giỏ hàng trống", Toast.LENGTH_SHORT).show();
 
         }
+
 
         imageView_back_Cart.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -88,4 +118,6 @@ public class CartActivity extends AppCompatActivity {
         });
 
     }
+
+
 }
