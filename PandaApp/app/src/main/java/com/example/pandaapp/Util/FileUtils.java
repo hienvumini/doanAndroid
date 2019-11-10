@@ -42,7 +42,7 @@ public class FileUtils {
         return path;
     }
 
-    public static   void DeleteFileonServer(String url) {
+    public static void DeleteFileonServer(String url) {
 
         DataClient dataClient = APIUltils.getData();
         Call<String> stringCall = dataClient.DeleteFileonServer(url);
@@ -61,9 +61,9 @@ public class FileUtils {
 
     }
 
-    public static void UploadImageProduct (final Context context, Uri uri, final int idProduct) {
+    public static void UploadImageProduct(final Context context, Uri uri, final int idProduct) {
         File file = null;
-            String realpath = FileUtils.getRealPathFromURI(uri, context);
+        String realpath = FileUtils.getRealPathFromURI(uri, context);
 
         if (uri != null) {
             file = new File(FileUtils.getRealPathFromURI(uri, context));
@@ -86,12 +86,8 @@ public class FileUtils {
                             Toast.makeText(context, response.body(), Toast.LENGTH_SHORT).show();
                             if (response.body().contains("Success")) {
                                 Toast.makeText(context, "Chỉnh sửa sản phẩm thành công", Toast.LENGTH_SHORT).show();
-                                CacheUltils cacheUltils=new CacheUltils(context);
+                                CacheUltils cacheUltils = new CacheUltils(context);
                                 cacheUltils.RefreshProduct(idProduct);
-                                Intent intent = new Intent(context, DetailActivity.class);
-                                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                                context.startActivity(intent);
-                                (new Activity()).finish();
 
                             }
 
@@ -113,7 +109,7 @@ public class FileUtils {
                 }
             });
         }
-        }
+    }
 
     public static String convertUritoImage(String s) {
 

@@ -46,6 +46,8 @@ public class DetailActivity extends AppCompatActivity {
             product = globalApplication.product;
             account = globalApplication.account;
         }
+        CacheUltils cacheUltils = new CacheUltils(getApplicationContext());
+        cacheUltils.RefreshProduct(product.getProductId());
         init();
         setDataSP(product);
         Listener();
@@ -106,7 +108,9 @@ public class DetailActivity extends AppCompatActivity {
         imageViewCart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ChangeActivity.toActivity(getApplicationContext(), CartActivity.class);
+               ChangeActivity.toActivity(DetailActivity.this, CartActivity.class);
+                //Intent intent = new Intent(DetailActivity.this,CartActivity.class);
+               // startActivity(intent);
             }
         });
         btnAddCart.setOnClickListener(new View.OnClickListener() {

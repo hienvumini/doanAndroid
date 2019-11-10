@@ -14,13 +14,14 @@ import android.widget.Toast;
 import com.example.pandaapp.Models.CartItem;
 import com.example.pandaapp.R;
 import com.example.pandaapp.Util.GlobalApplication;
+import com.example.pandaapp.Util.OtherUltil;
 import com.example.pandaapp.adapter.AdapterCartItem;
 
 import java.util.ArrayList;
 import java.util.List;
 
 
-public class CartActivity extends AppCompatActivity  {
+public class CartActivity extends AppCompatActivity {
     ListView listViewCart;
 
     AdapterCartItem adapterCartItem;
@@ -28,9 +29,9 @@ public class CartActivity extends AppCompatActivity  {
     Button cart_button;
     TextView cart_total;
     GlobalApplication globalApplication;
-    TextView textViewMinussoMount ;
-    TextView textViewAddsoMoutt ;
-    TextView textViewDeleteProduct ;
+
+
+    TextView textViewDeleteProduct;
     ImageView imageView_back_Cart;
 
     @Override
@@ -39,33 +40,31 @@ public class CartActivity extends AppCompatActivity  {
         setContentView(R.layout.activity_cart);
         init();
         onListener();
-        cart_total.setText(String.valueOf(globalApplication.updatetotal()));;
+
+        ;
     }
 
 
-
-
     private void init() {
-        imageView_back_Cart=(ImageView) findViewById(R.id.img_back_Cart);
-        textViewMinussoMount = (TextView)findViewById(R.id.textviewMinusProduct_Cart);
-        textViewAddsoMoutt = (TextView) findViewById(R.id.textviewAddProduct_Cart);
+        imageView_back_Cart = (ImageView) findViewById(R.id.img_back_Cart);
         textViewDeleteProduct = (TextView) findViewById(R.id.textviewDelteProductCart);
 
         listViewCart = (ListView) findViewById(R.id.listviewProduct_Cart);
-        cart_button =(Button) findViewById(R.id.cart_button);
+        cart_button = (Button) findViewById(R.id.cart_button);
         cart_total = (TextView) findViewById(R.id.cart_total);
         LiCartItemList = new ArrayList<>();
-        globalApplication= (GlobalApplication) getApplicationContext();
+        globalApplication = (GlobalApplication) getApplicationContext();
         if (globalApplication.ListcartItems != null) {
             LiCartItemList = globalApplication.ListcartItems;
             adapterCartItem = new AdapterCartItem(getApplicationContext(), R.id.listviewProduct_Cart, LiCartItemList);
             listViewCart.setAdapter(adapterCartItem);
-        }else {
+        } else {
             Toast.makeText(globalApplication, "Giỏ hàng trống", Toast.LENGTH_SHORT).show();
 
         }
 
     }
+
     private void onListener() {
 
         if (globalApplication.ListcartItems != null) {
@@ -82,16 +81,17 @@ public class CartActivity extends AppCompatActivity  {
                 public void OnClickAddAmount(int position) {
                     LiCartItemList.get(position).setMount(LiCartItemList.get(position).getMount() + 1);
                     adapterCartItem.notifyDataSetChanged();
-                    listViewCart.setAdapter(adapterCartItem);
+                   // listViewCart.setAdapter(adapterCartItem);
+                    caculatorPriceTotal();
                 }
 
                 @Override
                 public void OnClickMinusAmount(int position) {
-                    if( LiCartItemList.get(position).getMount()>1)
-                    {
+                    if (LiCartItemList.get(position).getMount() > 1) {
                         LiCartItemList.get(position).setMount(LiCartItemList.get(position).getMount() - 1);
                         adapterCartItem.notifyDataSetChanged();
-                        listViewCart.setAdapter(adapterCartItem);
+                       // listViewCart.setAdapter(adapterCartItem);
+                        caculatorPriceTotal();
                     }
 
                 }
@@ -101,10 +101,11 @@ public class CartActivity extends AppCompatActivity  {
                     LiCartItemList.remove(position);
                     adapterCartItem.notifyDataSetChanged();
                     listViewCart.setAdapter(adapterCartItem);
+                    caculatorPriceTotal();
                 }
             });
 
-        }else {
+        } else {
             Toast.makeText(globalApplication, "Giỏ hàng trống", Toast.LENGTH_SHORT).show();
 
         }
@@ -120,4 +121,8 @@ public class CartActivity extends AppCompatActivity  {
     }
 
 
+    public void caculatorPriceTotal() {
+
+        cart_total.setText(OtherUltil.fomattien.format(globalApplication.updatetotal()) +"đ");
+    }
 }

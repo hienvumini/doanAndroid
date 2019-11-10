@@ -40,18 +40,20 @@ public class AdapterCartItem extends ArrayAdapter {
     @Override
     public View getView(final int position, @Nullable View convertView, @NonNull ViewGroup parent) {
         View view = convertView;
+
         if (view == null) {
-            view = LayoutInflater.from(mctx).inflate(R.layout.item_product_listview, parent, false);
+            view = LayoutInflater.from(mctx).inflate(R.layout.item_cart, parent, false);
 
         }
-        ImageView imageViewProduct = (ImageView) view.findViewById(R.id.imageanhSP_Cart);
-        TextView textViewName = (TextView) view.findViewById(R.id.textviewTenSP_Cart);
-        TextView textViewPrice = (TextView) view.findViewById(R.id.textviewGiaSP_Cart);
-         final TextView textViewsoMount = (TextView) view.findViewById(R.id.textviewMountProduct_Cart);
-        TextView textViewMinussoMount = (TextView) view.findViewById(R.id.textviewMinusProduct_Cart);
-        TextView textViewAddsoMoutt = (TextView) view.findViewById(R.id.textviewAddProduct_Cart);
-        TextView textViewDeleteProduct = (TextView) view.findViewById(R.id.textviewDelteProductCart);
-        ImageView imgDeleteItem = (ImageView) view.findViewById(R.id.item_cart_delete);
+        ImageView imageViewProduct = (ImageView) view.findViewById(R.id.img_Anh_ItemCart);
+        TextView textViewName = (TextView) view.findViewById(R.id.tv_ten_ItemCart);
+        TextView textViewShop = (TextView) view.findViewById(R.id.tv_tenShop_ItemCart);
+        TextView textViewPrice = (TextView) view.findViewById(R.id.tv_gia_SP_ItemCart);
+        TextView textViewsoMount = (TextView) view.findViewById(R.id.tv_soluong_ItemCart);
+        TextView textViewMinussoMount = (TextView) view.findViewById(R.id.tv_tru_ItemCart);
+        TextView textViewAddsoMoutt = (TextView) view.findViewById(R.id.tv_cong_ItemCart);
+
+        ImageView imgDeleteItem = (ImageView) view.findViewById(R.id.tv_delete_ItemCart);
 
         textViewAddsoMoutt.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -76,7 +78,8 @@ public class AdapterCartItem extends ArrayAdapter {
         LoadImage.getImageInServer(mctx,cartItemList.get(position).getProduct().getImages().get(0),imageViewProduct);
         textViewName.setText(cartItemList.get(position).getProduct().getName());
         DecimalFormat decimalFormat=new DecimalFormat("###,###.###");
-        textViewPrice.setText((cartItemList.get(position).getProduct().getPrice()+"đ"));
+
+        textViewPrice.setText((decimalFormat.format(cartItemList.get(position).getProduct().getPrice()))+"đ");
         textViewsoMount.setText(cartItemList.get(position).getMount()+"");
         return view;
     }
@@ -86,5 +89,6 @@ public class AdapterCartItem extends ArrayAdapter {
         public void OnClickAddAmount(int position);
         public void OnClickMinusAmount(int position);
         public void OnClickRemoveAmount(int position);
+
     }
 }

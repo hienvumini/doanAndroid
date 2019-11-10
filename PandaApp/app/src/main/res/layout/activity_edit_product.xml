@@ -94,15 +94,16 @@
                     android:layout_marginLeft="@dimen/dimen_20dp"
                     android:layout_marginTop="@dimen/dimen_20dp"
                     android:src="@drawable/addimage" />
-                <TextView
-                    android:textColor="@color/color_red_text"
-                    android:layout_marginBottom="@dimen/dimen_10dp"
-                    android:layout_marginTop="@dimen/dimen_10dp"
-                    android:layout_marginLeft="@dimen/dimen_20dp"
-                    android:id="@+id/textviewNoti_setImageProduct_EditProduct"
 
+                <TextView
+                    android:id="@+id/textviewNoti_setImageProduct_EditProduct"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/dimen_20dp"
+                    android:layout_marginTop="@dimen/dimen_10dp"
+
+                    android:layout_marginBottom="@dimen/dimen_10dp"
+                    android:textColor="@color/color_red_text" />
 
             </LinearLayout>
 
@@ -265,6 +266,15 @@
         </LinearLayout>
 
     </ScrollView>
+
+
+
+        <ProgressBar
+            android:visibility="invisible"
+            android:id="@+id/process_EditProduct"
+            android:layout_centerInParent="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
 
 
 </RelativeLayout>

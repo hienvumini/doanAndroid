@@ -66,16 +66,14 @@ public class CacheUltils {
                     globalApplication = (GlobalApplication) mctx.getApplicationContext();
                 }
                 globalApplication.product = response.body().get(0);
-                Log.d("AAAA1", "onResponse: " + response.body());
-
             }
 
             @Override
             public void onFailure(Call<ArrayList<Product>> call, Throwable t) {
-                System.out.println("Loi " + t.toString());
 
             }
         });
+
     }
 
 }

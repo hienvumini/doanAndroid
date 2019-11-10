@@ -29,6 +29,7 @@ public class GlobalApplication extends Application {
                 double amount = (double) ListcartItems.get(i).getMount();
                 total += price * amount;
             }
+
         return total;
     }
 
