@@ -6,6 +6,7 @@ import android.content.Context;
 import com.example.pandaapp.Models.Account;
 import com.example.pandaapp.Models.CartItem;
 import com.example.pandaapp.Models.Category;
+import com.example.pandaapp.Models.Order;
 import com.example.pandaapp.Models.Product;
 
 import java.util.ArrayList;
@@ -19,6 +20,7 @@ public class GlobalApplication extends Application {
     public ArrayList<Product> listProduct;
     public List<CartItem> ListcartItems;
     public Category category;
+    public Order order;
 
 
     public double updatetotal() {
@@ -29,6 +31,7 @@ public class GlobalApplication extends Application {
                 double amount = (double) ListcartItems.get(i).getMount();
                 total += price * amount;
             }
+
         return total;
     }
 

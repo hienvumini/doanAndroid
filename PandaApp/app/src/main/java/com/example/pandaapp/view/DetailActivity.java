@@ -22,6 +22,7 @@ import com.example.pandaapp.Util.ChangeActivity;
 import com.example.pandaapp.Util.FragmentUtils;
 import com.example.pandaapp.Util.GlobalApplication;
 import com.example.pandaapp.Util.LoadImage;
+import com.example.pandaapp.Util.OtherUltil;
 import com.example.pandaapp.fragment.FragmentShowImage;
 
 import java.util.ArrayList;
@@ -46,6 +47,8 @@ public class DetailActivity extends AppCompatActivity {
             product = globalApplication.product;
             account = globalApplication.account;
         }
+        CacheUltils cacheUltils = new CacheUltils(getApplicationContext());
+        cacheUltils.RefreshProduct(product.getProductId());
         init();
         setDataSP(product);
         Listener();
@@ -89,7 +92,7 @@ public class DetailActivity extends AppCompatActivity {
         }
 
         textViewTen.setText(product.getName());
-        textViewgia.setText(product.getPrice() + "đ");
+        textViewgia.setText(OtherUltil.fomattien.format(product.getPrice()) + "đ");
         textViewmota.setText(product.getDis());
         textviewSTTImage.setText(1+"/"+product.getImages().size());
 
@@ -106,7 +109,9 @@ public class DetailActivity extends AppCompatActivity {
         imageViewCart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ChangeActivity.toActivity(getApplicationContext(), CartActivity.class);
+               ChangeActivity.toActivity(DetailActivity.this, CartActivity.class);
+                //Intent intent = new Intent(DetailActivity.this,CartActivity.class);
+               // startActivity(intent);
             }
         });
         btnAddCart.setOnClickListener(new View.OnClickListener() {

@@ -13,6 +13,7 @@ import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -57,23 +58,24 @@ public class EditProductActivity extends AppCompatActivity {
     ArrayAdapter adapterspinner;
     int idproductadd;
     TextView textViewNotifi;
+    ProgressBar progressBar;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_product);
-        FileUtils fileUtils = new FileUtils();
-
-
         init();
         setbackProduct();
         onListener();
+
+
+
     }
 
 
     private void init() {
-
+        progressBar = (ProgressBar) findViewById(R.id.process_EditProduct);
         globalApplication = (GlobalApplication) getApplicationContext();
         product = globalApplication.product;
         btnback = (ImageView) findViewById(R.id.img_back_black_EditProduct);
@@ -197,8 +199,8 @@ public class EditProductActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 UpdateProduct();
-                CacheUltils cacheUltils = new CacheUltils(getApplicationContext());
-                cacheUltils.RefreshProduct(product.getProductId());
+
+
                 Intent intent = new Intent(getApplicationContext(), DetailActivity.class);
                 startActivity(intent);
 
@@ -268,6 +270,8 @@ public class EditProductActivity extends AppCompatActivity {
             Toast.makeText(this, "Vui lòng điền đầy đủ thông tin sản phẩm", Toast.LENGTH_SHORT).show();
         } else {
             getdataFromUser();
+
+
             System.out.println(product.toString());
             DataClient DataclientUpdate = APIUltils.getData();
             Call<String> stringCall = DataclientUpdate.UpdateProduct(product.getIdcategory(), product.getProductId(), product.getName(), product.getPrice(), product.getDis(), product.getDiscount());
@@ -276,11 +280,23 @@ public class EditProductActivity extends AppCompatActivity {
                 public void onResponse(Call<String> call, Response<String> response) {
                     System.out.println("A123" + response.body());
 
-
                     for (int i = 0; i < imageThem.size(); i++) {
                         System.out.println(FileUtils.getRealPathFromURI(listUriImage.get(i), getApplicationContext()));
                         FileUtils.UploadImageProduct(getApplicationContext(), imageThem.get(i), product.getProductId());
+
                     }
+                    for (int i = 0; i < imageNeedDelete.size(); i++) {
+                        System.out.println("CONG" + imageNeedDelete.get(i));
+                        FileUtils.DeleteFileonServer(FileUtils.convertUritoImage(imageNeedDelete.get(i)));
+                    }
+                    if (response.body().contains("Success")) {
+                        CacheUltils cacheUltils = new CacheUltils(getApplicationContext());
+                        cacheUltils.RefreshProduct(idproductadd);
+                        Intent intent = new Intent(getApplicationContext(), DetailActivity.class);
+                        startActivity(intent);
+                        finish();
+                    }
+
 
                 }
 
@@ -290,11 +306,10 @@ public class EditProductActivity extends AppCompatActivity {
 
                 }
             });
-            for (int i = 0; i < imageNeedDelete.size(); i++) {
-                System.out.println("CONG" + imageNeedDelete.get(i));
-                FileUtils.DeleteFileonServer(FileUtils.convertUritoImage(imageNeedDelete.get(i)));
-            }
+
+
         }
+
     }
 
 }

@@ -37,7 +37,7 @@ import com.google.android.material.bottomnavigation.LabelVisibilityMode;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity implements AdapterProduct.AdapterItemClickListener {
+public class MainActivity extends AppCompatActivity  {
 
     Account account0 = new Account();
     BottomNavigationView nav_bottom_MainActivity;
@@ -105,10 +105,7 @@ public class MainActivity extends AppCompatActivity implements AdapterProduct.Ad
         }
     };
 
-    @Override
-    public void onClick(View view, int position, boolean isLongClick) {
 
-    }
 
     public void changeNavigationBottomto(int sttFragment) {
         nav_bottom_MainActivity.setSelectedItemId(R.id.menu_nav_home);

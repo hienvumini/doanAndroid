@@ -24,6 +24,7 @@ import com.example.pandaapp.Models.Product;
 import com.example.pandaapp.R;
 import com.example.pandaapp.Retrofit2.APIUltils;
 import com.example.pandaapp.Retrofit2.DataClient;
+import com.example.pandaapp.Util.CacheUltils;
 import com.example.pandaapp.Util.FileUtils;
 import com.example.pandaapp.Util.GlobalApplication;
 import com.example.pandaapp.adapter.AdapterAddImage;
@@ -38,7 +39,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class AddProductActivity extends AppCompatActivity{
+public class AddProductActivity extends AppCompatActivity {
 
     ImageView addmoreimage_AddProduct, img_back_AddProduct;
     int REQUEST_CODE_ADDMOREIMAGES = 123;
@@ -101,7 +102,7 @@ public class AddProductActivity extends AppCompatActivity{
         adapterAddImage.setListener(new AdapterAddImage.IcallbackAddProductActivity() {
             @Override
             public void removeImage(int position) {
-                Toast.makeText(getApplicationContext(), "Xoa anh thu "+position, Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "Xoa anh thu " + position, Toast.LENGTH_SHORT).show();
                 listUriImage.remove(position);
                 adapterAddImage.notifyDataSetChanged();
             }
@@ -164,9 +165,9 @@ public class AddProductActivity extends AppCompatActivity{
 
         for (int i = 0; i < listUriImage.size(); i++) {
             Uri uri = listUriImage.get(i);
-            realpath = FileUtils.getRealPathFromURI(uri,getApplicationContext());
+            realpath = FileUtils.getRealPathFromURI(uri, getApplicationContext());
 
-            file = new File(FileUtils.getRealPathFromURI(uri,getApplicationContext()));
+            file = new File(FileUtils.getRealPathFromURI(uri, getApplicationContext()));
             String file_path = file.getAbsolutePath();
             String[] mangtenfile = file_path.split("\\.");
             file_path = mangtenfile[0] + System.currentTimeMillis() + "." + mangtenfile[1];
@@ -185,7 +186,9 @@ public class AddProductActivity extends AppCompatActivity{
                         public void onResponse(Call<String> call, Response<String> response) {
                             Toast.makeText(AddProductActivity.this, response.body(), Toast.LENGTH_SHORT).show();
                             if (response.body().contains("Success")) {
-                                Intent intent = new Intent(getApplicationContext(), ListProductShopActivity.class);
+                                CacheUltils cacheUltils = new CacheUltils(getApplicationContext());
+                                cacheUltils.RefreshProduct(idproductadd);
+                                Intent intent = new Intent(getApplicationContext(), DetailActivity.class);
                                 startActivity(intent);
                                 finish();
                             }
@@ -224,7 +227,7 @@ public class AddProductActivity extends AppCompatActivity{
                 for (int i = 0; i < count; i++) {
                     Uri uri = data.getClipData().getItemAt(i).getUri();
                     listUriImage.add(uri);
-                    realpath = FileUtils.getRealPathFromURI(uri,getApplicationContext());
+                    realpath = FileUtils.getRealPathFromURI(uri, getApplicationContext());
 
 
                 }
@@ -306,7 +309,6 @@ public class AddProductActivity extends AppCompatActivity{
 
         }
     }
-
 
 
 }

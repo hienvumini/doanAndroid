@@ -2,6 +2,7 @@ package com.example.pandaapp.Retrofit2;
 
 import com.example.pandaapp.Models.Account;
 import com.example.pandaapp.Models.Category;
+import com.example.pandaapp.Models.Order;
 import com.example.pandaapp.Models.Product;
 
 import java.util.ArrayList;
@@ -66,7 +67,11 @@ public interface DataClient {
 
     @FormUrlEncoded
     @POST("getProductofShop.php")
-    Call<ArrayList<Product>> getProductShop(@Field("idshop") int idShop);
+    Call<ArrayList<Product>> getProductShop(@Field("idShop") int idShop);
+
+    @FormUrlEncoded
+    @POST("getOrderShop.php")
+    Call<ArrayList<Order>> getOrderShop(@Field("idShop") int idShop,@Field("statusId") int statusId);
 
     @FormUrlEncoded
     @POST("insertBill.php")

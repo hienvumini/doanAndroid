@@ -18,6 +18,7 @@ import android.widget.Toast;
 
 import com.example.pandaapp.Models.Account;
 import com.example.pandaapp.Util.CacheUltils;
+import com.example.pandaapp.Util.ChangeActivity;
 import com.example.pandaapp.Util.FragmentUtils;
 import com.example.pandaapp.view.AddProductActivity;
 import com.example.pandaapp.view.ListProductShopActivity;
@@ -25,12 +26,13 @@ import com.example.pandaapp.view.LoginActivity;
 import com.example.pandaapp.R;
 import com.example.pandaapp.Util.GlobalApplication;
 import com.example.pandaapp.view.MainActivity;
+import com.example.pandaapp.view.OrderManagerActivity;
 
 import java.io.File;
 
 
 public class FragmentShopProfile extends Fragment implements View.OnClickListener {
-    LinearLayout linearAddProduct, linearRevenue, linearProductList, linearOnWay, linearReceived, linearCancel, linearProfile;
+    LinearLayout linearAddProduct, linearRevenue, linearProductList, linearProcess, linearOnWay, linearReceived, linearCancel, linearProfile;
     Button btnLogoutShop;
     ImageView img_back_black;
     int REQUEST_CODE_ADDPRODUCT = 112;
@@ -46,6 +48,7 @@ public class FragmentShopProfile extends Fragment implements View.OnClickListene
     }
 
     private void listenerEvent(View view) {
+        linearProcess.setOnClickListener(this);
         linearOnWay.setOnClickListener(this);
         linearReceived.setOnClickListener(this);
         linearCancel.setOnClickListener(this);
@@ -61,15 +64,23 @@ public class FragmentShopProfile extends Fragment implements View.OnClickListene
 
     @Override
     public void onClick(View v) {
+
         switch (v.getId()) {
+            case R.id.layoutVeri_ProfileShop:
+                Toast.makeText(getActivity(), "on Processing", Toast.LENGTH_SHORT).show();
+                ChangeActivity.toActivity(getActivity(), OrderManagerActivity.class);
+                break;
             case R.id.layoutOnWay_ProfileShop:
                 Toast.makeText(getActivity(), "OnWay", Toast.LENGTH_SHORT).show();
+                ChangeActivity.toActivity(getActivity(), OrderManagerActivity.class);
                 break;
             case R.id.layoutReceived_ProfileShop:
                 Toast.makeText(getActivity(), "ReceiVed ", Toast.LENGTH_SHORT).show();
+                ChangeActivity.toActivity(getActivity(), OrderManagerActivity.class);
                 break;
             case R.id.layoutCancel_ProfileShop:
                 Toast.makeText(getActivity(), "Cancel", Toast.LENGTH_SHORT).show();
+                ChangeActivity.toActivity(getActivity(), OrderManagerActivity.class);
                 break;
             case R.id.layoutAddProduct_ProfileShop:
                 Toast.makeText(getActivity(), "Add Product", Toast.LENGTH_SHORT).show();
@@ -113,6 +124,7 @@ public class FragmentShopProfile extends Fragment implements View.OnClickListene
 
     private void init(View view) {
         linearAddProduct = (LinearLayout) view.findViewById(R.id.layoutAddProduct_ProfileShop);
+        linearProcess = (LinearLayout) view.findViewById(R.id.layoutVeri_ProfileShop);
         linearOnWay = (LinearLayout) view.findViewById(R.id.layoutOnWay_ProfileShop);
         linearReceived = (LinearLayout) view.findViewById(R.id.layoutReceived_ProfileShop);
         linearCancel = (LinearLayout) view.findViewById(R.id.layoutCancel_ProfileShop);

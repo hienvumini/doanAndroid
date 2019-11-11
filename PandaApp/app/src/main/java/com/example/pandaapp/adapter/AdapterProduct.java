@@ -19,6 +19,7 @@ import com.example.pandaapp.Models.Product;
 import com.example.pandaapp.R;
 import com.example.pandaapp.Util.GlobalApplication;
 import com.example.pandaapp.Util.LoadImage;
+import com.example.pandaapp.Util.OtherUltil;
 import com.example.pandaapp.view.DetailActivity;
 
 import java.util.List;
@@ -47,7 +48,7 @@ public class AdapterProduct extends RecyclerView.Adapter<AdapterProduct.ViewHold
     @Override
     public void onBindViewHolder(final ViewHolder holder, final int position) {
         holder.textviewTen.setText(listproduct.get(position).getName());
-        holder.textViewGia.setText(listproduct.get(position).getPrice() + "đ");
+        holder.textViewGia.setText(OtherUltil.fomattien.format(listproduct.get(position).getPrice()) + "đ");
         if (listproduct.get(position).getImages().size() != 0) {
             LoadImage.getImageInServer(mctx, listproduct.get(position).getImages().get(0), holder.imageView);
         } else {
@@ -101,7 +102,5 @@ public class AdapterProduct extends RecyclerView.Adapter<AdapterProduct.ViewHold
         }
     }
 
-    public interface AdapterItemClickListener {
-        public void onClick(View view, int position, boolean isLongClick);
-    }
+
 }

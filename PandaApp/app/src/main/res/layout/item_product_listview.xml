@@ -37,7 +37,7 @@
                 android:orientation="vertical">
 
                 <TextView
-                    android:id="@+id/textviewTenSP_Cart"
+                    android:id="@+id/tv_TenSP_Cart"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/dimen_10dp"
@@ -47,7 +47,7 @@
                     android:textStyle="bold" />
 
                 <TextView
-                    android:id="@+id/textviewGiaSP_Cart"
+                    android:id="@+id/tv_GiaSP_Cart"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/dimen_10dp"
