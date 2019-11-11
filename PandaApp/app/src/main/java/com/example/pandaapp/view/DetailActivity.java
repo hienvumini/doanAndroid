@@ -22,6 +22,7 @@ import com.example.pandaapp.Util.ChangeActivity;
 import com.example.pandaapp.Util.FragmentUtils;
 import com.example.pandaapp.Util.GlobalApplication;
 import com.example.pandaapp.Util.LoadImage;
+import com.example.pandaapp.Util.OtherUltil;
 import com.example.pandaapp.fragment.FragmentShowImage;
 
 import java.util.ArrayList;
@@ -91,7 +92,7 @@ public class DetailActivity extends AppCompatActivity {
         }
 
         textViewTen.setText(product.getName());
-        textViewgia.setText(product.getPrice() + "đ");
+        textViewgia.setText(OtherUltil.fomattien.format(product.getPrice()) + "đ");
         textViewmota.setText(product.getDis());
         textviewSTTImage.setText(1+"/"+product.getImages().size());
 

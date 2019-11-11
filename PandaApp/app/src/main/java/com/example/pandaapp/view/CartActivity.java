@@ -123,6 +123,6 @@ public class CartActivity extends AppCompatActivity {
 
     public void caculatorPriceTotal() {
 
-        cart_total.setText(OtherUltil.fomattien.format(globalApplication.updatetotal()) +"đ");
+        cart_total.setText(OtherUltil.fomattien.format(globalApplication.updatetotal()) );
     }
 }

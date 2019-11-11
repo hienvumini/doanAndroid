@@ -61,7 +61,7 @@
                     android:layout_height="@dimen/dimen_35dp"
                     android:text="-"
                     android:textSize="@dimen/font_26sp"
-
+                    android:textColor="@color/color_black"
                     android:gravity="center"/>
                 <TextView
                     android:id="@+id/tv_soluong_ItemCart"
@@ -76,7 +76,7 @@
                     android:layout_width="@dimen/dimen_35dp"
                     android:layout_height="@dimen/dimen_35dp"
                     android:text="+"
-
+                    android:textColor="@color/color_black"
                     android:textSize="@dimen/font_26sp"
                     android:gravity="center"/>
             </LinearLayout>

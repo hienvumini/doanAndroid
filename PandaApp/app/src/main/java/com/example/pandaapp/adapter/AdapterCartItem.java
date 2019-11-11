@@ -16,6 +16,7 @@ import com.example.pandaapp.Models.CartItem;
 import com.example.pandaapp.Models.Product;
 import com.example.pandaapp.R;
 import com.example.pandaapp.Util.LoadImage;
+import com.example.pandaapp.Util.OtherUltil;
 
 import java.text.DecimalFormat;
 import java.util.List;
@@ -77,9 +78,9 @@ public class AdapterCartItem extends ArrayAdapter {
 
         LoadImage.getImageInServer(mctx,cartItemList.get(position).getProduct().getImages().get(0),imageViewProduct);
         textViewName.setText(cartItemList.get(position).getProduct().getName());
-        DecimalFormat decimalFormat=new DecimalFormat("###,###.###");
 
-        textViewPrice.setText((decimalFormat.format(cartItemList.get(position).getProduct().getPrice()))+"đ");
+
+        textViewPrice.setText((OtherUltil.fomattien.format(cartItemList.get(position).getProduct().getPrice()))+"đ");
         textViewsoMount.setText(cartItemList.get(position).getMount()+"");
         return view;
     }
