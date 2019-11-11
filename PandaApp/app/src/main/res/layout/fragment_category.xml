@@ -26,7 +26,7 @@
                 android:weightSum="10">
 
                 <SearchView
-                    android:id="@+id/SearchView"
+                    android:id="@+id/tv_Search_Search"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/dimen_10dp"

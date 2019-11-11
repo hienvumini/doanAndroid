@@ -1,5 +1,6 @@
 package com.example.pandaapp.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -14,6 +15,7 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.SearchView;
+import android.widget.TextView;
 import android.widget.Toolbar;
 import android.widget.ViewFlipper;
 
@@ -26,6 +28,7 @@ import com.example.pandaapp.Models.Product;
 import com.example.pandaapp.R;
 import com.example.pandaapp.Util.ChangeActivity;
 import com.example.pandaapp.adapter.AdapterProduct;
+import com.example.pandaapp.view.SearchActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.squareup.picasso.Picasso;
 
@@ -40,7 +43,7 @@ import retrofit2.Response;
 public class FragmentMain extends Fragment {
     Toolbar toolbar;
     List<Product> ListProduct;
-    SearchView searchView;
+    TextView searchView;
     ArrayList<Product> listproduct;
     AdapterProduct mainAdapter;
     RecyclerView recyclerView;
@@ -67,7 +70,9 @@ public class FragmentMain extends Fragment {
         searchView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                FragmentUtils.openFragment(fragmentSearch, getActivity().getSupportFragmentManager(), R.id.ctNavigationbotton);
+
+                Intent intent=new Intent(getActivity(), SearchActivity.class);
+                startActivity(intent);
             }
         });
 
@@ -122,7 +127,7 @@ public class FragmentMain extends Fragment {
         viewFlipper = (ViewFlipper) view.findViewById(R.id.viewflipperquangcao);
         ActionViewflipper(view);
         imgmyCart = (ImageView) view.findViewById(R.id.imgcartMain);
-        searchView = (SearchView) view.findViewById(R.id.SearchView);
+        searchView = (TextView) view.findViewById(R.id.tv_Search_Search);
 
     }
 

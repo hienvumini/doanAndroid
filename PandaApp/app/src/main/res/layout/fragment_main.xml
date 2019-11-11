@@ -16,17 +16,21 @@
         android:orientation="horizontal"
         android:weightSum="10">
 
-        <SearchView
-
-            android:id="@+id/SearchView"
+        <TextView
+            android:id="@+id/tv_Search_Search"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/dimen_10dp"
             android:layout_weight="10"
             android:background="@drawable/shape_edittext"
             android:iconifiedByDefault="false"
-            android:inputType="none"
-            android:queryHint="Bạn tìm gì hôm nay..." />
+            android:paddingLeft="@dimen/dimen_20dp"
+            android:paddingTop="@dimen/dimen_5dp"
+            android:paddingBottom="@dimen/dimen_5dp"
+            android:text="Tìm kiếm"
+            android:textSize="@dimen/font_20sp"
+
+            />
 
         <ImageView
             android:id="@+id/imgcartMain"
