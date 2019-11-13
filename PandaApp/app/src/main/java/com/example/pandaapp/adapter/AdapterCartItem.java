@@ -75,8 +75,11 @@ public class AdapterCartItem extends ArrayAdapter {
             }
         });
 
+        if (cartItemList.get(position).getProduct().getImages().size()>0) {
+            LoadImage.getImageInServer(mctx,cartItemList.get(position).getProduct().getImages().get(0),imageViewProduct);
 
-        LoadImage.getImageInServer(mctx,cartItemList.get(position).getProduct().getImages().get(0),imageViewProduct);
+        }
+
         textViewName.setText(cartItemList.get(position).getProduct().getName());
 
 

@@ -7,6 +7,7 @@ import com.example.pandaapp.Models.Account;
 import com.example.pandaapp.Models.CartItem;
 import com.example.pandaapp.Models.Category;
 import com.example.pandaapp.Models.Order;
+import com.example.pandaapp.Models.OrderCustomer;
 import com.example.pandaapp.Models.Product;
 
 import java.util.ArrayList;
@@ -21,6 +22,8 @@ public class GlobalApplication extends Application {
     public List<CartItem> ListcartItems;
     public Category category;
     public Order order;
+    public OrderCustomer orderCustomer;
+
 
 
     public double updatetotal() {

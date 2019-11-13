@@ -3,6 +3,7 @@ package com.example.pandaapp.Retrofit2;
 import com.example.pandaapp.Models.Account;
 import com.example.pandaapp.Models.Category;
 import com.example.pandaapp.Models.Order;
+import com.example.pandaapp.Models.OrderCustomer;
 import com.example.pandaapp.Models.Product;
 
 import java.util.ArrayList;
@@ -69,9 +70,7 @@ public interface DataClient {
     @POST("getProductofShop.php")
     Call<ArrayList<Product>> getProductShop(@Field("idShop") int idShop);
 
-    @FormUrlEncoded
-    @POST("getOrderShop.php")
-    Call<ArrayList<Order>> getOrderShop(@Field("idShop") int idShop,@Field("statusId") int statusId);
+
 
     @FormUrlEncoded
     @POST("insertBill.php")
@@ -107,8 +106,22 @@ public interface DataClient {
     @POST("getProduct.php")
     Call<ArrayList<Product>> getProduct(@Field("productId") int productId);
 
+
     @FormUrlEncoded
     @POST("getProductBySearch.php")
     Call<ArrayList<Product>> getProductSearch(@Field("key") String key);
+    @FormUrlEncoded
+    @POST("getOrderShop.php")
+    Call<ArrayList<Order>> getOrderShop(@Field("idShop") int idShop,@Field("statusId") int statusId);
+
+    @FormUrlEncoded
+    @POST("setStatusOrder.php")
+    Call<String> setStatusOrderShop(@Field("oderId") int oderId, @Field("statusId") int statusId);
+    @FormUrlEncoded
+    @POST("getOrderofCustomers.php")
+    Call<ArrayList<OrderCustomer>> getOrderCustomer(@Field("AccountId") int AccountId, @Field("statusId") int statusId);
+
+
+
 
 }

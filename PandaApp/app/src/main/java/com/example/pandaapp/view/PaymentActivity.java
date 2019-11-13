@@ -91,6 +91,7 @@ public class PaymentActivity extends AppCompatActivity {
         listCartItem = new ArrayList<>();
         listCartItem = globalApplication.ListcartItems;
         payment_total.setText(String.valueOf(globalApplication.updatetotal()));
+
     }
 
     private void init() {

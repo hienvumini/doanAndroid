@@ -48,7 +48,10 @@ public class AdapterPayment extends ArrayAdapter {
         paymentItemTenShop.setText(listCartItem.get(position).getProduct().getShopName());
         paymentItemSoLuong.setText(String.valueOf(listCartItem.get(position).getMount()));
         paymentItemGia.setText(String.valueOf(listCartItem.get(position).getProduct().getPrice()));
-        LoadImage.getImageInServer(mctx,listCartItem.get(position).getProduct().getImages().get(0).toString(),payment_paymentAnh);
+        if (listCartItem.get(position).getProduct().getImages().size()>0) {
+            LoadImage.getImageInServer(mctx,listCartItem.get(position).getProduct().getImages().get(0).toString(),payment_paymentAnh);
+
+        }
 
 
         return convertView;

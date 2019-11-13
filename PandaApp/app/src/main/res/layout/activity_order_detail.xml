@@ -21,7 +21,7 @@
             android:layout_height="40dp"
             android:layout_gravity="start"
             android:scaleType="centerInside"
-            android:src="@drawable/back1" />
+            android:src="@drawable/ic_keyboard_arrow_left_white_48dp" />
 
         <TextView
 
@@ -315,7 +315,7 @@
         android:layout_alignParentBottom="true"
         android:layout_margin="@dimen/dimen_10dp"
         android:background="@color/color_pink2"
-        android:text="Chuẩn bị hàng"
+        android:text="Xử lý đơn hàng"
         android:textColor="@color/color_white"
         android:textSize="@dimen/font_18sp" />
 

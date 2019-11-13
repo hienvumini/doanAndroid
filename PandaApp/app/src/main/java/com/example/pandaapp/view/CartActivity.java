@@ -39,6 +39,7 @@ public class CartActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cart);
         init();
+        caculatorPriceTotal();
         onListener();
 
         ;
@@ -51,7 +52,7 @@ public class CartActivity extends AppCompatActivity {
 
         listViewCart = (ListView) findViewById(R.id.listviewProduct_Cart);
         cart_button = (Button) findViewById(R.id.cart_button);
-        cart_total = (TextView) findViewById(R.id.cart_total);
+        cart_total = (TextView) findViewById(R.id.cart_total_CartItem);
         LiCartItemList = new ArrayList<>();
         globalApplication = (GlobalApplication) getApplicationContext();
         if (globalApplication.ListcartItems != null) {
@@ -64,6 +65,7 @@ public class CartActivity extends AppCompatActivity {
         }
 
     }
+
 
     private void onListener() {
 
@@ -81,7 +83,7 @@ public class CartActivity extends AppCompatActivity {
                 public void OnClickAddAmount(int position) {
                     LiCartItemList.get(position).setMount(LiCartItemList.get(position).getMount() + 1);
                     adapterCartItem.notifyDataSetChanged();
-                   // listViewCart.setAdapter(adapterCartItem);
+                    // listViewCart.setAdapter(adapterCartItem);
                     caculatorPriceTotal();
                 }
 
@@ -90,7 +92,7 @@ public class CartActivity extends AppCompatActivity {
                     if (LiCartItemList.get(position).getMount() > 1) {
                         LiCartItemList.get(position).setMount(LiCartItemList.get(position).getMount() - 1);
                         adapterCartItem.notifyDataSetChanged();
-                       // listViewCart.setAdapter(adapterCartItem);
+                        // listViewCart.setAdapter(adapterCartItem);
                         caculatorPriceTotal();
                     }
 
@@ -123,6 +125,6 @@ public class CartActivity extends AppCompatActivity {
 
     public void caculatorPriceTotal() {
 
-        cart_total.setText(OtherUltil.fomattien.format(globalApplication.updatetotal()) );
+        cart_total.setText(OtherUltil.fomattien.format(globalApplication.updatetotal()));
     }
 }

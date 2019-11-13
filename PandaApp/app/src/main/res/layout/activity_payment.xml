@@ -20,7 +20,7 @@
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:scaleType="centerInside"
-            android:src="@drawable/back1"/>
+            android:src="@drawable/ic_keyboard_arrow_left_white_48dp"/>
         <TextView
 
             android:textColor="@color/color_white"
@@ -156,7 +156,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="450.000"
+                    android:text="0.000.000"
                     android:id="@+id/payment_total"
                     android:textColor="@color/color_pink2"
                     android:textSize="@dimen/font_20sp"

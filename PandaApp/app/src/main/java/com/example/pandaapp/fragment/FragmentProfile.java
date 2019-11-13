@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.pandaapp.view.FavoriteActivity;
@@ -17,6 +18,7 @@ import com.example.pandaapp.view.LoginActivity;
 import com.example.pandaapp.Models.Account;
 import com.example.pandaapp.R;
 import com.example.pandaapp.Util.GlobalApplication;
+import com.example.pandaapp.view.OrderManagerCustomerActivity;
 
 
 public class FragmentProfile extends Fragment {
@@ -26,6 +28,7 @@ public class FragmentProfile extends Fragment {
     Account account;
     TextView textViewbtnFavorite;
     ImageView imageViewi_black_Profile;
+    LinearLayout layoutMyOrder_Profile;
 
 
     @Override
@@ -50,6 +53,7 @@ public class FragmentProfile extends Fragment {
         textViewPhone = (TextView) view.findViewById(R.id.textviewPhone_Profile);
         btnLogout = (Button) view.findViewById(R.id.btnLogOut_Profile);
         textViewbtnFavorite = (TextView) view.findViewById(R.id.textview_Favorite_Profile);
+        layoutMyOrder_Profile=(LinearLayout) view.findViewById(R.id.layoutMyOrder_Profile);
 
     }
 
@@ -83,6 +87,15 @@ public class FragmentProfile extends Fragment {
                 getFragmentManager().popBackStack();
             }
         });
+        layoutMyOrder_Profile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(), OrderManagerCustomerActivity.class);
+                getActivity().startActivity(intent);
+
+            }
+        });
+
 
     }
 

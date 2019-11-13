@@ -11,7 +11,7 @@
         android:id="@+id/toolbab_AddProduct"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:background="@color/color_brown"
+        android:background="@color/color_pink2"
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
 
         <RelativeLayout
@@ -30,7 +30,7 @@
                     android:layout_gravity="start"
                     android:layout_marginTop="@dimen/dimen_5dp"
                     android:scaleType="centerInside"
-                    android:src="@drawable/back_black" />
+                    android:src="@drawable/ic_keyboard_arrow_left_white_48dp" />
 
                 <TextView
                     android:id="@+id/add_product_add"
@@ -41,7 +41,7 @@
                     android:layout_toRightOf="@+id/img_back_black"
                     android:gravity="center"
                     android:text="Sửa thông tin sản phẩm"
-                    android:textColor="@color/color_pink2"
+                    android:textColor="@color/color_white"
                     android:textSize="@dimen/font_20sp"
                     android:textStyle="bold" />
             </LinearLayout>
@@ -53,7 +53,7 @@
                 android:layout_alignParentEnd="true"
                 android:layout_marginTop="@dimen/dimen_10dp"
                 android:layout_marginRight="@dimen/dimen_15dp"
-                android:src="@drawable/dau_v" />
+                android:src="@drawable/ic_check_circle_white_48dp" />
 
         </RelativeLayout>
 

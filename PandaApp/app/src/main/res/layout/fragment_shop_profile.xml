@@ -25,7 +25,7 @@
                 android:layout_gravity="start"
                 android:layout_marginTop="@dimen/dimen_5dp"
                 android:scaleType="centerInside"
-                android:src="@drawable/back_black" />
+                android:src="@drawable/ic_keyboard_arrow_left_white_48dp" />
 
             <TextView
                 android:id="@+id/shop_myaccount"

@@ -19,7 +19,7 @@
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:scaleType="centerInside"
-            android:src="@drawable/back1"/>
+            android:src="@drawable/ic_keyboard_arrow_left_white_48dp"/>
         <TextView
 
             android:textColor="@color/color_white"

@@ -1,7 +1,10 @@
 package com.example.pandaapp.view;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -11,8 +14,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.pandaapp.Models.Order;
+import com.example.pandaapp.Models.OrderCustomer;
 import com.example.pandaapp.R;
 import com.example.pandaapp.Util.GlobalApplication;
+import com.example.pandaapp.Util.OrderUltils;
 import com.example.pandaapp.Util.OtherUltil;
 
 import java.text.ParseException;
@@ -27,6 +32,7 @@ public class OrderDetail extends AppCompatActivity {
     ListView listView;
     GlobalApplication globalApplication;
     Order order;
+    int status;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +50,12 @@ public class OrderDetail extends AppCompatActivity {
         } catch (ParseException e) {
             e.printStackTrace();
         }
+        Intent intent = getIntent();
+        status = intent.getIntExtra("status", 1);
+        Toast.makeText(getApplicationContext(), "Trang thani dong hang: " + status, Toast.LENGTH_SHORT).show();
+        if (status+1>2) {
+            btnProcess_OrderDeatil.setVisibility(View.GONE);
+        }
         listener();
 
     }
@@ -60,7 +72,7 @@ public class OrderDetail extends AppCompatActivity {
         tvtotalPay = (TextView) findViewById(R.id.tv_MoneyPay_ItemOrder);
         tvIdorder = (TextView) findViewById(R.id.tv_IDorder_OrderDetail);
         tvDateCreat = (TextView) findViewById(R.id.tv_dateCreat_OrderDetail);
-        listView=(ListView) findViewById(R.id.listviewOrderDetail);
+        listView = (ListView) findViewById(R.id.listviewOrderDetail);
     }
 
     private void setdataview() throws ParseException {
@@ -82,7 +94,48 @@ public class OrderDetail extends AppCompatActivity {
         btnProcess_OrderDeatil.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(OrderDetail.this, "Xu ly", Toast.LENGTH_SHORT).show();
+                String t = "";
+                switch (status + 1) {
+                    case 1:
+                        t = "Bạn chắc chắn xác nhận đơn hàng này, sau khi xác nhận đơn hàng sẽ chuyển sang trạng thái \"Đang giao\"";
+                        break;
+                    case 2:
+                        t = "Bạn chắc chắn đã giao đơn hàng này, sau khi xác nhận đơn hàng sẽ chuyển sang trạng thái \"Đã giao\"";
+                        break;
+                    default:
+                        btnProcess_OrderDeatil.setVisibility(View.GONE);
+                        break;
+
+
+                }
+
+                AlertDialog.Builder alertDialog = new AlertDialog.Builder(OrderDetail.this);
+                alertDialog.setTitle("Xác nhận đơn hàng");
+                alertDialog.setMessage(t);
+                alertDialog.setPositiveButton("Xác nhận", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        Toast.makeText(getApplicationContext(), "Đơn hàng đã được xác nhận :" + OrderUltils.updateOrderStatus(order.getOderId(), status + 2), Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent();
+                        setResult(RESULT_OK);
+                        finish();
+
+                    }
+                });
+                alertDialog.setNegativeButton("Hủy đơn hàng", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        Toast.makeText(getApplicationContext(), "Hủy đơn hàng :" + order.getOderId() + "? " + OrderUltils.updateOrderStatus(order.getOderId(), 4), Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent();
+                        setResult(RESULT_OK);
+                        finish();
+
+
+                    }
+                });
+                alertDialog.show();
+
+
             }
         });
     }

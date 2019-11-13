@@ -4,11 +4,8 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
 
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -16,8 +13,6 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
-import com.example.pandaapp.Models.Account;
-import com.example.pandaapp.Util.CacheUltils;
 import com.example.pandaapp.Util.ChangeActivity;
 import com.example.pandaapp.Util.FragmentUtils;
 import com.example.pandaapp.view.AddProductActivity;
@@ -26,9 +21,7 @@ import com.example.pandaapp.view.LoginActivity;
 import com.example.pandaapp.R;
 import com.example.pandaapp.Util.GlobalApplication;
 import com.example.pandaapp.view.MainActivity;
-import com.example.pandaapp.view.OrderManagerActivity;
-
-import java.io.File;
+import com.example.pandaapp.view.OrderManagerShopActivity;
 
 
 public class FragmentShopProfile extends Fragment implements View.OnClickListener {
@@ -68,19 +61,19 @@ public class FragmentShopProfile extends Fragment implements View.OnClickListene
         switch (v.getId()) {
             case R.id.layoutVeri_ProfileShop:
                 Toast.makeText(getActivity(), "on Processing", Toast.LENGTH_SHORT).show();
-                ChangeActivity.toActivity(getActivity(), OrderManagerActivity.class);
+                ChangeActivity.toActivity(getActivity(), OrderManagerShopActivity.class);
                 break;
             case R.id.layoutOnWay_ProfileShop:
                 Toast.makeText(getActivity(), "OnWay", Toast.LENGTH_SHORT).show();
-                ChangeActivity.toActivity(getActivity(), OrderManagerActivity.class);
+                ChangeActivity.toActivity(getActivity(), OrderManagerShopActivity.class);
                 break;
             case R.id.layoutReceived_ProfileShop:
                 Toast.makeText(getActivity(), "ReceiVed ", Toast.LENGTH_SHORT).show();
-                ChangeActivity.toActivity(getActivity(), OrderManagerActivity.class);
+                ChangeActivity.toActivity(getActivity(), OrderManagerShopActivity.class);
                 break;
             case R.id.layoutCancel_ProfileShop:
                 Toast.makeText(getActivity(), "Cancel", Toast.LENGTH_SHORT).show();
-                ChangeActivity.toActivity(getActivity(), OrderManagerActivity.class);
+                ChangeActivity.toActivity(getActivity(), OrderManagerShopActivity.class);
                 break;
             case R.id.layoutAddProduct_ProfileShop:
                 Toast.makeText(getActivity(), "Add Product", Toast.LENGTH_SHORT).show();
