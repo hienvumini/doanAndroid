@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Handler;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -65,8 +66,8 @@ public class FragmentMain extends Fragment {
     LinearLayoutManager linnerlayout;
     GridLayoutManager gridLayoutManager;
     ProgressBar progressBarLoadMore;
-    int page_number = 1;
-    int item_count = 10;
+    boolean intial = true;
+    int offset = 0;
 
 
     @Override
@@ -95,7 +96,7 @@ public class FragmentMain extends Fragment {
 
     private void getlistProduct() {
         DataClient dataClient = APIUltils.getData();
-        Call<ArrayList<Product>> listProductCall = dataClient.getUpdateProduct(limitProductPerPull);
+        Call<ArrayList<Product>> listProductCall = dataClient.getUpdateProduct(limitProductPerPull,listproduct.size());
         listProductCall.enqueue(new Callback<ArrayList<Product>>() {
             @Override
             public void onResponse(Call<ArrayList<Product>> call, Response<ArrayList<Product>> response) {
@@ -116,8 +117,9 @@ public class FragmentMain extends Fragment {
             @Override
             public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
                 super.onScrollStateChanged(recyclerView, newState);
-                if (newState == AbsListView.OnScrollListener.SCROLL_STATE_FLING) {
-                    isScolling = true;
+                if (newState == AbsListView.OnScrollListener.SCROLL_STATE_TOUCH_SCROLL) {
+
+                isScolling = true;
 
                 }
 
@@ -127,10 +129,25 @@ public class FragmentMain extends Fragment {
             @Override
             public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
                 super.onScrolled(recyclerView, dx, dy);
-                int lastVisiblePosition = gridLayoutManager.findLastVisibleItemPosition();
-                if (lastVisiblePosition + gridLayoutManager.getChildCount()==gridLayoutManager.getItemCount()) {
-                    progressBarLoadMore.setVisibility(View.VISIBLE);
-                    fetchData();
+                pastVisiableItems = gridLayoutManager.findFirstVisibleItemPosition();
+                visiableItemCount = gridLayoutManager.getChildCount();
+                totalItems = gridLayoutManager.getItemCount();
+
+//                if (isScolling && (visiableItemCount + pastVisiableItems == totalItems)) {
+//                    fetchData();
+//                }
+                if (dy > 0) {
+
+                    if (isScolling && (visiableItemCount + pastVisiableItems == totalItems)) {
+
+                        isScolling = false;
+                        progressBarLoadMore.setVisibility(View.VISIBLE);
+                        fetchData();
+
+                        //
+                    }
+                } else {
+
 
                 }
             }
@@ -140,32 +157,62 @@ public class FragmentMain extends Fragment {
     }
 
     private void fetchData() {
-        Toast.makeText(getActivity(), "Load them data", Toast.LENGTH_SHORT).show();
+        Toast.makeText(getActivity(), "Add more", Toast.LENGTH_SHORT).show();
 
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-
                 DataClient dataClient = APIUltils.getData();
-                Call<ArrayList<Product>> listProductCall = dataClient.getUpdateProduct(limitProductPerPull);
-                listProductCall.enqueue(new Callback<ArrayList<Product>>() {
+
+                if (intial) {
+                    offset = 0;
+
+                } else {
+
+                    offset = listproduct.size();
+                }
+                Call<ArrayList<Product>> arrayListCall = dataClient.getUpdateProduct(limitProductPerPull,listproduct.size());
+                arrayListCall.enqueue(new Callback<ArrayList<Product>>() {
                     @Override
                     public void onResponse(Call<ArrayList<Product>> call, Response<ArrayList<Product>> response) {
-                        if (response.body() != null) {
+                        ArrayList<Product> listadd;
+                        listadd = response.body();
+                        if (intial) {
+
                             listproduct = response.body();
-                            mainAdapter = new AdapterProduct(getActivity(), R.id.recycleviewLastlate_Main, listproduct);
+                            mainAdapter.notifyDataSetChanged();
+                            mainAdapter = new AdapterProduct(getActivity(), R.id.recycleview_ShopProduct, listproduct);
                             recyclerView.setAdapter(mainAdapter);
+                            Toast.makeText(getActivity(), listproduct.size() + "", Toast.LENGTH_SHORT).show();
+                            intial = false;
+                        } else {
+                            if (listadd.size() > 0) {
+                                listproduct.addAll(listadd);
+                                Log.d("EEE", "That bai: " + listproduct.size());
+                                mainAdapter.notifyDataSetChanged();
+                                mainAdapter = new AdapterProduct(getActivity(), R.id.recycleview_ShopProduct, listproduct);
+
+                                recyclerView.setAdapter(mainAdapter);
+
+                                Toast.makeText(getActivity(), listproduct.size() + "", Toast.LENGTH_SHORT).show();
+
+                            } else {
+                                Toast.makeText(getActivity(), "Đã tải xong tất cả", Toast.LENGTH_SHORT).show();
+                            }
                         }
                     }
 
                     @Override
                     public void onFailure(Call<ArrayList<Product>> call, Throwable t) {
+                        Log.d("BBB", "That bai: " + t.toString());
 
                     }
                 });
+                progressBarLoadMore.setVisibility(View.GONE);
+
             }
-        }, 2000);
-        progressBarLoadMore.setVisibility(View.GONE);
+        }, 500);
+
     }
 
 

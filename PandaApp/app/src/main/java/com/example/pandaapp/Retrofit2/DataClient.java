@@ -51,7 +51,7 @@ public interface DataClient {
 
     @FormUrlEncoded
     @POST("getUpdateProduct.php")
-    Call<ArrayList<Product>> getUpdateProduct(@Field("limit") int limit);
+    Call<ArrayList<Product>> getUpdateProduct(@Field("limit") int limit,@Field("offset") int offset);
 
     @FormUrlEncoded
     @POST("InsertImageProduct.php")

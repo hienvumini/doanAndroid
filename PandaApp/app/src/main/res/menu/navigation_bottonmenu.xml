@@ -3,6 +3,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 <item android:title="Home" android:icon="@drawable/home" android:id="@+id/menu_nav_home"></item>
 <item android:title="Danh mục" android:icon="@drawable/catagory" android:id="@+id/menu_nav_cate"></item>
-<item android:title="Tìm kiếm" android:icon="@drawable/search" android:id="@+id/menu_nav_seach"></item>
+<item android:title="Tin tức" android:icon="@drawable/search" android:id="@+id/menu_nav_seach"></item>
 <item android:title="Tôi" android:icon="@drawable/profile" android:id="@+id/menu_nav_profile"></item>
 </menu>
