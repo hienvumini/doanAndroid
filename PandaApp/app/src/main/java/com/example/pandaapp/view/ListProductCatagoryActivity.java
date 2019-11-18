@@ -1,11 +1,17 @@
 package com.example.pandaapp.view;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
+import android.view.View;
+import android.widget.AbsListView;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.example.pandaapp.Models.Category;
@@ -30,6 +36,17 @@ public class ListProductCatagoryActivity extends AppCompatActivity {
     Category mcategory;
     int idCate;
 
+    boolean isScolling = false;
+    int pastVisiableItems, totalItems, visiableItemCount;
+    LinearLayoutManager linnerlayout;
+    GridLayoutManager gridLayoutManager;
+    GridLayoutManager layoutManager;
+    ProgressBar progressBar;
+    int page_number = 1;
+    int item_count = 6;
+    int offset = 0;
+    boolean intial = true;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,11 +68,12 @@ public class ListProductCatagoryActivity extends AppCompatActivity {
 
 
     private void init() {
+        progressBar = (ProgressBar) findViewById(R.id.processbar_Category);
         recyclerViewListProduct = (RecyclerView) findViewById(R.id.recycleview_CategoryProduct);
         listProduct = new ArrayList<>();
         //fakedata();
         adapterProduct = new AdapterProduct(getApplicationContext(), R.id.recycleview_CategoryProduct, listProduct);
-        RecyclerView.LayoutManager layoutManager = new GridLayoutManager(getApplicationContext(), 2);
+        layoutManager = new GridLayoutManager(getApplicationContext(), 2);
         recyclerViewListProduct.setLayoutManager(layoutManager);
         recyclerViewListProduct.setHasFixedSize(true);
         recyclerViewListProduct.setAdapter(adapterProduct);
@@ -63,43 +81,126 @@ public class ListProductCatagoryActivity extends AppCompatActivity {
     }
 
     private void getlistProductCate() {
-        Toast.makeText(this, "Danh muc "+idCate, Toast.LENGTH_SHORT).show();
-        DataClient getProductCategory = APIUltils.getData();
-        Call<ArrayList<Product>> arrayListCall = getProductCategory.getProductCategory(idCate);
-        arrayListCall.enqueue(new Callback<ArrayList<Product>>() {
+        Toast.makeText(this, "Danh muc " + idCate, Toast.LENGTH_SHORT).show();
+        fetchData();
+
+//        DataClient dataClient = APIUltils.getData();
+//        Call<ArrayList<Product>> arrayListCall = dataClient.getProductCategory(idCate, 0);
+//        arrayListCall.enqueue(new Callback<ArrayList<Product>>() {
+//            @Override
+//            public void onResponse(Call<ArrayList<Product>> call, Response<ArrayList<Product>> response) {
+//                listProduct = response.body();
+//                Log.d("EEE", "That bai: " + listProduct.size());
+//                adapterProduct.notifyDataSetChanged();
+//                adapterProduct = new AdapterProduct(getBaseContext(), R.id.recycleview_ShopProduct, listProduct);
+//
+//                recyclerViewListProduct.setAdapter(adapterProduct);
+//
+//                Toast.makeText(getApplicationContext(), listProduct.size() + "", Toast.LENGTH_SHORT).show();
+//            }
+//
+//            @Override
+//            public void onFailure(Call<ArrayList<Product>> call, Throwable t) {
+//                Log.d("BBB", "That bai: " + t.toString());
+//
+//            }
+//        });
+        recyclerViewListProduct.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
-            public void onResponse(Call<ArrayList<Product>> call, Response<ArrayList<Product>> response) {
-                listProduct = response.body();
-                adapterProduct.notifyDataSetChanged();
-                adapterProduct = new AdapterProduct(getBaseContext(), R.id.recycleview_ShopProduct, listProduct);
+            public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
+                super.onScrollStateChanged(recyclerView, newState);
 
-                recyclerViewListProduct.setAdapter(adapterProduct);
+                if (newState == AbsListView.OnScrollListener.SCROLL_STATE_TOUCH_SCROLL) {
+                    isScolling = true;
+                }
 
-                Toast.makeText(getApplicationContext(), listProduct.size() + "", Toast.LENGTH_SHORT).show();
             }
 
             @Override
-            public void onFailure(Call<ArrayList<Product>> call, Throwable t) {
-                Log.d("BBB", "That bai: " + t.toString());
+            public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+                visiableItemCount = layoutManager.getChildCount();
+                totalItems = layoutManager.getItemCount();
+                pastVisiableItems = layoutManager.findFirstVisibleItemPosition();
+
+                if (dy > 0) {
+
+                    if (isScolling && (visiableItemCount + pastVisiableItems == totalItems)) {
+
+                        isScolling = false;
+                        progressBar.setVisibility(View.VISIBLE);
+                        fetchData();
+
+                        //
+                    }
+                } else {
+
+
+                }
 
             }
         });
 
     }
 
-    public void fakedata() {
+    private void fetchData() {
+        Toast.makeText(getApplicationContext(), "Add more", Toast.LENGTH_SHORT).show();
 
-        ArrayList<String> manganh = new ArrayList<>();
-        manganh.add("https://cf.shopee.vn/file/b094ce2dc84d13b302e147e1b3cfa6d8");
-        manganh.add("https://cf.shopee.vn/file/b094ce2dc84d13b302e147e1b3cfa6d8");
-        manganh.add("https://cf.shopee.vn/file/b094ce2dc84d13b302e147e1b3cfa6d8");
-        manganh.add("https://cf.shopee.vn/file/b094ce2dc84d13b302e147e1b3cfa6d8");
-        listProduct.add(new Product("Ao 1", 150000, "Tu", manganh, "Đây là áo 1"));
-        listProduct.add(new Product("Ao 2", 150000, "Tu", manganh, "Đây là áo 1"));
-        listProduct.add(new Product("Ao 3", 150000, "Tu", manganh, "Đây là áo 1"));
-        listProduct.add(new Product("Ao 4", 150000, "Tu", manganh, "Đây là áo 1"));
-        listProduct.add(new Product("Ao 5", 150000, "Tu", manganh, "Đây là áo 1"));
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                DataClient dataClient = APIUltils.getData();
+
+                if (intial) {
+                    offset = 0;
+
+                } else {
+
+                    offset = listProduct.size();
+                }
+                Call<ArrayList<Product>> arrayListCall = dataClient.getProductCategory(idCate, offset);
+                arrayListCall.enqueue(new Callback<ArrayList<Product>>() {
+                    @Override
+                    public void onResponse(Call<ArrayList<Product>> call, Response<ArrayList<Product>> response) {
+                        ArrayList<Product> listadd;
+                        listadd = response.body();
+                        if (intial) {
+
+                            listProduct = response.body();
+                            adapterProduct.notifyDataSetChanged();
+                            adapterProduct = new AdapterProduct(getBaseContext(), R.id.recycleview_ShopProduct, listProduct);
+                            recyclerViewListProduct.setAdapter(adapterProduct);
+                            Toast.makeText(getApplicationContext(), listProduct.size() + "", Toast.LENGTH_SHORT).show();
+                            intial = false;
+                        } else {
+                            if (listadd.size() > 0) {
+                                listProduct.addAll(listadd);
+                                Log.d("EEE", "That bai: " + listProduct.size());
+                                adapterProduct.notifyDataSetChanged();
+                                adapterProduct = new AdapterProduct(getBaseContext(), R.id.recycleview_ShopProduct, listProduct);
+
+                                recyclerViewListProduct.setAdapter(adapterProduct);
+
+                                Toast.makeText(getApplicationContext(), listProduct.size() + "", Toast.LENGTH_SHORT).show();
+
+                            } else {
+                                Toast.makeText(getApplicationContext(), "Đã tải xong tất cả", Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<ArrayList<Product>> call, Throwable t) {
+                        Log.d("BBB", "That bai: " + t.toString());
+
+                    }
+                });
+                progressBar.setVisibility(View.GONE);
+
+            }
+        }, 500);
 
     }
+
 
 }

@@ -47,7 +47,7 @@ public interface DataClient {
 
     @FormUrlEncoded
     @POST("getallProductCategory.php")
-    Call<ArrayList<Product>> getProductCategory(@Field("idcategory") int idcategory);
+    Call<ArrayList<Product>> getProductCategory(@Field("idcategory") int idcategory,@Field("offset") int position);
 
     @FormUrlEncoded
     @POST("getUpdateProduct.php")

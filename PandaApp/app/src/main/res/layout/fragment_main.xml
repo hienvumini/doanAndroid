@@ -70,5 +70,13 @@
             </androidx.recyclerview.widget.RecyclerView>
         </LinearLayout>
     </ScrollView>
+    <ProgressBar
+        android:layout_marginBottom="@dimen/dimen_50dp"
+        android:id="@+id/progressBar_LoadMore_FragmentMain"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:visibility="gone"/>
 
 </RelativeLayout>

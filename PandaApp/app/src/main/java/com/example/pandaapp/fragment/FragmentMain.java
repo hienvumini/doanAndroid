@@ -1,27 +1,31 @@
 package com.example.pandaapp.fragment;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.AbsListView;
 import android.widget.ImageView;
-import android.widget.SearchView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 import android.widget.Toolbar;
 import android.widget.ViewFlipper;
 
 import com.example.pandaapp.Retrofit2.APIUltils;
 import com.example.pandaapp.Retrofit2.DataClient;
-import com.example.pandaapp.Util.FragmentUtils;
 import com.example.pandaapp.view.CartActivity;
 import com.example.pandaapp.Models.Account;
 import com.example.pandaapp.Models.Product;
@@ -55,7 +59,14 @@ public class FragmentMain extends Fragment {
     FragmentSearch fragmentSearch = new FragmentSearch();
     FragmentProfile fragmentProfile = new FragmentProfile();
     FragmentCart fragmentCart = new FragmentCart();
-    int limitProductPerPull = 10;
+    int limitProductPerPull = 6;
+    boolean isScolling = false;
+    int pastVisiableItems, totalItems, visiableItemCount, prevous_total, view_threshold = 10;
+    LinearLayoutManager linnerlayout;
+    GridLayoutManager gridLayoutManager;
+    ProgressBar progressBarLoadMore;
+    int page_number = 1;
+    int item_count = 10;
 
 
     @Override
@@ -65,13 +76,14 @@ public class FragmentMain extends Fragment {
         init(view);
 
         getlistProduct();
-        recyclerView.setAdapter(mainAdapter);
+
+
         imgmyCart.setOnClickListener(onClickListenerCartItem);
         searchView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                Intent intent=new Intent(getActivity(), SearchActivity.class);
+                Intent intent = new Intent(getActivity(), SearchActivity.class);
                 startActivity(intent);
             }
         });
@@ -79,6 +91,7 @@ public class FragmentMain extends Fragment {
 
         return view;
     }
+
 
     private void getlistProduct() {
         DataClient dataClient = APIUltils.getData();
@@ -88,7 +101,7 @@ public class FragmentMain extends Fragment {
             public void onResponse(Call<ArrayList<Product>> call, Response<ArrayList<Product>> response) {
                 if (response.body() != null) {
                     listproduct = response.body();
-                    mainAdapter=new AdapterProduct(getActivity(),R.id.recycleviewLastlate_Main,listproduct);
+                    mainAdapter = new AdapterProduct(getActivity(), R.id.recycleviewLastlate_Main, listproduct);
                     recyclerView.setAdapter(mainAdapter);
                 }
             }
@@ -98,31 +111,75 @@ public class FragmentMain extends Fragment {
 
             }
         });
+
+        recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
+                super.onScrollStateChanged(recyclerView, newState);
+                if (newState == AbsListView.OnScrollListener.SCROLL_STATE_FLING) {
+                    isScolling = true;
+
+                }
+
+
+            }
+
+            @Override
+            public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+                int lastVisiblePosition = gridLayoutManager.findLastVisibleItemPosition();
+                if (lastVisiblePosition + gridLayoutManager.getChildCount()==gridLayoutManager.getItemCount()) {
+                    progressBarLoadMore.setVisibility(View.VISIBLE);
+                    fetchData();
+
+                }
+            }
+        });
+
+
     }
 
-    public void fakedata() {
+    private void fetchData() {
+        Toast.makeText(getActivity(), "Load them data", Toast.LENGTH_SHORT).show();
 
-        ArrayList<String> manganh = new ArrayList<>();
-        manganh.add("https://cf.shopee.vn/file/b094ce2dc84d13b302e147e1b3cfa6d8");
-        manganh.add("https://cf.shopee.vn/file/b094ce2dc84d13b302e147e1b3cfa6d8");
-        manganh.add("https://cf.shopee.vn/file/b094ce2dc84d13b302e147e1b3cfa6d8");
-        manganh.add("https://cf.shopee.vn/file/b094ce2dc84d13b302e147e1b3cfa6d8");
-        listproduct.add(new Product("Ao 1", 150000, "Tu", manganh, "Đây là áo 1"));
-        listproduct.add(new Product("Ao 2", 150000, "Tu", manganh, "Đây là áo 1"));
-        listproduct.add(new Product("Ao 3", 150000, "Tu", manganh, "Đây là áo 1"));
-        listproduct.add(new Product("Ao 4", 150000, "Tu", manganh, "Đây là áo 1"));
-        listproduct.add(new Product("Ao 5", 150000, "Tu", manganh, "Đây là áo 1"));
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
 
+                DataClient dataClient = APIUltils.getData();
+                Call<ArrayList<Product>> listProductCall = dataClient.getUpdateProduct(limitProductPerPull);
+                listProductCall.enqueue(new Callback<ArrayList<Product>>() {
+                    @Override
+                    public void onResponse(Call<ArrayList<Product>> call, Response<ArrayList<Product>> response) {
+                        if (response.body() != null) {
+                            listproduct = response.body();
+                            mainAdapter = new AdapterProduct(getActivity(), R.id.recycleviewLastlate_Main, listproduct);
+                            recyclerView.setAdapter(mainAdapter);
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<ArrayList<Product>> call, Throwable t) {
+
+                    }
+                });
+            }
+        }, 2000);
+        progressBarLoadMore.setVisibility(View.GONE);
     }
+
 
     public void init(View view) {
+        Context context;
+        progressBarLoadMore = (ProgressBar) view.findViewById(R.id.progressBar_LoadMore_FragmentMain);
+        //manager = new LinearLayoutManager(getActivity());
         listproduct = new ArrayList<>();
         recyclerView = (RecyclerView) view.findViewById(R.id.recycleviewLastlate_Main);
         mainAdapter = new AdapterProduct(getActivity(), R.id.recycleviewLastlate_Main, listproduct);
-        RecyclerView.LayoutManager layoutManager = new GridLayoutManager(getActivity(), 2);
-        LinearLayoutManager linnerlayout
-                = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
-        recyclerView.setLayoutManager(layoutManager);
+        gridLayoutManager = new GridLayoutManager(getActivity(), 2);
+        linnerlayout
+                = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
+        recyclerView.setLayoutManager(gridLayoutManager);
         recyclerView.setHasFixedSize(true);
         viewFlipper = (ViewFlipper) view.findViewById(R.id.viewflipperquangcao);
         ActionViewflipper(view);

@@ -12,9 +12,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.pandaapp.Models.Account;
+import com.example.pandaapp.Models.ILoadmoreProduct;
 import com.example.pandaapp.Models.Product;
 import com.example.pandaapp.R;
 import com.example.pandaapp.Util.GlobalApplication;
@@ -29,12 +31,16 @@ public class AdapterProduct extends RecyclerView.Adapter<AdapterProduct.ViewHold
     int layout;
     List<Product> listproduct;
     int stt;
+    int VIEW_TYPE_LOADING=1, VIEW_TYPE_ITEM=0;;
+
+
 
 
     public AdapterProduct(Context context, int resource, List<Product> object) {
         this.mctx = context;
         this.layout = resource;
         this.listproduct = object;
+
     }
 
 
@@ -43,6 +49,11 @@ public class AdapterProduct extends RecyclerView.Adapter<AdapterProduct.ViewHold
         View view = LayoutInflater.from(mctx).inflate(R.layout.item_product, parent, false);
 
         return new ViewHolder(view);
+    }
+
+    @Override
+    public int getItemViewType(int position) {
+       return listproduct.get(position)==null ? VIEW_TYPE_LOADING : VIEW_TYPE_ITEM;
     }
 
     @Override
