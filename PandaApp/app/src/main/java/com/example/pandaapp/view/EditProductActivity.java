@@ -2,6 +2,7 @@ package com.example.pandaapp.view;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.content.Intent;
 import android.net.Uri;
@@ -30,6 +31,7 @@ import com.example.pandaapp.adapter.AdapterAddImage;
 
 import java.util.ArrayList;
 
+import es.dmoral.toasty.Toasty;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -59,6 +61,7 @@ public class EditProductActivity extends AppCompatActivity {
     int idproductadd;
     TextView textViewNotifi;
     ProgressBar progressBar;
+    SwipeRefreshLayout swipeRefreshLayout;
 
 
     @Override
@@ -75,6 +78,7 @@ public class EditProductActivity extends AppCompatActivity {
 
 
     private void init() {
+        swipeRefreshLayout=(SwipeRefreshLayout) findViewById(R.id.swiperefresh_EditProduct);
         progressBar = (ProgressBar) findViewById(R.id.process_EditProduct);
         globalApplication = (GlobalApplication) getApplicationContext();
         product = globalApplication.product;
@@ -181,16 +185,16 @@ public class EditProductActivity extends AppCompatActivity {
         adapterAddImage.setListener(new AdapterAddImage.IcallbackAddProductActivity() {
             @Override
             public void removeImage(int position) {
-                Toast.makeText(getApplicationContext(), "Xoa anh thu " + position, Toast.LENGTH_SHORT).show();
+
                 FileUtils fileUtils = new FileUtils();
-                Toast.makeText(getApplicationContext(), listLinkImage.get(position), Toast.LENGTH_SHORT).show();
+
 
                 imageNeedDelete.add(listLinkImage.get(position));
                 listUriImage.remove(position);
                 listLinkImage.remove(position);
 
                 adapterAddImage.notifyDataSetChanged();
-                //gridViewImage.setAdapter(adapterAddImage);
+
 
 
             }
@@ -205,6 +209,15 @@ public class EditProductActivity extends AppCompatActivity {
                 startActivity(intent);
 
 
+            }
+        });
+        swipeRefreshLayout.setColorSchemeResources(R.color.color_pink2);
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                finish();
+                startActivity(getIntent());
+                swipeRefreshLayout.setRefreshing(false);
             }
         });
 
@@ -267,7 +280,7 @@ public class EditProductActivity extends AppCompatActivity {
 
     private void UpdateProduct() {
         if (txtNameProduct.getText().toString().trim().equalsIgnoreCase("") || txtDiscProduct.getText().toString().trim().equalsIgnoreCase("")) {
-            Toast.makeText(this, "Vui lòng điền đầy đủ thông tin sản phẩm", Toast.LENGTH_SHORT).show();
+            Toasty.error(getApplicationContext(),"Điền đầy đủ thông tin sản phẩm",2000);
         } else {
             getdataFromUser();
 

@@ -3,6 +3,9 @@ package com.example.pandaapp.view;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
+
+import es.dmoral.toasty.Toasty;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -23,6 +26,8 @@ public class ListProductSearchActivity extends AppCompatActivity {
     ArrayList<Product> listProduct;
     AdapterProduct adapterProduct;
     String key;
+    SwipeRefreshLayout swipeRefreshLayout;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,11 +35,12 @@ public class ListProductSearchActivity extends AppCompatActivity {
 
         init();
         Intent intent = getIntent();
-        key=intent.getStringExtra("key");
+        key = intent.getStringExtra("key");
         getProductSearch();
     }
 
     private void init() {
+        swipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swiperefresh_Search);
         recyclerViewListProduct = (RecyclerView) findViewById(R.id.recycleview_SearchProduct);
         listProduct = new ArrayList<>();
         adapterProduct = new AdapterProduct(getApplicationContext(), R.id.recycleview_SearchProduct, listProduct);
@@ -42,27 +48,44 @@ public class ListProductSearchActivity extends AppCompatActivity {
         recyclerViewListProduct.setLayoutManager(layoutManager);
         recyclerViewListProduct.setHasFixedSize(true);
         recyclerViewListProduct.setAdapter(adapterProduct);
+        onListener();
 
     }
 
-    private void getProductSearch()
-    {
+    private void onListener() {
+        swipeRefreshLayout.setColorSchemeResources(R.color.color_pink2);
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                finish();
+                startActivity(getIntent());
+                swipeRefreshLayout.setRefreshing(false);
+            }
+        });
+    }
+
+    private void getProductSearch() {
         APIUltils.getData().getProductSearch(key).enqueue(new Callback<ArrayList<Product>>() {
             @Override
             public void onResponse(Call<ArrayList<Product>> call, Response<ArrayList<Product>> response) {
-                listProduct = response.body();
-                Log.d("giatri", "onResponse: "+listProduct.size()+listProduct.get(0).getName());
-                for (int i = 0; i <listProduct.size() ; i++) {
-                    System.out.println("A11A "+listProduct.get(i).toString());
+                if (response.body().size() > 0) {
+                    listProduct = response.body();
+                    Log.d("giatri", "onResponse: " + listProduct.size());
+                    for (int i = 0; i < listProduct.size(); i++) {
+                        System.out.println("A11A " + listProduct.get(i).toString());
+                    }
+                    adapterProduct = new AdapterProduct(getApplicationContext(), R.id.recycleview_SearchProduct, listProduct);
+                    adapterProduct.notifyDataSetChanged();
+                    recyclerViewListProduct.setAdapter(adapterProduct);
+                } else {
+                    Toasty.error(getApplicationContext(),"Không tìm thấy sản phẩm nào",2000).show();
+
                 }
-                adapterProduct = new AdapterProduct(getApplicationContext(), R.id.recycleview_SearchProduct, listProduct);
-                adapterProduct.notifyDataSetChanged();
-                recyclerViewListProduct.setAdapter(adapterProduct);
             }
 
             @Override
             public void onFailure(Call<ArrayList<Product>> call, Throwable t) {
-                Log.d("giatri1", "onResponse: "+t.toString());
+                Log.d("giatri1", "onResponse: " + t.toString());
             }
         });
     }

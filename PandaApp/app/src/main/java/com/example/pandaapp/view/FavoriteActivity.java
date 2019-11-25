@@ -3,6 +3,7 @@ package com.example.pandaapp.view;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.os.Bundle;
 
@@ -29,6 +30,7 @@ public class FavoriteActivity extends AppCompatActivity {
     RecyclerView recyclerView;
     GlobalApplication globalApplication;
     Account account;
+    SwipeRefreshLayout swipeRefreshLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,7 +38,16 @@ public class FavoriteActivity extends AppCompatActivity {
         setContentView(R.layout.activity_favorite);
         globalApplication = (GlobalApplication) getApplicationContext();
         account = globalApplication.account;
-
+        swipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swiperefresh_Favorite);
+        swipeRefreshLayout.setColorSchemeResources(R.color.color_pink2);
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                finish();
+                startActivity(getIntent());
+                swipeRefreshLayout.setRefreshing(false);
+            }
+        });
 
         recyclerView = findViewById(R.id.recycleview_favorite);
         favoriteProductAdapter = new AdapterProduct(getApplicationContext(), R.id.recycleview_favorite, products);

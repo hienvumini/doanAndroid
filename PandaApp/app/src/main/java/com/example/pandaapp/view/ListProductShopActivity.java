@@ -3,6 +3,7 @@ package com.example.pandaapp.view;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.os.Bundle;
 import android.util.Log;
@@ -32,6 +33,7 @@ public class ListProductShopActivity extends AppCompatActivity {
     int idshop;
     GlobalApplication globalApplication;
     ImageView imageViewcatagory_back;
+    SwipeRefreshLayout swipeRefreshLayout;
 
 
     @Override
@@ -45,6 +47,7 @@ public class ListProductShopActivity extends AppCompatActivity {
 
 
     private void init() {
+        swipeRefreshLayout=(SwipeRefreshLayout)findViewById(R.id.swiperefreshShop);
         imageViewcatagory_back=(ImageView) findViewById(R.id.catagory_back_ProductShop);
         recyclerViewListProduct = (RecyclerView) findViewById(R.id.recycleview_ShopProduct);
         listProduct = new ArrayList<>();
@@ -89,6 +92,15 @@ public class ListProductShopActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 finish();
+            }
+        });
+        swipeRefreshLayout.setColorSchemeResources(R.color.color_pink2);
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                finish();
+                startActivity(getIntent());
+                swipeRefreshLayout.setRefreshing(false);
             }
         });
 
