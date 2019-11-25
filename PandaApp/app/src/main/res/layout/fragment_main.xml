@@ -41,42 +41,51 @@
 
     </LinearLayout>
 
-    <ScrollView
-        android:id="@+id/scollviewmain"
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+
+        android:id="@+id/swiperefrefresh_FragmentMain"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-
         android:layout_below="@id/toolbar">
 
-        <LinearLayout
+        <ScrollView
+            android:id="@+id/scollviewmain"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical">
 
-            <ViewFlipper
-                android:id="@+id/viewflipperquangcao"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/dimen_150dp"
-                android:background="@color/color_pink2" />
+            >
 
-            <androidx.recyclerview.widget.RecyclerView
-
-                android:id="@+id/recycleviewLastlate_Main"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_gravity="center">
+                android:orientation="vertical">
+
+                <ViewFlipper
+                    android:id="@+id/viewflipperquangcao"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dimen_150dp"
+                    android:background="@color/color_pink2" />
+
+                <androidx.recyclerview.widget.RecyclerView
+
+                    android:id="@+id/recycleviewLastlate_Main"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center">
 
 
-            </androidx.recyclerview.widget.RecyclerView>
-        </LinearLayout>
-    </ScrollView>
+                </androidx.recyclerview.widget.RecyclerView>
+            </LinearLayout>
+        </ScrollView>
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
     <ProgressBar
-        android:layout_marginBottom="@dimen/dimen_50dp"
         android:id="@+id/progressBar_LoadMore_FragmentMain"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:visibility="gone"/>
+        android:layout_marginBottom="@dimen/dimen_50dp"
+        android:visibility="gone" />
 
 </RelativeLayout>

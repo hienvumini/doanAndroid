@@ -1,23 +1,18 @@
 package com.example.pandaapp.view;
 
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.pandaapp.Models.Order;
 import com.example.pandaapp.Models.OrderCustomer;
 import com.example.pandaapp.R;
 import com.example.pandaapp.Util.GlobalApplication;
-import com.example.pandaapp.Util.OrderUltils;
 import com.example.pandaapp.Util.OtherUltil;
 
 import java.text.ParseException;
@@ -79,7 +74,7 @@ public class OrderCustomerDetail extends AppCompatActivity {
         tvname.setText(order.getName());
         tvphone.setText(order.getPhoneNumber());
         tvaddress.setText(order.getAddress());
-        tvDateCreat.setText(OtherUltil.convertTime(order.getDateCreated()));
+        tvDateCreat.setText(OtherUltil.convertTimeFromDB(order.getDateCreated()));
         tvIdorder.setText(order.getOderId() + "");
 
     }

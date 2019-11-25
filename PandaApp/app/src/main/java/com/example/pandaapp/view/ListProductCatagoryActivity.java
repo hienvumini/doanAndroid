@@ -5,7 +5,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
@@ -24,6 +26,7 @@ import com.example.pandaapp.adapter.AdapterProduct;
 
 import java.util.ArrayList;
 
+import es.dmoral.toasty.Toasty;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -46,6 +49,7 @@ public class ListProductCatagoryActivity extends AppCompatActivity {
     int item_count = 6;
     int offset = 0;
     boolean intial = true;
+    SwipeRefreshLayout swipeRefreshLayout;
 
 
     @Override
@@ -54,13 +58,14 @@ public class ListProductCatagoryActivity extends AppCompatActivity {
         setContentView(R.layout.activity_list_product_catagory);
         globalApplication = (GlobalApplication) getApplicationContext();
         init();
+
         if (globalApplication.category != null) {
             mcategory = globalApplication.category;
             idCate = globalApplication.category.getIdcategory();
             getlistProductCate();
 
         } else {
-            Toast.makeText(getApplicationContext(), "Danh mục lỗi", Toast.LENGTH_SHORT).show();
+            Toasty.error(getApplicationContext(),"Danh mục lỗi").show();
 
         }
 
@@ -68,6 +73,7 @@ public class ListProductCatagoryActivity extends AppCompatActivity {
 
 
     private void init() {
+        swipeRefreshLayout=(SwipeRefreshLayout) findViewById(R.id.swiperefresh);
         progressBar = (ProgressBar) findViewById(R.id.processbar_Category);
         recyclerViewListProduct = (RecyclerView) findViewById(R.id.recycleview_CategoryProduct);
         listProduct = new ArrayList<>();
@@ -81,30 +87,10 @@ public class ListProductCatagoryActivity extends AppCompatActivity {
     }
 
     private void getlistProductCate() {
-        Toast.makeText(this, "Danh muc " + idCate, Toast.LENGTH_SHORT).show();
+
         fetchData();
 
-//        DataClient dataClient = APIUltils.getData();
-//        Call<ArrayList<Product>> arrayListCall = dataClient.getProductCategory(idCate, 0);
-//        arrayListCall.enqueue(new Callback<ArrayList<Product>>() {
-//            @Override
-//            public void onResponse(Call<ArrayList<Product>> call, Response<ArrayList<Product>> response) {
-//                listProduct = response.body();
-//                Log.d("EEE", "That bai: " + listProduct.size());
-//                adapterProduct.notifyDataSetChanged();
-//                adapterProduct = new AdapterProduct(getBaseContext(), R.id.recycleview_ShopProduct, listProduct);
-//
-//                recyclerViewListProduct.setAdapter(adapterProduct);
-//
-//                Toast.makeText(getApplicationContext(), listProduct.size() + "", Toast.LENGTH_SHORT).show();
-//            }
-//
-//            @Override
-//            public void onFailure(Call<ArrayList<Product>> call, Throwable t) {
-//                Log.d("BBB", "That bai: " + t.toString());
-//
-//            }
-//        });
+
         recyclerViewListProduct.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
@@ -136,15 +122,27 @@ public class ListProductCatagoryActivity extends AppCompatActivity {
                 } else {
 
 
+                    
+
                 }
 
+            }
+        });
+        swipeRefreshLayout.setColorSchemeResources(R.color.color_pink2);
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+
+                listProduct.clear();
+                fetchData();
+                swipeRefreshLayout.setRefreshing(false);
             }
         });
 
     }
 
     private void fetchData() {
-        Toast.makeText(getApplicationContext(), "Add more", Toast.LENGTH_SHORT).show();
+
 
         new Handler().postDelayed(new Runnable() {
             @Override
@@ -184,7 +182,7 @@ public class ListProductCatagoryActivity extends AppCompatActivity {
                                 Toast.makeText(getApplicationContext(), listProduct.size() + "", Toast.LENGTH_SHORT).show();
 
                             } else {
-                                Toast.makeText(getApplicationContext(), "Đã tải xong tất cả", Toast.LENGTH_SHORT).show();
+                                Toasty.custom(getApplicationContext(),"Đã tải xong tất cả sản phẩm",R.drawable.ok, R.color.color_pink2,2000,true,true).show();
                             }
                         }
                     }

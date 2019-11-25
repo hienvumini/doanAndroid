@@ -12,6 +12,7 @@ import android.widget.Toast;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.example.pandaapp.Models.Account;
 import com.example.pandaapp.Models.CartItem;
@@ -36,6 +37,7 @@ public class DetailActivity extends AppCompatActivity {
     Product product = new Product();
     Account account;
     int REQUESTCODE_EDIT=112;
+    SwipeRefreshLayout swipeRefreshLayout;
 
 
     @Override
@@ -57,6 +59,7 @@ public class DetailActivity extends AppCompatActivity {
     }
 
     private void init() {
+        swipeRefreshLayout =(SwipeRefreshLayout) findViewById(R.id.swiperefresh_DetailProduct);
         btnEdit = (Button) findViewById(R.id.btnEdit_ProductDetail);
         btnAddCart = (Button) findViewById(R.id.btnAddCart_Detail);
         btnBuyNow = (Button) findViewById(R.id.btn_buy_ProductDetail);
@@ -148,6 +151,14 @@ public class DetailActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 FragmentUtils.openFragment(new FragmentShowImage(), getSupportFragmentManager(),R.id.Frame_ShowImage);
+            }
+        });
+        swipeRefreshLayout.setColorSchemeResources(R.color.color_pink2);
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                finish();
+                startActivity(getIntent());
             }
         });
 

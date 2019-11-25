@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -27,6 +28,7 @@ import com.example.pandaapp.view.MainActivity;
 
 import java.util.ArrayList;
 
+import es.dmoral.toasty.Toasty;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -54,10 +56,8 @@ public class FragmentLogin extends Fragment {
 
 
 
-        SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(getActivity());
-        String username = pref.getString("username", null);
-        String password = pref.getString("password", null);
-        Toast.makeText(getActivity(), username + "   " + password, Toast.LENGTH_SHORT).show();
+
+
 
         edittextuser = (EditText) view.findViewById(R.id.edittextusernameLogin);
         edittextpass = (EditText) view.findViewById(R.id.edittextpassLogin);
@@ -95,7 +95,7 @@ public class FragmentLogin extends Fragment {
             @Override
             public void onResponse(Call<ArrayList<Account>> call, Response<ArrayList<Account>> response) {
                 if (response.body().size() > 0) {
-                    //Toast.makeText(getActivity(), "Đăng nhập thành công" , Toast.LENGTH_SHORT).show();
+                    Toasty.custom(getActivity(),"Đăng nhập thành công",R.drawable.ok,R.color.color_pink2,2000,false,true).show();
                     Log.d("AZ", "Dăng nhập: "+response.body());
                     ArrayList<Account> accountslist = response.body();
                     Account account = accountslist.get(0);

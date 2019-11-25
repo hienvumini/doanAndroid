@@ -14,16 +14,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.pandaapp.Models.Order;
-import com.example.pandaapp.Models.OrderCustomer;
 import com.example.pandaapp.R;
 import com.example.pandaapp.Util.GlobalApplication;
 import com.example.pandaapp.Util.OrderUltils;
 import com.example.pandaapp.Util.OtherUltil;
 
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
 
 public class OrderDetail extends AppCompatActivity {
     ImageView img_back_OrderDetail;
@@ -79,7 +75,7 @@ public class OrderDetail extends AppCompatActivity {
         tvname.setText(order.getName());
         tvphone.setText(order.getPhone_number());
         tvaddress.setText(order.getAddress());
-        tvDateCreat.setText(OtherUltil.convertTime(order.getDate_created()));
+        tvDateCreat.setText(OtherUltil.convertTimeFromDB(order.getDate_created()));
         tvIdorder.setText(order.getOderId() + "");
 
     }

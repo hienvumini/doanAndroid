@@ -98,22 +98,29 @@
         </LinearLayout>
     </LinearLayout>
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recycleview_CategoryProduct"
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/swiperefresh"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/ctheader_Category"
-        android:layout_gravity="center"
-        android:gravity="center" />
+        android:layout_below="@id/ctheader_Category">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycleview_CategoryProduct"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+
+            android:layout_gravity="center"
+            android:gravity="center" />
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
 
     <ProgressBar
-        android:visibility="gone"
         android:id="@+id/processbar_Category"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_gravity="center_horizontal" />
+        android:layout_gravity="center_horizontal"
+        android:visibility="gone" />
 
 </RelativeLayout>

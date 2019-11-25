@@ -1,6 +1,7 @@
 package com.example.pandaapp.view;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -33,6 +34,7 @@ public class CartActivity extends AppCompatActivity {
 
     TextView textViewDeleteProduct;
     ImageView imageView_back_Cart;
+    SwipeRefreshLayout swipeRefreshLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,6 +49,7 @@ public class CartActivity extends AppCompatActivity {
 
 
     private void init() {
+        swipeRefreshLayout=(SwipeRefreshLayout) findViewById(R.id.swiperefresh_Cart_Item);
         imageView_back_Cart = (ImageView) findViewById(R.id.img_back_Cart);
         textViewDeleteProduct = (TextView) findViewById(R.id.textviewDelteProductCart);
 
@@ -68,6 +71,15 @@ public class CartActivity extends AppCompatActivity {
 
 
     private void onListener() {
+        swipeRefreshLayout.setColorSchemeResources(R.color.color_pink2);
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                finish();
+                startActivity(getIntent());
+                swipeRefreshLayout.setRefreshing(false);
+            }
+        });
 
         if (globalApplication.ListcartItems != null) {
             cart_button.setOnClickListener(new View.OnClickListener() {

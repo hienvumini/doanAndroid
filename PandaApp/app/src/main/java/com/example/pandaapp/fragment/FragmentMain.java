@@ -2,6 +2,7 @@ package com.example.pandaapp.fragment;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -9,6 +10,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.os.Handler;
 import android.util.Log;
@@ -40,6 +42,7 @@ import com.squareup.picasso.Picasso;
 import java.util.ArrayList;
 import java.util.List;
 
+import es.dmoral.toasty.Toasty;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -68,6 +71,8 @@ public class FragmentMain extends Fragment {
     ProgressBar progressBarLoadMore;
     boolean intial = true;
     int offset = 0;
+
+    SwipeRefreshLayout swipeRefreshLayout;
 
 
     @Override
@@ -152,12 +157,21 @@ public class FragmentMain extends Fragment {
                 }
             }
         });
+        swipeRefreshLayout.setColorSchemeResources(R.color.color_pink2);
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                listproduct.clear();
+                fetchData();
+                swipeRefreshLayout.setRefreshing(false);
+            }
+        });
 
 
     }
 
     private void fetchData() {
-        Toast.makeText(getActivity(), "Add more", Toast.LENGTH_SHORT).show();
+
 
         new Handler().postDelayed(new Runnable() {
             @Override
@@ -183,7 +197,7 @@ public class FragmentMain extends Fragment {
                             mainAdapter.notifyDataSetChanged();
                             mainAdapter = new AdapterProduct(getActivity(), R.id.recycleview_ShopProduct, listproduct);
                             recyclerView.setAdapter(mainAdapter);
-                            Toast.makeText(getActivity(), listproduct.size() + "", Toast.LENGTH_SHORT).show();
+
                             intial = false;
                         } else {
                             if (listadd.size() > 0) {
@@ -194,10 +208,10 @@ public class FragmentMain extends Fragment {
 
                                 recyclerView.setAdapter(mainAdapter);
 
-                                Toast.makeText(getActivity(), listproduct.size() + "", Toast.LENGTH_SHORT).show();
+
 
                             } else {
-                                Toast.makeText(getActivity(), "Đã tải xong tất cả", Toast.LENGTH_SHORT).show();
+                                Toasty.custom(getActivity(),"Đã tải xong tất cả sản phẩm",R.drawable.ok, R.color.color_pink2,2000,true,true).show();
                             }
                         }
                     }
@@ -232,6 +246,7 @@ public class FragmentMain extends Fragment {
         ActionViewflipper(view);
         imgmyCart = (ImageView) view.findViewById(R.id.imgcartMain);
         searchView = (TextView) view.findViewById(R.id.tv_Search_Search);
+        swipeRefreshLayout=(SwipeRefreshLayout) view.findViewById(R.id.swiperefrefresh_FragmentMain);
 
     }
 

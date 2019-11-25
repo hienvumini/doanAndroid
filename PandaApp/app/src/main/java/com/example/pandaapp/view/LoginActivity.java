@@ -31,7 +31,7 @@ public class LoginActivity extends AppCompatActivity {
 
     public void toSignUpFragment() {
         FragmentUtils.openFragment(fragmentSignup,getSupportFragmentManager(),R.id.frameSigin);
-        Toast.makeText(this, "Hello", Toast.LENGTH_SHORT).show();
+
     }
     public void toSigninFragment() {
         FragmentUtils.openFragment(fragmentLogin,getSupportFragmentManager(),R.id.frameSigin);

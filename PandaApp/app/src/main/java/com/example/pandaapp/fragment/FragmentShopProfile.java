@@ -23,6 +23,8 @@ import com.example.pandaapp.Util.GlobalApplication;
 import com.example.pandaapp.view.MainActivity;
 import com.example.pandaapp.view.OrderManagerShopActivity;
 
+import es.dmoral.toasty.Toasty;
+
 
 public class FragmentShopProfile extends Fragment implements View.OnClickListener {
     LinearLayout linearAddProduct, linearRevenue, linearProductList, linearProcess, linearOnWay, linearReceived, linearCancel, linearProfile;
@@ -98,6 +100,7 @@ public class FragmentShopProfile extends Fragment implements View.OnClickListene
                 startActivity(intent);
                 getActivity().finish();
                 GlobalApplication globalApplication = (GlobalApplication) getActivity().getApplicationContext();
+                Toasty.custom(getActivity(),"Đăng xuất",R.drawable.logo,R.color.color_red_text,2000,false,true).show();
 
 
                 break;

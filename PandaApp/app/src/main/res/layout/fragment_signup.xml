@@ -9,9 +9,9 @@
     tools:context=".view.LoginActivity">
 
     <ScrollView
-        android:layout_above="@id/signup_buttonSignup"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_above="@id/signup_buttonSignup">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -117,7 +117,7 @@
                 android:layout_marginRight="@dimen/dimen_20dp"
                 android:background="@color/color_white"
                 android:hint="0988998899"
-                android:inputType="text"
+                android:inputType="number"
                 android:paddingLeft="@dimen/dimen_5dp"
                 android:text="" />
 
@@ -163,9 +163,9 @@
 
                 <RadioButton
                     android:id="@+id/checkNuSignup"
-                    android:checked="true"
                     android:layout_width="100dp"
                     android:layout_height="match_parent"
+                    android:checked="true"
                     android:gravity="center"
                     android:text="Nữ" />
 
@@ -206,7 +206,7 @@
                 android:text="Ngày sinh"
                 android:textColor="@color/color_blue_text" />
 
-            <EditText
+            <TextView
                 android:id="@+id/edittextDateOfBirthSignup"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/dimen_35dp"
@@ -214,8 +214,9 @@
                 android:layout_marginTop="@dimen/dimen_10dp"
                 android:layout_marginRight="@dimen/dimen_20dp"
                 android:background="@color/color_white"
+                android:gravity="center_vertical"
                 android:hint="09/11/1992"
-                android:inputType="text"
+                android:inputType="none"
                 android:paddingLeft="@dimen/dimen_5dp"
                 android:text="" />
 
@@ -229,27 +230,29 @@
                 android:orientation="horizontal">
 
                 <TextView
+
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Bạn có muốn mở gian hàng không?"
                     android:textSize="@dimen/font_20sp" />
+
                 <CheckBox
                     android:id="@+id/checkboxOpenShop"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
+                    android:layout_height="wrap_content" />
             </LinearLayout>
+
             <TextView
                 android:id="@+id/texviewlableOpenShopSignUp"
-                android:visibility="invisible"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/dimen_15dp"
                 android:layout_marginTop="@dimen/dimen_15dp"
                 android:text="Tên gian hàng"
-                android:textColor="@color/color_blue_text" />
+                android:textColor="@color/color_blue_text"
+                android:visibility="invisible" />
 
             <EditText
-                android:visibility="invisible"
                 android:id="@+id/edittextNameShopSignup"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/dimen_35dp"
@@ -260,23 +263,23 @@
                 android:hint="Phạm Công Panda Shop"
                 android:inputType="text"
                 android:paddingLeft="@dimen/dimen_5dp"
-                android:text="" />
+                android:text=""
+                android:visibility="invisible" />
 
         </LinearLayout>
     </ScrollView>
 
 
-
-        <Button
-            android:layout_alignParentBottom="true"
-            android:id="@+id/signup_buttonSignup"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/dimen_40dp"
-            android:layout_gravity="center_horizontal"
-            android:layout_margin="@dimen/dimen_10dp"
-            android:layout_marginTop="@dimen/dimen_25dp"
-            android:background="@drawable/botron_button"
-            android:text="Đăng kí"
-            android:textColor="@color/color_white" />
+    <Button
+        android:id="@+id/signup_buttonSignup"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimen_40dp"
+        android:layout_alignParentBottom="true"
+        android:layout_gravity="center_horizontal"
+        android:layout_margin="@dimen/dimen_10dp"
+        android:layout_marginTop="@dimen/dimen_25dp"
+        android:background="@drawable/botron_button"
+        android:text="Đăng kí"
+        android:textColor="@color/color_white" />
 
 </RelativeLayout>

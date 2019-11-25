@@ -20,6 +20,8 @@ import com.example.pandaapp.R;
 import com.example.pandaapp.Util.GlobalApplication;
 import com.example.pandaapp.view.OrderManagerCustomerActivity;
 
+import es.dmoral.toasty.Toasty;
+
 
 public class FragmentProfile extends Fragment {
     TextView textViewName, textViewUsername, textViewPhone, textViewAddress;
@@ -72,6 +74,7 @@ public class FragmentProfile extends Fragment {
                 Intent intent = new Intent(getContext(), LoginActivity.class);
                 startActivity(intent);
                 getActivity().finish();
+                Toasty.custom(getActivity(),"Đăng xuất",R.drawable.logo,R.color.color_red_text,2000,false,true).show();
             }
         });
         textViewbtnFavorite.setOnClickListener(new View.OnClickListener() {

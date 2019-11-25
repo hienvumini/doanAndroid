@@ -1,5 +1,6 @@
 package com.example.pandaapp.fragment;
 
+import android.app.DatePickerDialog;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -11,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -19,16 +21,21 @@ import android.widget.Toast;
 
 import com.example.pandaapp.Retrofit2.APIUltils;
 import com.example.pandaapp.Retrofit2.DataClient;
+import com.example.pandaapp.Util.OtherUltil;
 import com.example.pandaapp.view.LoginActivity;
 import com.example.pandaapp.Models.Account;
 import com.example.pandaapp.R;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+
+import es.dmoral.toasty.Toasty;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
 public class FragmentSignup extends Fragment {
-    EditText edittextusernameSignup, edittextpassSignup, edittextNameSignup, edittextPhoneSignup, edittextAddressSignup, edittextEmailSignup, edittextDateOfBirthSignup, edittextNameShopSignup;
+    EditText edittextusernameSignup, edittextpassSignup, edittextNameSignup, edittextPhoneSignup, edittextAddressSignup, edittextEmailSignup,  edittextNameShopSignup;
     RadioGroup radiogroupGioitinh;
     RadioButton checkNuSignup, checkNamSignup;
     Button signup_buttonSignup;
@@ -39,13 +46,32 @@ public class FragmentSignup extends Fragment {
     int idrole = 1;
     Account account = new Account();
     CheckBox checkenableShop;
+    TextView edittextDateOfBirthSignup;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         final View view = inflater.inflate(R.layout.fragment_signup, container, false);
         init(view);
+        edittextDateOfBirthSignup.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final Calendar calendar=Calendar.getInstance();
 
+                DatePickerDialog datePickerDialog=new DatePickerDialog(getActivity(), new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+                        calendar.set(year,month,dayOfMonth);
+                        SimpleDateFormat simpleDateFormat=new SimpleDateFormat("dd/MM/yyyy");
+                        edittextDateOfBirthSignup.setText(simpleDateFormat.format(calendar.getTime()));
+
+                    }
+                },2019,11,11);
+                datePickerDialog.show();
+
+
+            }
+        });
         signup_buttonSignup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -57,7 +83,7 @@ public class FragmentSignup extends Fragment {
                         edittextDateOfBirthSignup.getText().toString().equalsIgnoreCase("") ||
                         edittextPhoneSignup.getText().toString().equalsIgnoreCase("")
                 ) {
-                    Toast.makeText(getActivity(), "Vui lòng điền đầy đủ thông tin!", Toast.LENGTH_SHORT).show();
+                    Toasty.error(getActivity(),"Vui lòng điền đầy đủ thông tin",2000).show();
                 } else {
 
                     getdataformSignup();
@@ -77,13 +103,14 @@ public class FragmentSignup extends Fragment {
                 stringCall.enqueue(new Callback<String>() {
                     @Override
                     public void onResponse(Call<String> call, Response<String> response) {
+                        Log.d("A111", "onResponse: " + response);
                         if (response.body().equalsIgnoreCase("Exist")) {
-                            Toast.makeText(getActivity(), "Tài khoản đã tồn tại", Toast.LENGTH_SHORT).show();
+                            Toasty.error(getActivity(),"Tài khoản đã tồn tại",2000).show();
                         } else if (response.body() == "0") {
-                            Toast.makeText(getActivity(), "Đăng kí thất bại, Thử lại", Toast.LENGTH_SHORT).show();
+                            Toasty.error(getActivity(),"Đăng kí thất bại, vui lòng thử lại",2000).show();
 
                         } else {
-                            Toast.makeText(getActivity(), "Đăng kí thành công", Toast.LENGTH_SHORT).show();
+                            Toasty.custom(getActivity(),"Đăng kí thành công",R.drawable.ok,R.color.color_pink2,2000,false,true).show();
                             ((LoginActivity) getActivity()).toSigninFragment();
 
                         }
@@ -123,7 +150,7 @@ public class FragmentSignup extends Fragment {
 
     private void init(View view) {
         edittextAddressSignup = (EditText) view.findViewById(R.id.edittextAddressSignup);
-        edittextDateOfBirthSignup = (EditText) view.findViewById(R.id.edittextDateOfBirthSignup);
+        edittextDateOfBirthSignup = (TextView) view.findViewById(R.id.edittextDateOfBirthSignup);
         edittextEmailSignup = (EditText) view.findViewById(R.id.edittextEmailSignup);
         edittextNameSignup = (EditText) view.findViewById(R.id.edittextNameSignup);
         edittextpassSignup = (EditText) view.findViewById(R.id.edittextpassSignup);
@@ -140,6 +167,9 @@ public class FragmentSignup extends Fragment {
     public void getdataformSignup() {
         txtaddress = edittextAddressSignup.getText().toString().trim();
         txtdateofbirth = edittextDateOfBirthSignup.getText().toString().trim();
+        String dateOfBirthDB = OtherUltil.convertDatetoMysql(txtdateofbirth);
+        txtdateofbirth = dateOfBirthDB;
+        SimpleDateFormat dateDB = new SimpleDateFormat("yyyy-mm-dd");
         if (edittextusernameSignup.getText().toString().equalsIgnoreCase("")) {
             txtemail = "";
         } else {

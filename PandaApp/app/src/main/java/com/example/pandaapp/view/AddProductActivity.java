@@ -19,6 +19,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.pandaapp.Models.Account;
 import com.example.pandaapp.Models.Category;
 import com.example.pandaapp.Models.Product;
 import com.example.pandaapp.R;
@@ -32,6 +33,7 @@ import com.example.pandaapp.adapter.AdapterAddImage;
 import java.io.File;
 import java.util.ArrayList;
 
+import es.dmoral.toasty.Toasty;
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
@@ -62,6 +64,7 @@ public class AddProductActivity extends AppCompatActivity {
     ArrayAdapter adapterspinner;
     int idproductadd;
     TextView textViewNotifi;
+    GlobalApplication globalApplication;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -102,7 +105,7 @@ public class AddProductActivity extends AppCompatActivity {
         adapterAddImage.setListener(new AdapterAddImage.IcallbackAddProductActivity() {
             @Override
             public void removeImage(int position) {
-                Toast.makeText(getApplicationContext(), "Xoa anh thu " + position, Toast.LENGTH_SHORT).show();
+
                 listUriImage.remove(position);
                 adapterAddImage.notifyDataSetChanged();
             }
@@ -112,7 +115,7 @@ public class AddProductActivity extends AppCompatActivity {
 
     private void insertProduct() {
         if (txtNameProduct.getText().toString().trim().equalsIgnoreCase("") || txtDiscProduct.getText().toString().trim().equalsIgnoreCase("")) {
-            Toast.makeText(this, "Vui lòng điền đầy đủ thông tin sản phẩm", Toast.LENGTH_SHORT).show();
+            Toasty.error(getApplicationContext(),"Điền đầy đủ thông tin sản phẩm",2000,false);
         } else {
             getdataFromUser();
             DataClient insertProduct = APIUltils.getData();
@@ -154,7 +157,7 @@ public class AddProductActivity extends AppCompatActivity {
         GlobalApplication globalApplication = (GlobalApplication) getApplicationContext();
         idshop = globalApplication.account.getIdShop();
         product = new Product(name, price, discount, idshop, idCate, disc);
-        Toast.makeText(getApplicationContext(), product.toString(), Toast.LENGTH_SHORT).show();
+
 
 
     }
@@ -179,18 +182,22 @@ public class AddProductActivity extends AppCompatActivity {
             callback.enqueue(new Callback<String>() {
                 @Override
                 public void onResponse(Call<String> call, Response<String> response) {
+                    Log.d("", "onResponse: "+response.body());
                     DataClient insertImages = APIUltils.getData();
                     Call<String> stringCall = insertImages.InsertImage("image/ImageProduct/" + response.body(), idproductadd);
                     stringCall.enqueue(new Callback<String>() {
                         @Override
                         public void onResponse(Call<String> call, Response<String> response) {
-                            Toast.makeText(AddProductActivity.this, response.body(), Toast.LENGTH_SHORT).show();
+
                             if (response.body().contains("Success")) {
                                 CacheUltils cacheUltils = new CacheUltils(getApplicationContext());
                                 cacheUltils.RefreshProduct(idproductadd);
-                                Intent intent = new Intent(getApplicationContext(), DetailActivity.class);
-                                startActivity(intent);
+                                globalApplication=(GlobalApplication) getApplicationContext();
+                                Account account=globalApplication.account;
+
+
                                 finish();
+
                             }
 
 

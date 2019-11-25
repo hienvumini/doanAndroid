@@ -9,7 +9,7 @@ import java.util.Date;
 public class OtherUltil {
     public static DecimalFormat fomattien = new DecimalFormat("###,###.###");
 
-    public static String convertTime(String datetime) {
+    public static String convertTimeFromDB(String datetime) {
         SimpleDateFormat sdf = null;
         Date d = new Date();
         SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -23,5 +23,19 @@ public class OtherUltil {
         return sdf.format(d);
     }
 
-    ;
+    public static  String convertDatetoMysql(String date){
+
+        SimpleDateFormat fmt = new SimpleDateFormat("dd/MM/yyyy");
+        Date inputDate = null;
+        try {
+            inputDate = fmt.parse(date);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+
+        fmt = new SimpleDateFormat("yyyy-MM-dd");
+        String dateString = fmt.format(inputDate);
+        return dateString;
+    }
 }
