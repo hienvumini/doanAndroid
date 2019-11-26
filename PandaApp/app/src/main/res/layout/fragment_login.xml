@@ -67,10 +67,10 @@
             android:layout_marginLeft="@dimen/dimen_20dp"
             android:layout_marginTop="@dimen/dimen_10dp"
             android:background="@color/color_white"
-            android:hint="*********"
+            android:hint="********"
             android:inputType="textPassword"
             android:paddingLeft="@dimen/dimen_5dp"
-            android:text="12345678" />
+            android:text="123456" />
 
         <Button
 
