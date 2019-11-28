@@ -82,7 +82,7 @@ public class MainActivity extends AppCompatActivity  {
                     fragmentselect = fragmentCategory;
 
                     break;
-                case R.id.menu_nav_seach:
+                case R.id.menu_nav_news:
                     fragmentselect = fragmentSearch;
 
                     break;
