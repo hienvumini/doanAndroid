@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.webkit.WebSettings;
 import android.webkit.WebView;
 
 import com.example.pandaapp.Models.News;
@@ -22,7 +23,13 @@ public class NewsDetailActivity extends AppCompatActivity {
         webView=(WebView) findViewById(R.id.webview_detail_News);
         globalApplication=(GlobalApplication) getApplicationContext();
         news=globalApplication.news;
-        webView.loadData(news.getDetailNews(), "text/html", "UTF-16");
+
+        WebSettings settings = webView.getSettings();
+        settings.setJavaScriptEnabled(true);
+        settings.setDefaultTextEncodingName("utf-8");
+
+        webView.loadData(news.getDetailNews(), "text/html; charset=utf-8", "utf-8");
+       // webView.loadData(news.getDetailNews(), "text/html", "utf-8");
 
     }
 }
