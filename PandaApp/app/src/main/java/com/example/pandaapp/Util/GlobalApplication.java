@@ -6,6 +6,7 @@ import android.content.Context;
 import com.example.pandaapp.Models.Account;
 import com.example.pandaapp.Models.CartItem;
 import com.example.pandaapp.Models.Category;
+import com.example.pandaapp.Models.News;
 import com.example.pandaapp.Models.Order;
 import com.example.pandaapp.Models.OrderCustomer;
 import com.example.pandaapp.Models.Product;
@@ -25,6 +26,7 @@ public class GlobalApplication extends Application {
     public Category category;
     public Order order;
     public OrderCustomer orderCustomer;
+    public News news;
 
     @Override
     public void onCreate() {

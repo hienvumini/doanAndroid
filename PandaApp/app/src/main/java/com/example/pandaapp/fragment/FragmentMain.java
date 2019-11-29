@@ -2,7 +2,6 @@ package com.example.pandaapp.fragment;
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -23,7 +22,6 @@ import android.widget.AbsListView;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
 import android.widget.Toolbar;
 import android.widget.ViewFlipper;
 
@@ -60,7 +58,7 @@ public class FragmentMain extends Fragment {
     Account account = new Account();
     BottomNavigationView nav_bottom_MainActivity;
     FragmentCategory fragmentCategory = new FragmentCategory();
-    FragmentSearch fragmentSearch = new FragmentSearch();
+    FragmentNews fragmentNews = new FragmentNews();
     FragmentProfile fragmentProfile = new FragmentProfile();
     FragmentCart fragmentCart = new FragmentCart();
     int limitProductPerPull = 6;

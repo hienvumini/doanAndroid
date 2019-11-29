@@ -3,46 +3,29 @@ package com.example.pandaapp.view;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
-import androidx.recyclerview.widget.RecyclerView;
 
-import android.content.Intent;
-import android.content.res.ColorStateList;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.ImageView;
-import android.widget.SearchView;
 import android.widget.Toast;
-import android.widget.Toolbar;
-import android.widget.ViewFlipper;
 
 import com.example.pandaapp.Util.FragmentUtils;
 import com.example.pandaapp.Util.GlobalApplication;
-import com.example.pandaapp.fragment.FragmentCart;
 import com.example.pandaapp.fragment.FragmentCategory;
 import com.example.pandaapp.fragment.FragmentMain;
 import com.example.pandaapp.fragment.FragmentProfile;
-import com.example.pandaapp.fragment.FragmentSearch;
+import com.example.pandaapp.fragment.FragmentNews;
 import com.example.pandaapp.Models.Account;
-import com.example.pandaapp.Models.Product;
 import com.example.pandaapp.R;
-import com.example.pandaapp.adapter.AdapterProduct;
 import com.example.pandaapp.fragment.FragmentShopProfile;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.bottomnavigation.LabelVisibilityMode;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class MainActivity extends AppCompatActivity  {
 
     Account account0 = new Account();
     BottomNavigationView nav_bottom_MainActivity;
     FragmentCategory fragmentCategory = new FragmentCategory();
-    FragmentSearch fragmentSearch = new FragmentSearch();
+    FragmentNews fragmentNews = new FragmentNews();
     FragmentProfile fragmentProfile = new FragmentProfile();
     FragmentMain fragmentMain = new FragmentMain();
     FragmentShopProfile fragmentShopProfile = new FragmentShopProfile();
@@ -83,7 +66,7 @@ public class MainActivity extends AppCompatActivity  {
 
                     break;
                 case R.id.menu_nav_news:
-                    fragmentselect = fragmentSearch;
+                    fragmentselect = fragmentNews;
 
                     break;
                 case R.id.menu_nav_profile:

@@ -2,6 +2,7 @@ package com.example.pandaapp.Retrofit2;
 
 import com.example.pandaapp.Models.Account;
 import com.example.pandaapp.Models.Category;
+import com.example.pandaapp.Models.News;
 import com.example.pandaapp.Models.Order;
 import com.example.pandaapp.Models.OrderCustomer;
 import com.example.pandaapp.Models.Product;
@@ -124,6 +125,12 @@ public interface DataClient {
     @FormUrlEncoded
     @POST("checkAccountFB.php")
     Call<ArrayList<Account>> CheckAccountFB(@Field("usernameaccount") String username);
+
+    @FormUrlEncoded
+    @POST("getNews.php")
+    Call<ArrayList<News>> getNews(@Field("offset") int offset);
+
+
 
 
 
