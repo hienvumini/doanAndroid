@@ -22,6 +22,7 @@ import com.example.pandaapp.R;
 import com.example.pandaapp.Util.GlobalApplication;
 import com.example.pandaapp.view.MainActivity;
 import com.example.pandaapp.view.OrderManagerShopActivity;
+import com.facebook.login.LoginManager;
 
 import es.dmoral.toasty.Toasty;
 
@@ -101,6 +102,7 @@ public class FragmentShopProfile extends Fragment implements View.OnClickListene
                 getActivity().finish();
                 GlobalApplication globalApplication = (GlobalApplication) getActivity().getApplicationContext();
                 Toasty.custom(getActivity(),"Đăng xuất",R.drawable.logo,R.color.color_red_text,2000,false,true).show();
+                LoginManager.getInstance().logOut();
 
 
                 break;

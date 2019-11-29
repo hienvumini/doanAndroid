@@ -9,10 +9,13 @@ import android.os.Bundle;
 import android.text.Layout;
 import android.widget.Toast;
 
+import com.example.pandaapp.Models.Account;
 import com.example.pandaapp.R;
 import com.example.pandaapp.Util.FragmentUtils;
 import com.example.pandaapp.fragment.FragmentLogin;
 import com.example.pandaapp.fragment.FragmentSignup;
+import com.facebook.CallbackManager;
+import com.facebook.login.widget.LoginButton;
 
 public class LoginActivity extends AppCompatActivity {
     FragmentTransaction fragmentTransaction;
@@ -29,8 +32,8 @@ public class LoginActivity extends AppCompatActivity {
 
     }
 
-    public void toSignUpFragment() {
-        FragmentUtils.openFragment(fragmentSignup,getSupportFragmentManager(),R.id.frameSigin);
+    public void toSignUpFragment(Account account,int mode) {
+        FragmentUtils.openFragment(fragmentSignup,getSupportFragmentManager(),R.id.frameSigin,account,mode);
 
     }
     public void toSigninFragment() {

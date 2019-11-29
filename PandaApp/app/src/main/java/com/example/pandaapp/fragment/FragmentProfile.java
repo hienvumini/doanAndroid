@@ -19,6 +19,7 @@ import com.example.pandaapp.Models.Account;
 import com.example.pandaapp.R;
 import com.example.pandaapp.Util.GlobalApplication;
 import com.example.pandaapp.view.OrderManagerCustomerActivity;
+import com.facebook.login.LoginManager;
 
 import es.dmoral.toasty.Toasty;
 
@@ -48,14 +49,14 @@ public class FragmentProfile extends Fragment {
     }
 
     public void init(View view) {
-        imageViewi_black_Profile=(ImageView) view.findViewById(R.id.img_back_black_Profile);
+        imageViewi_black_Profile = (ImageView) view.findViewById(R.id.img_back_black_Profile);
         textViewName = (TextView) view.findViewById(R.id.textviewName_Profile);
         textViewUsername = (TextView) view.findViewById(R.id.textviewUsename_Profile);
         textViewAddress = (TextView) view.findViewById(R.id.textviewAddress_Profile);
         textViewPhone = (TextView) view.findViewById(R.id.textviewPhone_Profile);
         btnLogout = (Button) view.findViewById(R.id.btnLogOut_Profile);
         textViewbtnFavorite = (TextView) view.findViewById(R.id.textview_Favorite_Profile);
-        layoutMyOrder_Profile=(LinearLayout) view.findViewById(R.id.layoutMyOrder_Profile);
+        layoutMyOrder_Profile = (LinearLayout) view.findViewById(R.id.layoutMyOrder_Profile);
 
     }
 
@@ -73,8 +74,12 @@ public class FragmentProfile extends Fragment {
             public void onClick(View v) {
                 Intent intent = new Intent(getContext(), LoginActivity.class);
                 startActivity(intent);
+
+                Toasty.custom(getActivity(), "Đăng xuất", R.drawable.logo, R.color.color_red_text, 2000, false, true).show();
+                LoginManager.getInstance().logOut();
                 getActivity().finish();
-                Toasty.custom(getActivity(),"Đăng xuất",R.drawable.logo,R.color.color_red_text,2000,false,true).show();
+
+
             }
         });
         textViewbtnFavorite.setOnClickListener(new View.OnClickListener() {

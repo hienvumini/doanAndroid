@@ -121,6 +121,10 @@ public interface DataClient {
     @POST("getOrderofCustomers.php")
     Call<ArrayList<OrderCustomer>> getOrderCustomer(@Field("AccountId") int AccountId, @Field("statusId") int statusId);
 
+    @FormUrlEncoded
+    @POST("checkAccountFB.php")
+    Call<ArrayList<Account>> CheckAccountFB(@Field("usernameaccount") String username);
+
 
 
 

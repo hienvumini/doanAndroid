@@ -1,6 +1,7 @@
 package com.example.pandaapp.fragment;
 
 import android.app.DatePickerDialog;
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -35,7 +36,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class FragmentSignup extends Fragment {
-    EditText edittextusernameSignup, edittextpassSignup, edittextNameSignup, edittextPhoneSignup, edittextAddressSignup, edittextEmailSignup,  edittextNameShopSignup;
+    EditText edittextusernameSignup, edittextpassSignup, edittextNameSignup, edittextPhoneSignup, edittextAddressSignup, edittextEmailSignup, edittextNameShopSignup;
     RadioGroup radiogroupGioitinh;
     RadioButton checkNuSignup, checkNamSignup;
     Button signup_buttonSignup;
@@ -47,26 +48,57 @@ public class FragmentSignup extends Fragment {
     Account account = new Account();
     CheckBox checkenableShop;
     TextView edittextDateOfBirthSignup;
+    int mode;
+    View view;
+    Bundle bundle;
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        final View view = inflater.inflate(R.layout.fragment_signup, container, false);
+        view = inflater.inflate(R.layout.fragment_signup, container, false);
         init(view);
+        bundle=this.getArguments();
+        mode = bundle.getInt("mode", 1);
+        Toast.makeText(getActivity(), "Mode= "+mode, Toast.LENGTH_SHORT).show();
+        switch (mode) {
+
+            case 1:
+
+
+                break;
+            case 2:
+
+                account= (Account) bundle.getSerializable("key");
+                Toast.makeText(getActivity(), "Dang nhap Fb "+account.toString(), Toast.LENGTH_SHORT).show();
+
+                setDataIntilize(account);
+
+                break;
+            case 3:
+
+                break;
+
+        }
+        onListener(view);
+        return view;
+    }
+
+    private void onListener(final View view) {
         edittextDateOfBirthSignup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                final Calendar calendar=Calendar.getInstance();
+                final Calendar calendar = Calendar.getInstance();
 
-                DatePickerDialog datePickerDialog=new DatePickerDialog(getActivity(), new DatePickerDialog.OnDateSetListener() {
+                DatePickerDialog datePickerDialog = new DatePickerDialog(getActivity(), new DatePickerDialog.OnDateSetListener() {
                     @Override
                     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-                        calendar.set(year,month,dayOfMonth);
-                        SimpleDateFormat simpleDateFormat=new SimpleDateFormat("dd/MM/yyyy");
+                        calendar.set(year, month, dayOfMonth);
+                        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");
                         edittextDateOfBirthSignup.setText(simpleDateFormat.format(calendar.getTime()));
 
                     }
-                },2019,11,11);
+                }, 2019, 11, 11);
                 datePickerDialog.show();
 
 
@@ -83,7 +115,7 @@ public class FragmentSignup extends Fragment {
                         edittextDateOfBirthSignup.getText().toString().equalsIgnoreCase("") ||
                         edittextPhoneSignup.getText().toString().equalsIgnoreCase("")
                 ) {
-                    Toasty.error(getActivity(),"Vui lòng điền đầy đủ thông tin",2000).show();
+                    Toasty.error(getActivity(), "Vui lòng điền đầy đủ thông tin", 2000).show();
                 } else {
 
                     getdataformSignup();
@@ -105,12 +137,12 @@ public class FragmentSignup extends Fragment {
                     public void onResponse(Call<String> call, Response<String> response) {
                         Log.d("A111", "onResponse: " + response);
                         if (response.body().equalsIgnoreCase("Exist")) {
-                            Toasty.error(getActivity(),"Tài khoản đã tồn tại",2000).show();
+                            Toasty.error(getActivity(), "Tài khoản đã tồn tại", 2000).show();
                         } else if (response.body() == "0") {
-                            Toasty.error(getActivity(),"Đăng kí thất bại, vui lòng thử lại",2000).show();
+                            Toasty.error(getActivity(), "Đăng kí thất bại, vui lòng thử lại", 2000).show();
 
                         } else {
-                            Toasty.custom(getActivity(),"Đăng kí thành công",R.drawable.ok,R.color.color_pink2,2000,false,true).show();
+                            Toasty.custom(getActivity(), "Đăng kí thành công", R.drawable.ok, R.color.color_pink2, 2000, false, true).show();
                             ((LoginActivity) getActivity()).toSigninFragment();
 
                         }
@@ -144,7 +176,6 @@ public class FragmentSignup extends Fragment {
                 }
             }
         });
-        return view;
     }
 
 
@@ -198,5 +229,21 @@ public class FragmentSignup extends Fragment {
         if (txtNameShop == null || txtNameShop.equalsIgnoreCase("")) {
             txtNameShop = txtnamefull;
         }
+    }
+    public void setDataIntilize(Account account){
+            edittextNameSignup.setText(account.getName());
+            edittextAddressSignup.setText(account.getAddress());
+            edittextDateOfBirthSignup.setText(account.getDateOfBirth());
+            edittextEmailSignup.setText(account.getEmail());
+            if (account.getGender()==1){
+                checkNamSignup.setChecked(true);
+
+            } else {
+                checkNuSignup.setChecked(true);
+
+            }
+            edittextusernameSignup.setText(account.getEmail());
+            edittextusernameSignup.setEnabled(false);
+
     }
 }

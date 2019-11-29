@@ -9,6 +9,8 @@ import com.example.pandaapp.Models.Category;
 import com.example.pandaapp.Models.Order;
 import com.example.pandaapp.Models.OrderCustomer;
 import com.example.pandaapp.Models.Product;
+import com.facebook.FacebookSdk;
+import com.facebook.appevents.AppEventsLogger;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,7 +26,12 @@ public class GlobalApplication extends Application {
     public Order order;
     public OrderCustomer orderCustomer;
 
-
+    @Override
+    public void onCreate() {
+        super.onCreate();
+        FacebookSdk.sdkInitialize(getApplicationContext());
+        AppEventsLogger.activateApp(this);
+    }
 
     public double updatetotal() {
         double total = 0;
