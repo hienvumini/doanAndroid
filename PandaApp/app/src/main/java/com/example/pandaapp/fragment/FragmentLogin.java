@@ -97,17 +97,15 @@ public class FragmentLogin extends Fragment {
         });
 
 
-
         edittextuser = (EditText) view.findViewById(R.id.edittextusernameLogin);
         edittextpass = (EditText) view.findViewById(R.id.edittextpassLogin);
         btnlogin = (Button) view.findViewById(R.id.login_buttonLogin);
-        btnfacebookLogin = (ImageView) view.findViewById(R.id.login_facebookLogin);
-        btnGoogleLogin = (ImageView) view.findViewById(R.id.login_googleLogin);
+
         textViewSignupLogin = (TextView) view.findViewById(R.id.textview_sigupLogin);
         textViewSignupLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ((LoginActivity) getActivity()).toSignUpFragment(account,1);
+                ((LoginActivity) getActivity()).toSignUpFragment(account, 1);
             }
         });
         btnlogin.setOnClickListener(new View.OnClickListener() {
@@ -168,7 +166,7 @@ public class FragmentLogin extends Fragment {
                         @Override
                         public void onCompleted(final JSONObject me, GraphResponse response) {
                             if (me != null) {
-                                accountFB=new Account();
+                                accountFB = new Account();
                                 Log.i("Login: ", me.optString("name"));
                                 Log.i("ID: ", me.optString("id"));
                                 edittextuser.setText(me.optString("email"));
@@ -189,8 +187,8 @@ public class FragmentLogin extends Fragment {
                                     gender = 1;
                                 }
                                 String email = me.optString("email");
-                                String datebirth=me.optString("birthday");
-                                Log.d("NgaySinh", "onCompleted: "+datebirth);
+                                String datebirth = me.optString("birthday");
+                                Log.d("NgaySinh", "onCompleted: " + datebirth);
                                 accountFB.setName(name);
                                 accountFB.setEmail(email);
                                 accountFB.setGender(gender);
@@ -198,10 +196,6 @@ public class FragmentLogin extends Fragment {
                                 accountFB.setName(name);
                                 accountFB.setName(name);
                                 checkaccFB(accountFB.getEmail());
-
-
-
-
 
 
                             }
@@ -224,13 +218,15 @@ public class FragmentLogin extends Fragment {
         callbackManager.onActivityResult(requestCode, resultCode, data);
         super.onActivityResult(requestCode, resultCode, data);
     }
-    public  void logoutFB(){
+
+    public void logoutFB() {
         loginButton.unregisterCallback(callbackManager);
 
     }
-    public void checkaccFB(String emailFB){
 
-        DataClient dataClient=APIUltils.getData();
+    public void checkaccFB(String emailFB) {
+
+        DataClient dataClient = APIUltils.getData();
         DataClient processLogin = APIUltils.getData();
         Call<ArrayList<Account>> accountCall = processLogin.CheckAccountFB(emailFB);
         accountCall.enqueue(new Callback<ArrayList<Account>>() {
@@ -241,7 +237,7 @@ public class FragmentLogin extends Fragment {
 
                     ArrayList<Account> accountslist = response.body();
                     Account acc = accountslist.get(0);
-                    Log.d("A222", "onCompleted: "+acc.toString());
+                    Log.d("A222", "onCompleted: " + acc.toString());
                     if (globalApplication == null) {
                         globalApplication = (GlobalApplication) getActivity().getApplicationContext();
 
@@ -252,7 +248,7 @@ public class FragmentLogin extends Fragment {
                     getActivity().finish();
 
                 } else {
-                    ((LoginActivity) getActivity()).toSignUpFragment(accountFB,2);
+                    ((LoginActivity) getActivity()).toSignUpFragment(accountFB, 2);
 
                 }
 

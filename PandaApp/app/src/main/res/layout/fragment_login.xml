@@ -124,49 +124,28 @@
         </LinearLayout>
 
         <LinearLayout
+            android:weightSum="2"
             android:layout_width="match_parent"
             android:layout_height="@dimen/dimen_35dp"
             android:layout_marginTop="@dimen/dimen_15dp"
             android:orientation="horizontal">
 
-            <RelativeLayout
+            <com.facebook.login.widget.LoginButton
+
+                android:id="@+id/login_button"
                 android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_marginRight="@dimen/dimen_10dp"
-                android:layout_weight="1">
+                android:layout_height="@dimen/dimen_50dp"
+                android:layout_weight="1"/>
 
-                <ImageView
-
-                    android:id="@+id/login_facebookLogin"
-                    android:layout_width="@dimen/dimen_35dp"
-                    android:layout_height="match_parent"
-                    android:layout_alignParentEnd="true"
-                    android:src="@drawable/facebook" />
-
-            </RelativeLayout>
-
-            <RelativeLayout
+            <com.google.android.gms.common.SignInButton
                 android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1">
-
-                <ImageView
-                    android:id="@+id/login_googleLogin"
-                    android:layout_width="@dimen/dimen_35dp"
-                    android:layout_height="match_parent"
-                    android:src="@drawable/google" />
-            </RelativeLayout>
+                android:layout_height="wrap_content"
+                android:layout_weight="1"/>
 
 
         </LinearLayout>
 
-        <com.facebook.login.widget.LoginButton
-            android:id="@+id/login_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="30dp"
-            android:layout_marginBottom="30dp" />
+
     </LinearLayout>
 
     <FrameLayout
