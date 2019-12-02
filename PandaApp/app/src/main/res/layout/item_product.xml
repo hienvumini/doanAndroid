@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/itemProduct"
     android:layout_width="match_parent"
@@ -9,6 +9,7 @@
 
     >
 
+
     <androidx.cardview.widget.CardView
         android:layout_width="@dimen/dimen_200dp"
         android:layout_height="@dimen/dimen_250dp"
@@ -17,12 +18,14 @@
         app:cardCornerRadius="@dimen/dimen_5dp"
         app:cardElevation="@dimen/dimen_20dp">
 
+
+
         <LinearLayout
-            android:padding="@dimen/dimen_10dp"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:padding="@dimen/dimen_10dp">
 
             <ImageView
                 android:id="@+id/ImageanhSP"
@@ -32,11 +35,11 @@
                 android:src="@color/color_blue_text" />
 
             <TextView
-                android:maxLines="2"
                 android:id="@+id/textviewTenSP"
                 android:layout_width="match_parent"
-
                 android:layout_height="wrap_content"
+
+                android:maxLines="2"
                 android:text="Tên sản phẩm"
                 android:textSize="@dimen/font_16sp" />
 
@@ -50,8 +53,15 @@
                 android:textSize="@dimen/font_18sp" />
         </LinearLayout>
 
-
+        <ImageView
+            android:layout_marginBottom="@dimen/dimen_5dp"
+            android:id="@+id/btn_favorite_ItemProduct"
+            android:layout_marginLeft="@dimen/dimen_10dp"
+            android:layout_width="@dimen/dimen_20dp"
+            android:layout_height="@dimen/dimen_20dp"
+            android:layout_gravity="bottom"
+            android:src="@drawable/heart" />
     </androidx.cardview.widget.CardView>
 
 
-</LinearLayout>
+</RelativeLayout>

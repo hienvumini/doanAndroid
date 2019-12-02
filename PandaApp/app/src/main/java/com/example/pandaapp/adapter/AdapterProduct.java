@@ -3,11 +3,13 @@ package com.example.pandaapp.adapter;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -84,6 +86,13 @@ public class AdapterProduct extends RecyclerView.Adapter<AdapterProduct.ViewHold
 
             }
         });
+        holder.iconheart.setColorFilter(0x00000000);
+        holder.iconheart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                holder.iconheart.setColorFilter(0xffff0000);
+            }
+        });
 
     }
 
@@ -99,16 +108,18 @@ public class AdapterProduct extends RecyclerView.Adapter<AdapterProduct.ViewHold
 
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        ImageView imageView;
+        ImageView imageView,iconheart;
         TextView textviewTen, textViewGia;
-        LinearLayout linearLayoutItemProduct;
+        RelativeLayout linearLayoutItemProduct;
+
 
         public ViewHolder(View itemView) {
             super(itemView);
             imageView = (ImageView) itemView.findViewById(R.id.ImageanhSP);
             textviewTen = (TextView) itemView.findViewById(R.id.textviewTenSP);
             textViewGia = (TextView) itemView.findViewById(R.id.textviewGiaSP);
-            linearLayoutItemProduct = (LinearLayout) itemView.findViewById(R.id.itemProduct);
+            linearLayoutItemProduct = (RelativeLayout) itemView.findViewById(R.id.itemProduct);
+            iconheart=(ImageView) itemView.findViewById(R.id.btn_favorite_ItemProduct);
 
         }
     }

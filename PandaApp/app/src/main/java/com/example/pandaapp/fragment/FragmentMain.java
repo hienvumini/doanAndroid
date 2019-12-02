@@ -160,6 +160,7 @@ public class FragmentMain extends Fragment {
             @Override
             public void onRefresh() {
                 listproduct.clear();
+                mainAdapter.notifyDataSetChanged();
                 fetchData();
                 swipeRefreshLayout.setRefreshing(false);
             }

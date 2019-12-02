@@ -215,7 +215,8 @@
                 android:layout_marginLeft="@dimen/dimen_5dp"
                 android:layout_marginRight="@dimen/dimen_5dp"
                 android:layout_weight="5"
-                android:background="@drawable/botron_button_pink"
+                android:background="@drawable/selector_btn"
+
                 android:text="Thêm vào giỏ hàng"
                 android:textColor="@color/color_white" />
         </LinearLayout>
