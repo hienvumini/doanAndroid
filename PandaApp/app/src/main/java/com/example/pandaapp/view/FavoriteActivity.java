@@ -50,15 +50,19 @@ public class FavoriteActivity extends AppCompatActivity {
         });
 
         recyclerView = findViewById(R.id.recycleview_favorite);
-        favoriteProductAdapter = new AdapterProduct(getApplicationContext(), R.id.recycleview_favorite, products);
+        favoriteProductAdapter = new AdapterProduct(this, R.id.recycleview_favorite, products);
         recyclerView.setAdapter(favoriteProductAdapter);
-        RecyclerView.LayoutManager layoutManager = new GridLayoutManager(getApplicationContext(), 2);
+        RecyclerView.LayoutManager layoutManager = new GridLayoutManager(this, 2);
         recyclerView.hasFixedSize();
         recyclerView.setLayoutManager(layoutManager);
-        getlistProduct();
+        try {
+            getlistProduct();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
-    private void getlistProduct() {
+    private void getlistProduct() throws Exception{
         DataClient dataClient = APIUltils.getData();
         Call<ArrayList<Product>> arrayListFavoriteCall = dataClient.getFavoritesProduct(globalApplication.account.getAccountId());
         arrayListFavoriteCall.enqueue(new Callback<ArrayList<Product>>() {
@@ -66,7 +70,7 @@ public class FavoriteActivity extends AppCompatActivity {
             public void onResponse(Call<ArrayList<Product>> call, Response<ArrayList<Product>> response) {
                 if (response.body() != null) {
                     products = response.body();
-                    favoriteProductAdapter = new AdapterProduct(getApplicationContext(), R.id.recycleview_favorite, products);
+                    favoriteProductAdapter = new AdapterProduct(FavoriteActivity.this, R.id.recycleview_favorite, products);
                     recyclerView.setAdapter(favoriteProductAdapter);
                 }
             }

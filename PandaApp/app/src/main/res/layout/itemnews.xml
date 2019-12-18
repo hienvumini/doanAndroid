@@ -8,11 +8,13 @@
     android:orientation="vertical">
 
     <androidx.cardview.widget.CardView
+        android:padding="@dimen/dimen_5dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:cardMaxElevation="50dp">
 
         <LinearLayout
+            android:paddingLeft="@dimen/dimen_10dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
@@ -24,6 +26,7 @@
                 android:layout_weight="4">
 
                 <ImageView
+                    android:scaleType="centerCrop"
                     android:id="@+id/img_News"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -31,12 +34,14 @@
             </LinearLayout>
 
             <LinearLayout
+                android:layout_marginLeft="@dimen/dimen_10dp"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="6"
                 android:orientation="vertical">
 
                 <TextView
+                    android:textStyle="bold"
                     android:id="@+id/txt_title_News"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -51,7 +56,8 @@
                     android:layout_height="wrap_content"
                     android:maxLines="2"
                     android:text="Noi dung la abcdxyz"
-                    android:textSize="@dimen/font_16sp">
+                    android:textSize="@dimen/font_16sp"
+                    android:autoSizeMaxTextSize="@dimen/font_16sp">
 
                 </TextView>
 

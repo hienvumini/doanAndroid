@@ -20,7 +20,9 @@ import com.example.pandaapp.fragment.FragmentShopProfile;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.bottomnavigation.LabelVisibilityMode;
 
-public class MainActivity extends AppCompatActivity  {
+import es.dmoral.toasty.Toasty;
+
+public class MainActivity extends AppCompatActivity {
 
     Account account0 = new Account();
     BottomNavigationView nav_bottom_MainActivity;
@@ -40,13 +42,15 @@ public class MainActivity extends AppCompatActivity  {
         FragmentUtils.openFragment(fragmentMain, getSupportFragmentManager(), R.id.framMainActivity);
         if (globalApplication.account != null) {
             account0 = globalApplication.account;
-
-
             nav_bottom_MainActivity = findViewById(R.id.ctNavigationbotton);
             nav_bottom_MainActivity.setOnNavigationItemSelectedListener(categoryFragmentListennerItem);
             nav_bottom_MainActivity.setLabelVisibilityMode(LabelVisibilityMode.LABEL_VISIBILITY_LABELED);
         } else {
-            Toast.makeText(getApplicationContext(), "Đăng nhập thất bại", Toast.LENGTH_SHORT).show();
+            try {
+                Toasty.error(getBaseContext(), "Đăng nhập thất bại", 2000, true).show();
+            } catch (Exception e) {
+                System.out.println(e.toString());
+            }
 
         }
 
@@ -82,19 +86,21 @@ public class MainActivity extends AppCompatActivity  {
 
 
             }
-            FragmentUtils.openFragment(fragmentselect, getSupportFragmentManager(), R.id.framMainActivity);
+            try {
+                FragmentUtils.openFragment(fragmentselect, getSupportFragmentManager(), R.id.framMainActivity);
+            } catch (Exception e) {
+                System.out.println(e.toString());
+            }
 
             return true;
         }
     };
 
 
-
     public void changeNavigationBottomto(int sttFragment) {
         nav_bottom_MainActivity.setSelectedItemId(R.id.menu_nav_home);
 
     }
-
 
 
 }

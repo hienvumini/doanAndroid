@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    android:targetSandboxVersion="1"
-    package="com.example.pandaapp">
+    package="com.example.pandaapp"
+    android:targetSandboxVersion="1">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
@@ -14,12 +14,13 @@
         android:allowBackup="true"
         android:icon="@drawable/logo"
         android:label="@string/app_name"
-        android:usesCleartextTraffic="true"
         android:roundIcon="@drawable/logo"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
-        <activity android:name=".view.NewsDetailActivity"></activity>
-        <activity android:name=".view.NewsActivity" />
+        android:theme="@style/AppTheme"
+        android:usesCleartextTraffic="true">
+        <activity android:name=".view.OpenShopActivity"></activity>
+        <activity android:name=".view.EditInfoAccountActivity" />
+        <activity android:name=".view.NewsDetailActivity" />
 
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"

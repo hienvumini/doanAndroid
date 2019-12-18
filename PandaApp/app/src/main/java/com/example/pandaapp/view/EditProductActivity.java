@@ -68,16 +68,21 @@ public class EditProductActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_product);
-        init();
-        setbackProduct();
-        onListener();
+        try {
+            init();
+            setbackProduct();
+            onListener();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
 
 
 
     }
 
 
-    private void init() {
+    private void init() throws Exception{
         swipeRefreshLayout=(SwipeRefreshLayout) findViewById(R.id.swiperefresh_EditProduct);
         progressBar = (ProgressBar) findViewById(R.id.process_EditProduct);
         globalApplication = (GlobalApplication) getApplicationContext();
@@ -109,7 +114,7 @@ public class EditProductActivity extends AppCompatActivity {
 
     }
 
-    private void setbackProduct() {
+    private void setbackProduct() throws Exception{
         Toast.makeText(getApplicationContext(), product.toString(), Toast.LENGTH_SHORT).show();
         txtNameProduct.setText(product.getName());
         txtDiscProduct.setText(product.getDis());
@@ -136,7 +141,7 @@ public class EditProductActivity extends AppCompatActivity {
 
     }
 
-    private void getCategory() {
+    private void getCategory() throws Exception{
 
         DataClient dataClientgetcate = APIUltils.getData();
         dataClientgetcate.getCategory();
@@ -165,7 +170,7 @@ public class EditProductActivity extends AppCompatActivity {
 
     }
 
-    public void onListener() {
+    public void onListener() throws Exception{
         btnback.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -202,7 +207,11 @@ public class EditProductActivity extends AppCompatActivity {
         btnsubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                UpdateProduct();
+                try {
+                    UpdateProduct();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
 
 
                 Intent intent = new Intent(getApplicationContext(), DetailActivity.class);
@@ -250,7 +259,7 @@ public class EditProductActivity extends AppCompatActivity {
     }
 
 
-    private void getdataFromUser() {
+    private void getdataFromUser() throws Exception{
 
         name = txtNameProduct.getText().toString().trim();
         disc = txtDiscProduct.getText().toString().trim();
@@ -278,7 +287,7 @@ public class EditProductActivity extends AppCompatActivity {
 
     }
 
-    private void UpdateProduct() {
+    private void UpdateProduct() throws Exception{
         if (txtNameProduct.getText().toString().trim().equalsIgnoreCase("") || txtDiscProduct.getText().toString().trim().equalsIgnoreCase("")) {
             Toasty.error(getApplicationContext(),"Điền đầy đủ thông tin sản phẩm",2000);
         } else {

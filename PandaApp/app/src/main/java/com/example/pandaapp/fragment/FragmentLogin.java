@@ -81,7 +81,11 @@ public class FragmentLogin extends Fragment {
         loginButton.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
             @Override
             public void onSuccess(LoginResult loginResult) {
-                getFbInfo();
+                try {
+                    getFbInfo();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
 
             }
 
@@ -105,14 +109,25 @@ public class FragmentLogin extends Fragment {
         textViewSignupLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ((LoginActivity) getActivity()).toSignUpFragment(account, 1);
+                if (getActivity() != null) {
+                    try {
+                        ((LoginActivity) getActivity()).toSignUpFragment(account, 1);
+                    } catch (Exception e){
+                        System.out.println(e.toString());
+
+                    }
+                }
             }
         });
         btnlogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 getdataformLogin();
-                checkaccount(txtusername, txtpassword);
+                try {
+                    checkaccount(txtusername, txtpassword);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
         });
         return view;
@@ -125,7 +140,7 @@ public class FragmentLogin extends Fragment {
 
     }
 
-    public void checkaccount(final String ussername, final String password) {
+    public void checkaccount(final String ussername, final String password) throws Exception{
         DataClient processLogin = APIUltils.getData();
         Call<ArrayList<Account>> accountCall = processLogin.CheckAccount(ussername, password);
         accountCall.enqueue(new Callback<ArrayList<Account>>() {
@@ -158,7 +173,7 @@ public class FragmentLogin extends Fragment {
 
     }
 
-    private void getFbInfo() {
+    private void getFbInfo() throws Exception{
 
         if (AccessToken.getCurrentAccessToken() != null) {
             GraphRequest request = GraphRequest.newMeRequest(AccessToken.getCurrentAccessToken(),
@@ -248,7 +263,11 @@ public class FragmentLogin extends Fragment {
                     getActivity().finish();
 
                 } else {
-                    ((LoginActivity) getActivity()).toSignUpFragment(accountFB, 2);
+                   try {
+                       ((LoginActivity) getActivity()).toSignUpFragment(accountFB, 2);
+                   }catch (Exception e){
+                       System.out.println(e.toString());
+                   }
 
                 }
 

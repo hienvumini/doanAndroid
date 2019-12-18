@@ -6,6 +6,8 @@ import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -40,35 +42,32 @@ public class AdapterOrderShop extends ArrayAdapter {
     onlistenerAdapterOrder onlistenerAdapterOrder;
 
 
-    public AdapterOrderShop(@NonNull Context context, int resource, @NonNull List objects) {
+    public AdapterOrderShop( Context context, int resource,  List objects) {
         super(context, resource, objects);
         this.mctx = context;
         this.orderList = objects;
         this.layout = resource;
     }
 
-    @NonNull
+
     @Override
-    public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
+    public View getView(int position,  View convertView,  ViewGroup parent) {
         View view = convertView;
         if (view == null) {
             view = LayoutInflater.from(mctx).inflate(R.layout.item_order, parent, false);
+            Animation animation_cycle = AnimationUtils.loadAnimation(mctx, R.anim.animation_listview);
+            view.setAnimation(animation_cycle);
         }
         final TextView tvUser = (TextView) view.findViewById(R.id.tv_user_ItemOrder);
-        TextView tvstatus = (TextView) view.findViewById(R.id.tv_status_ItemOrder);
+        final TextView tvstatus = (TextView) view.findViewById(R.id.tv_status_ItemOrder_Shop);
         final TextView tvNameProduct = (TextView) view.findViewById(R.id.tv_nameProduct_ItemOrder);
         final TextView tvAmount = (TextView) view.findViewById(R.id.tv_Mount_ItemOrder);
-        TextView tvTotalAmount = (TextView) view.findViewById(R.id.tv_total_product);
+        final TextView tvTotalAmount = (TextView) view.findViewById(R.id.tv_total_product);
         final TextView tvPriceProduct = (TextView) view.findViewById(R.id.tv_Price_ItemOrder);
         final TextView tvTotalPay = (TextView) view.findViewById(R.id.tv_MoneyPay_ItemOrder);
         final ImageView imgAnhSanPham = (ImageView) view.findViewById(R.id.img_ImageProduct_ItemOrder);
-         final Order order = orderList.get(position);
-//        Product product = new Product();
-//        GlobalApplication globalApplication = (GlobalApplication) mctx.getApplicationContext();
-//        CacheUltils cacheUltils = new CacheUltils(mctx);
-//        cacheUltils.RefreshProduct(orderList.get(position).getOrderitem().get(0).getProductId());
-//        tvNameProduct.setText(globalApplication.product.getName());
-//        LoadImage.getImageInServer(mctx, globalApplication.product.getImages().get(0), imgAnhSanPham);
+        final Order order = orderList.get(position);
+
         if (order.getTotalPrice() != null) {
             tvTotalPay.setText(OtherUltil.fomattien.format(orderList.get(position).getTotalPrice()) + "đ");
         }
@@ -77,14 +76,31 @@ public class AdapterOrderShop extends ArrayAdapter {
         }
 
         int tongsanpham = 0;
-        double discount=0;
+        double discount = 0;
         for (int i = 0; i < orderList.get(position).getOrderitem().size(); i++) {
             tongsanpham += orderList.get(position).getOrderitem().get(i).getAmount();
 
         }
         tvTotalAmount.setText(tongsanpham + " sản phẩm");
         tvUser.setText(order.getName());
+        String status = "";
+        switch (order.getStatusId()) {
+            case 1:
+                status = "Đang chờ xác nhận";
+                break;
+            case 2:
+                status = "Đang giao hàng";
+                break;
+            case 3:
+                status = "Đã giao hàng";
+                break;
+            case 4:
+                status = "Đã hủy";
+                break;
 
+
+        }
+        tvstatus.setText(status);
         DataClient getProduct = APIUltils.getData();
         Call<ArrayList<Product>> productCall = getProduct.getProduct(orderList.get(position).getOrderitem().get(0).getProductId());
         productCall.enqueue(new Callback<ArrayList<Product>>() {
@@ -111,7 +127,8 @@ public class AdapterOrderShop extends ArrayAdapter {
             public void onClick(View view) {
                 globalApplication = (GlobalApplication) mctx.getApplicationContext();
                 globalApplication.order = order;
-                onlistenerAdapterOrder=(onlistenerAdapterOrder) mctx;
+                globalApplication.orderID=order.getOderId();
+                onlistenerAdapterOrder = (onlistenerAdapterOrder) mctx;
                 onlistenerAdapterOrder.startActivityforResultListener();
 
             }
@@ -119,7 +136,8 @@ public class AdapterOrderShop extends ArrayAdapter {
 
         return view;
     }
-    public interface onlistenerAdapterOrder{
+
+    public interface onlistenerAdapterOrder {
         public void startActivityforResultListener();
     }
 }

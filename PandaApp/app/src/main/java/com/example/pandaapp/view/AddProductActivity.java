@@ -89,7 +89,12 @@ public class AddProductActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                insertProduct();
+                try {
+                    insertProduct();
+                } catch (Exception e){
+                    System.out.println(e.toString());
+
+                }
 
             }
 
@@ -115,7 +120,7 @@ public class AddProductActivity extends AppCompatActivity {
 
     private void insertProduct() {
         if (txtNameProduct.getText().toString().trim().equalsIgnoreCase("") || txtDiscProduct.getText().toString().trim().equalsIgnoreCase("")) {
-            Toasty.error(getApplicationContext(),"Điền đầy đủ thông tin sản phẩm",2000,false);
+            Toasty.error(getBaseContext(),"Điền đầy đủ thông tin sản phẩm",2000,false);
         } else {
             getdataFromUser();
             DataClient insertProduct = APIUltils.getData();

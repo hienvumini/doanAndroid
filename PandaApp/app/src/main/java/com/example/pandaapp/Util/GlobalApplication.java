@@ -27,6 +27,8 @@ public class GlobalApplication extends Application {
     public Order order;
     public OrderCustomer orderCustomer;
     public News news;
+    public String result;
+    public int orderID;
 
     @Override
     public void onCreate() {

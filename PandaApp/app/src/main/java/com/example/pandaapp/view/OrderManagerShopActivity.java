@@ -7,6 +7,7 @@ import androidx.viewpager.widget.ViewPager;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 
 import com.example.pandaapp.R;
 import com.example.pandaapp.adapter.AdapterOrderShop;
@@ -14,7 +15,10 @@ import com.example.pandaapp.adapter.AdapterTabOrder;
 import com.example.pandaapp.fragment.FragmentOrderShop;
 import com.google.android.material.tabs.TabLayout;
 
+import java.lang.reflect.Field;
 import java.util.ArrayList;
+
+import es.dmoral.toasty.Toasty;
 
 public class OrderManagerShopActivity extends AppCompatActivity implements FragmentOrderShop.callbackActivity, AdapterOrderShop.onlistenerAdapterOrder {
     TabLayout tabLayout;
@@ -25,14 +29,26 @@ public class OrderManagerShopActivity extends AppCompatActivity implements Fragm
     AdapterTabOrder adapterTabOrder;
     int positonTab;
     int REQUEST_DETAILORDER = 112;
+    int status;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_order_manager_shop);
-        init();
-        creatDataTab();
-        viewPager.setAdapter(adapterTabOrder);
+        try {
+            init();
+            creatDataTab();
+            viewPager.setAdapter(adapterTabOrder);
+            Intent intent = getIntent();
+            status = intent.getIntExtra("status", 1);
+            tabLayout.getTabAt(status).select();
+        } catch (NullPointerException e) {
+            System.out.println("OrderManagerShopActivity_Null: " + e.toString());
+        } catch (Exception e) {
+            System.out.println("OrderManagerShopActivity_E: " + e.toString());
+        }
+
+
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
@@ -56,10 +72,11 @@ public class OrderManagerShopActivity extends AppCompatActivity implements Fragm
     }
 
 
-    private void init() {
+    private void init() throws NullPointerException, Exception {
         tabLayout = (TabLayout) findViewById(R.id.tablayoutStatus_Order);
         viewPager = (ViewPager) findViewById(R.id.viewpagerStatus_Order);
         tabLayout.setupWithViewPager(viewPager, true);
+
         listTab = new ArrayList<>();
         listFragment = new ArrayList<>();
         adapterTabOrder = new AdapterTabOrder(getSupportFragmentManager(), listTab, listFragment);
@@ -67,7 +84,7 @@ public class OrderManagerShopActivity extends AppCompatActivity implements Fragm
 
     }
 
-    private void creatDataTab() {
+    private void creatDataTab() throws Exception {
         listTab.add("Chờ xác nhận");
         listTab.add("Đang giao");
         listTab.add("Đã giao");
@@ -90,7 +107,8 @@ public class OrderManagerShopActivity extends AppCompatActivity implements Fragm
     @Override
     public void startActivityforResultListener() {
         Intent intent = new Intent(this, OrderDetail.class);
-        intent.putExtra("status",positonTab);
+        intent.putExtra("status", positonTab);
+        intent.putExtra("role",2);
         startActivityForResult(intent, REQUEST_DETAILORDER);
     }
 
@@ -101,4 +119,6 @@ public class OrderManagerShopActivity extends AppCompatActivity implements Fragm
         }
         super.onActivityResult(requestCode, resultCode, data);
     }
+
+
 }

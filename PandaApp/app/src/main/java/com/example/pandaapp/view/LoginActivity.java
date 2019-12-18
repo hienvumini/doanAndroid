@@ -32,11 +32,11 @@ public class LoginActivity extends AppCompatActivity {
 
     }
 
-    public void toSignUpFragment(Account account,int mode) {
+    public void toSignUpFragment(Account account,int mode) throws Exception{
         FragmentUtils.openFragment(fragmentSignup,getSupportFragmentManager(),R.id.frameSigin,account,mode);
 
     }
-    public void toSigninFragment() {
+    public void toSigninFragment() throws Exception{
         FragmentUtils.openFragment(fragmentLogin,getSupportFragmentManager(),R.id.frameSigin);
     }
 

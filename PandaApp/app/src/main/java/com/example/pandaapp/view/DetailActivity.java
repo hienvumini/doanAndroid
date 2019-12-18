@@ -1,6 +1,8 @@
 package com.example.pandaapp.view;
 
 import android.content.Intent;
+import android.graphics.Paint;
+import android.nfc.Tag;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.view.View;
@@ -31,12 +33,12 @@ import java.util.HashSet;
 
 public class DetailActivity extends AppCompatActivity {
     ImageView imageViewSP, imageViewButtonBack, imageViewCart;
-    TextView textViewTen, textViewgia, textViewmota, textViewdaBan, textviewSTTImage;
+    TextView textViewTen, textViewgia, textViewmota, textViewdaBan, textviewSTTImage, textViewDiscount;
     Button btnAddCart, btnEdit, btnBuyNow;
     GlobalApplication globalApplication;
     Product product = new Product();
     Account account;
-    int REQUESTCODE_EDIT=112;
+    int REQUESTCODE_EDIT = 112;
     SwipeRefreshLayout swipeRefreshLayout;
 
 
@@ -51,15 +53,20 @@ public class DetailActivity extends AppCompatActivity {
         }
         CacheUltils cacheUltils = new CacheUltils(getApplicationContext());
         cacheUltils.RefreshProduct(product.getProductId());
-        init();
-        setDataSP(product);
-        Listener();
+        try {
+            init();
+            setDataSP(product);
+            Listener();
+        } catch (Exception e) {
+            System.out.println(e.toString());
+
+        }
 
 
     }
 
-    private void init() {
-        swipeRefreshLayout =(SwipeRefreshLayout) findViewById(R.id.swiperefresh_DetailProduct);
+    private void init() throws Exception {
+        swipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swiperefresh_DetailProduct);
         btnEdit = (Button) findViewById(R.id.btnEdit_ProductDetail);
         btnAddCart = (Button) findViewById(R.id.btnAddCart_Detail);
         btnBuyNow = (Button) findViewById(R.id.btn_buy_ProductDetail);
@@ -70,7 +77,9 @@ public class DetailActivity extends AppCompatActivity {
         textViewmota = (TextView) findViewById(R.id.textviewDis_Detail);
         imageViewCart = (ImageView) findViewById(R.id.detail_product_cart);
         imageViewButtonBack = (ImageView) findViewById(R.id.detail_product_back);
-        textviewSTTImage=(TextView) findViewById(R.id.textviewSTT_DetailProduct);
+        textviewSTTImage = (TextView) findViewById(R.id.textviewSTT_DetailProduct);
+        textViewDiscount = (TextView) findViewById(R.id.textviewGiaDiscount_Deatail);
+
 
         if (product.getIdShop() == account.getIdShop()) {
             btnEdit.setVisibility(View.VISIBLE);
@@ -80,11 +89,11 @@ public class DetailActivity extends AppCompatActivity {
 
     }
 
-    public void setDataSP(Product product) {
-        DisplayMetrics displayMetrics=new DisplayMetrics();
-       // getParent().getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
-        int height=displayMetrics.heightPixels;
-        int width=displayMetrics.widthPixels;
+    public void setDataSP(Product product) throws Exception {
+        DisplayMetrics displayMetrics = new DisplayMetrics();
+        // getParent().getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
+        int height = displayMetrics.heightPixels;
+        int width = displayMetrics.widthPixels;
         imageViewSP.setMinimumHeight(height);
         imageViewSP.setMinimumHeight(width);
         if (product.getImages().size() > 0) {
@@ -97,11 +106,13 @@ public class DetailActivity extends AppCompatActivity {
         textViewTen.setText(product.getName());
         textViewgia.setText(OtherUltil.fomattien.format(product.getPrice()) + "đ");
         textViewmota.setText(product.getDis());
-        textviewSTTImage.setText(1+"/"+product.getImages().size());
+        textviewSTTImage.setText(1 + "/" + product.getImages().size());
+        textViewDiscount.setText(OtherUltil.fomattien.format(product.getDiscount()+product.getPrice())+"đ");
+        textViewDiscount.setPaintFlags(textViewDiscount.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
 
     }
 
-    public void Listener() {
+    public void Listener() throws Exception {
         imageViewButtonBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -113,7 +124,7 @@ public class DetailActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                Intent intent = new Intent(DetailActivity.this,CartActivity.class);
+                Intent intent = new Intent(DetailActivity.this, CartActivity.class);
                 startActivity(intent);
             }
         });
@@ -141,16 +152,16 @@ public class DetailActivity extends AppCompatActivity {
         btnEdit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                CacheUltils cacheUltils=new CacheUltils(getApplicationContext());
+                CacheUltils cacheUltils = new CacheUltils(getApplicationContext());
                 cacheUltils.RefreshProduct(product.getProductId());
-                Intent intent =new Intent(getApplicationContext(),EditProductActivity.class);
-                startActivityForResult(intent,REQUESTCODE_EDIT);
+                Intent intent = new Intent(getApplicationContext(), EditProductActivity.class);
+                startActivityForResult(intent, REQUESTCODE_EDIT);
             }
         });
         imageViewSP.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                FragmentUtils.openFragment(new FragmentShowImage(), getSupportFragmentManager(),R.id.Frame_ShowImage);
+                FragmentUtils.openFragment(new FragmentShowImage(), getSupportFragmentManager(), R.id.Frame_ShowImage);
             }
         });
         swipeRefreshLayout.setColorSchemeResources(R.color.color_pink2);
@@ -167,7 +178,7 @@ public class DetailActivity extends AppCompatActivity {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        if (requestCode == REQUESTCODE_EDIT && requestCode==RESULT_OK) {
+        if (requestCode == REQUESTCODE_EDIT && requestCode == RESULT_OK) {
             Toast.makeText(getBaseContext(), "Sửa sản phẩm xong", Toast.LENGTH_SHORT).show();
 
         }

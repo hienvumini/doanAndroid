@@ -36,8 +36,10 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@id/btnProcess_OrderDeatil"
-        android:layout_below="@id/toolbar">
+        android:layout_below="@id/toolbar"
+        android:fillViewport="true"
+
+        android:paddingBottom="@dimen/dimen_50dp">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -65,10 +67,10 @@
             </LinearLayout>
 
             <LinearLayout
-                android:layout_marginBottom="@dimen/dimen_10dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/dimen_40dp"
+                android:layout_marginBottom="@dimen/dimen_10dp"
                 android:orientation="vertical">
 
                 <TextView
@@ -187,8 +189,8 @@
                     <TextView
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_weight="3"
-                        android:text="Tổng tiền"
+                        android:layout_weight="5"
+                        android:text="Tổng tiền thanh toán"
                         android:textSize="@dimen/font_18sp"
                         android:textStyle="bold" />
 
@@ -197,7 +199,7 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginRight="@dimen/dimen_10dp"
-                        android:layout_weight="7"
+                        android:layout_weight="5"
                         android:gravity="end"
                         android:text="0.000.000đ"
                         android:textColor="@color/color_pink2"
@@ -212,6 +214,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="15dp"
                 android:background="@color/color_brown" />
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -240,7 +243,7 @@
                         android:layout_marginRight="@dimen/dimen_10dp"
                         android:layout_weight="7"
                         android:gravity="end"
-                        android:text="0.000.000đ"
+                        android:text="0"
                         android:textSize="@dimen/font_16sp" />
                 </LinearLayout>
 
@@ -267,11 +270,9 @@
                         android:layout_marginRight="@dimen/dimen_10dp"
                         android:layout_weight="6"
                         android:gravity="end"
-                        android:text="0.000.000đ"
+                        android:text="12/12/2019"
                         android:textSize="@dimen/font_16sp" />
                 </LinearLayout>
-
-
 
 
             </LinearLayout>
@@ -300,23 +301,48 @@
                     android:textStyle="bold" />
 
             </LinearLayout>
+
             <ListView
+
                 android:id="@+id/listviewOrderDetail"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+                android:layout_height="wrap_content" />
+
+
         </LinearLayout>
+
 
     </ScrollView>
 
-    <Button
-        android:id="@+id/btnProcess_OrderDeatil"
-        android:layout_width="match_parent"
+    <RelativeLayout
+        android:paddingBottom="@dimen/dimen_5dp"
+        android:id="@+id/ctfooter"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_margin="@dimen/dimen_10dp"
-        android:background="@color/color_pink2"
-        android:text="Xử lý đơn hàng"
-        android:textColor="@color/color_white"
-        android:textSize="@dimen/font_18sp" />
+        android:layout_alignParentBottom="true">
 
+        <Button
+            android:id="@+id/btnProcess_OrderDeatil"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_margin="@dimen/dimen_10dp"
+            android:background="@color/color_pink2"
+            android:text="Xử lý đơn hàng"
+            android:textColor="@color/color_white"
+            android:textSize="@dimen/font_18sp"
+            android:visibility="gone" />
+
+        <Button
+            android:id="@+id/btnCancel_OrderDeatil"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_margin="@dimen/dimen_10dp"
+            android:background="@color/color_pink2"
+            android:text="Hủy đơn hàng"
+            android:textColor="@color/color_white"
+            android:textSize="@dimen/font_18sp"
+            android:visibility="gone" />
+    </RelativeLayout>
 </RelativeLayout>

@@ -20,7 +20,7 @@
             android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
 
             <ImageView
-                android:id="@+id/img_back_Cart"
+                android:id="@+id/img_back_News"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:layout_gravity="start"

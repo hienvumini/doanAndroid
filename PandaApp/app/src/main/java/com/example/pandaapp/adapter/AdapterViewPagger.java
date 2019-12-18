@@ -5,6 +5,8 @@ import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -43,6 +45,8 @@ public class AdapterViewPagger extends PagerAdapter {
     @Override
     public Object instantiateItem(@NonNull ViewGroup container, int position) {
         View view=LayoutInflater.from(activity).inflate(R.layout.viewpager_item,container,false);
+        Animation animation_cycle = AnimationUtils.loadAnimation(activity.getApplicationContext(), R.anim.animation_listview);
+        view.setAnimation(animation_cycle);
         ImageView imageView=(ImageView) view.findViewById(R.id.imageview_ViewPagerItem);
         DisplayMetrics displayMetrics=new DisplayMetrics();
         activity.getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);

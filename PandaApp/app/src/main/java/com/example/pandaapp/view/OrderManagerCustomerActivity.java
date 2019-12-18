@@ -35,8 +35,16 @@ public class OrderManagerCustomerActivity extends AppCompatActivity implements F
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_order_manager_customer);
-        init();
-        creatDataTab();
+        try {
+            init();
+            creatDataTab();
+        } catch (NullPointerException e) {
+            System.out.println("OrderManagerCustomerActivity: " + e.toString());
+
+        } catch (Exception e) {
+            System.out.println("OrderManagerCustomerActivity_E: " + e.toString());
+
+        }
         viewPager.setAdapter(adapterTabOrder);
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
@@ -67,7 +75,7 @@ public class OrderManagerCustomerActivity extends AppCompatActivity implements F
     }
 
 
-    private void init() {
+    private void init() throws NullPointerException, Exception {
         tabLayout = (TabLayout) findViewById(R.id.tablayoutStatus_OrderCustomer);
         viewPager = (ViewPager) findViewById(R.id.viewpagerStatus_OrderCustomer);
         img_back_OrderCustomer = (ImageView) findViewById(R.id.img_back_OrderCustomer);
@@ -79,7 +87,7 @@ public class OrderManagerCustomerActivity extends AppCompatActivity implements F
 
     }
 
-    private void creatDataTab() {
+    private void creatDataTab() throws Exception {
         listTab.add("Chờ xác nhận");
         listTab.add("Đang giao");
         listTab.add("Đã nhận");
@@ -110,7 +118,7 @@ public class OrderManagerCustomerActivity extends AppCompatActivity implements F
     @Override
     public void startActivityforResultListener() {
 
-        Intent intent = new Intent(this, OrderCustomerDetail.class);
+        Intent intent = new Intent(this, OrderDetail.class);
         intent.putExtra("status", positonTab);
         startActivityForResult(intent, REQUEST_DETAILORDER);
 

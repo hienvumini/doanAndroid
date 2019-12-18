@@ -8,12 +8,18 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 import android.widget.AbsListView;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.pandaapp.Models.Category;
@@ -45,11 +51,12 @@ public class ListProductCatagoryActivity extends AppCompatActivity {
     GridLayoutManager gridLayoutManager;
     GridLayoutManager layoutManager;
     ProgressBar progressBar;
-    int page_number = 1;
-    int item_count = 6;
-    int offset = 0;
+       int offset = 0;
     boolean intial = true;
     SwipeRefreshLayout swipeRefreshLayout;
+    ImageView imageView_Cart,imageView_back;
+    TextView textView_nameCategory;
+    Spinner spinner_sort;
 
 
     @Override
@@ -57,22 +64,74 @@ public class ListProductCatagoryActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_product_catagory);
         globalApplication = (GlobalApplication) getApplicationContext();
-        init();
+        try {
+            init();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
         if (globalApplication.category != null) {
             mcategory = globalApplication.category;
             idCate = globalApplication.category.getIdcategory();
-            getlistProductCate();
+            try {
+                getlistProductCate(3);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
 
         } else {
             Toasty.error(getApplicationContext(),"Danh mục lỗi").show();
 
         }
+      listener();
 
     }
 
+    private void listener() {
+        imageView_Cart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(ListProductCatagoryActivity.this,CartActivity.class);
+                startActivity(intent);
+            }
+        });
+        imageView_back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+        spinner_sort.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 
-    private void init() {
+
+                try {
+
+                    getlistProductCate(position);
+                    listProduct.clear();
+                    adapterProduct.notifyDataSetChanged();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+    }
+
+
+    private void init() throws Exception{
+        spinner_sort=(Spinner) findViewById(R.id.sort_ProductCategory);
+        ArrayAdapter adapter = ArrayAdapter.createFromResource(this, R.array.array_sort, R.layout.spinner_item);
+        adapter.setDropDownViewResource(R.layout.spinner_dropdown_item);
+        spinner_sort.setBackgroundColor(Color.TRANSPARENT);
+        spinner_sort.setAdapter(adapter);
+
         swipeRefreshLayout=(SwipeRefreshLayout) findViewById(R.id.swiperefresh);
         progressBar = (ProgressBar) findViewById(R.id.processbar_Category);
         recyclerViewListProduct = (RecyclerView) findViewById(R.id.recycleview_CategoryProduct);
@@ -83,12 +142,17 @@ public class ListProductCatagoryActivity extends AppCompatActivity {
         recyclerViewListProduct.setLayoutManager(layoutManager);
         recyclerViewListProduct.setHasFixedSize(true);
         recyclerViewListProduct.setAdapter(adapterProduct);
+        imageView_Cart=(ImageView) findViewById(R.id.catagory_cart_ProductCategory);
+        textView_nameCategory=(TextView) findViewById(R.id.catagory_tenSP_ProductCategory);
+        textView_nameCategory.setText(globalApplication.category.getCategoryName());
+        imageView_back=(ImageView)findViewById(R.id.catagory_back_Category);
+
 
     }
 
-    private void getlistProductCate() {
+    private void getlistProductCate(final int sortID) throws Exception{
 
-        fetchData();
+        fetchData(sortID);
 
 
         recyclerViewListProduct.addOnScrollListener(new RecyclerView.OnScrollListener() {
@@ -115,7 +179,11 @@ public class ListProductCatagoryActivity extends AppCompatActivity {
 
                         isScolling = false;
                         progressBar.setVisibility(View.VISIBLE);
-                        fetchData();
+                        try {
+                            fetchData(sortID);
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
 
                         //
                     }
@@ -134,14 +202,18 @@ public class ListProductCatagoryActivity extends AppCompatActivity {
             public void onRefresh() {
 
                 listProduct.clear();
-                fetchData();
+                try {
+                    fetchData(sortID);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
                 swipeRefreshLayout.setRefreshing(false);
             }
         });
 
     }
 
-    private void fetchData() {
+    private void fetchData(final int sortID) throws Exception{
 
 
         new Handler().postDelayed(new Runnable() {
@@ -156,35 +228,41 @@ public class ListProductCatagoryActivity extends AppCompatActivity {
 
                     offset = listProduct.size();
                 }
-                Call<ArrayList<Product>> arrayListCall = dataClient.getProductCategory(idCate, offset);
+                Call<ArrayList<Product>> arrayListCall = dataClient.getProductCategory(idCate, offset,sortID);
                 arrayListCall.enqueue(new Callback<ArrayList<Product>>() {
                     @Override
                     public void onResponse(Call<ArrayList<Product>> call, Response<ArrayList<Product>> response) {
-                        ArrayList<Product> listadd;
-                        listadd = response.body();
-                        if (intial) {
+                        try {
+                            ArrayList<Product> listadd;
+                            listadd = response.body();
+                            if (intial) {
 
-                            listProduct = response.body();
-                            adapterProduct.notifyDataSetChanged();
-                            adapterProduct = new AdapterProduct(getBaseContext(), R.id.recycleview_ShopProduct, listProduct);
-                            recyclerViewListProduct.setAdapter(adapterProduct);
-                            Toast.makeText(getApplicationContext(), listProduct.size() + "", Toast.LENGTH_SHORT).show();
-                            intial = false;
-                        } else {
-                            if (listadd.size() > 0) {
-                                listProduct.addAll(listadd);
-                                Log.d("EEE", "That bai: " + listProduct.size());
+                                listProduct = response.body();
                                 adapterProduct.notifyDataSetChanged();
                                 adapterProduct = new AdapterProduct(getBaseContext(), R.id.recycleview_ShopProduct, listProduct);
-
                                 recyclerViewListProduct.setAdapter(adapterProduct);
-
                                 Toast.makeText(getApplicationContext(), listProduct.size() + "", Toast.LENGTH_SHORT).show();
-
+                                intial = false;
                             } else {
-                                Toasty.custom(getApplicationContext(),"Đã tải xong tất cả sản phẩm",R.drawable.ok, R.color.color_pink2,2000,true,true).show();
+                                if (listadd.size() > 0) {
+                                    listProduct.addAll(listadd);
+                                    Log.d("EEE", "That bai: " + listProduct.size());
+                                    adapterProduct.notifyDataSetChanged();
+                                    adapterProduct = new AdapterProduct(getBaseContext(), R.id.recycleview_ShopProduct, listProduct);
+
+                                    recyclerViewListProduct.setAdapter(adapterProduct);
+
+                                    Toast.makeText(getApplicationContext(), listProduct.size() + "", Toast.LENGTH_SHORT).show();
+
+                                } else {
+                                    Toasty.custom(getApplicationContext(),"Đã tải xong tất cả sản phẩm",R.drawable.ok, R.color.color_pink2,2000,true,true).show();
+                                }
                             }
+                        } catch (Exception e){
+                            System.out.println(e.toString());
+
                         }
+
                     }
 
                     @Override

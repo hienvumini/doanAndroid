@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     tools:context=".fragment.FragmentCategory">
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
@@ -16,7 +16,7 @@
             android:orientation="vertical">
 
             <LinearLayout
-                android:id="@+id/toolbar"
+                android:id="@+id/ctheader_Category"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/dimension_actionbar_height_56dp"
                 android:layout_centerHorizontal="true"
@@ -25,29 +25,37 @@
                 android:orientation="horizontal"
                 android:weightSum="10">
 
-                <SearchView
-                    android:id="@+id/tv_Search_Search"
+                <TextView
+                    android:id="@+id/tv_Search_Category"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/dimen_10dp"
                     android:layout_weight="10"
                     android:background="@drawable/shape_edittext"
                     android:iconifiedByDefault="false"
-                    android:queryHint="Danh mục sản phẩm" />
+                    android:paddingLeft="@dimen/dimen_20dp"
+                    android:paddingTop="@dimen/dimen_5dp"
+                    android:paddingBottom="@dimen/dimen_5dp"
+                    android:text="Tìm kiếm"
+                    android:textSize="@dimen/font_20sp"
+
+                    />
 
                 <ImageView
-                    android:id="@+id/imgcartMain"
+                    android:id="@+id/imgcart_Categoy"
                     android:layout_width="@dimen/dimen_50dp"
                     android:layout_height="@dimen/dimen_50dp"
                     android:layout_weight="1"
-                    android:src="@drawable/ic_shopping_cart_white_48dp" />
+                    android:src="@drawable/cart" />
             </LinearLayout>
 
             <ScrollView
+
+
                 android:id="@+id/scollviewmain"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_below="@id/toolbar">
+                android:layout_below="@id/ctheader_Category">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -56,17 +64,17 @@
 
                     <androidx.recyclerview.widget.RecyclerView
 
-                        android:layout_marginTop="@dimen/dimen_20dp"
                         android:id="@+id/recycleviewListCate"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:layout_gravity="center">
+                        android:layout_gravity="center"
+                        android:layout_marginTop="@dimen/dimen_20dp">
 
                     </androidx.recyclerview.widget.RecyclerView>
                 </LinearLayout>
             </ScrollView>
         </RelativeLayout>
-    </LinearLayout>
+    </RelativeLayout>
 </FrameLayout>
 
 

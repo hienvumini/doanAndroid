@@ -41,13 +41,13 @@
                 android:textStyle="bold" />
 
 
-
         </RelativeLayout>
 
     </androidx.appcompat.widget.Toolbar>
 
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/tablayoutStatus_Order"
+
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/toolbar">
@@ -56,11 +56,11 @@
     </com.google.android.material.tabs.TabLayout>
 
     <androidx.viewpager.widget.ViewPager
-        android:background="@color/color_white"
         android:id="@+id/viewpagerStatus_Order"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/tablayoutStatus_Order" />
+        android:layout_below="@id/tablayoutStatus_Order"
+        android:background="@color/color_white" />
 
 
 </RelativeLayout>

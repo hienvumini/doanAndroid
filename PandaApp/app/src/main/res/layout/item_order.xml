@@ -20,6 +20,7 @@
             android:orientation="vertical">
 
             <LinearLayout
+                android:id="@+id/ctShoplayout_ItemOrder"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dimen_5dp"
@@ -28,6 +29,7 @@
                 android:weightSum="10">
 
                 <ImageView
+                    android:id="@+id/iconShop"
                     android:layout_width="@dimen/dimen_35dp"
                     android:layout_height="@dimen/dimen_35dp"
                     android:layout_gravity="center"
@@ -44,13 +46,14 @@
                     android:textSize="@dimen/font_18sp" />
 
                 <TextView
-                    android:id="@+id/tv_status_ItemOrder"
+                    android:gravity="end"
+                    android:id="@+id/tv_status_ItemOrder_Shop"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="4"
-                    android:text="Chờ xác nhận"
+                    android:text=""
                     android:textColor="@color/color_pink2"
-                    android:textSize="@dimen/font_18sp" />
+                    android:textSize="@dimen/font_14sp" />
             </LinearLayout>
 
             <LinearLayout

@@ -3,9 +3,12 @@ package com.example.pandaapp.adapter;
 import android.content.Context;
 import android.content.Intent;
 import android.text.Html;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -13,6 +16,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.Size;
 
 import com.example.pandaapp.Models.News;
 import com.example.pandaapp.R;
@@ -47,7 +51,8 @@ public class AdapterNews extends ArrayAdapter {
         TextView textViewDate=(TextView) view.findViewById(R.id.txt_date_News);
         LoadImage.getImageInServer(mctx,newsList.get(position).getImageNews(),imageView);
         textViewttile.setText(newsList.get(position).getNewstitle());
-        textViewContent.setText(Html.fromHtml(newsList.get(position).getDetailNews()));
+        textViewContent.setText((Html.fromHtml(Html.fromHtml(newsList.get(position).getDetailNews()).toString())));
+        textViewContent.setTextSize(TypedValue.COMPLEX_UNIT_SP,16);
         textViewDate.setText(newsList.get(position).getDateCreated());
         LinearLayout linearLayout=(LinearLayout) view.findViewById(R.id.item_news);
         linearLayout.setOnClickListener(new View.OnClickListener() {
@@ -60,6 +65,8 @@ public class AdapterNews extends ArrayAdapter {
 
             }
         });
+        Animation animation_cycle = AnimationUtils.loadAnimation(mctx, R.anim.animation_listview);
+        linearLayout.setAnimation(animation_cycle);
         return view;
     }
 }

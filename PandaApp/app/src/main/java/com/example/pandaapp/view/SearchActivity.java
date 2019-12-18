@@ -27,6 +27,7 @@ public class SearchActivity extends AppCompatActivity {
                     Intent intent = new Intent(getBaseContext(), ListProductSearchActivity.class);
                     intent.putExtra("key",query);
                     startActivity(intent);
+                    finish();
                 }
                 return false;
             }

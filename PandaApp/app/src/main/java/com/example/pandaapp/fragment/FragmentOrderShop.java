@@ -36,7 +36,11 @@ public class FragmentOrderShop extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.layout_fragmentordershop, container, false);
-        init(view);
+        try {
+            init(view);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
 
         callbackActivity = (callbackActivity) getActivity();
@@ -60,13 +64,17 @@ public class FragmentOrderShop extends Fragment {
         lstOrder.clear();
         adapterOrderShop = new AdapterOrderShop(getActivity(), R.id.listviewOrderDetail, lstOrder);
         adapterOrderShop.notifyDataSetChanged();
-        getOrder(view, statusOrrder);
+        try {
+            getOrder(view, statusOrrder);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         return view;
 
     }
 
 
-    private void init(View view) {
+    private void init(View view) throws Exception,NullPointerException{
         listView = (ListView) view.findViewById(R.id.listviewOrder);
         lstOrder = new ArrayList<>();
         adapterOrderShop = new AdapterOrderShop(getActivity(), R.id.listviewOrder, lstOrder);
@@ -76,7 +84,7 @@ public class FragmentOrderShop extends Fragment {
 
     }
 
-    private void getOrder(View view, int stt) {
+    private void getOrder(View view, int stt) throws Exception,NullPointerException{
         DataClient dataClient = APIUltils.getData();
         Call<ArrayList<Order>> listCall = dataClient.getOrderShop(globalApplication.account.getIdShop(), stt);
         listCall.enqueue(new Callback<ArrayList<Order>>() {
@@ -85,8 +93,13 @@ public class FragmentOrderShop extends Fragment {
                 Log.d("A1A1", "onResponse: " + response.body());
 
                 lstOrder = response.body();
-                adapterOrderShop = new AdapterOrderShop(getActivity(), R.id.listviewOrder, lstOrder);
-                listView.setAdapter(adapterOrderShop);
+
+                if (getContext() != null) {
+                    adapterOrderShop = new AdapterOrderShop(getContext(), R.id.listviewOrder, lstOrder);
+                    listView.setAdapter(adapterOrderShop);
+                }
+
+
 
 
             }

@@ -5,6 +5,8 @@ import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -33,7 +35,8 @@ public class AdapterCategory extends RecyclerView.Adapter<AdapterCategory.ViewHo
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(mctx).inflate(R.layout.item_category, parent, false);
-
+        Animation animation_cycle = AnimationUtils.loadAnimation(mctx, R.anim.animation_listview);
+        view.setAnimation(animation_cycle);
         return new ViewHolder(view);
 
 

@@ -1,5 +1,7 @@
 package com.example.pandaapp.Models;
 
+import androidx.annotation.NonNull;
+
 import java.util.List;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
@@ -30,8 +32,13 @@ private String phone_number;
 @SerializedName("orderitem")
 @Expose
 private List<Orderitem> orderitem;
+    @SerializedName("totaldiscount")
+    @Expose
+private double totaldiscount;
+    private  int statusId;
 
-    public Order(int oderId, int accountId, String date_created, Double totalPrice, String name, String address, String phone_number, List<Orderitem> orderitem) {
+
+    public Order(int oderId, int accountId, String date_created, Double totalPrice,Double totaldiscount, String name, String address, String phone_number, List<Orderitem> orderitem,int statusId) {
         this.oderId = oderId;
         AccountId = accountId;
         this.date_created = date_created;
@@ -40,6 +47,8 @@ private List<Orderitem> orderitem;
         this.address = address;
         this.phone_number = phone_number;
         this.orderitem = orderitem;
+        this.totaldiscount=totaldiscount;
+        this.statusId=statusId;
     }
 
     public Order() {
@@ -107,5 +116,37 @@ private List<Orderitem> orderitem;
 
     public void setOrderitem(List<Orderitem> orderitem) {
         this.orderitem = orderitem;
+    }
+
+    public double getTotaldiscount() {
+        return totaldiscount;
+    }
+
+    public void setTotaldiscount(double totaldiscount) {
+        this.totaldiscount = totaldiscount;
+    }
+
+    public int getStatusId() {
+        return statusId;
+    }
+
+    public void setStatusId(int statusId) {
+        this.statusId = statusId;
+    }
+
+    @Override
+    public String toString() {
+        return "Order{" +
+                "oderId=" + oderId +
+                ", AccountId=" + AccountId +
+                ", date_created='" + date_created + '\'' +
+                ", totalPrice=" + totalPrice +
+                ", name='" + name + '\'' +
+                ", address='" + address + '\'' +
+                ", phone_number='" + phone_number + '\'' +
+                ", orderitem=" + orderitem +
+                ", totaldiscount=" + totaldiscount +
+                ", statusId=" + statusId +
+                '}';
     }
 }

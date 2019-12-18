@@ -5,7 +5,9 @@ import com.example.pandaapp.Models.Category;
 import com.example.pandaapp.Models.News;
 import com.example.pandaapp.Models.Order;
 import com.example.pandaapp.Models.OrderCustomer;
+import com.example.pandaapp.Models.OrderItemDetail;
 import com.example.pandaapp.Models.Product;
+import com.example.pandaapp.Models.Revenue;
 
 import java.util.ArrayList;
 
@@ -37,7 +39,7 @@ public interface DataClient {
 
     @FormUrlEncoded
     @POST("UpdateProduct.php")
-    Call<String> UpdateProduct (@Field("idcategory") int category,
+    Call<String> UpdateProduct(@Field("idcategory") int category,
                                @Field("productId") int productId,
                                @Field("name") String tensanpham,
                                @Field("price") double gia,
@@ -48,11 +50,11 @@ public interface DataClient {
 
     @FormUrlEncoded
     @POST("getallProductCategory.php")
-    Call<ArrayList<Product>> getProductCategory(@Field("idcategory") int idcategory,@Field("offset") int position);
+    Call<ArrayList<Product>> getProductCategory(@Field("idcategory") int idcategory, @Field("offset") int position, @Field("sort") int sortID);
 
     @FormUrlEncoded
     @POST("getUpdateProduct.php")
-    Call<ArrayList<Product>> getUpdateProduct(@Field("limit") int limit,@Field("offset") int offset);
+    Call<ArrayList<Product>> getUpdateProduct(@Field("limit") int limit, @Field("offset") int offset);
 
     @FormUrlEncoded
     @POST("InsertImageProduct.php")
@@ -60,6 +62,7 @@ public interface DataClient {
                              @Field("productId") int idProduct
 
     );
+
     @FormUrlEncoded
     @POST("getFavoriteItem.php")
     Call<ArrayList<Product>> getFavoritesProduct(@Field("accID") int accID);
@@ -69,12 +72,11 @@ public interface DataClient {
 
     @FormUrlEncoded
     @POST("getProductofShop.php")
-    Call<ArrayList<Product>> getProductShop(@Field("idShop") int idShop);
-
+    Call<ArrayList<Product>> getProductShop(@Field("idShop") int idShop, @Field("limit") int limit, @Field("offset") int offset);
 
 
     @FormUrlEncoded
-    @POST("insertBill.php")
+    @POST("InsertBill.php")
     Call<String> addOder(@Field("AccountId") int AccountId, @Field("totalPrice") Double totalPrice
             , @Field("name") String name, @Field("address") String address, @Field("phone_number") String phone_number);
 
@@ -97,11 +99,15 @@ public interface DataClient {
                                  @Field("gender") String gender,
                                  @Field("txtemail") String txtemail,
                                  @Field("DateOfBirth") String DateOfBirth,
-                                 @Field("shopName") String shopName);
+                                 @Field("shopName") String shopName,
+                                 @Field("introduceshop") String introduceshop,
+                                 @Field("addressshop") String addressshop,
+                                 @Field("phoneshop") String phoneshop,
+                                 @Field("emailshop") String emailshop);
 
     @FormUrlEncoded
     @POST("DeleteFileOnServer.php")
-    Call<String> DeleteFileonServer(@Field("pathFile") String LinkFile);
+    Call<String>DeleteFileonServer(@Field("pathFile") String LinkFile);
 
     @FormUrlEncoded
     @POST("getProduct.php")
@@ -110,14 +116,20 @@ public interface DataClient {
 
     @FormUrlEncoded
     @POST("getProductBySearch.php")
-    Call<ArrayList<Product>> getProductSearch(@Field("key") String key);
+    Call<ArrayList<Product>> getProductSearch(@Field("key") String key, @Field("sort") int sortID, @Field("offset") int position);
+
     @FormUrlEncoded
     @POST("getOrderShop.php")
-    Call<ArrayList<Order>> getOrderShop(@Field("idShop") int idShop,@Field("statusId") int statusId);
+    Call<ArrayList<Order>> getOrderShop(@Field("idShop") int idShop, @Field("statusId") int statusId);
+
+    @FormUrlEncoded
+    @POST("getOrderShop.php")
+    Call<ArrayList<Order>> getOrder(@Field("idShop") int idShop, @Field("statusId") int statusId);
 
     @FormUrlEncoded
     @POST("setStatusOrder.php")
     Call<String> setStatusOrderShop(@Field("oderId") int oderId, @Field("statusId") int statusId);
+
     @FormUrlEncoded
     @POST("getOrderofCustomers.php")
     Call<ArrayList<OrderCustomer>> getOrderCustomer(@Field("AccountId") int AccountId, @Field("statusId") int statusId);
@@ -131,8 +143,30 @@ public interface DataClient {
     Call<ArrayList<News>> getNews(@Field("offset") int offset);
 
 
+    @FormUrlEncoded
+    @POST("insertFavorite.php")
+    Call<String> insertFavorite(@Field("AccountId") int AccountId, @Field("productId") int productId, @Field("isfavorite") int isfavorite);
+
+    @FormUrlEncoded
+    @POST("checkFavorite.php")
+    Call<String> checkFavorite(@Field("AccountId") int AccountId, @Field("productId") int productId);
+
+    @FormUrlEncoded
+    @POST("getTotalRevenueShop.php")
+    Call<String> getTotalRevenueShop(@Field("idShop") int idShop, @Field("fromdate") String fromdate, @Field("todate") String todate);
+
+    @FormUrlEncoded
+    @POST("getDetailRevenueShop.php")
+    Call<String> getDetailRevenueShop(@Field("idShop") int idShop, @Field("date") String date);
+
+    @FormUrlEncoded
+    @POST("getListRevenueShop.php")
+    Call<ArrayList<Revenue>> getListRevenueShop(@Field("idShop") int idShop, @Field("fromdate") String fromdate, @Field("todate") String todate);
 
 
+    @FormUrlEncoded
+    @POST("getOrderItemDetail.php")
+    Call<ArrayList<OrderItemDetail>> getOrderItemDetail(@Field("oderId") int oderId);
 
 
 }

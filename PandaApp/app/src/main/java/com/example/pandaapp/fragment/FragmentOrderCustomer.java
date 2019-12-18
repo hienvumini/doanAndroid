@@ -38,7 +38,11 @@ public class FragmentOrderCustomer extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.layout_fragmentordercustomer, container, false);
-        init(view);
+        try {
+            init(view);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
 
         callbackActivity = (callbackActivityCustomer) getActivity();
@@ -62,13 +66,17 @@ public class FragmentOrderCustomer extends Fragment {
         lstOrder.clear();
         adapterOrderCustomer = new AdapterOrderCustomer(getActivity(), R.id.listviewCustomerOrder, lstOrder);
         adapterOrderCustomer.notifyDataSetChanged();
-        getOrder(view, statusOrrder);
+        try {
+            getOrder(view, statusOrrder);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         return view;
 
     }
 
 
-    private void init(View view) {
+    private void init(View view) throws Exception{
         listView = (ListView) view.findViewById(R.id.listviewCustomerOrder);
         lstOrder = new ArrayList<>();
         adapterOrderCustomer = new AdapterOrderCustomer(getActivity(), R.id.listviewCustomerOrder, lstOrder);
@@ -78,13 +86,13 @@ public class FragmentOrderCustomer extends Fragment {
 
     }
 
-    private void getOrder(View view, int stt) {
+    private void getOrder(View view, int stt) throws Exception,NullPointerException{
         DataClient dataClient = APIUltils.getData();
         Call<ArrayList<OrderCustomer>> listCall = dataClient.getOrderCustomer(globalApplication.account.getAccountId(),stt);
         listCall.enqueue(new Callback<ArrayList<OrderCustomer>>() {
             @Override
             public void onResponse(Call<ArrayList<OrderCustomer>> call, Response<ArrayList<OrderCustomer>> response) {
-                Toast.makeText(getActivity(), response.body().size()+"SL", Toast.LENGTH_SHORT).show();
+
                 Log.d("A2A2", "onResponse: " + response.body());
 
 

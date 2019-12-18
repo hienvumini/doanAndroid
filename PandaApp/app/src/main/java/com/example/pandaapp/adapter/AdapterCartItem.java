@@ -4,6 +4,8 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -44,6 +46,8 @@ public class AdapterCartItem extends ArrayAdapter {
 
         if (view == null) {
             view = LayoutInflater.from(mctx).inflate(R.layout.item_cart, parent, false);
+            Animation animation_cycle = AnimationUtils.loadAnimation(mctx, R.anim.animation_listview);
+            view.setAnimation(animation_cycle);
 
         }
         ImageView imageViewProduct = (ImageView) view.findViewById(R.id.img_Anh_ItemCart);

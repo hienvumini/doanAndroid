@@ -15,6 +15,7 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
@@ -36,11 +37,12 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class FragmentSignup extends Fragment {
-    EditText edittextusernameSignup, edittextpassSignup, edittextNameSignup, edittextPhoneSignup, edittextAddressSignup, edittextEmailSignup, edittextNameShopSignup;
+    EditText edittextusernameSignup, edittextpassSignup, edittextNameSignup, edittextPhoneSignup, edittextAddressSignup, edittextEmailSignup, edittextNameShopSignup,
+            editTextIntroduce, editTextAddressShop, editTextphoneShop, editTextmailShop;
     RadioGroup radiogroupGioitinh;
     RadioButton checkNuSignup, checkNamSignup;
     Button signup_buttonSignup;
-    String txtusername, txtpassword, txtnamefull, txtphone, txtaddress, txtemail, txtdateofbirth, txtNameShop;
+    String txtusername, txtpassword, txtnamefull, txtphone, txtaddress, txtemail, txtdateofbirth, txtNameShop, txtIntrude, txtAddressShop, txtPhoneShop, txtEmailShop;
     int gioitinh;
     boolean enableShop = false;
     int idShop, AccountId;
@@ -51,6 +53,7 @@ public class FragmentSignup extends Fragment {
     int mode;
     View view;
     Bundle bundle;
+    LinearLayout linearLayoutInfoShop;
 
 
     @Override
@@ -58,20 +61,17 @@ public class FragmentSignup extends Fragment {
                              Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_signup, container, false);
         init(view);
-        bundle=this.getArguments();
+        bundle = this.getArguments();
         mode = bundle.getInt("mode", 1);
-        Toast.makeText(getActivity(), "Mode= "+mode, Toast.LENGTH_SHORT).show();
+
         switch (mode) {
 
             case 1:
 
-
                 break;
             case 2:
 
-                account= (Account) bundle.getSerializable("key");
-                Toast.makeText(getActivity(), "Dang nhap Fb "+account.toString(), Toast.LENGTH_SHORT).show();
-
+                account = (Account) bundle.getSerializable("key");
                 setDataIntilize(account);
 
                 break;
@@ -80,7 +80,12 @@ public class FragmentSignup extends Fragment {
                 break;
 
         }
-        onListener(view);
+        try {
+            onListener(view);
+        } catch (Exception e) {
+            System.out.println(e.toString());
+
+        }
         return view;
     }
 
@@ -98,7 +103,7 @@ public class FragmentSignup extends Fragment {
                         edittextDateOfBirthSignup.setText(simpleDateFormat.format(calendar.getTime()));
 
                     }
-                }, 2019, 11, 11);
+                }, calendar.get(Calendar.YEAR) - 18, calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH));
                 datePickerDialog.show();
 
 
@@ -127,11 +132,13 @@ public class FragmentSignup extends Fragment {
             }
 
             private void requestSignUp() {
+                getInfoShop();
 
                 DataClient dataClientRegister = APIUltils.getData();
                 Call<String> stringCall = dataClientRegister.RegisterAccount(
                         txtusername, txtpassword, idrole, txtnamefull, txtphone,
-                        txtaddress, gioitinh + "", txtemail, txtdateofbirth, txtNameShop);
+                        txtaddress, gioitinh + "", txtemail, txtdateofbirth,
+                        txtNameShop, txtIntrude, txtAddressShop, txtPhoneShop, txtEmailShop);
                 stringCall.enqueue(new Callback<String>() {
                     @Override
                     public void onResponse(Call<String> call, Response<String> response) {
@@ -143,7 +150,11 @@ public class FragmentSignup extends Fragment {
 
                         } else {
                             Toasty.custom(getActivity(), "Đăng kí thành công", R.drawable.ok, R.color.color_pink2, 2000, false, true).show();
-                            ((LoginActivity) getActivity()).toSigninFragment();
+                            try {
+                                ((LoginActivity) getActivity()).toSigninFragment();
+                            } catch (Exception e) {
+                                System.out.println(e.toString());
+                            }
 
                         }
                     }
@@ -161,21 +172,31 @@ public class FragmentSignup extends Fragment {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
                     enableShop = true;
-                    ((TextView) view.findViewById(R.id.texviewlableOpenShopSignUp)).setVisibility(View.VISIBLE);
-                    edittextNameShopSignup.setVisibility(View.VISIBLE);
-                    edittextNameShopSignup.setText(edittextNameSignup.getText().toString().trim());
+                    linearLayoutInfoShop.setVisibility(View.VISIBLE);
+
+
                     idrole = 2;
+                    IntilizeInfoShop();
 
 
                 } else {
-                    ((TextView) view.findViewById(R.id.texviewlableOpenShopSignUp)).setVisibility(View.INVISIBLE);
-                    edittextNameShopSignup.setVisibility(View.INVISIBLE);
+                    linearLayoutInfoShop.setVisibility(View.GONE);
+
+
                     idrole = 1;
 
 
                 }
             }
         });
+    }
+
+    private void IntilizeInfoShop() {
+        editTextAddressShop.setText(edittextAddressSignup.getText().toString().trim() + "");
+        edittextNameShopSignup.setText(edittextNameSignup.getText().toString().trim() + "");
+        editTextAddressShop.setText(edittextAddressSignup.getText().toString().trim() + "");
+        editTextphoneShop.setText(edittextNameSignup.getText().toString().trim() + "");
+        editTextmailShop.setText(edittextEmailSignup.getText().toString().trim() + "");
     }
 
 
@@ -193,6 +214,13 @@ public class FragmentSignup extends Fragment {
         checkNuSignup = (RadioButton) view.findViewById(R.id.checkNuSignup);
         signup_buttonSignup = (Button) view.findViewById(R.id.signup_buttonSignup);
         checkenableShop = (CheckBox) view.findViewById(R.id.checkboxOpenShop);
+        linearLayoutInfoShop = (LinearLayout) view.findViewById(R.id.linerShopInfo_Sigup);
+        editTextIntroduce = (EditText) view.findViewById(R.id.edittextIntroduceShopSignup);
+        editTextAddressShop = (EditText) view.findViewById(R.id.edittextAddressShopSignup);
+        editTextphoneShop = (EditText) view.findViewById(R.id.edittextPhonelShopSignup);
+        editTextmailShop = (EditText) view.findViewById(R.id.edittextEmailShopSignup);
+
+
     }
 
     public void getdataformSignup() {
@@ -229,21 +257,32 @@ public class FragmentSignup extends Fragment {
         if (txtNameShop == null || txtNameShop.equalsIgnoreCase("")) {
             txtNameShop = txtnamefull;
         }
+
     }
-    public void setDataIntilize(Account account){
-            edittextNameSignup.setText(account.getName());
-            edittextAddressSignup.setText(account.getAddress());
-            edittextDateOfBirthSignup.setText(account.getDateOfBirth());
-            edittextEmailSignup.setText(account.getEmail());
-            if (account.getGender()==1){
-                checkNamSignup.setChecked(true);
 
-            } else {
-                checkNuSignup.setChecked(true);
+    public void setDataIntilize(Account account) {
+        edittextNameSignup.setText(account.getName());
+        edittextAddressSignup.setText(account.getAddress());
+        edittextDateOfBirthSignup.setText(account.getDateOfBirth());
+        edittextEmailSignup.setText(account.getEmail());
+        if (account.getGender() == 1) {
+            checkNamSignup.setChecked(true);
 
-            }
-            edittextusernameSignup.setText(account.getEmail());
-            edittextusernameSignup.setEnabled(false);
+        } else {
+            checkNuSignup.setChecked(true);
+
+        }
+        edittextusernameSignup.setText(account.getEmail());
+        edittextusernameSignup.setEnabled(false);
+
+    }
+
+    public void getInfoShop() {
+        txtAddressShop = editTextAddressShop.getText().toString().trim() + "";
+        txtEmailShop = editTextmailShop.getText().toString().trim() + "";
+        txtIntrude = editTextIntroduce.getText().toString().trim() + "";
+        txtPhoneShop = editTextphoneShop.getText().toString().trim() + "";
+        txtNameShop = edittextNameShopSignup.getText().toString().trim() + "";
 
     }
 }

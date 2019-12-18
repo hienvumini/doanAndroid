@@ -6,13 +6,17 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.example.pandaapp.Models.Order;
+import com.example.pandaapp.Models.OrderItemDetail;
 import com.example.pandaapp.Models.Product;
 import com.example.pandaapp.R;
 import com.example.pandaapp.Retrofit2.APIUltils;
@@ -20,6 +24,7 @@ import com.example.pandaapp.Retrofit2.DataClient;
 import com.example.pandaapp.Util.GlobalApplication;
 import com.example.pandaapp.Util.LoadImage;
 import com.example.pandaapp.Util.OtherUltil;
+import com.example.pandaapp.view.DetailActivity;
 import com.example.pandaapp.view.OrderDetail;
 
 import java.util.ArrayList;
@@ -31,7 +36,7 @@ import retrofit2.Response;
 
 public class AdapterOrderItem extends ArrayAdapter {
     Context mctx;
-    List<Order> orderList;
+    List<OrderItemDetail> orderItemList;
     int layout;
     GlobalApplication globalApplication;
 
@@ -39,77 +44,71 @@ public class AdapterOrderItem extends ArrayAdapter {
     public AdapterOrderItem(@NonNull Context context, int resource, @NonNull List objects) {
         super(context, resource, objects);
         this.mctx = context;
-        this.orderList = objects;
+        this.orderItemList = objects;
         this.layout = resource;
+
     }
 
     @NonNull
     @Override
-    public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
+    public View getView(final int position, @Nullable View convertView, @NonNull ViewGroup parent) {
         View view = convertView;
         if (view == null) {
             view = LayoutInflater.from(mctx).inflate(R.layout.item_order, parent, false);
         }
+        globalApplication=(GlobalApplication) mctx.getApplicationContext();
         final TextView tvUser = (TextView) view.findViewById(R.id.tv_user_ItemOrder);
-        TextView tvstatus = (TextView) view.findViewById(R.id.tv_status_ItemOrder);
+        final TextView tvstatus = (TextView) view.findViewById(R.id.tv_status_ItemOrder_Shop);
         final TextView tvNameProduct = (TextView) view.findViewById(R.id.tv_nameProduct_ItemOrder);
         final TextView tvAmount = (TextView) view.findViewById(R.id.tv_Mount_ItemOrder);
         TextView tvTotalAmount = (TextView) view.findViewById(R.id.tv_total_product);
         final TextView tvPriceProduct = (TextView) view.findViewById(R.id.tv_Price_ItemOrder);
         final TextView tvTotalPay = (TextView) view.findViewById(R.id.tv_MoneyPay_ItemOrder);
         final ImageView imgAnhSanPham = (ImageView) view.findViewById(R.id.img_ImageProduct_ItemOrder);
-        final Order order = orderList.get(position);
-//        Product product = new Product();
-//        GlobalApplication globalApplication = (GlobalApplication) mctx.getApplicationContext();
-//        CacheUltils cacheUltils = new CacheUltils(mctx);
-//        cacheUltils.RefreshProduct(orderList.get(position).getOrderitem().get(0).getProductId());
-//        tvNameProduct.setText(globalApplication.product.getName());
-//        LoadImage.getImageInServer(mctx, globalApplication.product.getImages().get(0), imgAnhSanPham);
-        if (order.getTotalPrice() != null) {
-            tvTotalPay.setText(OtherUltil.fomattien.format(orderList.get(position).getTotalPrice()) + "đ");
+        final OrderItemDetail order = orderItemList.get(position);
+        final LinearLayout linearLayoutShop = (LinearLayout) view.findViewById(R.id.ctShoplayout_ItemOrder);
+
+
+        if (order.getTotal() != 0) {
+            tvTotalPay.setText(OtherUltil.fomattien.format(orderItemList.get(position).getTotal()) + "đ");
         }
-        if (order.getOrderitem().size() >= 0) {
-            tvAmount.setText("x" + orderList.get(position).getOrderitem().get(0).getAmount());
-        }
-
-        int tongsanpham = 0;
-        for (int i = 0; i < orderList.get(position).getOrderitem().size(); i++) {
-            tongsanpham += orderList.get(position).getOrderitem().get(i).getAmount();
-        }
-        tvTotalAmount.setText(tongsanpham + " sản phẩm");
-        tvUser.setText(order.getName());
-
-        DataClient getProduct = APIUltils.getData();
-        Call<ArrayList<Product>> productCall = getProduct.getProduct(orderList.get(position).getOrderitem().get(0).getProductId());
-        productCall.enqueue(new Callback<ArrayList<Product>>() {
-            @Override
-            public void onResponse(Call<ArrayList<Product>> call, Response<ArrayList<Product>> response) {
-                Product product = new Product();
-                product = response.body().get(0);
-                if (product.getImages().size() > 0) {
-                    LoadImage.getImageInServer(mctx, product.getImages().get(0), imgAnhSanPham);
-                }
-                tvNameProduct.setText(product.getName());
-                tvPriceProduct.setText(OtherUltil.fomattien.format(product.getPrice()) + "đ");
+        tvPriceProduct.setText(OtherUltil.fomattien.format(orderItemList.get(position).getPrice()+orderItemList.get(position).getDiscount()) + "đ");
+        Toast.makeText(mctx, ""+orderItemList.get(position).getDiscount(), Toast.LENGTH_SHORT).show();
+        tvAmount.setText("x" + orderItemList.get(position).getAmount());
+        linearLayoutShop.setVisibility(View.GONE);
+        tvTotalAmount.setVisibility(View.GONE);
+        tvNameProduct.setText(orderItemList.get(position).getName());
+        LoadImage.getImageInServer(mctx, orderItemList.get(position).getImage(), imgAnhSanPham);
 
 
-            }
-
-            @Override
-            public void onFailure(Call<ArrayList<Product>> call, Throwable t) {
-
-            }
-        });
         view.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
-                globalApplication = (GlobalApplication) mctx.getApplicationContext();
-                globalApplication.order = order;
-                Intent intent = new Intent(mctx, OrderDetail.class);
-                mctx.startActivity(intent);
+            public void onClick(View v) {
+                DataClient dataClient=APIUltils.getData();
+                Call<ArrayList<Product>> arrayListCall=dataClient.getProduct(orderItemList.get(position).getProductId());
+                arrayListCall.enqueue(new Callback<ArrayList<Product>>() {
+                    @Override
+                    public void onResponse(Call<ArrayList<Product>> call, Response<ArrayList<Product>> response) {
+                        if (response.body().size()>0) {
+                            globalApplication.product=response.body().get(0);
+                            Intent intent=new Intent(mctx, DetailActivity.class);
+                            mctx.startActivity(intent);
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<ArrayList<Product>> call, Throwable t) {
+
+                    }
+                });
             }
         });
 
         return view;
+    }
+
+    @Override
+    public int getCount() {
+        return orderItemList.size();
     }
 }

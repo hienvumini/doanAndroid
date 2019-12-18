@@ -40,13 +40,7 @@
                 android:textSize="@dimen/font_20sp"
                 android:textStyle="bold" />
 
-            <ImageView
-                android:id="@+id/img_more"
-                android:layout_width="@dimen/dimen_25dp"
-                android:layout_height="match_parent"
-                android:layout_alignParentEnd="true"
-                android:layout_marginRight="@dimen/dimen_15dp"
-                android:src="@drawable/detail_more" />
+
 
         </RelativeLayout>
 
@@ -60,18 +54,36 @@
         android:background="@color/color_white"
         android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/shop_donban"
+        <LinearLayout
+            android:id="@+id/layoutMyOrder_Profile"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/dimen_0dp"
-            android:layout_marginLeft="@dimen/dimen_10dp"
-            android:layout_weight="2"
-            android:text="Đơn bán"
-            android:textColor="@color/color_black"
-            android:textSize="@dimen/font_18sp"
-            android:textStyle="bold" />
+            android:layout_height="@dimen/dimen_35dp"
+            android:layout_marginTop="@dimen/dimen_10dp"
+            android:layout_marginBottom="@dimen/dimen_10dp"
+            android:orientation="horizontal">
+
+            <ImageView
+
+                android:layout_width="@dimen/dimen_35dp"
+                android:layout_height="@dimen/dimen_35dp"
+                android:layout_marginLeft="@dimen/dimen_15dp"
+                android:background="@drawable/custom_circle_pink"
+                android:src="@drawable/ordershop" />
+
+            <TextView
+
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="@dimen/dimen_15dp"
+                android:gravity="center|left"
+                android:text="Đơn hàng"
+                android:textColor="@color/color_black"
+                android:textSize="@dimen/font_18sp" />
+        </LinearLayout>
 
         <LinearLayout
+            android:layout_marginRight="@dimen/dimen_10dp"
+            android:layout_marginLeft="@dimen/dimen_10dp"
             android:weightSum="4"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -86,9 +98,10 @@
                 <ImageView
 
                     android:layout_width="wrap_content"
-                    android:layout_height="@dimen/dimen_40dp"
+                    android:layout_height="@dimen/dimen_30dp"
                     android:layout_marginTop="@dimen/dimen_15dp"
-                    android:src="@drawable/processveri" />
+                    android:src="@drawable/processveri"
+                    />
 
                 <TextView
                     android:gravity="center"
@@ -98,7 +111,7 @@
                     android:layout_marginTop="@dimen/dimen_15dp"
                     android:text="Chờ xác nhận"
                     android:textColor="@color/color_black"
-                    android:textSize="@dimen/font_18sp" />
+                    android:textSize="@dimen/font_16sp" />
             </LinearLayout>
 
             <LinearLayout
@@ -111,7 +124,7 @@
                 <ImageView
 
                     android:layout_width="wrap_content"
-                    android:layout_height="@dimen/dimen_40dp"
+                    android:layout_height="@dimen/dimen_30dp"
                     android:layout_marginTop="@dimen/dimen_15dp"
                     android:src="@drawable/giaohang" />
 
@@ -122,7 +135,7 @@
                     android:layout_marginTop="@dimen/dimen_15dp"
                     android:text="Đang giao"
                     android:textColor="@color/color_black"
-                    android:textSize="@dimen/font_18sp" />
+                    android:textSize="@dimen/font_16sp" />
             </LinearLayout>
 
             <LinearLayout
@@ -135,7 +148,7 @@
                 <ImageView
 
                     android:layout_width="wrap_content"
-                    android:layout_height="@dimen/dimen_40dp"
+                    android:layout_height="@dimen/dimen_30dp"
                     android:layout_marginTop="@dimen/dimen_15dp"
                     android:src="@drawable/nhanhang" />
 
@@ -146,7 +159,7 @@
                     android:layout_marginTop="@dimen/dimen_15dp"
                     android:text="Đã nhận"
                     android:textColor="@color/color_black"
-                    android:textSize="@dimen/font_18sp" />
+                    android:textSize="@dimen/font_16sp" />
             </LinearLayout>
 
             <LinearLayout
@@ -159,7 +172,7 @@
                 <ImageView
 
                     android:layout_width="wrap_content"
-                    android:layout_height="@dimen/dimen_40dp"
+                    android:layout_height="@dimen/dimen_30dp"
                     android:layout_marginTop="@dimen/dimen_15dp"
                     android:src="@drawable/dahuy" />
 
@@ -170,7 +183,7 @@
                     android:layout_marginTop="@dimen/dimen_15dp"
                     android:text="Đã hủy"
                     android:textColor="@color/color_black"
-                    android:textSize="@dimen/font_18sp" />
+                    android:textSize="@dimen/font_16sp" />
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>
@@ -287,6 +300,32 @@
                 android:layout_marginLeft="@dimen/dimen_15dp"
                 android:gravity="center|left"
                 android:text="Thông tin tài khoản"
+                android:textColor="@color/color_black"
+                android:textSize="@dimen/font_18sp" />
+        </LinearLayout>
+        <LinearLayout
+
+            android:id="@+id/layoutEditShop_Profile"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimen_35dp"
+            android:layout_marginTop="@dimen/dimen_30dp"
+            android:layout_marginBottom="@dimen/dimen_10dp"
+            android:orientation="horizontal">
+
+            <ImageView
+
+                android:layout_width="@dimen/dimen_35dp"
+                android:layout_height="@dimen/dimen_35dp"
+                android:layout_marginLeft="@dimen/dimen_15dp"
+                android:src="@drawable/openshop" />
+
+            <TextView
+
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="@dimen/dimen_15dp"
+                android:gravity="center|left"
+                android:text="Sửa thông tin cửa hàng"
                 android:textColor="@color/color_black"
                 android:textSize="@dimen/font_18sp" />
         </LinearLayout>

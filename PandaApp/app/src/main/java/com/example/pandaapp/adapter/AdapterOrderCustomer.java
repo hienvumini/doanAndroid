@@ -1,9 +1,12 @@
 package com.example.pandaapp.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -21,6 +24,7 @@ import com.example.pandaapp.Retrofit2.DataClient;
 import com.example.pandaapp.Util.GlobalApplication;
 import com.example.pandaapp.Util.LoadImage;
 import com.example.pandaapp.Util.OtherUltil;
+import com.example.pandaapp.view.OrderDetail;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -50,9 +54,12 @@ public class AdapterOrderCustomer extends ArrayAdapter {
         View view = convertView;
         if (view == null) {
             view = LayoutInflater.from(mctx).inflate(R.layout.item_order, parent, false);
+            Animation animation_cycle = AnimationUtils.loadAnimation(mctx, R.anim.animation_listview);
+            view.setAnimation(animation_cycle);
         }
+        globalApplication = (GlobalApplication) mctx.getApplicationContext();
         final TextView nameShop = (TextView) view.findViewById(R.id.tv_user_ItemOrder);
-        TextView tvstatus = (TextView) view.findViewById(R.id.tv_status_ItemOrder);
+        TextView tvstatus = (TextView) view.findViewById(R.id.tv_status_ItemOrder_Shop);
         final TextView tvNameProduct = (TextView) view.findViewById(R.id.tv_nameProduct_ItemOrder);
         final TextView tvAmount = (TextView) view.findViewById(R.id.tv_Mount_ItemOrder);
         TextView tvTotalAmount = (TextView) view.findViewById(R.id.tv_total_product);
@@ -76,7 +83,24 @@ public class AdapterOrderCustomer extends ArrayAdapter {
         }
         tvTotalAmount.setText(tongsanpham + " sản phẩm");
         nameShop.setText(order.getShopName());
+        String status = "";
+        switch (order.getStatusId()) {
+            case 1:
+                status = "Đang chờ xác nhận";
+                break;
+            case 2:
+                status = "Đang giao hàng";
+                break;
+            case 3:
+                status = "Đã giao hàng";
+                break;
+            case 4:
+                status = "Đã hủy";
+                break;
 
+
+        }
+        tvstatus.setText(status);
         DataClient getProduct = APIUltils.getData();
         Call<ArrayList<Product>> productCall = getProduct.getProduct(orderList.get(position).getOrderitem().get(0).getProductId());
         productCall.enqueue(new Callback<ArrayList<Product>>() {
@@ -101,15 +125,28 @@ public class AdapterOrderCustomer extends ArrayAdapter {
         view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                globalApplication = (GlobalApplication) mctx.getApplicationContext();
+
                 globalApplication.orderCustomer = order;
                 onlistenerAdapterOrder = (onlistenerAdapterOrderCustomer) mctx;
                 onlistenerAdapterOrder.startActivityforResultListener();
 
             }
         });
+        view.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                DataClient dataClient = APIUltils.getData();
+
+                Intent intent = new Intent(mctx, OrderDetail.class);
+                globalApplication.orderID =order.getOderId();
+                globalApplication.orderCustomer = orderList.get(position);
+                intent.putExtra("role",1);
+                mctx.startActivity(intent);
+            }
+        });
 
         return view;
+
     }
 
     public interface onlistenerAdapterOrderCustomer {

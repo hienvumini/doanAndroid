@@ -21,17 +21,20 @@ import com.example.pandaapp.view.LoginActivity;
 import com.example.pandaapp.R;
 import com.example.pandaapp.Util.GlobalApplication;
 import com.example.pandaapp.view.MainActivity;
+import com.example.pandaapp.view.OpenShopActivity;
 import com.example.pandaapp.view.OrderManagerShopActivity;
+import com.example.pandaapp.view.RevenueActivity;
 import com.facebook.login.LoginManager;
 
 import es.dmoral.toasty.Toasty;
 
 
 public class FragmentShopProfile extends Fragment implements View.OnClickListener {
-    LinearLayout linearAddProduct, linearRevenue, linearProductList, linearProcess, linearOnWay, linearReceived, linearCancel, linearProfile;
+    LinearLayout linearAddProduct, linearRevenue, linearProductList, linearProcess, linearOnWay, linearReceived, linearCancel, linearProfile, linearEditShop;
     Button btnLogoutShop;
     ImageView img_back_black;
     int REQUEST_CODE_ADDPRODUCT = 112;
+    int status;
 
 
     @Override
@@ -54,6 +57,7 @@ public class FragmentShopProfile extends Fragment implements View.OnClickListene
         linearProfile.setOnClickListener(this);
         btnLogoutShop.setOnClickListener(this);
         img_back_black.setOnClickListener(this);
+        linearEditShop.setOnClickListener(this);
 
     }
 
@@ -62,30 +66,37 @@ public class FragmentShopProfile extends Fragment implements View.OnClickListene
     public void onClick(View v) {
 
         switch (v.getId()) {
+
             case R.id.layoutVeri_ProfileShop:
-                Toast.makeText(getActivity(), "on Processing", Toast.LENGTH_SHORT).show();
-                ChangeActivity.toActivity(getActivity(), OrderManagerShopActivity.class);
+                status = 0;
+
+                ChangeActivity.toActivity(getActivity(), OrderManagerShopActivity.class, "status", status);
                 break;
             case R.id.layoutOnWay_ProfileShop:
-                Toast.makeText(getActivity(), "OnWay", Toast.LENGTH_SHORT).show();
-                ChangeActivity.toActivity(getActivity(), OrderManagerShopActivity.class);
+                status = 1;
+
+                ChangeActivity.toActivity(getActivity(), OrderManagerShopActivity.class, "status", status);
                 break;
             case R.id.layoutReceived_ProfileShop:
-                Toast.makeText(getActivity(), "ReceiVed ", Toast.LENGTH_SHORT).show();
-                ChangeActivity.toActivity(getActivity(), OrderManagerShopActivity.class);
+                status = 2;
+
+                ChangeActivity.toActivity(getActivity(), OrderManagerShopActivity.class, "status", status);
                 break;
             case R.id.layoutCancel_ProfileShop:
-                Toast.makeText(getActivity(), "Cancel", Toast.LENGTH_SHORT).show();
-                ChangeActivity.toActivity(getActivity(), OrderManagerShopActivity.class);
+                status = 3;
+
+                ChangeActivity.toActivity(getActivity(), OrderManagerShopActivity.class, "status", status);
                 break;
             case R.id.layoutAddProduct_ProfileShop:
-                Toast.makeText(getActivity(), "Add Product", Toast.LENGTH_SHORT).show();
+
                 Intent intent = new Intent(getActivity(), AddProductActivity.class);
                 startActivityForResult(intent, REQUEST_CODE_ADDPRODUCT);
 
                 break;
             case R.id.layoutRevenue_ProfileShop:
-                Toast.makeText(getActivity(), "Doanh thu", Toast.LENGTH_SHORT).show();
+                intent = new Intent(getActivity(), RevenueActivity.class);
+                startActivity(intent);
+
                 break;
             case R.id.layoutListProduct_ProfileShop:
 
@@ -93,7 +104,7 @@ public class FragmentShopProfile extends Fragment implements View.OnClickListene
                 startActivity(intent);
                 break;
             case R.id.layoutProfileInfomation_ProfileShop:
-                Toast.makeText(getActivity(), "THông tin tài khoản", Toast.LENGTH_SHORT).show();
+
                 FragmentUtils.openFragment((new FragmentProfile()), getActivity().getSupportFragmentManager(), R.id.frameProfile_ProfileShop);
                 break;
             case R.id.btnLogOut_ProfileShop:
@@ -101,20 +112,22 @@ public class FragmentShopProfile extends Fragment implements View.OnClickListene
                 startActivity(intent);
                 getActivity().finish();
                 GlobalApplication globalApplication = (GlobalApplication) getActivity().getApplicationContext();
-                Toasty.custom(getActivity(),"Đăng xuất",R.drawable.logo,R.color.color_red_text,2000,false,true).show();
+                Toasty.custom(getActivity(), "Đăng xuất", R.drawable.logo, R.color.color_red_text, 2000, false, true).show();
                 LoginManager.getInstance().logOut();
-
-
                 break;
+
+            case R.id.layoutEditShop_Profile:
+                Intent intent1 = new Intent(getActivity(), OpenShopActivity.class);
+                intent1.putExtra("mode", 2);
+                startActivity(intent1);
+                break;
+
             case R.id.img_back_black:
-//                intent=new Intent(getActivity(), MainActivity.class);
-//                startActivity(intent);
-//                getActivity().finish();
-                // getFragmentManager().popBackStack();
                 ((MainActivity) getActivity()).changeNavigationBottomto(1);
 
 
                 break;
+
 
         }
 
@@ -131,6 +144,7 @@ public class FragmentShopProfile extends Fragment implements View.OnClickListene
         linearProfile = (LinearLayout) view.findViewById(R.id.layoutProfileInfomation_ProfileShop);
         btnLogoutShop = (Button) view.findViewById(R.id.btnLogOut_ProfileShop);
         img_back_black = (ImageView) view.findViewById(R.id.img_back_black);
+        linearEditShop = (LinearLayout) view.findViewById(R.id.layoutEditShop_Profile);
     }
 
 

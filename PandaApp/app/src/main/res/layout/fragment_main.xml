@@ -1,70 +1,77 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<androidx.swiperefreshlayout.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+    android:id="@+id/swiperefrefresh_FragmentMain"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
 
-    <LinearLayout
-        android:id="@+id/toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/dimension_actionbar_height_56dp"
-        android:layout_centerHorizontal="true"
-        android:background="@color/color_pink2"
-        android:gravity="center"
-        android:orientation="horizontal"
-        android:weightSum="10">
+    >
 
-        <TextView
-            android:id="@+id/tv_Search_Search"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/dimen_10dp"
-            android:layout_weight="10"
-            android:background="@drawable/shape_edittext"
-            android:iconifiedByDefault="false"
-            android:paddingLeft="@dimen/dimen_20dp"
-            android:paddingTop="@dimen/dimen_5dp"
-            android:paddingBottom="@dimen/dimen_5dp"
-            android:text="Tìm kiếm"
-            android:textSize="@dimen/font_20sp"
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
 
-            />
-
-        <ImageView
-            android:id="@+id/imgcartMain"
-            android:layout_width="@dimen/dimen_50dp"
-            android:layout_height="@dimen/dimen_50dp"
-            android:layout_weight="1"
-            android:src="@drawable/ic_shopping_cart_white_48dp" />
-
-    </LinearLayout>
-
-    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-
-        android:id="@+id/swiperefrefresh_FragmentMain"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/toolbar">
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:id="@+id/ctheader"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dimension_actionbar_height_56dp"
+                android:layout_centerHorizontal="true"
+                android:background="@color/color_pink2"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:weightSum="10">
+
+                <TextView
+                    android:id="@+id/tv_Search_Search"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/dimen_10dp"
+                    android:layout_weight="10"
+                    android:background="@drawable/shape_edittext"
+                    android:iconifiedByDefault="false"
+                    android:paddingLeft="@dimen/dimen_20dp"
+                    android:paddingTop="@dimen/dimen_5dp"
+                    android:paddingBottom="@dimen/dimen_5dp"
+                    android:text="Tìm kiếm"
+                    android:textSize="@dimen/font_20sp"
+
+                    />
+
+                <ImageView
+                    android:id="@+id/imgcartMain"
+                    android:layout_width="@dimen/dimen_50dp"
+                    android:layout_height="@dimen/dimen_50dp"
+                    android:layout_weight="1"
+                    android:src="@drawable/cart" />
+            </LinearLayout>
+
+            <ViewFlipper
+                android:id="@+id/viewflipperquangcao"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dimen_150dp"
+                android:background="@color/color_pink2" />
+        </LinearLayout>
+
 
         <ScrollView
             android:id="@+id/scollviewmain"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-
-            >
+            android:layout_below="@id/ctheader">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical">
 
-                <ViewFlipper
-                    android:id="@+id/viewflipperquangcao"
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/dimen_150dp"
-                    android:background="@color/color_pink2" />
 
                 <androidx.recyclerview.widget.RecyclerView
 
@@ -77,15 +84,17 @@
                 </androidx.recyclerview.widget.RecyclerView>
             </LinearLayout>
         </ScrollView>
-    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
-    <ProgressBar
-        android:id="@+id/progressBar_LoadMore_FragmentMain"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="@dimen/dimen_50dp"
-        android:visibility="gone" />
 
-</RelativeLayout>
+        <ProgressBar
+            android:id="@+id/progressBar_LoadMore_FragmentMain"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="@dimen/dimen_50dp"
+            android:visibility="gone" />
+
+
+    </RelativeLayout>
+</androidx.swiperefreshlayout.widget.SwipeRefreshLayout>

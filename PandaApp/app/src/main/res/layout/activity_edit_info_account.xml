@@ -1,0 +1,244 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/color_pink1"
+    android:orientation="vertical"
+    tools:context=".view.LoginActivity">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@id/signup_buttonEdit">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/imgV"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/dimen_135dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="@dimen/dimen_20dp"
+                android:src="@drawable/panda" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="Chỉnh sửa thông tin"
+                android:textColor="@color/color_blue_text"
+                android:textSize="@dimen/dimen_35dp"
+                android:textStyle="bold" />
+
+            <TextView
+
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dimen_20dp"
+                android:layout_marginLeft="@dimen/dimen_15dp"
+                android:layout_marginTop="@dimen/dimen_15dp"
+                android:text="Tên tài khoản"
+                android:textColor="@color/color_blue_text" />
+
+            <EditText
+                android:id="@+id/edittextusernameEdit"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dimen_35dp"
+                android:layout_marginLeft="@dimen/dimen_20dp"
+                android:layout_marginTop="@dimen/dimen_10dp"
+                android:layout_marginRight="@dimen/dimen_20dp"
+                android:background="@color/color_white"
+                android:hint="congpham@gmail.com"
+                android:inputType="textEmailAddress"
+                android:paddingLeft="@dimen/dimen_5dp"
+                android:text=""
+                android:textColor="@color/color_red_text" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dimen_15dp"
+                android:layout_marginTop="@dimen/dimen_15dp"
+                android:text="Mật khẩu"
+                android:textColor="@color/color_blue_text" />
+
+            <EditText
+                android:id="@+id/edittextpassEdit"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dimen_35dp"
+                android:layout_marginLeft="@dimen/dimen_20dp"
+                android:layout_marginTop="@dimen/dimen_10dp"
+                android:layout_marginRight="@dimen/dimen_20dp"
+                android:background="@color/color_white"
+                android:hint="********"
+                android:inputType="textPassword"
+                android:paddingLeft="@dimen/dimen_5dp"
+                android:text="" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dimen_15dp"
+                android:layout_marginTop="@dimen/dimen_15dp"
+                android:text="Họ và tên"
+                android:textColor="@color/color_blue_text" />
+
+            <EditText
+                android:id="@+id/edittextNameEdit"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dimen_35dp"
+                android:layout_marginLeft="@dimen/dimen_20dp"
+                android:layout_marginTop="@dimen/dimen_10dp"
+                android:layout_marginRight="@dimen/dimen_20dp"
+                android:background="@color/color_white"
+                android:hint="Phạm Công"
+                android:inputType="text"
+                android:paddingLeft="@dimen/dimen_5dp"
+                android:text="" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dimen_15dp"
+                android:layout_marginTop="@dimen/dimen_15dp"
+                android:text="Số điện thoại"
+                android:textColor="@color/color_blue_text" />
+
+            <EditText
+                android:id="@+id/edittextPhoneEdit"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dimen_35dp"
+                android:layout_marginLeft="@dimen/dimen_20dp"
+                android:layout_marginTop="@dimen/dimen_10dp"
+                android:layout_marginRight="@dimen/dimen_20dp"
+                android:background="@color/color_white"
+                android:hint="0988998899"
+                android:inputType="number"
+                android:paddingLeft="@dimen/dimen_5dp"
+                android:text="" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dimen_15dp"
+                android:layout_marginTop="@dimen/dimen_15dp"
+                android:text="Địa chỉ"
+                android:textColor="@color/color_blue_text" />
+
+            <EditText
+                android:inputType="textCapSentences|textMultiLine"
+                android:id="@+id/edittextAddressEdit"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dimen_100dp"
+                android:layout_marginLeft="@dimen/dimen_20dp"
+                android:layout_marginTop="@dimen/dimen_10dp"
+                android:layout_marginRight="@dimen/dimen_20dp"
+                android:background="@color/color_white"
+                android:gravity="start"
+                android:hint="0988998899"
+
+                android:paddingLeft="@dimen/dimen_5dp"
+                android:text="" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dimen_15dp"
+                android:layout_marginTop="@dimen/dimen_15dp"
+                android:text="Giới tính"
+                android:textColor="@color/color_blue_text" />
+
+            <RadioGroup
+                android:id="@+id/radiogroupGioitinhEdit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dimen_20dp"
+                android:layout_marginRight="@dimen/dimen_20dp"
+                android:background="@color/color_white"
+                android:gravity="start"
+                android:orientation="horizontal">
+
+                <RadioButton
+                    android:id="@+id/checkNuEdit"
+                    android:layout_width="100dp"
+                    android:layout_height="match_parent"
+                    android:checked="true"
+                    android:gravity="center"
+                    android:text="Nữ" />
+
+                <RadioButton
+                    android:id="@+id/checkNamEdit"
+                    android:layout_width="100dp"
+                    android:layout_height="match_parent"
+                    android:text="Nam" />
+
+            </RadioGroup>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dimen_15dp"
+                android:layout_marginTop="@dimen/dimen_15dp"
+                android:text="Email"
+                android:textColor="@color/color_blue_text" />
+
+            <EditText
+                android:id="@+id/edittextEmailEdit"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dimen_35dp"
+                android:layout_marginLeft="@dimen/dimen_20dp"
+                android:layout_marginTop="@dimen/dimen_10dp"
+                android:layout_marginRight="@dimen/dimen_20dp"
+                android:background="@color/color_white"
+                android:hint="congpham@gmail.com"
+                android:inputType="text"
+                android:paddingLeft="@dimen/dimen_5dp"
+                android:text="" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dimen_15dp"
+                android:layout_marginTop="@dimen/dimen_15dp"
+                android:text="Ngày sinh"
+                android:textColor="@color/color_blue_text" />
+
+            <TextView
+                android:id="@+id/edittextDateOfBirthEdit"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dimen_35dp"
+                android:layout_marginLeft="@dimen/dimen_20dp"
+                android:layout_marginTop="@dimen/dimen_10dp"
+                android:layout_marginRight="@dimen/dimen_20dp"
+                android:background="@color/color_white"
+                android:gravity="center_vertical"
+                android:hint="09/11/1992"
+                android:inputType="none"
+                android:paddingLeft="@dimen/dimen_5dp"
+                android:text="" />
+
+
+
+
+
+        </LinearLayout>
+    </ScrollView>
+
+
+    <Button
+        android:id="@+id/signup_buttonEdit"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimen_40dp"
+        android:layout_alignParentBottom="true"
+        android:layout_gravity="center_horizontal"
+        android:layout_margin="@dimen/dimen_10dp"
+        android:layout_marginTop="@dimen/dimen_25dp"
+        android:background="@drawable/botron_button"
+        android:text="Xác nhận"
+        android:textColor="@color/color_white" />
+
+</RelativeLayout>

@@ -36,7 +36,7 @@
 
                             android:id="@+id/Image_Detail"
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent"
+                            android:layout_height="300dp"
                             android:src="@drawable/detail_img" />
 
                         <TextView
@@ -89,6 +89,16 @@
                                 android:paddingLeft="@dimen/dimen_10dp"
                                 android:text="120.000"
                                 android:textColor="@color/color_pink2"
+                                android:textSize="@dimen/font_16sp" />
+                            <TextView
+                                android:layout_marginLeft="@dimen/dimen_20dp"
+                                android:id="@+id/textviewGiaDiscount_Deatail"
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:gravity="center|left"
+                                android:paddingLeft="@dimen/dimen_10dp"
+                                android:text="120.000"
+                                android:textColor="@color/color_black"
                                 android:textSize="@dimen/font_16sp" />
 
 
@@ -166,26 +176,7 @@
             android:paddingTop="@dimen/dimen_2dp"
             android:paddingBottom="@dimen/dimen_2dp">
 
-            <LinearLayout
-                android:layout_width="@dimen/dimen_0dp"
-                android:layout_height="match_parent"
-                android:layout_marginLeft="@dimen/dimen_5dp"
-                android:layout_weight="2"
-                android:orientation="vertical">
 
-                <ImageView
-                    android:id="@+id/detail_product_stall"
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/dimen_30dp"
-                    android:src="@drawable/stall" />
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:text="Gian hàng"
-                    android:textColor="@color/color_black" />
-            </LinearLayout>
 
             <Button
                 android:id="@+id/btn_buy_ProductDetail"
@@ -240,21 +231,12 @@
                 android:layout_height="@dimen/dimen_35dp"
                 android:layout_marginTop="@dimen/dimen_15dp"
                 android:layout_marginRight="@dimen/dimen_10dp"
-                android:layout_toLeftOf="@+id/detail_product_more"
+                android:layout_alignParentRight="true"
                 android:background="@drawable/custom_circle"
                 android:padding="@dimen/dimen_2dp"
                 android:src="@drawable/cart" />
 
-            <ImageView
-                android:id="@+id/detail_product_more"
-                android:layout_width="@dimen/dimen_35dp"
-                android:layout_height="@dimen/dimen_35dp"
 
-                android:layout_alignParentEnd="true"
-                android:layout_marginTop="@dimen/dimen_15dp"
-                android:layout_marginRight="@dimen/dimen_15dp"
-                android:padding="@dimen/dimen_5dp"
-                android:src="@drawable/favorite" />
         </RelativeLayout>
 
         <FrameLayout

@@ -48,20 +48,7 @@
             </LinearLayout>
 
 
-            <TextView
-                android:id="@+id/textview_Favorite_Profile"
-                android:layout_width="@dimen/dimen_120dp"
-                android:layout_height="@dimen/dimen_40dp"
-                android:layout_alignParentEnd="true"
-                android:layout_marginTop="@dimen/dimen_5dp"
-                android:layout_marginRight="@dimen/dimen_10dp"
-                android:background="@drawable/custom_myshop"
-                android:gravity="center"
-                android:paddingLeft="@dimen/dimen_2dp"
-                android:paddingRight="@dimen/dimen_2dp"
-                android:text="Yêu thích"
-                android:textColor="@color/color_white"
-                android:textSize="@dimen/font_20sp" />
+
 
         </RelativeLayout>
 
@@ -101,6 +88,33 @@
                 android:textColor="@color/color_black"
                 android:textSize="@dimen/font_18sp" />
         </LinearLayout>
+        <LinearLayout
+            android:id="@+id/layoutFavorite_Profile"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimen_35dp"
+            android:layout_marginTop="@dimen/dimen_10dp"
+            android:layout_marginBottom="@dimen/dimen_10dp"
+            android:orientation="horizontal">
+
+            <ImageView
+
+                android:layout_width="@dimen/dimen_35dp"
+                android:layout_height="@dimen/dimen_35dp"
+                android:layout_marginLeft="@dimen/dimen_15dp"
+                android:background="@drawable/custom_circle_pink"
+                android:src="@drawable/favorite" />
+
+            <TextView
+
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="@dimen/dimen_15dp"
+                android:gravity="center|left"
+                android:text="Sản phẩm yêu thích"
+                android:textColor="@color/color_black"
+                android:textSize="@dimen/font_18sp" />
+        </LinearLayout>
+
     </LinearLayout>
 
     <LinearLayout
@@ -309,9 +323,62 @@
             </LinearLayout>
 
         </LinearLayout>
+        <LinearLayout
 
+            android:id="@+id/layoutEdit_Profile"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimen_35dp"
+            android:layout_marginTop="@dimen/dimen_20dp"
+            android:layout_marginBottom="@dimen/dimen_10dp"
+            android:orientation="horizontal">
+
+            <ImageView
+
+                android:layout_width="@dimen/dimen_35dp"
+                android:layout_height="@dimen/dimen_35dp"
+                android:layout_marginLeft="@dimen/dimen_15dp"
+                android:background="@drawable/custom_circle_pink"
+                android:src="@drawable/editflat" />
+
+            <TextView
+
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="@dimen/dimen_15dp"
+                android:gravity="center|left"
+                android:text="Sửa thông tin tài khoản"
+                android:textColor="@color/color_black"
+                android:textSize="@dimen/font_18sp" />
+        </LinearLayout>
+        <LinearLayout
+
+            android:id="@+id/layoutOpenShop_Profile"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimen_35dp"
+            android:layout_marginTop="@dimen/dimen_20dp"
+            android:layout_marginBottom="@dimen/dimen_10dp"
+            android:orientation="horizontal">
+
+            <ImageView
+
+                android:layout_width="@dimen/dimen_35dp"
+                android:layout_height="@dimen/dimen_35dp"
+                android:layout_marginLeft="@dimen/dimen_15dp"
+                android:src="@drawable/openshop" />
+
+            <TextView
+
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="@dimen/dimen_15dp"
+                android:gravity="center|left"
+                android:text="Bắt đầu bán hàng với Panda"
+                android:textColor="@color/color_black"
+                android:textSize="@dimen/font_18sp" />
+        </LinearLayout>
 
     </LinearLayout>
+
 
     <Button
         android:id="@+id/btnLogOut_Profile"
