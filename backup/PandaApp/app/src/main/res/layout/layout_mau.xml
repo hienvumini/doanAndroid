@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+    <androidx.appcompat.widget.Toolbar
+
+       android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        android:background="@color/color_pink2">
+        <ImageView
+            android:id="@+id/img_qrorrfid"
+            android:layout_gravity="start"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:scaleType="centerInside"
+            android:src="@drawable/back1"/>
+        <TextView
+android:layout_marginLeft="@dimen/dimen_5dp"
+            android:textColor="@color/color_white"
+            android:textStyle="bold"
+            android:textSize="@dimen/font_18sp"
+            android:text="Giỏ hàng của tôi"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+    </androidx.appcompat.widget.Toolbar>
+
+
+<LinearLayout
+    android:layout_above="@id/ctNavigationbotton"
+    android:layout_below="@id/toolbar"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <LinearLayout
+
+        android:layout_centerHorizontal="true"
+        android:background="@color/color_pink2"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:id="@+id/ctsearch"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimension_actionbar_height_56dp"
+        android:weightSum="10"
+        >
+        <SearchView
+
+            android:layout_marginRight="@dimen/dimen_50dp"
+            android:layout_marginLeft="@dimen/dimen_10dp"
+            android:background="@drawable/shape_edittext"
+            android:id="@+id/simpleSearchView"
+            android:layout_width="0dp"
+            android:layout_weight="10"
+            android:layout_height="wrap_content"
+            android:iconifiedByDefault="false"
+            android:queryHint="Bạn tìm gì hôm nay..." />
+        <ImageView
+            android:layout_weight="1"
+            android:src="@drawable/catagory"
+            android:layout_width="@dimen/dimen_50dp"
+            android:layout_height="@dimen/dimen_50dp"/>
+    </LinearLayout>
+</LinearLayout>
+
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:layout_alignParentBottom="true"
+        android:id="@+id/ctNavigationbotton"
+        app:menu="@menu/navigation_bottonmenu"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"></com.google.android.material.bottomnavigation.BottomNavigationView>
+
+</RelativeLayout>

@@ -18,7 +18,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".view.OpenShopActivity"></activity>
+        <activity android:name=".view.ChangePassActivity" />
+        <activity android:name=".view.OpenShopActivity" />
         <activity android:name=".view.EditInfoAccountActivity" />
         <activity android:name=".view.NewsDetailActivity" />
 

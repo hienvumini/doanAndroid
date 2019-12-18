@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".fragment.FragmentCategory">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:id="@+id/ctheader_Category"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dimension_actionbar_height_56dp"
+                android:layout_centerHorizontal="true"
+                android:background="@color/color_pink2"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:weightSum="10">
+
+                <TextView
+                    android:id="@+id/tv_Search_Category"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/dimen_10dp"
+                    android:layout_weight="10"
+                    android:background="@drawable/shape_edittext"
+                    android:iconifiedByDefault="false"
+                    android:paddingLeft="@dimen/dimen_20dp"
+                    android:paddingTop="@dimen/dimen_5dp"
+                    android:paddingBottom="@dimen/dimen_5dp"
+                    android:text="Tìm kiếm"
+                    android:textSize="@dimen/font_20sp"
+
+                    />
+
+                <ImageView
+                    android:id="@+id/imgcart_Categoy"
+                    android:layout_width="@dimen/dimen_50dp"
+                    android:layout_height="@dimen/dimen_50dp"
+                    android:layout_weight="1"
+                    android:src="@drawable/cart" />
+            </LinearLayout>
+
+            <ScrollView
+
+
+                android:id="@+id/scollviewmain"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@id/ctheader_Category">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <androidx.recyclerview.widget.RecyclerView
+
+                        android:id="@+id/recycleviewListCate"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="@dimen/dimen_20dp">
+
+                    </androidx.recyclerview.widget.RecyclerView>
+                </LinearLayout>
+            </ScrollView>
+        </RelativeLayout>
+    </RelativeLayout>
+</FrameLayout>
+
+
+

@@ -37,24 +37,17 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class FragmentSignup extends Fragment {
-    EditText edittextusernameSignup, edittextpassSignup, edittextNameSignup, edittextPhoneSignup, edittextAddressSignup, edittextEmailSignup, edittextNameShopSignup,
-            editTextIntroduce, editTextAddressShop, editTextphoneShop, editTextmailShop;
+    EditText edittextusernameSignup, edittextpassSignup, edittextNameSignup, edittextPhoneSignup, edittextAddressSignup, edittextEmailSignup;
     RadioGroup radiogroupGioitinh;
     RadioButton checkNuSignup, checkNamSignup;
     Button signup_buttonSignup;
-    String txtusername, txtpassword, txtnamefull, txtphone, txtaddress, txtemail, txtdateofbirth, txtNameShop, txtIntrude, txtAddressShop, txtPhoneShop, txtEmailShop;
+    String txtusername, txtpassword, txtnamefull, txtphone, txtaddress, txtemail, txtdateofbirth;
     int gioitinh;
-    boolean enableShop = false;
-    int idShop, AccountId;
-    int idrole = 1;
     Account account = new Account();
-    CheckBox checkenableShop;
     TextView edittextDateOfBirthSignup;
     int mode;
     View view;
     Bundle bundle;
-    LinearLayout linearLayoutInfoShop;
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -132,13 +125,13 @@ public class FragmentSignup extends Fragment {
             }
 
             private void requestSignUp() {
-                getInfoShop();
+
 
                 DataClient dataClientRegister = APIUltils.getData();
                 Call<String> stringCall = dataClientRegister.RegisterAccount(
-                        txtusername, txtpassword, idrole, txtnamefull, txtphone,
-                        txtaddress, gioitinh + "", txtemail, txtdateofbirth,
-                        txtNameShop, txtIntrude, txtAddressShop, txtPhoneShop, txtEmailShop);
+                        account.getUsename(), account.getPassword(), account.getName(), account.getPhone_number(),
+                        account.getAddress(), account.getGender() + "", account.getEmail(), account.getDateOfBirth()
+                );
                 stringCall.enqueue(new Callback<String>() {
                     @Override
                     public void onResponse(Call<String> call, Response<String> response) {
@@ -167,36 +160,7 @@ public class FragmentSignup extends Fragment {
                 });
             }
         });
-        checkenableShop.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (isChecked) {
-                    enableShop = true;
-                    linearLayoutInfoShop.setVisibility(View.VISIBLE);
 
-
-                    idrole = 2;
-                    IntilizeInfoShop();
-
-
-                } else {
-                    linearLayoutInfoShop.setVisibility(View.GONE);
-
-
-                    idrole = 1;
-
-
-                }
-            }
-        });
-    }
-
-    private void IntilizeInfoShop() {
-        editTextAddressShop.setText(edittextAddressSignup.getText().toString().trim() + "");
-        edittextNameShopSignup.setText(edittextNameSignup.getText().toString().trim() + "");
-        editTextAddressShop.setText(edittextAddressSignup.getText().toString().trim() + "");
-        editTextphoneShop.setText(edittextNameSignup.getText().toString().trim() + "");
-        editTextmailShop.setText(edittextEmailSignup.getText().toString().trim() + "");
     }
 
 
@@ -208,17 +172,10 @@ public class FragmentSignup extends Fragment {
         edittextpassSignup = (EditText) view.findViewById(R.id.edittextpassSignup);
         edittextPhoneSignup = (EditText) view.findViewById(R.id.edittextPhoneSignup);
         edittextusernameSignup = (EditText) view.findViewById(R.id.edittextusernameSignup);
-        edittextNameShopSignup = (EditText) view.findViewById(R.id.edittextNameShopSignup);
         radiogroupGioitinh = (RadioGroup) view.findViewById(R.id.radiogroupGioitinh);
         checkNamSignup = (RadioButton) view.findViewById(R.id.checkNamSignup);
         checkNuSignup = (RadioButton) view.findViewById(R.id.checkNuSignup);
         signup_buttonSignup = (Button) view.findViewById(R.id.signup_buttonSignup);
-        checkenableShop = (CheckBox) view.findViewById(R.id.checkboxOpenShop);
-        linearLayoutInfoShop = (LinearLayout) view.findViewById(R.id.linerShopInfo_Sigup);
-        editTextIntroduce = (EditText) view.findViewById(R.id.edittextIntroduceShopSignup);
-        editTextAddressShop = (EditText) view.findViewById(R.id.edittextAddressShopSignup);
-        editTextphoneShop = (EditText) view.findViewById(R.id.edittextPhonelShopSignup);
-        editTextmailShop = (EditText) view.findViewById(R.id.edittextEmailShopSignup);
 
 
     }
@@ -247,16 +204,7 @@ public class FragmentSignup extends Fragment {
                 break;
         }
 
-        account = new Account(idrole, idShop, txtusername, txtpassword, txtnamefull, txtphone, txtaddress, gioitinh, txtemail, txtdateofbirth, 1);
-        txtNameShop = txtnamefull;
-        idrole = 1;
-        if (enableShop == true) {
-            txtNameShop = edittextNameShopSignup.getText().toString().trim();
-            idrole = 2;
-        }
-        if (txtNameShop == null || txtNameShop.equalsIgnoreCase("")) {
-            txtNameShop = txtnamefull;
-        }
+        account = new Account(1, -1, txtusername, txtpassword, txtnamefull, txtphone, txtaddress, gioitinh, txtemail, txtdateofbirth, 1);
 
     }
 
@@ -277,12 +225,4 @@ public class FragmentSignup extends Fragment {
 
     }
 
-    public void getInfoShop() {
-        txtAddressShop = editTextAddressShop.getText().toString().trim() + "";
-        txtEmailShop = editTextmailShop.getText().toString().trim() + "";
-        txtIntrude = editTextIntroduce.getText().toString().trim() + "";
-        txtPhoneShop = editTextphoneShop.getText().toString().trim() + "";
-        txtNameShop = edittextNameShopSignup.getText().toString().trim() + "";
-
-    }
 }

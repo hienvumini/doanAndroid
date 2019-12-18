@@ -13,6 +13,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.example.pandaapp.view.ChangePassActivity;
 import com.example.pandaapp.view.EditInfoAccountActivity;
 import com.example.pandaapp.view.FavoriteActivity;
 import com.example.pandaapp.view.LoginActivity;
@@ -33,7 +34,7 @@ public class FragmentProfile extends Fragment {
     Account account;
     LinearLayout linearLayoutFavorite;
     ImageView imageViewi_black_Profile;
-    LinearLayout layoutMyOrder_Profile, layoutLayoutEditProdile,layoutOpenShop;
+    LinearLayout layoutMyOrder_Profile, layoutLayoutEditProdile,layoutOpenShop,layoutChangePass;
 
 
     @Override
@@ -69,6 +70,7 @@ public class FragmentProfile extends Fragment {
         layoutMyOrder_Profile = (LinearLayout) view.findViewById(R.id.layoutMyOrder_Profile);
         layoutLayoutEditProdile =(LinearLayout) view.findViewById(R.id.layoutEdit_Profile);
         layoutOpenShop=(LinearLayout) view.findViewById(R.id.layoutOpenShop_Profile);
+        layoutChangePass=(LinearLayout) view.findViewById(R.id.layoutChangePasss_Profile);
         if (globalApplication.account.getRoleId()==2){
             layoutOpenShop.setVisibility(View.GONE);
 
@@ -131,6 +133,15 @@ public class FragmentProfile extends Fragment {
             public void onClick(View v) {
                 Intent intent=new Intent(getActivity(), OpenShopActivity.class);
                 intent.putExtra("mode",1);
+                startActivity(intent);
+
+            }
+        });
+        layoutChangePass.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(getActivity(), ChangePassActivity.class);
+
                 startActivity(intent);
 
             }

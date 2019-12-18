@@ -43,6 +43,9 @@ public class OtherUltil {
             inputDate = fmt.parse(date);
         } catch (ParseException e) {
             e.printStackTrace();
+        } catch (NullPointerException n){
+
+
         }
 
 

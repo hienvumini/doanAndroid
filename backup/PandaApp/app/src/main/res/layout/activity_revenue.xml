@@ -1,0 +1,232 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/color_brown"
+    tools:context=".view.RevenueActivity">
+
+    <androidx.appcompat.widget.Toolbar
+
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/color_pink2"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/img_back_black"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_gravity="start"
+                android:layout_marginTop="@dimen/dimen_5dp"
+                android:scaleType="centerInside"
+                android:src="@drawable/ic_keyboard_arrow_left_white_48dp" />
+
+            <TextView
+                android:id="@+id/add_product_add"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/dimen_40dp"
+                android:layout_marginLeft="@dimen/dimen_10dp"
+                android:layout_marginTop="@dimen/dimen_5dp"
+                android:layout_toRightOf="@+id/img_back_black"
+                android:gravity="center"
+                android:text="Doanh thu"
+                android:textColor="@color/color_white"
+                android:textSize="@dimen/font_20sp"
+                android:textStyle="bold" />
+        </RelativeLayout>
+
+    </androidx.appcompat.widget.Toolbar>
+
+    <RelativeLayout
+        android:id="@+id/revenue_Relative_rate"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/dimen_20dp"
+        android:layout_below="@+id/toolbar">
+
+
+<LinearLayout
+    android:layout_marginLeft="@dimen/dimen_10dp"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <TextView
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:text="Tổng doanh thu:  "
+        android:textColor="@color/color_black"
+        android:textSize="@dimen/font_20sp"/>
+    <TextView
+        android:id="@+id/revenue_pay_total_Revenue"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="left"
+        android:gravity="left"
+        android:text="0đ"
+        android:textColor="@color/color_pink2"
+        android:textSize="@dimen/font_20sp" />
+</LinearLayout>
+
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/revenue_Liner_date"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimen_70dp"
+        android:layout_below="@+id/revenue_Relative_rate"
+        android:background="@drawable/custom_rectangle"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:id="@+id/From_Revenue"
+            android:layout_width="@dimen/dimen_150dp"
+            android:layout_height="@dimen/dimen_35dp"
+            android:layout_gravity="center"
+            android:layout_marginLeft="@dimen/dimen_15dp"
+            android:background="@drawable/custom_rectangle">
+
+            <TextView
+                android:id="@+id/textviewFROM_Revenue"
+                android:layout_width="@dimen/dimen_0dp"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:layout_weight="8"
+                android:gravity="center"
+                android:text="14-10-2019"
+                android:textColor="@color/color_black" />
+
+            <ImageView
+                android:layout_width="@dimen/dimen_0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="3"
+                android:src="@drawable/drop_dow2" />
+        </LinearLayout>
+
+        <ImageView
+            android:layout_width="@dimen/dimen_70dp"
+            android:layout_height="@dimen/dimen_35dp"
+            android:layout_gravity="center"
+            android:src="@drawable/dash" />
+
+        <LinearLayout
+            android:id="@+id/To_Revenue"
+            android:layout_width="@dimen/dimen_150dp"
+            android:layout_height="@dimen/dimen_35dp"
+            android:layout_gravity="center"
+            android:background="@drawable/custom_rectangle">
+
+            <TextView
+                android:id="@+id/textviewTO_Revenue"
+                android:layout_width="@dimen/dimen_0dp"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:layout_weight="8"
+                android:gravity="center"
+                android:text="20-10-2019"
+                android:textColor="@color/color_black" />
+
+            <ImageView
+                android:layout_width="@dimen/dimen_0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="3"
+                android:src="@drawable/drop_dow2" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <ScrollView
+        android:layout_below="@+id/revenue_Liner_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                >
+
+                <ListView
+                    android:visibility="gone"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="@dimen/dimen_10dp"
+                    android:paddingBottom="@dimen/dimen_10dp" />
+
+                <com.github.mikephil.charting.charts.CombinedChart
+
+                    android:id="@+id/combinedChart_Revenue"
+                    android:layout_width="match_parent"
+                    android:layout_height="300dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginLeft="@dimen/dimen_10dp"
+                    />
+                <LinearLayout
+                    android:layout_marginTop="@dimen/dimen_10dp"
+                    android:layout_below="@id/combinedChart_Revenue"
+                    android:id="@+id/revenue_liner_dateRate"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:text="Doanh thu từ ngày ("
+                        android:textColor="@color/color_black"
+                        android:textSize="@dimen/font_16sp" />
+
+                    <TextView
+
+                        android:id="@+id/textview_date_start_Revenue"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:text="14-10-2019 "
+                        android:textColor="@color/color_black"
+                        android:textSize="@dimen/font_16sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:text="-"
+                        android:textColor="@color/color_black"
+                        android:textSize="@dimen/font_16sp" />
+
+                    <TextView
+                        android:id="@+id/textview_date_end_Revenue"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:text="20-10-2019"
+                        android:textColor="@color/color_black"
+                        android:textSize="@dimen/font_16sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:text=")"
+                        android:textColor="@color/color_black"
+                        android:textSize="@dimen/font_16sp" />
+                </LinearLayout>
+            </RelativeLayout>
+        </LinearLayout>
+    </ScrollView>
+
+
+</RelativeLayout>

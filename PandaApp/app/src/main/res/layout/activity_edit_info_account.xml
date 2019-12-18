@@ -44,7 +44,7 @@
                 android:text="Tên tài khoản"
                 android:textColor="@color/color_blue_text" />
 
-            <EditText
+            <TextView
                 android:id="@+id/edittextusernameEdit"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/dimen_35dp"
@@ -52,32 +52,12 @@
                 android:layout_marginTop="@dimen/dimen_10dp"
                 android:layout_marginRight="@dimen/dimen_20dp"
                 android:background="@color/color_white"
-                android:hint="congpham@gmail.com"
-                android:inputType="textEmailAddress"
-                android:paddingLeft="@dimen/dimen_5dp"
+                android:gravity="center_vertical"
+                android:paddingLeft="@dimen/dimen_15dp"
                 android:text=""
-                android:textColor="@color/color_red_text" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/dimen_15dp"
-                android:layout_marginTop="@dimen/dimen_15dp"
-                android:text="Mật khẩu"
                 android:textColor="@color/color_blue_text" />
 
-            <EditText
-                android:id="@+id/edittextpassEdit"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/dimen_35dp"
-                android:layout_marginLeft="@dimen/dimen_20dp"
-                android:layout_marginTop="@dimen/dimen_10dp"
-                android:layout_marginRight="@dimen/dimen_20dp"
-                android:background="@color/color_white"
-                android:hint="********"
-                android:inputType="textPassword"
-                android:paddingLeft="@dimen/dimen_5dp"
-                android:text="" />
+
 
             <TextView
                 android:layout_width="match_parent"
@@ -130,7 +110,6 @@
                 android:textColor="@color/color_blue_text" />
 
             <EditText
-                android:inputType="textCapSentences|textMultiLine"
                 android:id="@+id/edittextAddressEdit"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/dimen_100dp"
@@ -140,6 +119,7 @@
                 android:background="@color/color_white"
                 android:gravity="start"
                 android:hint="0988998899"
+                android:inputType="textCapSentences|textMultiLine"
 
                 android:paddingLeft="@dimen/dimen_5dp"
                 android:text="" />
@@ -208,6 +188,7 @@
                 android:textColor="@color/color_blue_text" />
 
             <TextView
+
                 android:id="@+id/edittextDateOfBirthEdit"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/dimen_35dp"
@@ -219,10 +200,7 @@
                 android:hint="09/11/1992"
                 android:inputType="none"
                 android:paddingLeft="@dimen/dimen_5dp"
-                android:text="" />
-
-
-
+                android:text="09/11/1992" />
 
 
         </LinearLayout>

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<set xmlns:android="http://schemas.android.com/apk/res/android">
+    <translate
+        android:duration="@integer/time_animation"
+        android:fromYDelta="-100%"
+        android:toYDelta="0%"></translate>
+    <alpha
+        android:duration="@integer/time_animation"
+        android:fromAlpha="0.0"
+        android:toAlpha="1.0"></alpha>
+    <scale
+        android:duration="@integer/time_animation"
+        android:fromXScale="90%"
+        android:fromYScale="90%"
+        android:toXScale="100%"
+        android:toYScale="100%" />
+
+</set>

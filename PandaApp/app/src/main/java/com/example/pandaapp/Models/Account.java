@@ -72,6 +72,16 @@ public class Account implements Serializable {
         this.accountStatus = accountStatus;
     }
 
+    public Account(String password, String name, String phone_number, String address, int gender, String email, String dateOfBirth) {
+        this.password = password;
+        this.name = name;
+        this.phone_number = phone_number;
+        this.address = address;
+        this.gender = gender;
+        this.email = email;
+        DateOfBirth = dateOfBirth;
+    }
+
     public int getAccountId() {
         return accountId;
     }

@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/itemProduct"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center"
+    android:orientation="vertical"
+
+    >
+
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="@dimen/dimen_200dp"
+        android:layout_height="@dimen/dimen_250dp"
+        android:layout_gravity="center"
+        android:layout_margin="@dimen/dimen_10dp"
+        app:cardCornerRadius="@dimen/dimen_5dp"
+        app:cardElevation="@dimen/dimen_20dp">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:padding="@dimen/dimen_10dp">
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:id="@+id/ImageanhSP"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dimen_150dp"
+                    android:scaleType="fitCenter"
+                    android:src="@color/color_blue_text" />
+
+            </RelativeLayout>
+
+
+            <TextView
+                android:id="@+id/textviewTenSP"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:maxLines="2"
+                android:text="Tên sản phẩm"
+                android:textSize="@dimen/font_16sp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="10">
+
+                <TextView
+                    android:id="@+id/textviewGiaSP"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="9"
+                    android:text="120.000đ"
+                    android:textColor="@color/color_pink2"
+                    android:textSize="@dimen/font_18sp" />
+
+                <ImageView
+
+                    android:id="@+id/btn_favorite_ItemProduct"
+                    android:layout_width="@dimen/dimen_20dp"
+                    android:layout_height="@dimen/dimen_20dp"
+                    android:layout_gravity="right"
+                    android:layout_marginLeft="@dimen/dimen_10dp"
+                    android:layout_marginBottom="@dimen/dimen_5dp"
+                    android:src="@drawable/heart" />
+            </LinearLayout>
+        </LinearLayout>
+
+
+    </androidx.cardview.widget.CardView>
+
+
+</RelativeLayout>

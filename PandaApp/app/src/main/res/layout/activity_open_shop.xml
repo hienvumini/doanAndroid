@@ -54,7 +54,7 @@
                     android:layout_marginTop="@dimen/dimen_10dp"
                     android:layout_marginRight="@dimen/dimen_20dp"
                     android:background="@color/color_white"
-                    android:hint="Phạm Công Panda Shop"
+                    android:hint="Đặt tên cho cửa hàng"
                     android:inputType="text"
                     android:paddingLeft="@dimen/dimen_5dp"
                     android:text=""
@@ -163,7 +163,7 @@
 
 
     <Button
-        android:id="@+id/signup_buttonSignup"
+        android:id="@+id/signup_buttonOpenShop"
         android:layout_width="match_parent"
         android:layout_height="@dimen/dimen_40dp"
         android:layout_alignParentBottom="true"

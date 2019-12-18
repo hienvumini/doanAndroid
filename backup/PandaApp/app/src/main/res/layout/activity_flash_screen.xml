@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".view.FlashScreen"
+    android:background="@color/color_pink1">
+    <ImageView
+        android:id="@+id/screen_imgV"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/dimen_150dp"
+        android:src="@drawable/panda"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/dimen_200dp"/>
+    <ProgressBar
+        android:id="@+id/screen_ProgressBar"
+        android:layout_width="@dimen/dimen_70dp"
+        android:layout_height="@dimen/dimen_70dp"
+        android:layout_below="@+id/screen_imgV"
+        android:layout_marginLeft="@dimen/dimen_150dp"
+        android:layout_marginTop="@dimen/dimen_25dp"
+        />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:orientation="vertical"
+        android:layout_marginBottom="@dimen/dimen_25dp">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Một sản phẩm của"
+            android:gravity="center"
+            android:textSize="@dimen/font_24sp"
+            android:textColor="@color/color_white"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="sinh viên BKAP"
+            android:gravity="center"
+            android:textSize="@dimen/font_24sp"
+            android:textColor="@color/color_white"/>
+    </LinearLayout>
+
+
+</RelativeLayout>

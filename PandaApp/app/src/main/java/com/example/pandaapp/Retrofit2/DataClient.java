@@ -8,6 +8,7 @@ import com.example.pandaapp.Models.OrderCustomer;
 import com.example.pandaapp.Models.OrderItemDetail;
 import com.example.pandaapp.Models.Product;
 import com.example.pandaapp.Models.Revenue;
+import com.example.pandaapp.Models.Shop;
 
 import java.util.ArrayList;
 
@@ -89,25 +90,20 @@ public interface DataClient {
     Call<ArrayList<Account>> CheckAccount(@Field("usernameaccount") String username, @Field("passwordaccount") String password);
 
     @FormUrlEncoded
-    @POST("addAccount.php")
+    @POST("addAccount1.php")
     Call<String> RegisterAccount(@Field("txtusername") String username,
                                  @Field("txtpassword") String password,
-                                 @Field("idrole") int idrole,
                                  @Field("txtnamefull") String txtnamefull,
                                  @Field("txtphone") String txtphone,
                                  @Field("txtaddress") String txtaddress,
                                  @Field("gender") String gender,
                                  @Field("txtemail") String txtemail,
-                                 @Field("DateOfBirth") String DateOfBirth,
-                                 @Field("shopName") String shopName,
-                                 @Field("introduceshop") String introduceshop,
-                                 @Field("addressshop") String addressshop,
-                                 @Field("phoneshop") String phoneshop,
-                                 @Field("emailshop") String emailshop);
+                                 @Field("DateOfBirth") String DateOfBirth);
+
 
     @FormUrlEncoded
     @POST("DeleteFileOnServer.php")
-    Call<String>DeleteFileonServer(@Field("pathFile") String LinkFile);
+    Call<String> DeleteFileonServer(@Field("pathFile") String LinkFile);
 
     @FormUrlEncoded
     @POST("getProduct.php")
@@ -168,5 +164,48 @@ public interface DataClient {
     @POST("getOrderItemDetail.php")
     Call<ArrayList<OrderItemDetail>> getOrderItemDetail(@Field("oderId") int oderId);
 
+    @FormUrlEncoded
+    @POST("OpenShop.php")
+    Call<String> OpenShop(@Field("shopName") String shopName,
+                          @Field("introduceshop") String introduceshop,
+                          @Field("addressshop") String addressshop,
+                          @Field("phoneshop") String phoneshop,
+                          @Field("emailshop") String emailshop,
+                          @Field("AccountId") int AccountId);
+
+    @FormUrlEncoded
+    @POST("EditAccount.php")
+    Call<String> EditAccount(
+            @Field("txtnamefull") String Name,
+            @Field("txtphone") String Phone,
+            @Field("txtaddress") String Address,
+            @Field("txtemail") String Email,
+            @Field("DateOfBirth") String DateofBirth,
+            @Field("gender") int Gioitinh,
+            @Field("AccountId") int AccountId);
+
+    @FormUrlEncoded
+    @POST("Changepassword.php")
+    Call<String> ChangePass(
+            @Field("AccountId") int AccountId,
+            @Field("oldPass") String oldPass,
+            @Field("NewsPass") String NewsPass
+    );
+
+    @FormUrlEncoded
+    @POST("getInfoShop.php")
+    Call<ArrayList<Shop>> getInfoShop(
+            @Field("idShop") int idShop
+    );
+
+    @FormUrlEncoded
+    @POST("EditShop.php")
+    Call<String> EditShop(
+            @Field("idShop") int idShop,
+            @Field("shopName") String shopName,
+            @Field("introduce") String introduce,
+            @Field("address") String address,
+            @Field("phone") String phone,
+            @Field("email") String email);
 
 }

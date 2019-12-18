@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/color_pink1"
+    android:orientation="vertical"
+    tools:context=".view.LoginActivity">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@id/signup_buttonSignup">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/imgV"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/dimen_135dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="@dimen/dimen_20dp"
+                android:src="@drawable/panda" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="Thông tin cửa hàng"
+                android:textColor="@color/color_blue_text"
+                android:textSize="@dimen/dimen_35dp"
+                android:textStyle="bold" />
+
+
+                <TextView
+
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/dimen_15dp"
+                    android:layout_marginTop="@dimen/dimen_15dp"
+                    android:text="Tên gian hàng"
+                    android:textColor="@color/color_blue_text"
+                    android:visibility="visible" />
+
+                <EditText
+                    android:id="@+id/edittextNameOpenShop"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dimen_35dp"
+                    android:layout_marginLeft="@dimen/dimen_20dp"
+                    android:layout_marginTop="@dimen/dimen_10dp"
+                    android:layout_marginRight="@dimen/dimen_20dp"
+                    android:background="@color/color_white"
+                    android:hint="Phạm Công Panda Shop"
+                    android:inputType="text"
+                    android:paddingLeft="@dimen/dimen_5dp"
+                    android:text=""
+                    android:visibility="visible" />
+
+                <TextView
+
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/dimen_15dp"
+                    android:layout_marginTop="@dimen/dimen_15dp"
+                    android:text="Giới thiệu cửa hàng"
+                    android:textColor="@color/color_blue_text"
+                    android:visibility="visible" />
+
+                <EditText
+
+                    android:gravity="start"
+                    android:inputType="textCapSentences|textMultiLine"
+                    android:id="@+id/edittextIntroduceOpenShop"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dimen_100dp"
+                    android:layout_marginLeft="@dimen/dimen_20dp"
+                    android:layout_marginTop="@dimen/dimen_10dp"
+                    android:layout_marginRight="@dimen/dimen_20dp"
+                    android:background="@color/color_white"
+                    android:hint="Viết giới thiệu về cửa hàng của bạn để khách hàng hiểu hơn về sản phẩm của bạn "
+
+                    android:paddingLeft="@dimen/dimen_5dp"
+                    android:text=""
+                    android:visibility="visible"
+                    android:autofillHints="true"/>
+                <TextView
+
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/dimen_15dp"
+                    android:layout_marginTop="@dimen/dimen_15dp"
+                    android:text="Địa chỉ cửa hàng"
+                    android:textColor="@color/color_blue_text"
+                    android:visibility="visible" />
+
+                <EditText
+                    android:id="@+id/edittextAddressOpenShop"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dimen_35dp"
+                    android:layout_marginLeft="@dimen/dimen_20dp"
+                    android:layout_marginTop="@dimen/dimen_10dp"
+                    android:layout_marginRight="@dimen/dimen_20dp"
+                    android:background="@color/color_white"
+                    android:hint="Điền địa chỉ cửa hàng"
+                    android:inputType="text"
+                    android:paddingLeft="@dimen/dimen_5dp"
+                    android:text=""
+                    android:visibility="visible" />
+                <TextView
+
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/dimen_15dp"
+                    android:layout_marginTop="@dimen/dimen_15dp"
+                    android:text="Điện thoại cửa hàng"
+                    android:textColor="@color/color_blue_text"
+                    android:visibility="visible" />
+
+                <EditText
+                    android:id="@+id/edittextPhonelOpenShop"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dimen_35dp"
+                    android:layout_marginLeft="@dimen/dimen_20dp"
+                    android:layout_marginTop="@dimen/dimen_10dp"
+                    android:layout_marginRight="@dimen/dimen_20dp"
+                    android:background="@color/color_white"
+                    android:hint="Điền số điện thoại cửa hàng"
+                    android:inputType="text"
+                    android:paddingLeft="@dimen/dimen_5dp"
+                    android:text=""
+                    android:visibility="visible" />
+                <TextView
+
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/dimen_15dp"
+                    android:layout_marginTop="@dimen/dimen_15dp"
+                    android:text="Địa chỉ email"
+                    android:textColor="@color/color_blue_text"
+                    android:visibility="visible" />
+
+                <EditText
+                    android:id="@+id/edittextEmailOpenShop"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dimen_35dp"
+                    android:layout_marginLeft="@dimen/dimen_20dp"
+                    android:layout_marginTop="@dimen/dimen_10dp"
+                    android:layout_marginRight="@dimen/dimen_20dp"
+                    android:background="@color/color_white"
+                    android:hint="Điền địa chỉ email cửa hàng"
+                    android:inputType="text"
+                    android:paddingLeft="@dimen/dimen_5dp"
+                    android:text=""
+                    android:visibility="visible" />
+            </LinearLayout>
+
+
+    </ScrollView>
+
+
+    <Button
+        android:id="@+id/signup_buttonSignup"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimen_40dp"
+        android:layout_alignParentBottom="true"
+        android:layout_gravity="center_horizontal"
+        android:layout_margin="@dimen/dimen_10dp"
+        android:layout_marginTop="@dimen/dimen_25dp"
+        android:background="@drawable/botron_button"
+        android:text="Đăng kí"
+        android:textColor="@color/color_white" />
+
+</RelativeLayout>
