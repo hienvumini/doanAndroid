@@ -73,7 +73,7 @@ public interface DataClient {
 
     @FormUrlEncoded
     @POST("getProductofShop.php")
-    Call<ArrayList<Product>> getProductShop(@Field("idShop") int idShop, @Field("limit") int limit, @Field("offset") int offset);
+    Call<ArrayList<Product>> getProductShop(@Field("idShop") int idShop, @Field("limit") int limit, @Field("offset") int offset,@Field("sort") int sortID);
 
 
     @FormUrlEncoded
@@ -207,5 +207,10 @@ public interface DataClient {
             @Field("address") String address,
             @Field("phone") String phone,
             @Field("email") String email);
+
+    @FormUrlEncoded
+    @POST("DeleteProduct.php")
+    Call<String> DeleteProduct(
+            @Field("productId") int productId);
 
 }

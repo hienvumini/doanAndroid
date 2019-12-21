@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.swiperefreshlayout.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/swiperefresh_DetailProduct"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:id="@+id/swiperefresh_DetailProduct">
+    android:layout_height="match_parent">
 
     <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -14,7 +14,7 @@
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_above="@+id/detail_product_footer">
+            android:layout_above="@+id/ctfooter_Detail">
 
             <LinearLayout
                 android:id="@+id/detail_liner"
@@ -41,14 +41,14 @@
 
                         <TextView
                             android:id="@+id/textviewSTT_DetailProduct"
-                            android:layout_marginBottom="@dimen/dimen_10dp"
-                            android:textSize="@dimen/font_20sp"
-                            android:textColor="@color/color_pink2"
-                            android:layout_centerHorizontal="true"
-                            android:layout_alignParentBottom="true"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="0/0" />
+                            android:layout_alignParentBottom="true"
+                            android:layout_centerHorizontal="true"
+                            android:layout_marginBottom="@dimen/dimen_10dp"
+                            android:text="0/0"
+                            android:textColor="@color/color_pink2"
+                            android:textSize="@dimen/font_20sp" />
                     </RelativeLayout>
                 </androidx.cardview.widget.CardView>
 
@@ -90,11 +90,12 @@
                                 android:text="120.000"
                                 android:textColor="@color/color_pink2"
                                 android:textSize="@dimen/font_16sp" />
+
                             <TextView
-                                android:layout_marginLeft="@dimen/dimen_20dp"
                                 android:id="@+id/textviewGiaDiscount_Deatail"
                                 android:layout_width="wrap_content"
                                 android:layout_height="match_parent"
+                                android:layout_marginLeft="@dimen/dimen_20dp"
                                 android:gravity="center|left"
                                 android:paddingLeft="@dimen/dimen_10dp"
                                 android:text="120.000"
@@ -165,52 +166,84 @@
 
         </ScrollView>
 
-        <LinearLayout
-            android:id="@+id/detail_product_footer"
+        <RelativeLayout
+            android:id="@+id/ctfooter_Detail"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/dimen_50dp"
-            android:layout_alignParentBottom="true"
-            android:layout_marginBottom="@dimen/dimen_5dp"
-            android:background="@color/color_white"
-            android:orientation="horizontal"
-            android:paddingTop="@dimen/dimen_2dp"
-            android:paddingBottom="@dimen/dimen_2dp">
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true">
+
+            <LinearLayout
+                android:id="@+id/detail_product_footer_Customer"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dimen_50dp"
+                android:layout_marginBottom="@dimen/dimen_5dp"
+
+                android:background="@color/color_white"
+                android:orientation="horizontal"
+                android:paddingTop="@dimen/dimen_2dp"
+                android:paddingBottom="@dimen/dimen_2dp"
+                android:visibility="visible">
 
 
+                <Button
+                    android:id="@+id/btn_buy_ProductDetail"
+                    android:layout_width="@dimen/dimen_0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="@dimen/dimen_25dp"
+                    android:layout_weight="3"
+                    android:background="@drawable/botron_button_pink"
+                    android:text="Mua ngay"
+                    android:textColor="@color/color_white" />
 
-            <Button
-                android:id="@+id/btn_buy_ProductDetail"
-                android:layout_width="@dimen/dimen_0dp"
-                android:layout_height="match_parent"
-                android:layout_marginLeft="@dimen/dimen_25dp"
-                android:layout_weight="3"
-                android:background="@drawable/botron_button_pink"
-                android:text="Mua ngay"
-                android:textColor="@color/color_white" />
+                <Button
+                    android:id="@+id/btnAddCart_Detail"
+                    android:layout_width="@dimen/dimen_0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="@dimen/dimen_5dp"
+                    android:layout_marginRight="@dimen/dimen_5dp"
+                    android:layout_weight="5"
+                    android:background="@drawable/selector_btn"
 
-            <Button
-                android:id="@+id/btnEdit_ProductDetail"
-                android:layout_width="@dimen/dimen_0dp"
-                android:layout_height="match_parent"
-                android:layout_marginLeft="@dimen/dimen_25dp"
-                android:layout_weight="3"
-                android:background="@drawable/botron_button_pink"
-                android:text="Sửa sản phẩm"
-                android:textColor="@color/color_white"
-                android:visibility="gone" />
+                    android:text="Thêm vào giỏ hàng"
+                    android:textColor="@color/color_white" />
+            </LinearLayout>
 
-            <Button
-                android:id="@+id/btnAddCart_Detail"
-                android:layout_width="@dimen/dimen_0dp"
-                android:layout_height="match_parent"
-                android:layout_marginLeft="@dimen/dimen_5dp"
-                android:layout_marginRight="@dimen/dimen_5dp"
-                android:layout_weight="5"
-                android:background="@drawable/selector_btn"
+            <LinearLayout
+                android:id="@+id/detail_product_footer_Shop"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dimen_50dp"
+                android:layout_marginBottom="@dimen/dimen_5dp"
+                android:background="@color/color_white"
+                android:orientation="horizontal"
+                android:paddingTop="@dimen/dimen_2dp"
+                android:paddingBottom="@dimen/dimen_2dp"
+                android:visibility="gone">
 
-                android:text="Thêm vào giỏ hàng"
-                android:textColor="@color/color_white" />
-        </LinearLayout>
+                <Button
+                    android:id="@+id/btnDel_ProductDetail"
+                    android:layout_width="@dimen/dimen_0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="@dimen/dimen_25dp"
+                    android:layout_weight="3"
+                    android:background="@color/color_red_text"
+                    android:text="Xóa sản phẩm"
+                    android:textColor="@color/color_white"
+                    android:visibility="visible" />
+
+                <Button
+                    android:id="@+id/btnEdit_ProductDetail"
+                    android:layout_width="@dimen/dimen_0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="@dimen/dimen_25dp"
+                    android:layout_weight="3"
+                    android:background="@drawable/botron_button_pink"
+                    android:text="Sửa sản phẩm"
+                    android:textColor="@color/color_white"
+                    android:visibility="visible" />
+
+            </LinearLayout>
+
+        </RelativeLayout>
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -229,9 +262,9 @@
                 android:id="@+id/detail_product_cart"
                 android:layout_width="@dimen/dimen_35dp"
                 android:layout_height="@dimen/dimen_35dp"
+                android:layout_alignParentRight="true"
                 android:layout_marginTop="@dimen/dimen_15dp"
                 android:layout_marginRight="@dimen/dimen_10dp"
-                android:layout_alignParentRight="true"
                 android:background="@drawable/custom_circle"
                 android:padding="@dimen/dimen_2dp"
                 android:src="@drawable/cart" />

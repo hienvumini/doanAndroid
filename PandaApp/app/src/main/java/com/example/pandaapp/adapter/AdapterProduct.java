@@ -7,6 +7,7 @@ import android.graphics.Color;
 import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
+import android.view.ContextMenu;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -34,6 +35,7 @@ import com.example.pandaapp.Util.GlobalApplication;
 import com.example.pandaapp.Util.LoadImage;
 import com.example.pandaapp.Util.OtherUltil;
 import com.example.pandaapp.view.DetailActivity;
+import com.example.pandaapp.view.ListProductCatagoryActivity;
 
 import java.util.List;
 
@@ -42,7 +44,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class AdapterProduct extends RecyclerView.Adapter<AdapterProduct.ViewHolder> implements View.OnClickListener {
+public class AdapterProduct extends RecyclerView.Adapter<AdapterProduct.ViewHolder> implements View.OnClickListener, View.OnCreateContextMenuListener {
     Context mctx;
     int layout;
     List<Product> listproduct;
@@ -201,6 +203,7 @@ public class AdapterProduct extends RecyclerView.Adapter<AdapterProduct.ViewHold
         holder.linearLayoutItemProduct.setAnimation(animation_cycle);
 
 
+
     }
 
 
@@ -211,6 +214,14 @@ public class AdapterProduct extends RecyclerView.Adapter<AdapterProduct.ViewHold
 
     @Override
     public void onClick(View v) {
+
+    }
+
+    @Override
+    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
+        menu.setHeaderTitle("Select The Action");
+        menu.add(0, v.getId(), 0, "Call");//groupId, itemId, order, title
+        menu.add(0, v.getId(), 0, "SMS");
 
     }
 
@@ -231,8 +242,11 @@ public class AdapterProduct extends RecyclerView.Adapter<AdapterProduct.ViewHold
             iconheart = (ImageView) itemView.findViewById(R.id.btn_favorite_ItemProduct);
 
 
+
+
         }
     }
+    
 
 
 }

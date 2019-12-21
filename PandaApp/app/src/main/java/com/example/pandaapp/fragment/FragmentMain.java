@@ -86,7 +86,7 @@ public class FragmentMain extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        view= inflater.inflate(R.layout.fragment_main, container, false);
+        view = inflater.inflate(R.layout.fragment_main, container, false);
         try {
             init(view);
         } catch (Exception e) {
@@ -118,6 +118,7 @@ public class FragmentMain extends Fragment {
 
         return view;
     }
+
     public void init(View view) throws Exception {
         Context context;
         progressBarLoadMore = (ProgressBar) view.findViewById(R.id.progressBar_LoadMore_FragmentMain);
@@ -136,24 +137,22 @@ public class FragmentMain extends Fragment {
         imgmyCart.setColorFilter(Color.WHITE);
         searchView = (TextView) view.findViewById(R.id.tv_Search_Search);
         swipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.swiperefrefresh_FragmentMain);
-        listNews=new ArrayList<>();
-        globalApplication=(GlobalApplication) getActivity().getApplicationContext();
-
-
+        listNews = new ArrayList<>();
+        globalApplication = (GlobalApplication) getActivity().getApplicationContext();
 
 
     }
 
-    private void getlistnews( ) {
+    private void getlistnews() {
         DataClient dataClient = APIUltils.getData();
         Call<ArrayList<News>> arrayListCall = dataClient.getNews(0);
         arrayListCall.enqueue(new Callback<ArrayList<News>>() {
             @Override
             public void onResponse(Call<ArrayList<News>> call, Response<ArrayList<News>> response) {
-                Toast.makeText(getActivity(), response.body().size()+"", Toast.LENGTH_SHORT).show();
-                listNews=response.body();
+                Toast.makeText(getActivity(), response.body().size() + "", Toast.LENGTH_SHORT).show();
+                listNews = response.body();
                 try {
-                    ActionViewflipper(view,listNews);
+                    ActionViewflipper(view, listNews);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -172,8 +171,8 @@ public class FragmentMain extends Fragment {
             @Override
             public void onClick(View v) {
                 Toast.makeText(getActivity(), viewFlipper.getCurrentView().getId() + "", Toast.LENGTH_SHORT).show();
-                globalApplication.news=listNews.get(viewFlipper.getCurrentView().getId());
-                Intent intent=new Intent(getActivity(), NewsDetailActivity.class);
+                globalApplication.news = listNews.get(viewFlipper.getCurrentView().getId());
+                Intent intent = new Intent(getActivity(), NewsDetailActivity.class);
                 startActivity(intent);
 
             }
@@ -227,6 +226,7 @@ public class FragmentMain extends Fragment {
 //                if (isScolling && (visiableItemCount + pastVisiableItems == totalItems)) {
 //                    fetchData();
 //                }
+
                 if (dy > 0) {
 
                     if (isScolling && (visiableItemCount + pastVisiableItems == totalItems)) {
@@ -242,6 +242,8 @@ public class FragmentMain extends Fragment {
                         //
                     }
                 } else {
+
+
 
 
                 }
@@ -260,7 +262,9 @@ public class FragmentMain extends Fragment {
                 }
                 swipeRefreshLayout.setRefreshing(false);
             }
+
         });
+
 
 
     }
@@ -323,8 +327,6 @@ public class FragmentMain extends Fragment {
         }, 500);
 
     }
-
-
 
 
     public void ActionViewflipper(View view, ArrayList<News> news) throws Exception {

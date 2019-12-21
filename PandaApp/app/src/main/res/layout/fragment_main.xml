@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.swiperefreshlayout.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
-
-    android:id="@+id/swiperefrefresh_FragmentMain"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
 
@@ -17,10 +15,11 @@
             android:id="@+id/ctheader"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:background="@color/color_pink2">
 
             <LinearLayout
-
+                android:layout_marginTop="@dimen/dimen_10dp"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/dimension_actionbar_height_56dp"
                 android:layout_centerHorizontal="true"
@@ -29,28 +28,42 @@
                 android:orientation="horizontal"
                 android:weightSum="10">
 
-                <TextView
-                    android:id="@+id/tv_Search_Search"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/dimen_10dp"
-                    android:layout_weight="10"
-                    android:background="@drawable/shape_edittext"
-                    android:iconifiedByDefault="false"
-                    android:paddingLeft="@dimen/dimen_20dp"
-                    android:paddingTop="@dimen/dimen_5dp"
-                    android:paddingBottom="@dimen/dimen_5dp"
-                    android:text="Tìm kiếm"
-                    android:textSize="@dimen/font_20sp"
+                <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+                    android:id="@+id/swiperefrefresh_FragmentMain"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
 
-                    />
+                    <LinearLayout
 
-                <ImageView
-                    android:id="@+id/imgcartMain"
-                    android:layout_width="@dimen/dimen_50dp"
-                    android:layout_height="@dimen/dimen_50dp"
-                    android:layout_weight="1"
-                    android:src="@drawable/cart" />
+                        android:orientation="horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <TextView
+                            android:id="@+id/tv_Search_Search"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/dimen_10dp"
+                            android:layout_weight="10"
+                            android:background="@drawable/shape_edittext"
+                            android:iconifiedByDefault="false"
+                            android:paddingLeft="@dimen/dimen_20dp"
+                            android:paddingTop="@dimen/dimen_5dp"
+                            android:paddingBottom="@dimen/dimen_5dp"
+                            android:text="Tìm kiếm"
+                            android:textSize="@dimen/font_20sp"
+
+                            />
+
+                        <ImageView
+                            android:id="@+id/imgcartMain"
+                            android:layout_width="@dimen/dimen_50dp"
+                            android:layout_height="@dimen/dimen_50dp"
+                            android:layout_weight="1"
+                            android:src="@drawable/cart" />
+                    </LinearLayout>
+                </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
             </LinearLayout>
 
             <ViewFlipper
@@ -62,6 +75,7 @@
 
 
         <ScrollView
+            android:fillViewport="true"
             android:id="@+id/scollviewmain"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -77,7 +91,7 @@
 
                     android:id="@+id/recycleviewLastlate_Main"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_gravity="center">
 
 
@@ -97,4 +111,4 @@
 
 
     </RelativeLayout>
-</androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+</RelativeLayout>

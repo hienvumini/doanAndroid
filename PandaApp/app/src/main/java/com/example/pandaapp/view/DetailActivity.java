@@ -1,13 +1,19 @@
 package com.example.pandaapp.view;
 
+import android.app.AlertDialog;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Paint;
 import android.nfc.Tag;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -20,26 +26,35 @@ import com.example.pandaapp.Models.Account;
 import com.example.pandaapp.Models.CartItem;
 import com.example.pandaapp.Models.Product;
 import com.example.pandaapp.R;
+import com.example.pandaapp.Retrofit2.APIUltils;
+import com.example.pandaapp.Retrofit2.DataClient;
 import com.example.pandaapp.Util.CacheUltils;
 import com.example.pandaapp.Util.ChangeActivity;
 import com.example.pandaapp.Util.FragmentUtils;
 import com.example.pandaapp.Util.GlobalApplication;
 import com.example.pandaapp.Util.LoadImage;
+import com.example.pandaapp.Util.OrderUltils;
 import com.example.pandaapp.Util.OtherUltil;
 import com.example.pandaapp.fragment.FragmentShowImage;
 
 import java.util.ArrayList;
 import java.util.HashSet;
 
+import es.dmoral.toasty.Toasty;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
 public class DetailActivity extends AppCompatActivity {
     ImageView imageViewSP, imageViewButtonBack, imageViewCart;
     TextView textViewTen, textViewgia, textViewmota, textViewdaBan, textviewSTTImage, textViewDiscount;
-    Button btnAddCart, btnEdit, btnBuyNow;
+    Button btnAddCart, btnEdit, btnBuyNow, btnDel;
     GlobalApplication globalApplication;
     Product product = new Product();
     Account account;
     int REQUESTCODE_EDIT = 112;
     SwipeRefreshLayout swipeRefreshLayout;
+    LinearLayout layoutCustomer,layoutShop;
 
 
     @Override
@@ -79,12 +94,21 @@ public class DetailActivity extends AppCompatActivity {
         imageViewButtonBack = (ImageView) findViewById(R.id.detail_product_back);
         textviewSTTImage = (TextView) findViewById(R.id.textviewSTT_DetailProduct);
         textViewDiscount = (TextView) findViewById(R.id.textviewGiaDiscount_Deatail);
+        btnDel = (Button) findViewById(R.id.btnDel_ProductDetail);
+        layoutCustomer=(LinearLayout)findViewById(R.id.detail_product_footer_Customer);
+        layoutShop=(LinearLayout)findViewById(R.id.detail_product_footer_Shop);
 
 
         if (product.getIdShop() == account.getIdShop()) {
-            btnEdit.setVisibility(View.VISIBLE);
-            btnAddCart.setVisibility(View.GONE);
-            btnBuyNow.setVisibility(View.GONE);
+//            btnEdit.setVisibility(View.VISIBLE);
+//            btnAddCart.setVisibility(View.GONE);
+//            btnBuyNow.setVisibility(View.GONE);
+            layoutShop.setVisibility(View.VISIBLE);
+            layoutCustomer.setVisibility(View.GONE);
+        } else {
+            layoutShop.setVisibility(View.GONE);
+            layoutCustomer.setVisibility(View.VISIBLE);
+
         }
 
     }
@@ -107,7 +131,7 @@ public class DetailActivity extends AppCompatActivity {
         textViewgia.setText(OtherUltil.fomattien.format(product.getPrice()) + "đ");
         textViewmota.setText(product.getDis());
         textviewSTTImage.setText(1 + "/" + product.getImages().size());
-        textViewDiscount.setText(OtherUltil.fomattien.format(product.getDiscount()+product.getPrice())+"đ");
+        textViewDiscount.setText(OtherUltil.fomattien.format(product.getDiscount() + product.getPrice()) + "đ");
         textViewDiscount.setPaintFlags(textViewDiscount.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
 
     }
@@ -171,6 +195,82 @@ public class DetailActivity extends AppCompatActivity {
                 finish();
                 startActivity(getIntent());
             }
+        });
+        btnDel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final EditText edtText = new EditText(getBaseContext());
+                edtText.setWidth(200);
+                LinearLayout linearLayout = new LinearLayout(DetailActivity.this);
+                linearLayout.setGravity(Gravity.CENTER);
+
+                linearLayout.addView(edtText);
+                final AlertDialog.Builder builder = new AlertDialog.Builder(DetailActivity.this);
+                builder.setTitle("Xác nhận xóa sản phẩm");
+                builder.setMessage("Bạn chắc chắn xóa sản phẩm này?");
+                builder.setView(linearLayout);
+                builder.setNeutralButton("Xác nhận xóa!", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+
+                        if (edtText.getText().toString().trim().equalsIgnoreCase("Xoa")) {
+                            Toast.makeText(DetailActivity.this, "San pham da xoa", Toast.LENGTH_SHORT).show();
+                            DataClient dataClient= APIUltils.getData();
+                            Call<String> stringCall=dataClient.DeleteProduct(globalApplication.product.getProductId());
+                            stringCall.enqueue(new Callback<String>() {
+                                @Override
+                                public void onResponse(Call<String> call, Response<String> response) {
+                                    Toast.makeText(DetailActivity.this, response.body(), Toast.LENGTH_SHORT).show();
+                                    if (response != null) {
+                                        if (response.body().equals("0xx0")) {
+                                            AlertDialog.Builder builder1=new AlertDialog.Builder(DetailActivity.this);
+                                            builder1.setTitle("Không thể xóa!");
+                                            builder1.setMessage("Sản phẩm này hiện đang trong đơn đặt hàng của khách, bạn không thể xóa!");
+                                            builder1.setPositiveButton("Trở lại", new DialogInterface.OnClickListener() {
+                                                @Override
+                                                public void onClick(DialogInterface dialog, int which) {
+                                                    finish();
+                                                }
+                                            });
+                                            builder1.show();
+                                        } else if (response.body().equals("1xx1")){
+                                            AlertDialog.Builder builder1=new AlertDialog.Builder(DetailActivity.this);
+                                            builder1.setTitle("Xóa thành công");
+                                            builder1.setMessage("Bấm OK để trở lại");
+                                            builder1.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                                @Override
+                                                public void onClick(DialogInterface dialog, int which) {
+                                                    Intent refresh = new Intent(DetailActivity.this, MainActivity.class);
+                                                    startActivity(refresh);
+                                                    finish();
+                                                }
+                                            });
+                                            builder1.show();
+
+
+                                        }
+                                    }
+                                }
+
+                                @Override
+                                public void onFailure(Call<String> call, Throwable t) {
+
+                                }
+                            });
+
+                        }
+                    }
+                });
+                builder.setNegativeButton("Không", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                    }
+                });
+                builder.show();
+            }
+
         });
 
 

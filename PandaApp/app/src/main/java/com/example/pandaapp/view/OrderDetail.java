@@ -71,6 +71,7 @@ public class OrderDetail extends AppCompatActivity {
             totalPay = order1.getTotalPrice();
             Log.d("3333", "setdataview: mua " + totalPay);
 
+
         } else {
             btnCancel_Oder.setVisibility(View.GONE);
             btnProcess_OrderDeatil.setVisibility(View.VISIBLE);
@@ -82,9 +83,11 @@ public class OrderDetail extends AppCompatActivity {
         }
         Log.d("3333", "setdataview: bán " + totalPay);
 
-        if (status + 1 > 2) {
-            btnProcess_OrderDeatil.setVisibility(View.GONE);
-        }
+//        if (status + 1 > 2) {
+//            btnProcess_OrderDeatil.setVisibility(View.GONE);
+//            btnCancel_Oder.setVisibility(View.GONE);
+//
+//        }
         try {
             listener();
         } catch (Exception e) {
@@ -93,6 +96,11 @@ public class OrderDetail extends AppCompatActivity {
 
 
         getOrderItemDetail(globalApplication.orderID);
+        if (status >3) {
+
+            btnCancel_Oder.setVisibility(View.GONE);
+
+        }
 
 
     }
