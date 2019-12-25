@@ -1,7 +1,9 @@
 package com.example.pandaapp.fragment;
 
 import android.app.DatePickerDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -48,6 +50,7 @@ public class FragmentSignup extends Fragment {
     int mode;
     View view;
     Bundle bundle;
+    private final static String SHARED_PREFERENCES_NAME = "user";
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -144,7 +147,14 @@ public class FragmentSignup extends Fragment {
                         } else {
                             Toasty.custom(getActivity(), "Đăng kí thành công", R.drawable.ok, R.color.color_pink2, 2000, false, true).show();
                             try {
-                                ((LoginActivity) getActivity()).toSigninFragment();
+
+                                SharedPreferences sharedPreferences = getActivity().getSharedPreferences(SHARED_PREFERENCES_NAME, Context.MODE_PRIVATE);
+                                SharedPreferences.Editor editor = sharedPreferences.edit();
+                                editor.putString("user", account.getUsename());
+                                editor.putString("pass", account.getPassword());
+                                editor.apply();
+                                Intent intent = new Intent(getContext(), LoginActivity.class);
+                                startActivity(intent);
                             } catch (Exception e) {
                                 System.out.println(e.toString());
                             }

@@ -7,41 +7,43 @@
     tools:context=".view.FlashScreen"
     android:background="@color/color_pink1">
     <ImageView
-        android:id="@+id/screen_imgV"
+        android:id="@+id/logo_Secreen_Flash"
         android:layout_width="wrap_content"
         android:layout_height="@dimen/dimen_150dp"
         android:src="@drawable/panda"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="@dimen/dimen_200dp"/>
+        android:layout_marginTop="@dimen/dimen_85dp"/>
     <ProgressBar
+        android:visibility="gone"
         android:id="@+id/screen_ProgressBar"
         android:layout_width="@dimen/dimen_70dp"
         android:layout_height="@dimen/dimen_70dp"
-        android:layout_below="@+id/screen_imgV"
+        android:layout_below="@+id/logo_Secreen_Flash"
         android:layout_marginLeft="@dimen/dimen_150dp"
         android:layout_marginTop="@dimen/dimen_25dp"
         />
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:orientation="vertical"
-        android:layout_marginBottom="@dimen/dimen_25dp">
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Một sản phẩm của"
-            android:gravity="center"
-            android:textSize="@dimen/font_24sp"
-            android:textColor="@color/color_white"/>
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="sinh viên BKAP"
-            android:gravity="center"
-            android:textSize="@dimen/font_24sp"
-            android:textColor="@color/color_white"/>
-    </LinearLayout>
 
+
+<ImageView
+    android:scaleType="fitEnd"
+    android:layout_alignParentBottom="true"
+    android:src="@drawable/theme"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:maxHeight="@dimen/dimen_200dp"/>
+    <com.jetradarmobile.snowfall.SnowfallView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:snowflakesNum="250"
+        app:snowflakeAlphaMin="150"
+        app:snowflakeAlphaMax="255"
+        app:snowflakeAngleMax="5"
+        app:snowflakeSizeMin="3dp"
+        app:snowflakeSizeMax="8dp"
+        app:snowflakeSpeedMin="4"
+        app:snowflakeSpeedMax="12"
+        app:snowflakesFadingEnabled="true"
+        app:snowflakesAlreadyFalling="false"
+        />
 
 </RelativeLayout>

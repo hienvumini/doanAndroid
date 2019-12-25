@@ -207,7 +207,7 @@ public class DetailActivity extends AppCompatActivity {
                 linearLayout.addView(edtText);
                 final AlertDialog.Builder builder = new AlertDialog.Builder(DetailActivity.this);
                 builder.setTitle("Xác nhận xóa sản phẩm");
-                builder.setMessage("Bạn chắc chắn xóa sản phẩm này?");
+                builder.setMessage("Bạn chắc chắn xóa sản phẩm này? điền \"xoa\" sau đó bấm \"Xác nhận xóa\"");
                 builder.setView(linearLayout);
                 builder.setNeutralButton("Xác nhận xóa!", new DialogInterface.OnClickListener() {
                     @Override

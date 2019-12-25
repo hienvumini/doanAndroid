@@ -1,5 +1,6 @@
 package com.example.pandaapp.fragment;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.location.Address;
@@ -51,6 +52,7 @@ import retrofit2.Response;
 
 
 public class FragmentLogin extends Fragment {
+    private final static String SHARED_PREFERENCES_NAME = "user";
 
     EditText edittextuser, edittextpass;
     Button btnlogin;
@@ -101,18 +103,15 @@ public class FragmentLogin extends Fragment {
         });
 
 
-        edittextuser = (EditText) view.findViewById(R.id.edittextusernameLogin);
-        edittextpass = (EditText) view.findViewById(R.id.edittextpassLogin);
-        btnlogin = (Button) view.findViewById(R.id.login_buttonLogin);
-
-        textViewSignupLogin = (TextView) view.findViewById(R.id.textview_sigupLogin);
+        init(view);
+        getdataSharePreference();
         textViewSignupLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (getActivity() != null) {
                     try {
                         ((LoginActivity) getActivity()).toSignUpFragment(account, 1);
-                    } catch (Exception e){
+                    } catch (Exception e) {
                         System.out.println(e.toString());
 
                     }
@@ -133,6 +132,14 @@ public class FragmentLogin extends Fragment {
         return view;
     }
 
+    private void init(View view) {
+        edittextuser = (EditText) view.findViewById(R.id.edittextusernameLogin);
+        edittextpass = (EditText) view.findViewById(R.id.edittextpassLogin);
+        btnlogin = (Button) view.findViewById(R.id.login_buttonLogin);
+
+        textViewSignupLogin = (TextView) view.findViewById(R.id.textview_sigupLogin);
+    }
+
     public void getdataformLogin() {
         txtusername = edittextuser.getText().toString().trim();
         txtpassword = edittextpass.getText().toString().trim();
@@ -140,7 +147,7 @@ public class FragmentLogin extends Fragment {
 
     }
 
-    public void checkaccount(final String ussername, final String password) throws Exception{
+    public void checkaccount(final String ussername, final String password) throws Exception {
         DataClient processLogin = APIUltils.getData();
         Call<ArrayList<Account>> accountCall = processLogin.CheckAccount(ussername, password);
         accountCall.enqueue(new Callback<ArrayList<Account>>() {
@@ -159,6 +166,12 @@ public class FragmentLogin extends Fragment {
                     Intent intent = new Intent(getActivity(), MainActivity.class);
                     startActivity(intent);
                     getActivity().finish();
+                    SharedPreferences sharedPreferences = getActivity().getSharedPreferences(SHARED_PREFERENCES_NAME, Context.MODE_PRIVATE);
+                    SharedPreferences.Editor editor = sharedPreferences.edit();
+                    editor.putString("user", ussername);
+                    editor.putString("pass", password);
+                    editor.apply();
+
 
                 }
 
@@ -173,7 +186,7 @@ public class FragmentLogin extends Fragment {
 
     }
 
-    private void getFbInfo() throws Exception{
+    private void getFbInfo() throws Exception {
 
         if (AccessToken.getCurrentAccessToken() != null) {
             GraphRequest request = GraphRequest.newMeRequest(AccessToken.getCurrentAccessToken(),
@@ -263,11 +276,11 @@ public class FragmentLogin extends Fragment {
                     getActivity().finish();
 
                 } else {
-                   try {
-                       ((LoginActivity) getActivity()).toSignUpFragment(accountFB, 2);
-                   }catch (Exception e){
-                       System.out.println(e.toString());
-                   }
+                    try {
+                        ((LoginActivity) getActivity()).toSignUpFragment(accountFB, 2);
+                    } catch (Exception e) {
+                        System.out.println(e.toString());
+                    }
 
                 }
 
@@ -279,6 +292,17 @@ public class FragmentLogin extends Fragment {
 
             }
         });
+
+    }
+
+    public void getdataSharePreference() {
+        SharedPreferences sharedPreferences = getActivity().getSharedPreferences(SHARED_PREFERENCES_NAME, Context.MODE_PRIVATE);
+        if (sharedPreferences != null) {
+            String olduser = sharedPreferences.getString("user", "");
+            String oldpass = sharedPreferences.getString("pass", "");
+            edittextuser.setText(olduser + "");
+            edittextpass.setText(oldpass + "");
+        }
 
     }
 
