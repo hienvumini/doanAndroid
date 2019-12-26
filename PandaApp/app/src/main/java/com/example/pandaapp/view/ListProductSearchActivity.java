@@ -24,7 +24,8 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
+
+
 
 import com.example.pandaapp.Models.Product;
 import com.example.pandaapp.R;
@@ -199,23 +200,7 @@ public class ListProductSearchActivity extends AppCompatActivity {
         APIUltils.getData().getProductSearch(key,sortID,offset).enqueue(new Callback<ArrayList<Product>>() {
             @Override
             public void onResponse(Call<ArrayList<Product>> call, Response<ArrayList<Product>> response) {
-//                try {
-//                    if (response.body().size() > 0) {
-//                        listProduct = response.body();
-//                        Log.d("giatri", "onResponse: " + listProduct.size());
-//                        for (int i = 0; i < listProduct.size(); i++) {
-//                            System.out.println("A11A " + listProduct.get(i).toString());
-//                        }
-//                        adapterProduct = new AdapterProduct(getApplicationContext(), R.id.recycleview_SearchProduct, listProduct);
-//                        adapterProduct.notifyDataSetChanged();
-//                        recyclerViewListProduct.setAdapter(adapterProduct);
-//                    } else {
-//                        Toasty.error(getApplicationContext(),"Không tìm thấy sản phẩm nào",2000).show();
-//
-//                    }
-//                }catch (Exception e){
-//                    System.out.println(e.toString());
-//                }
+
                 try {
                     ArrayList<Product> listadd;
                     listadd = response.body();
@@ -225,7 +210,7 @@ public class ListProductSearchActivity extends AppCompatActivity {
                         adapterProduct.notifyDataSetChanged();
                         adapterProduct = new AdapterProduct(getBaseContext(), R.id.recycleview_ShopProduct, listProduct);
                         recyclerViewListProduct.setAdapter(adapterProduct);
-                        Toast.makeText(getApplicationContext(), listProduct.size() + "", Toast.LENGTH_SHORT).show();
+
                         intial = false;
                     } else {
                         if (listadd.size() > 0) {
@@ -236,7 +221,7 @@ public class ListProductSearchActivity extends AppCompatActivity {
 
                             recyclerViewListProduct.setAdapter(adapterProduct);
 
-                            Toast.makeText(getApplicationContext(), listProduct.size() + "", Toast.LENGTH_SHORT).show();
+
 
                         } else {
                             Toasty.custom(getApplicationContext(),"Đã tải xong tất cả sản phẩm",R.drawable.ok, R.color.color_pink2,2000,true,true).show();

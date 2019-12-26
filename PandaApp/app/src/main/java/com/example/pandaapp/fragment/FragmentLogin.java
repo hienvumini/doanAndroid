@@ -154,23 +154,34 @@ public class FragmentLogin extends Fragment {
             @Override
             public void onResponse(Call<ArrayList<Account>> call, Response<ArrayList<Account>> response) {
                 if (response.body().size() > 0) {
-                    Toasty.custom(getActivity(), "Đăng nhập thành công", R.drawable.ok, R.color.color_pink2, 2000, false, true).show();
-                    Log.d("AZ", "Dăng nhập: " + response.body());
+
                     ArrayList<Account> accountslist = response.body();
                     Account account = accountslist.get(0);
-                    if (globalApplication == null) {
-                        globalApplication = (GlobalApplication) getActivity().getApplicationContext();
+                   if (account.getAccountStatus()!=1){
+                       Toasty.error(getActivity(),"Tài khoản của bạn đã bị khóa!").show();
 
-                    }
-                    globalApplication.account = account;
-                    Intent intent = new Intent(getActivity(), MainActivity.class);
-                    startActivity(intent);
-                    getActivity().finish();
-                    SharedPreferences sharedPreferences = getActivity().getSharedPreferences(SHARED_PREFERENCES_NAME, Context.MODE_PRIVATE);
-                    SharedPreferences.Editor editor = sharedPreferences.edit();
-                    editor.putString("user", ussername);
-                    editor.putString("pass", password);
-                    editor.apply();
+                   } else {
+                       Toasty.custom(getActivity(), "Đăng nhập thành công", R.drawable.ok, R.color.color_pink2, 2000, false, true).show();
+                       Log.d("AZ", "Dăng nhập: " + response.body());
+                       if (globalApplication == null) {
+                           globalApplication = (GlobalApplication) getActivity().getApplicationContext();
+
+                       }
+                       globalApplication.account = account;
+                       Intent intent = new Intent(getActivity(), MainActivity.class);
+                       startActivity(intent);
+                       getActivity().finish();
+                       SharedPreferences sharedPreferences = getActivity().getSharedPreferences(SHARED_PREFERENCES_NAME, Context.MODE_PRIVATE);
+                       SharedPreferences.Editor editor = sharedPreferences.edit();
+                       editor.putString("user", ussername);
+                       editor.putString("pass", password);
+                       editor.apply();
+
+                   }
+
+
+                } else {
+                   Toasty.error(getActivity(),"Tên đăng nhập hoặc mật khẩu không chính xác!").show();
 
 
                 }

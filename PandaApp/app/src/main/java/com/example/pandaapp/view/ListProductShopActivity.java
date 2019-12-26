@@ -163,7 +163,7 @@ public class ListProductShopActivity extends AppCompatActivity {
                                 adapterProduct.notifyDataSetChanged();
                                 adapterProduct = new AdapterProduct(getBaseContext(), R.id.recycleview_ShopProduct, listProduct);
                                 recyclerViewListProduct.setAdapter(adapterProduct);
-                                Toast.makeText(getApplicationContext(), listProduct.size() + "", Toast.LENGTH_SHORT).show();
+
                                 intial = false;
                             } else {
                                 if (listadd.size() > 0) {
@@ -174,7 +174,7 @@ public class ListProductShopActivity extends AppCompatActivity {
 
                                     recyclerViewListProduct.setAdapter(adapterProduct);
 
-                                    Toast.makeText(getApplicationContext(), listProduct.size() + "", Toast.LENGTH_SHORT).show();
+
 
                                 } else {
                                     Toasty.custom(getApplicationContext(),"Đã tải xong tất cả sản phẩm",R.drawable.ok, R.color.color_pink2,2000,true,true).show();
@@ -223,32 +223,6 @@ public class ListProductShopActivity extends AppCompatActivity {
 
     }
 
-//    private void getProductShop() throws Exception {
-//
-//        DataClient getproduct = APIUltils.getData();
-//        Call<ArrayList<Product>> stringCall = getproduct.getProductShop(idshop, limit, offset);
-//        stringCall.enqueue(new Callback<ArrayList<Product>>() {
-//            @Override
-//            public void onResponse(Call<ArrayList<Product>> call, Response<ArrayList<Product>> response) {
-//                Log.d("AAA", "onResponse: " + response.body());
-//                listProduct = response.body();
-//                Toast.makeText(ListProductShopActivity.this, "San pham: " + listProduct.size(), Toast.LENGTH_SHORT).show();
-//                adapterProduct = new AdapterProduct(getApplicationContext(), R.id.recycleview_ShopProduct, listProduct);
-//                adapterProduct.notifyDataSetChanged();
-//                recyclerViewListProduct.setAdapter(adapterProduct);
-//                progressBar.setVisibility(View.GONE);
-//
-//            }
-//
-//            @Override
-//            public void onFailure(Call<ArrayList<Product>> call, Throwable t) {
-//                Log.d("BBB", "onResponse: " + t.toString());
-//
-//            }
-//        });
-//
-//
-//    }
 
     public void onClickListener() throws Exception {
         imageViewcatagory_back.setOnClickListener(new View.OnClickListener() {

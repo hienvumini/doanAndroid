@@ -13,6 +13,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.example.pandaapp.Util.OtherUltil;
 import com.example.pandaapp.view.ChangePassActivity;
 import com.example.pandaapp.view.EditInfoAccountActivity;
 import com.example.pandaapp.view.FavoriteActivity;
@@ -28,7 +29,7 @@ import es.dmoral.toasty.Toasty;
 
 
 public class FragmentProfile extends Fragment {
-    TextView textViewName, textViewUsername, textViewPhone, textViewAddress;
+    TextView textViewName, textViewUsername, textViewPhone, textViewAddress,textViewGender,textViewEmail,textViewDateOfBirth;
     Button btnLogout;
     GlobalApplication globalApplication;
     Account account;
@@ -65,6 +66,9 @@ public class FragmentProfile extends Fragment {
         textViewUsername = (TextView) view.findViewById(R.id.textviewUsename_Profile);
         textViewAddress = (TextView) view.findViewById(R.id.textviewAddress_Profile);
         textViewPhone = (TextView) view.findViewById(R.id.textviewPhone_Profile);
+        textViewGender=(TextView) view.findViewById(R.id.textviewGender_Profile);
+        textViewEmail=(TextView) view.findViewById(R.id.textviewEmail_Profile);
+        textViewDateOfBirth=(TextView) view.findViewById(R.id.textviewDateBirth_Profile);
         btnLogout = (Button) view.findViewById(R.id.btnLogOut_Profile);
         linearLayoutFavorite = (LinearLayout) view.findViewById(R.id.layoutFavorite_Profile);
         layoutMyOrder_Profile = (LinearLayout) view.findViewById(R.id.layoutMyOrder_Profile);
@@ -83,6 +87,9 @@ public class FragmentProfile extends Fragment {
         textViewUsername.setText(account.getUsename());
         textViewPhone.setText(account.getPhone_number());
         textViewAddress.setText(account.getAddress());
+        textViewGender.setText(account.getGender()==0?"Nữ":"Nam");
+        textViewEmail.setText(account.getEmail());
+        textViewDateOfBirth.setText(OtherUltil.convertDateFromMysql(account.getDateOfBirth()));
 
     }
 

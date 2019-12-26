@@ -149,7 +149,7 @@ public class FragmentMain extends Fragment {
         arrayListCall.enqueue(new Callback<ArrayList<News>>() {
             @Override
             public void onResponse(Call<ArrayList<News>> call, Response<ArrayList<News>> response) {
-                Toast.makeText(getActivity(), response.body().size() + "", Toast.LENGTH_SHORT).show();
+
                 listNews = response.body();
                 try {
                     ActionViewflipper(view, listNews);
@@ -170,7 +170,7 @@ public class FragmentMain extends Fragment {
         viewFlipper.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getActivity(), viewFlipper.getCurrentView().getId() + "", Toast.LENGTH_SHORT).show();
+
                 globalApplication.news = listNews.get(viewFlipper.getCurrentView().getId());
                 Intent intent = new Intent(getActivity(), NewsDetailActivity.class);
                 startActivity(intent);

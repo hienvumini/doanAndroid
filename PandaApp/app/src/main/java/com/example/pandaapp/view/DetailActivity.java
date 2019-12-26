@@ -64,6 +64,7 @@ public class DetailActivity extends AppCompatActivity {
         globalApplication = (GlobalApplication) getApplicationContext();
         if (globalApplication.product != null) {
             product = globalApplication.product;
+            Toast.makeText(getApplicationContext(), product.getProductId()+"", Toast.LENGTH_SHORT).show();
             account = globalApplication.account;
         }
         CacheUltils cacheUltils = new CacheUltils(getApplicationContext());

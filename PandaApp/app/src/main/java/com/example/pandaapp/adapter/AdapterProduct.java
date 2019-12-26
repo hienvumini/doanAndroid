@@ -1,11 +1,8 @@
 package com.example.pandaapp.adapter;
 
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
-import android.os.Handler;
-import android.os.Message;
 import android.util.Log;
 import android.view.ContextMenu;
 import android.view.LayoutInflater;
@@ -14,19 +11,9 @@ import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
-
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AlertDialog;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
-import com.example.pandaapp.Models.Account;
-import com.example.pandaapp.Models.ILoadmoreProduct;
 import com.example.pandaapp.Models.Product;
 import com.example.pandaapp.R;
 import com.example.pandaapp.Retrofit2.APIUltils;
@@ -35,11 +22,7 @@ import com.example.pandaapp.Util.GlobalApplication;
 import com.example.pandaapp.Util.LoadImage;
 import com.example.pandaapp.Util.OtherUltil;
 import com.example.pandaapp.view.DetailActivity;
-import com.example.pandaapp.view.ListProductCatagoryActivity;
-
 import java.util.List;
-
-import es.dmoral.toasty.Toasty;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -116,18 +99,10 @@ public class AdapterProduct extends RecyclerView.Adapter<AdapterProduct.ViewHold
             LoadImage.getImageInServer(mctx, "image/image/thumbnail.png", holder.imageView);
         }
 
-
-
-
-
-
-
-       // holder.progressBar.setVisibility(View.GONE);
         holder.linearLayoutItemProduct.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                //globalApplication.product=listproduct.get(position);
                 if (globalApplication.product == null) {
                     globalApplication.product = new Product();
 
@@ -135,7 +110,6 @@ public class AdapterProduct extends RecyclerView.Adapter<AdapterProduct.ViewHold
                 globalApplication.product = listproduct.get(position);
 
                 Intent intent = new Intent(mctx, DetailActivity.class);
-//                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 mctx.startActivity(intent);
 
 
@@ -143,7 +117,7 @@ public class AdapterProduct extends RecyclerView.Adapter<AdapterProduct.ViewHold
         });
 
         if (mctx.toString().contains("FavoriteActivity")) {
-            Toast.makeText(mctx, "FavoriteActivity", Toast.LENGTH_SHORT).show();
+
             holder.iconheart.setVisibility(View.GONE);
 
         }
@@ -160,7 +134,7 @@ public class AdapterProduct extends RecyclerView.Adapter<AdapterProduct.ViewHold
                     setfavorite = 1;
                 }
                 DataClient dataClient = APIUltils.getData();
-                Toasty.normal(mctx, globalApplication.account.getAccountId() + "---" + setfavorite + "->" + listproduct.get(position).getProductId()).show();
+
                 Call<String> stringCall = dataClient.insertFavorite(globalApplication.account.getAccountId(), listproduct.get(position).getProductId(), setfavorite);
                 stringCall.enqueue(new Callback<String>() {
                     @Override
@@ -191,7 +165,7 @@ public class AdapterProduct extends RecyclerView.Adapter<AdapterProduct.ViewHold
 
                     @Override
                     public void onFailure(Call<String> call, Throwable t) {
-                        Toast.makeText(mctx, t.toString(), Toast.LENGTH_SHORT).show();
+
 
                     }
                 });
@@ -230,7 +204,7 @@ public class AdapterProduct extends RecyclerView.Adapter<AdapterProduct.ViewHold
         ImageView imageView, iconheart;
         TextView textviewTen, textViewGia;
         RelativeLayout linearLayoutItemProduct;
-        ProgressBar progressBar;
+
 
 
         public ViewHolder(View itemView) {

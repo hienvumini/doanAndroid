@@ -241,7 +241,7 @@ public class ListProductCatagoryActivity extends AppCompatActivity {
                                 adapterProduct.notifyDataSetChanged();
                                 adapterProduct = new AdapterProduct(getBaseContext(), R.id.recycleview_ShopProduct, listProduct);
                                 recyclerViewListProduct.setAdapter(adapterProduct);
-                                Toast.makeText(getApplicationContext(), listProduct.size() + "", Toast.LENGTH_SHORT).show();
+
                                 intial = false;
                             } else {
                                 if (listadd.size() > 0) {
@@ -252,7 +252,7 @@ public class ListProductCatagoryActivity extends AppCompatActivity {
 
                                     recyclerViewListProduct.setAdapter(adapterProduct);
 
-                                    Toast.makeText(getApplicationContext(), listProduct.size() + "", Toast.LENGTH_SHORT).show();
+
 
                                 } else {
                                     Toasty.custom(getApplicationContext(),"Đã tải xong tất cả sản phẩm",R.drawable.ok, R.color.color_pink2,2000,true,true).show();

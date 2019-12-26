@@ -150,7 +150,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:paddingLeft="@dimen/dimen_10dp"
-                    android:weightSum="2">
+                    android:weightSum="3">
 
                     <TextView
                         android:layout_width="0dp"
@@ -158,15 +158,17 @@
                         android:layout_weight="1"
                         android:text="Họ và tên:"
                         android:textColor="@color/color_black"
-                        android:textSize="@dimen/font_20sp" />
+                        android:textSize="@dimen/font_18sp" />
 
                     <TextView
+                        android:textStyle="bold"
+                        android:textColor="@color/color_blue_text"
                         android:id="@+id/textviewName_Profile"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
+                        android:layout_weight="2"
                         android:text=""
-                        android:textSize="@dimen/font_20sp" />
+                        android:textSize="@dimen/font_18sp" />
 
                 </LinearLayout>
 
@@ -175,7 +177,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dimen_5dp"
                     android:paddingLeft="@dimen/dimen_10dp"
-                    android:weightSum="2">
+                    android:weightSum="3">
 
                     <TextView
                         android:layout_width="0dp"
@@ -183,15 +185,17 @@
                         android:layout_weight="1"
                         android:text="Tên tài khoản:"
                         android:textColor="@color/color_black"
-                        android:textSize="@dimen/font_20sp" />
+                        android:textSize="@dimen/font_18sp" />
 
                     <TextView
+                        android:textStyle="bold"
+                        android:textColor="@color/color_blue_text"
                         android:id="@+id/textviewUsename_Profile"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
+                        android:layout_weight="2"
                         android:text=""
-                        android:textSize="@dimen/font_20sp" />
+                        android:textSize="@dimen/font_18sp" />
 
                 </LinearLayout>
 
@@ -200,7 +204,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dimen_5dp"
                     android:paddingLeft="@dimen/dimen_10dp"
-                    android:weightSum="2">
+                    android:weightSum="3">
 
                     <TextView
                         android:layout_width="0dp"
@@ -208,15 +212,15 @@
                         android:layout_weight="1"
                         android:text="Số điện thoại:"
                         android:textColor="@color/color_black"
-                        android:textSize="@dimen/font_20sp" />
+                        android:textSize="@dimen/font_18sp" />
 
                     <TextView
                         android:id="@+id/textviewPhone_Profile"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
+                        android:layout_weight="2"
                         android:text=""
-                        android:textSize="@dimen/font_20sp" />
+                        android:textSize="@dimen/font_18sp" />
 
                 </LinearLayout>
 
@@ -225,7 +229,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dimen_5dp"
                     android:paddingLeft="@dimen/dimen_10dp"
-                    android:weightSum="2">
+                    android:weightSum="3">
 
                     <TextView
                         android:layout_width="0dp"
@@ -233,15 +237,15 @@
                         android:layout_weight="1"
                         android:text="Giới tính:"
                         android:textColor="@color/color_black"
-                        android:textSize="@dimen/font_20sp" />
+                        android:textSize="@dimen/font_18sp" />
 
                     <TextView
                         android:id="@+id/textviewGender_Profile"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
+                        android:layout_weight="2"
                         android:text=""
-                        android:textSize="@dimen/font_20sp" />
+                        android:textSize="@dimen/font_18sp" />
 
                 </LinearLayout>
 
@@ -250,7 +254,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dimen_5dp"
                     android:paddingLeft="@dimen/dimen_10dp"
-                    android:weightSum="2">
+                    android:weightSum="3">
 
                     <TextView
                         android:layout_width="0dp"
@@ -258,15 +262,15 @@
                         android:layout_weight="1"
                         android:text="Email:"
                         android:textColor="@color/color_black"
-                        android:textSize="@dimen/font_20sp" />
+                        android:textSize="@dimen/font_18sp" />
 
                     <TextView
                         android:id="@+id/textviewEmail_Profile"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
+                        android:layout_weight="2"
                         android:text=""
-                        android:textSize="@dimen/font_20sp" />
+                        android:textSize="@dimen/font_18sp" />
 
                 </LinearLayout>
 
@@ -275,7 +279,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dimen_5dp"
                     android:paddingLeft="@dimen/dimen_10dp"
-                    android:weightSum="2">
+                    android:weightSum="3">
 
                     <TextView
                         android:layout_width="0dp"
@@ -283,15 +287,15 @@
                         android:layout_weight="1"
                         android:text="Ngày sinh:"
                         android:textColor="@color/color_black"
-                        android:textSize="@dimen/font_20sp" />
+                        android:textSize="@dimen/font_18sp" />
 
                     <TextView
                         android:id="@+id/textviewDateBirth_Profile"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
+                        android:layout_weight="2"
                         android:text=""
-                        android:textSize="@dimen/font_20sp" />
+                        android:textSize="@dimen/font_18sp" />
 
                 </LinearLayout>
 
@@ -300,7 +304,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dimen_5dp"
                     android:paddingLeft="@dimen/dimen_10dp"
-                    android:weightSum="2">
+                    android:weightSum="3">
 
                     <TextView
                         android:layout_width="0dp"
@@ -308,15 +312,15 @@
                         android:layout_weight="1"
                         android:text="Địa chỉ:"
                         android:textColor="@color/color_black"
-                        android:textSize="@dimen/font_20sp" />
+                        android:textSize="@dimen/font_18sp" />
 
                     <TextView
                         android:id="@+id/textviewAddress_Profile"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
+                        android:layout_weight="2"
                         android:text=""
-                        android:textSize="@dimen/font_20sp" />
+                        android:textSize="@dimen/font_18sp" />
 
                 </LinearLayout>
 
