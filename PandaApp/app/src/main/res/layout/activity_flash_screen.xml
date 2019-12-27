@@ -9,10 +9,10 @@
     <ImageView
         android:id="@+id/logo_Secreen_Flash"
         android:layout_width="wrap_content"
-        android:layout_height="@dimen/dimen_150dp"
-        android:src="@drawable/panda"
+        android:layout_height="@dimen/dimen_200dp"
+        android:src="@drawable/panda_noel"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="@dimen/dimen_85dp"/>
+        android:layout_marginTop="@dimen/dimen_100dp"/>
     <ProgressBar
         android:visibility="gone"
         android:id="@+id/screen_ProgressBar"

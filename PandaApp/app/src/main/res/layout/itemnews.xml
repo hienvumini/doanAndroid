@@ -29,7 +29,8 @@
                     android:scaleType="centerCrop"
                     android:id="@+id/img_News"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="@dimen/dimen_100dp"
+                    android:maxHeight="@dimen/dimen_200dp"
                     android:src="@mipmap/ic_launcher"></ImageView>
             </LinearLayout>
 

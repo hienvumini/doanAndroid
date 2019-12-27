@@ -113,7 +113,7 @@ public class FragmentNews extends Fragment {
                 final int lastItem = firstVisibleItem + visibleItemCount;
                 if (lastItem == totalItemCount && scrollState == SCROLL_STATE_IDLE) {
 
-                    Toast.makeText(getActivity(), "Keo xong", Toast.LENGTH_SHORT).show();
+
                 }
             }
 
@@ -141,7 +141,6 @@ public class FragmentNews extends Fragment {
         arrayListCall.enqueue(new Callback<ArrayList<News>>() {
             @Override
             public void onResponse(Call<ArrayList<News>> call, Response<ArrayList<News>> response) {
-//                Toast.makeText(getActivity(), "Tin tuc "+response.body().size(), Toast.LENGTH_SHORT).show();
                 listNews = response.body();
                 adapterNews = new AdapterNews(getActivity(), R.id.listviewNews_News, listNews);
                 listViewNews.setAdapter(adapterNews);
