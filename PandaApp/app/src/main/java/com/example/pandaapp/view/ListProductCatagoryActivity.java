@@ -47,8 +47,6 @@ public class ListProductCatagoryActivity extends AppCompatActivity {
 
     boolean isScolling = false;
     int pastVisiableItems, totalItems, visiableItemCount;
-    LinearLayoutManager linnerlayout;
-    GridLayoutManager gridLayoutManager;
     GridLayoutManager layoutManager;
     ProgressBar progressBar;
        int offset = 0;
@@ -57,6 +55,7 @@ public class ListProductCatagoryActivity extends AppCompatActivity {
     ImageView imageView_Cart,imageView_back;
     TextView textView_nameCategory;
     Spinner spinner_sort;
+    TextView textViewNameShop;
 
 
     @Override
@@ -146,6 +145,7 @@ public class ListProductCatagoryActivity extends AppCompatActivity {
         textView_nameCategory=(TextView) findViewById(R.id.catagory_tenSP_ProductCategory);
         textView_nameCategory.setText(globalApplication.category.getCategoryName());
         imageView_back=(ImageView)findViewById(R.id.catagory_back_Category);
+        textViewNameShop=(TextView) findViewById(R.id.textviewNameShop);
 
 
     }

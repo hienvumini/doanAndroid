@@ -4,7 +4,7 @@
     android:layout_height="match_parent">
 
     <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
+
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -43,14 +43,13 @@
                            android:src="@drawable/ic_keyboard_arrow_left_white_48dp" />
 
                        <TextView
-                           android:id="@+id/catagory_tenSP"
+                           android:id="@+id/textviewNameShop"
                            android:layout_width="@dimen/dimen_250dp"
                            android:layout_height="@dimen/dimen_40dp"
-                           android:background="@color/color_white"
                            android:gravity="center|left"
                            android:paddingLeft="@dimen/dimen_10dp"
-                           android:text="Áo thun nam"
-                           android:textColor="@color/color_black"
+                           android:text="Quản lý sản phẩm"
+                           android:textColor="@color/color_white"
                            android:textSize="@dimen/font_20sp" />
 
                    </LinearLayout>
@@ -63,6 +62,7 @@
                        android:orientation="horizontal">
 
                        <LinearLayout
+                           android:paddingLeft="@dimen/dimen_20dp"
                            android:layout_width="@dimen/dimen_0dp"
                            android:layout_height="match_parent"
                            android:layout_weight="1"

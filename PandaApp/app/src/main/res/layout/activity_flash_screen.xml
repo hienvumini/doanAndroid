@@ -25,6 +25,9 @@
 
 
 <ImageView
+    android:paddingRight="@dimen/dimen_20dp"
+    android:paddingLeft="@dimen/dimen_20dp"
+    android:paddingTop="@dimen/dimen_200dp"
     android:scaleType="fitEnd"
     android:layout_alignParentBottom="true"
     android:src="@drawable/theme"

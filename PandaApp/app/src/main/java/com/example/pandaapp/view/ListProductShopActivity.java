@@ -224,7 +224,7 @@ public class ListProductShopActivity extends AppCompatActivity {
     }
 
 
-    public void onClickListener() throws Exception {
+    public void onClickListener()  {
         imageViewcatagory_back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

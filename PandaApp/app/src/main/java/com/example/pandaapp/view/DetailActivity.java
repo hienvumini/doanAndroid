@@ -54,7 +54,7 @@ public class DetailActivity extends AppCompatActivity {
     Account account;
     int REQUESTCODE_EDIT = 112;
     SwipeRefreshLayout swipeRefreshLayout;
-    LinearLayout layoutCustomer,layoutShop;
+    LinearLayout layoutCustomer, layoutShop;
 
 
     @Override
@@ -64,7 +64,7 @@ public class DetailActivity extends AppCompatActivity {
         globalApplication = (GlobalApplication) getApplicationContext();
         if (globalApplication.product != null) {
             product = globalApplication.product;
-            Toast.makeText(getApplicationContext(), product.getProductId()+"", Toast.LENGTH_SHORT).show();
+
             account = globalApplication.account;
         }
         CacheUltils cacheUltils = new CacheUltils(getApplicationContext());
@@ -96,8 +96,8 @@ public class DetailActivity extends AppCompatActivity {
         textviewSTTImage = (TextView) findViewById(R.id.textviewSTT_DetailProduct);
         textViewDiscount = (TextView) findViewById(R.id.textviewGiaDiscount_Deatail);
         btnDel = (Button) findViewById(R.id.btnDel_ProductDetail);
-        layoutCustomer=(LinearLayout)findViewById(R.id.detail_product_footer_Customer);
-        layoutShop=(LinearLayout)findViewById(R.id.detail_product_footer_Shop);
+        layoutCustomer = (LinearLayout) findViewById(R.id.detail_product_footer_Customer);
+        layoutShop = (LinearLayout) findViewById(R.id.detail_product_footer_Shop);
 
 
         if (product.getIdShop() == account.getIdShop()) {
@@ -216,16 +216,16 @@ public class DetailActivity extends AppCompatActivity {
 
 
                         if (edtText.getText().toString().trim().equalsIgnoreCase("Xoa")) {
-                            Toast.makeText(DetailActivity.this, "San pham da xoa", Toast.LENGTH_SHORT).show();
-                            DataClient dataClient= APIUltils.getData();
-                            Call<String> stringCall=dataClient.DeleteProduct(globalApplication.product.getProductId());
+
+                            DataClient dataClient = APIUltils.getData();
+                            Call<String> stringCall = dataClient.DeleteProduct(globalApplication.product.getProductId());
                             stringCall.enqueue(new Callback<String>() {
                                 @Override
                                 public void onResponse(Call<String> call, Response<String> response) {
-                                    Toast.makeText(DetailActivity.this, response.body(), Toast.LENGTH_SHORT).show();
+
                                     if (response != null) {
                                         if (response.body().equals("0xx0")) {
-                                            AlertDialog.Builder builder1=new AlertDialog.Builder(DetailActivity.this);
+                                            AlertDialog.Builder builder1 = new AlertDialog.Builder(DetailActivity.this);
                                             builder1.setTitle("Không thể xóa!");
                                             builder1.setMessage("Sản phẩm này hiện đang trong đơn đặt hàng của khách, bạn không thể xóa!");
                                             builder1.setPositiveButton("Trở lại", new DialogInterface.OnClickListener() {
@@ -235,8 +235,8 @@ public class DetailActivity extends AppCompatActivity {
                                                 }
                                             });
                                             builder1.show();
-                                        } else if (response.body().equals("1xx1")){
-                                            AlertDialog.Builder builder1=new AlertDialog.Builder(DetailActivity.this);
+                                        } else if (response.body().equals("1xx1")) {
+                                            AlertDialog.Builder builder1 = new AlertDialog.Builder(DetailActivity.this);
                                             builder1.setTitle("Xóa thành công");
                                             builder1.setMessage("Bấm OK để trở lại");
                                             builder1.setPositiveButton("OK", new DialogInterface.OnClickListener() {
@@ -280,7 +280,7 @@ public class DetailActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         if (requestCode == REQUESTCODE_EDIT && requestCode == RESULT_OK) {
-            Toast.makeText(getBaseContext(), "Sửa sản phẩm xong", Toast.LENGTH_SHORT).show();
+            Toasty.success(DetailActivity.this, "Sửa sản phẩm xong").show();
 
         }
         super.onActivityResult(requestCode, resultCode, data);
