@@ -54,361 +54,372 @@
 
     </androidx.appcompat.widget.Toolbar>
 
-    <LinearLayout
-        android:id="@+id/profilr_liner_tinhtrang"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/toolbar"
-        android:background="@color/color_white"
-        android:orientation="vertical">
+   <ScrollView
+       android:layout_below="@id/toolbar"
+       android:layout_above="@id/btnLogOut_Profile"
+       android:layout_width="match_parent"
+       android:layout_height="match_parent">
+       <LinearLayout
+           android:orientation="vertical"
+           android:layout_width="match_parent"
+           android:layout_height="match_parent">
+           <LinearLayout
+               android:id="@+id/profilr_liner_tinhtrang"
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:layout_below="@+id/toolbar"
+               android:background="@color/color_white"
+               android:orientation="vertical">
 
-        <LinearLayout
-            android:id="@+id/layoutMyOrder_Profile"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/dimen_35dp"
-            android:layout_marginTop="@dimen/dimen_10dp"
-            android:layout_marginBottom="@dimen/dimen_10dp"
-            android:orientation="horizontal">
+               <LinearLayout
+                   android:id="@+id/layoutMyOrder_Profile"
+                   android:layout_width="match_parent"
+                   android:layout_height="@dimen/dimen_35dp"
+                   android:layout_marginTop="@dimen/dimen_10dp"
+                   android:layout_marginBottom="@dimen/dimen_10dp"
+                   android:orientation="horizontal">
 
-            <ImageView
+                   <ImageView
 
-                android:layout_width="@dimen/dimen_35dp"
-                android:layout_height="@dimen/dimen_35dp"
-                android:layout_marginLeft="@dimen/dimen_15dp"
-                android:background="@drawable/custom_circle_pink"
-                android:src="@drawable/ordercustomers" />
+                       android:layout_width="@dimen/dimen_35dp"
+                       android:layout_height="@dimen/dimen_35dp"
+                       android:layout_marginLeft="@dimen/dimen_15dp"
+                       android:background="@drawable/custom_circle_pink"
+                       android:src="@drawable/ordercustomers" />
 
-            <TextView
+                   <TextView
 
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginLeft="@dimen/dimen_15dp"
-                android:gravity="center|left"
-                android:text="Xem đơn hàng của tôi"
-                android:textColor="@color/color_black"
-                android:textSize="@dimen/font_18sp" />
-        </LinearLayout>
-        <LinearLayout
-            android:id="@+id/layoutFavorite_Profile"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/dimen_35dp"
-            android:layout_marginTop="@dimen/dimen_10dp"
-            android:layout_marginBottom="@dimen/dimen_10dp"
-            android:orientation="horizontal">
+                       android:layout_width="match_parent"
+                       android:layout_height="match_parent"
+                       android:layout_marginLeft="@dimen/dimen_15dp"
+                       android:gravity="center|left"
+                       android:text="Xem đơn hàng của tôi"
+                       android:textColor="@color/color_black"
+                       android:textSize="@dimen/font_18sp" />
+               </LinearLayout>
+               <LinearLayout
+                   android:id="@+id/layoutFavorite_Profile"
+                   android:layout_width="match_parent"
+                   android:layout_height="@dimen/dimen_35dp"
+                   android:layout_marginTop="@dimen/dimen_10dp"
+                   android:layout_marginBottom="@dimen/dimen_10dp"
+                   android:orientation="horizontal">
 
-            <ImageView
+                   <ImageView
 
-                android:layout_width="@dimen/dimen_35dp"
-                android:layout_height="@dimen/dimen_35dp"
-                android:layout_marginLeft="@dimen/dimen_15dp"
-                android:background="@drawable/custom_circle_pink"
-                android:src="@drawable/favorite" />
+                       android:layout_width="@dimen/dimen_35dp"
+                       android:layout_height="@dimen/dimen_35dp"
+                       android:layout_marginLeft="@dimen/dimen_15dp"
+                       android:background="@drawable/custom_circle_pink"
+                       android:src="@drawable/favorite" />
 
-            <TextView
+                   <TextView
 
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginLeft="@dimen/dimen_15dp"
-                android:gravity="center|left"
-                android:text="Sản phẩm yêu thích"
-                android:textColor="@color/color_black"
-                android:textSize="@dimen/font_18sp" />
-        </LinearLayout>
+                       android:layout_width="match_parent"
+                       android:layout_height="match_parent"
+                       android:layout_marginLeft="@dimen/dimen_15dp"
+                       android:gravity="center|left"
+                       android:text="Sản phẩm yêu thích"
+                       android:textColor="@color/color_black"
+                       android:textSize="@dimen/font_18sp" />
+               </LinearLayout>
 
-    </LinearLayout>
+           </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/profilr_liner_tinhtrang"
-        android:layout_marginTop="@dimen/dimen_15dp"
-        android:background="@color/color_white"
-        android:orientation="vertical">
+           <LinearLayout
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:layout_below="@+id/profilr_liner_tinhtrang"
+               android:layout_marginTop="@dimen/dimen_15dp"
+               android:background="@color/color_white"
+               android:orientation="vertical">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/dimen_10dp"
-            android:orientation="vertical">
+               <LinearLayout
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content"
+                   android:layout_marginLeft="@dimen/dimen_10dp"
+                   android:orientation="vertical">
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="center|left"
-                android:text="Hồ sơ của tôi"
-                android:textColor="@color/color_black"
-                android:textSize="@dimen/font_22sp"
-                android:textStyle="bold" />
+                   <TextView
+                       android:layout_width="match_parent"
+                       android:layout_height="match_parent"
+                       android:gravity="center|left"
+                       android:text="Hồ sơ của tôi"
+                       android:textColor="@color/color_black"
+                       android:textSize="@dimen/font_22sp"
+                       android:textStyle="bold" />
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
+                   <LinearLayout
+                       android:layout_width="match_parent"
+                       android:layout_height="wrap_content"
+                       android:orientation="vertical">
 
-                <LinearLayout
+                       <LinearLayout
 
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:paddingLeft="@dimen/dimen_10dp"
-                    android:weightSum="3">
+                           android:layout_width="match_parent"
+                           android:layout_height="wrap_content"
+                           android:paddingLeft="@dimen/dimen_10dp"
+                           android:weightSum="3">
 
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="Họ và tên:"
-                        android:textColor="@color/color_black"
-                        android:textSize="@dimen/font_18sp" />
+                           <TextView
+                               android:layout_width="0dp"
+                               android:layout_height="wrap_content"
+                               android:layout_weight="1"
+                               android:text="Họ và tên:"
+                               android:textColor="@color/color_black"
+                               android:textSize="@dimen/font_18sp" />
 
-                    <TextView
-                        android:textStyle="bold"
-                        android:textColor="@color/color_blue_text"
-                        android:id="@+id/textviewName_Profile"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="2"
-                        android:text=""
-                        android:textSize="@dimen/font_18sp" />
+                           <TextView
+                               android:textStyle="bold"
+                               android:textColor="@color/color_blue_text"
+                               android:id="@+id/textviewName_Profile"
+                               android:layout_width="0dp"
+                               android:layout_height="wrap_content"
+                               android:layout_weight="2"
+                               android:text=""
+                               android:textSize="@dimen/font_18sp" />
 
-                </LinearLayout>
+                       </LinearLayout>
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/dimen_5dp"
-                    android:paddingLeft="@dimen/dimen_10dp"
-                    android:weightSum="3">
+                       <LinearLayout
+                           android:layout_width="match_parent"
+                           android:layout_height="wrap_content"
+                           android:layout_marginTop="@dimen/dimen_5dp"
+                           android:paddingLeft="@dimen/dimen_10dp"
+                           android:weightSum="3">
 
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="Tên tài khoản:"
-                        android:textColor="@color/color_black"
-                        android:textSize="@dimen/font_18sp" />
+                           <TextView
+                               android:layout_width="0dp"
+                               android:layout_height="wrap_content"
+                               android:layout_weight="1"
+                               android:text="Tên tài khoản:"
+                               android:textColor="@color/color_black"
+                               android:textSize="@dimen/font_18sp" />
 
-                    <TextView
-                        android:textStyle="bold"
-                        android:textColor="@color/color_blue_text"
-                        android:id="@+id/textviewUsename_Profile"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="2"
-                        android:text=""
-                        android:textSize="@dimen/font_18sp" />
+                           <TextView
+                               android:textStyle="bold"
+                               android:textColor="@color/color_blue_text"
+                               android:id="@+id/textviewUsename_Profile"
+                               android:layout_width="0dp"
+                               android:layout_height="wrap_content"
+                               android:layout_weight="2"
+                               android:text=""
+                               android:textSize="@dimen/font_18sp" />
 
-                </LinearLayout>
+                       </LinearLayout>
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/dimen_5dp"
-                    android:paddingLeft="@dimen/dimen_10dp"
-                    android:weightSum="3">
+                       <LinearLayout
+                           android:layout_width="match_parent"
+                           android:layout_height="wrap_content"
+                           android:layout_marginTop="@dimen/dimen_5dp"
+                           android:paddingLeft="@dimen/dimen_10dp"
+                           android:weightSum="3">
 
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="Số điện thoại:"
-                        android:textColor="@color/color_black"
-                        android:textSize="@dimen/font_18sp" />
+                           <TextView
+                               android:layout_width="0dp"
+                               android:layout_height="wrap_content"
+                               android:layout_weight="1"
+                               android:text="Số điện thoại:"
+                               android:textColor="@color/color_black"
+                               android:textSize="@dimen/font_18sp" />
 
-                    <TextView
-                        android:id="@+id/textviewPhone_Profile"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="2"
-                        android:text=""
-                        android:textSize="@dimen/font_18sp" />
+                           <TextView
+                               android:id="@+id/textviewPhone_Profile"
+                               android:layout_width="0dp"
+                               android:layout_height="wrap_content"
+                               android:layout_weight="2"
+                               android:text=""
+                               android:textSize="@dimen/font_18sp" />
 
-                </LinearLayout>
+                       </LinearLayout>
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/dimen_5dp"
-                    android:paddingLeft="@dimen/dimen_10dp"
-                    android:weightSum="3">
+                       <LinearLayout
+                           android:layout_width="match_parent"
+                           android:layout_height="wrap_content"
+                           android:layout_marginTop="@dimen/dimen_5dp"
+                           android:paddingLeft="@dimen/dimen_10dp"
+                           android:weightSum="3">
 
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="Giới tính:"
-                        android:textColor="@color/color_black"
-                        android:textSize="@dimen/font_18sp" />
+                           <TextView
+                               android:layout_width="0dp"
+                               android:layout_height="wrap_content"
+                               android:layout_weight="1"
+                               android:text="Giới tính:"
+                               android:textColor="@color/color_black"
+                               android:textSize="@dimen/font_18sp" />
 
-                    <TextView
-                        android:id="@+id/textviewGender_Profile"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="2"
-                        android:text=""
-                        android:textSize="@dimen/font_18sp" />
+                           <TextView
+                               android:id="@+id/textviewGender_Profile"
+                               android:layout_width="0dp"
+                               android:layout_height="wrap_content"
+                               android:layout_weight="2"
+                               android:text=""
+                               android:textSize="@dimen/font_18sp" />
 
-                </LinearLayout>
+                       </LinearLayout>
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/dimen_5dp"
-                    android:paddingLeft="@dimen/dimen_10dp"
-                    android:weightSum="3">
+                       <LinearLayout
+                           android:layout_width="match_parent"
+                           android:layout_height="wrap_content"
+                           android:layout_marginTop="@dimen/dimen_5dp"
+                           android:paddingLeft="@dimen/dimen_10dp"
+                           android:weightSum="3">
 
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="Email:"
-                        android:textColor="@color/color_black"
-                        android:textSize="@dimen/font_18sp" />
+                           <TextView
+                               android:layout_width="0dp"
+                               android:layout_height="wrap_content"
+                               android:layout_weight="1"
+                               android:text="Email:"
+                               android:textColor="@color/color_black"
+                               android:textSize="@dimen/font_18sp" />
 
-                    <TextView
-                        android:id="@+id/textviewEmail_Profile"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="2"
-                        android:text=""
-                        android:textSize="@dimen/font_18sp" />
+                           <TextView
+                               android:id="@+id/textviewEmail_Profile"
+                               android:layout_width="0dp"
+                               android:layout_height="wrap_content"
+                               android:layout_weight="2"
+                               android:text=""
+                               android:textSize="@dimen/font_18sp" />
 
-                </LinearLayout>
+                       </LinearLayout>
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/dimen_5dp"
-                    android:paddingLeft="@dimen/dimen_10dp"
-                    android:weightSum="3">
+                       <LinearLayout
+                           android:layout_width="match_parent"
+                           android:layout_height="wrap_content"
+                           android:layout_marginTop="@dimen/dimen_5dp"
+                           android:paddingLeft="@dimen/dimen_10dp"
+                           android:weightSum="3">
 
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="Ngày sinh:"
-                        android:textColor="@color/color_black"
-                        android:textSize="@dimen/font_18sp" />
+                           <TextView
+                               android:layout_width="0dp"
+                               android:layout_height="wrap_content"
+                               android:layout_weight="1"
+                               android:text="Ngày sinh:"
+                               android:textColor="@color/color_black"
+                               android:textSize="@dimen/font_18sp" />
 
-                    <TextView
-                        android:id="@+id/textviewDateBirth_Profile"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="2"
-                        android:text=""
-                        android:textSize="@dimen/font_18sp" />
+                           <TextView
+                               android:id="@+id/textviewDateBirth_Profile"
+                               android:layout_width="0dp"
+                               android:layout_height="wrap_content"
+                               android:layout_weight="2"
+                               android:text=""
+                               android:textSize="@dimen/font_18sp" />
 
-                </LinearLayout>
+                       </LinearLayout>
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/dimen_5dp"
-                    android:paddingLeft="@dimen/dimen_10dp"
-                    android:weightSum="3">
+                       <LinearLayout
+                           android:layout_width="match_parent"
+                           android:layout_height="wrap_content"
+                           android:layout_marginTop="@dimen/dimen_5dp"
+                           android:paddingLeft="@dimen/dimen_10dp"
+                           android:weightSum="3">
 
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="Địa chỉ:"
-                        android:textColor="@color/color_black"
-                        android:textSize="@dimen/font_18sp" />
+                           <TextView
+                               android:layout_width="0dp"
+                               android:layout_height="wrap_content"
+                               android:layout_weight="1"
+                               android:text="Địa chỉ:"
+                               android:textColor="@color/color_black"
+                               android:textSize="@dimen/font_18sp" />
 
-                    <TextView
-                        android:id="@+id/textviewAddress_Profile"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="2"
-                        android:text=""
-                        android:textSize="@dimen/font_18sp" />
+                           <TextView
+                               android:id="@+id/textviewAddress_Profile"
+                               android:layout_width="0dp"
+                               android:layout_height="wrap_content"
+                               android:layout_weight="2"
+                               android:text=""
+                               android:textSize="@dimen/font_18sp" />
 
-                </LinearLayout>
+                       </LinearLayout>
 
-            </LinearLayout>
+                   </LinearLayout>
 
-        </LinearLayout>
-        <LinearLayout
+               </LinearLayout>
+               <LinearLayout
 
-            android:id="@+id/layoutEdit_Profile"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/dimen_35dp"
-            android:layout_marginTop="@dimen/dimen_20dp"
-            android:layout_marginBottom="@dimen/dimen_10dp"
-            android:orientation="horizontal">
+                   android:id="@+id/layoutEdit_Profile"
+                   android:layout_width="match_parent"
+                   android:layout_height="@dimen/dimen_35dp"
+                   android:layout_marginTop="@dimen/dimen_20dp"
+                   android:layout_marginBottom="@dimen/dimen_10dp"
+                   android:orientation="horizontal">
 
-            <ImageView
+                   <ImageView
 
-                android:layout_width="@dimen/dimen_35dp"
-                android:layout_height="@dimen/dimen_35dp"
-                android:layout_marginLeft="@dimen/dimen_15dp"
-                android:background="@drawable/custom_circle_pink"
-                android:src="@drawable/editflat" />
+                       android:layout_width="@dimen/dimen_35dp"
+                       android:layout_height="@dimen/dimen_35dp"
+                       android:layout_marginLeft="@dimen/dimen_15dp"
+                       android:background="@drawable/custom_circle_pink"
+                       android:src="@drawable/editflat" />
 
-            <TextView
+                   <TextView
 
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginLeft="@dimen/dimen_15dp"
-                android:gravity="center|left"
-                android:text="Sửa thông tin tài khoản"
-                android:textColor="@color/color_black"
-                android:textSize="@dimen/font_18sp" />
-        </LinearLayout>
-        <LinearLayout
+                       android:layout_width="match_parent"
+                       android:layout_height="match_parent"
+                       android:layout_marginLeft="@dimen/dimen_15dp"
+                       android:gravity="center|left"
+                       android:text="Sửa thông tin tài khoản"
+                       android:textColor="@color/color_black"
+                       android:textSize="@dimen/font_18sp" />
+               </LinearLayout>
+               <LinearLayout
 
-            android:id="@+id/layoutChangePasss_Profile"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/dimen_35dp"
-            android:layout_marginTop="@dimen/dimen_20dp"
-            android:layout_marginBottom="@dimen/dimen_10dp"
-            android:orientation="horizontal">
+                   android:id="@+id/layoutChangePasss_Profile"
+                   android:layout_width="match_parent"
+                   android:layout_height="@dimen/dimen_35dp"
+                   android:layout_marginTop="@dimen/dimen_20dp"
+                   android:layout_marginBottom="@dimen/dimen_10dp"
+                   android:orientation="horizontal">
 
-            <ImageView
+                   <ImageView
 
-                android:layout_width="@dimen/dimen_35dp"
-                android:layout_height="@dimen/dimen_35dp"
-                android:layout_marginLeft="@dimen/dimen_15dp"
-                android:background="@drawable/custom_circle_pink"
-                android:src="@drawable/changepass" />
+                       android:layout_width="@dimen/dimen_35dp"
+                       android:layout_height="@dimen/dimen_35dp"
+                       android:layout_marginLeft="@dimen/dimen_15dp"
+                       android:background="@drawable/custom_circle_pink"
+                       android:src="@drawable/changepass" />
 
-            <TextView
+                   <TextView
 
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginLeft="@dimen/dimen_15dp"
-                android:gravity="center|left"
-                android:text="Đổi mật khẩu tài khoản"
-                android:textColor="@color/color_black"
-                android:textSize="@dimen/font_18sp" />
-        </LinearLayout>
-        <LinearLayout
+                       android:layout_width="match_parent"
+                       android:layout_height="match_parent"
+                       android:layout_marginLeft="@dimen/dimen_15dp"
+                       android:gravity="center|left"
+                       android:text="Đổi mật khẩu tài khoản"
+                       android:textColor="@color/color_black"
+                       android:textSize="@dimen/font_18sp" />
+               </LinearLayout>
+               <LinearLayout
 
-            android:id="@+id/layoutOpenShop_Profile"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/dimen_35dp"
-            android:layout_marginTop="@dimen/dimen_20dp"
-            android:layout_marginBottom="@dimen/dimen_10dp"
-            android:orientation="horizontal">
+                   android:id="@+id/layoutOpenShop_Profile"
+                   android:layout_width="match_parent"
+                   android:layout_height="@dimen/dimen_35dp"
+                   android:layout_marginTop="@dimen/dimen_20dp"
+                   android:layout_marginBottom="@dimen/dimen_10dp"
+                   android:orientation="horizontal">
 
-            <ImageView
+                   <ImageView
 
-                android:layout_width="@dimen/dimen_35dp"
-                android:layout_height="@dimen/dimen_35dp"
-                android:layout_marginLeft="@dimen/dimen_15dp"
-                android:src="@drawable/openshop" />
+                       android:layout_width="@dimen/dimen_35dp"
+                       android:layout_height="@dimen/dimen_35dp"
+                       android:layout_marginLeft="@dimen/dimen_15dp"
+                       android:src="@drawable/openshop" />
 
-            <TextView
+                   <TextView
 
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginLeft="@dimen/dimen_15dp"
-                android:gravity="center|left"
-                android:text="Bắt đầu bán hàng với Panda"
-                android:textColor="@color/color_black"
-                android:textSize="@dimen/font_18sp" />
-        </LinearLayout>
+                       android:layout_width="match_parent"
+                       android:layout_height="match_parent"
+                       android:layout_marginLeft="@dimen/dimen_15dp"
+                       android:gravity="center|left"
+                       android:text="Bắt đầu bán hàng với Panda"
+                       android:textColor="@color/color_black"
+                       android:textSize="@dimen/font_18sp" />
+               </LinearLayout>
 
-    </LinearLayout>
+           </LinearLayout>
+       </LinearLayout>
+   </ScrollView>
 
 
     <Button
